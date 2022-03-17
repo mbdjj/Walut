@@ -8,6 +8,15 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    @State var decimal: Int
+    
+    let defaults = UserDefaults.standard
+    
+    init() {
+        decimal = defaults.integer(forKey: "decimal")
+    }
+    
     var body: some View {
         NavigationView {
             List {
@@ -18,8 +27,14 @@ struct SettingsView: View {
                     Text("Change base currency")
                 }
                 
+                Stepper("Decimal numbers (\(decimal))", value: $decimal, in: 3...6)
+                
             }
             .navigationTitle("Settings")
+        }
+        
+        .onChange(of: decimal) { newValue in
+            defaults.set(newValue, forKey: "decimal")
         }
     }
 }

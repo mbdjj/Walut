@@ -36,9 +36,14 @@ struct BasePickerView: View {
                 
                 defaults.set(currencySelected, forKey: "base")
                 defaults.set(true, forKey: "isBaseSelected")
+                defaults.set(2, forKey: "sort")
+                defaults.set(3, forKey: "decimal")
+                defaults.set(shared.allCodesArray, forKey: "customSort")
                 shared.base = Currency(baseCode: currencySelected)
                 shared.isBaseSelected = true
-                //shared.fetchData(forCode: currencySelected)
+                shared.currentSort = 2
+                shared.customSortCodes = shared.allCodesArray
+                shared.fetchData(forCode: currencySelected)
                 
                 shared.changeIcon(to: currencySelected)
                 

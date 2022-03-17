@@ -26,7 +26,7 @@ struct Currency: Identifiable, Equatable {
     let rate: Double
     var price: Double { 1 / rate }
     
-    //var isFavorite: Bool?
+    var isFavorite: Bool = false
     
     var id: String { code }
     

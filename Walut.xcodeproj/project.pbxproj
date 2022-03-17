@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3418EE6E27B4FEAF0069F188 /* SortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3418EE6D27B4FEAF0069F188 /* SortView.swift */; };
+		3418EE7027B517EF0069F188 /* CellContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3418EE6F27B517EF0069F188 /* CellContextMenu.swift */; };
+		344169AA27B455CC007B9F58 /* SortManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344169A927B455CC007B9F58 /* SortManager.swift */; };
 		3453AE5A27B39B920088A637 /* CalculationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3453AE5927B39B920088A637 /* CalculationView.swift */; };
 		3453AE5D27B39FC90088A637 /* BasePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3453AE5C27B39FC90088A637 /* BasePickerView.swift */; };
 		3453AEA627B3C5C30088A637 /* IDR@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3453AE5E27B3C5C10088A637 /* IDR@3x.png */; };
@@ -98,6 +101,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3418EE6D27B4FEAF0069F188 /* SortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortView.swift; sourceTree = "<group>"; };
+		3418EE6F27B517EF0069F188 /* CellContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellContextMenu.swift; sourceTree = "<group>"; };
+		344169A927B455CC007B9F58 /* SortManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortManager.swift; sourceTree = "<group>"; };
 		3453AE5927B39B920088A637 /* CalculationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationView.swift; sourceTree = "<group>"; };
 		3453AE5C27B39FC90088A637 /* BasePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePickerView.swift; sourceTree = "<group>"; };
 		3453AE5E27B3C5C10088A637 /* IDR@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IDR@3x.png"; sourceTree = "<group>"; };
@@ -207,6 +213,8 @@
 				34BB2EBA27B2FE27008F8B8B /* CurrencyList.swift */,
 				34BB2EC727B2FF18008F8B8B /* CurrencyCell.swift */,
 				3453AE5927B39B920088A637 /* CalculationView.swift */,
+				3418EE6D27B4FEAF0069F188 /* SortView.swift */,
+				3418EE6F27B517EF0069F188 /* CellContextMenu.swift */,
 			);
 			path = "Base Currency";
 			sourceTree = "<group>";
@@ -218,6 +226,13 @@
 				3453AEF227B3E6B30088A637 /* SettingsPickerView.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		3498CD2F27C7A79D00594817 /* Other Currency */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Other Currency";
 			sourceTree = "<group>";
 		};
 		34BB2EAC27B2FE27008F8B8B = {
@@ -264,6 +279,7 @@
 				34BB2ED027B30814008F8B8B /* TabBarView.swift */,
 				3453AE5C27B39FC90088A637 /* BasePickerView.swift */,
 				3453AE5B27B39DA90088A637 /* Base Currency */,
+				3498CD2F27C7A79D00594817 /* Other Currency */,
 				3453AEF127B3E63E0088A637 /* Settings */,
 			);
 			path = Views;
@@ -273,6 +289,7 @@
 			isa = PBXGroup;
 			children = (
 				34BB2ECC27B301AE008F8B8B /* NetworkManager.swift */,
+				344169A927B455CC007B9F58 /* SortManager.swift */,
 				34BB2ECE27B3024A008F8B8B /* CurrencyData.swift */,
 				34BB2ECA27B2FF6B008F8B8B /* Currency.swift */,
 			);
@@ -509,6 +526,7 @@
 				3453AE5D27B39FC90088A637 /* BasePickerView.swift in Sources */,
 				34BB2ECF27B3024A008F8B8B /* CurrencyData.swift in Sources */,
 				34BB2ECB27B2FF6B008F8B8B /* Currency.swift in Sources */,
+				3418EE7027B517EF0069F188 /* CellContextMenu.swift in Sources */,
 				3453AE5A27B39B920088A637 /* CalculationView.swift in Sources */,
 				3453AEF327B3E6B30088A637 /* SettingsPickerView.swift in Sources */,
 				34BB2ED127B30814008F8B8B /* TabBarView.swift in Sources */,
@@ -516,7 +534,9 @@
 				34BB2EC827B2FF18008F8B8B /* CurrencyCell.swift in Sources */,
 				34BB2ECD27B301AE008F8B8B /* NetworkManager.swift in Sources */,
 				34BB2EBB27B2FE27008F8B8B /* CurrencyList.swift in Sources */,
+				3418EE6E27B4FEAF0069F188 /* SortView.swift in Sources */,
 				34BB2EB927B2FE27008F8B8B /* WalutApp.swift in Sources */,
+				344169AA27B455CC007B9F58 /* SortManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,29 +11,82 @@ struct CurrencyList: View {
     
     @ObservedObject var shared = NetworkManager.shared
     
+    @State var selectedCurrency: Currency
+    @State var shouldPresentSortPopover: Bool = false
+    
+    let defaults = UserDefaults.standard
+    
+    init() {
+        selectedCurrency = Currency(baseCode: "PLN")
+    }
+    
     var body: some View {
         
         NavigationView {
-            List (shared.currencies) { currency in
-                NavigationLink(destination: CalculationView(base: shared.base, foreign: currency)) {
-                    
-                    CurrencyCell(base: shared.base, currency: currency)
+            List {
+                ForEach(shared.sortedCurrencies) { currency in
+                    NavigationLink(destination: CalculationView(base: shared.base, foreign: currency)) {
+                        
+                        CurrencyCell(base: shared.base, currency: currency, decimal: defaults.integer(forKey: "decimal") )
+                            .contextMenu {
+                                CellContextMenu(for: currency)
+                            }
+                        
+                    }
                 }
+                .onMove(perform: move)
             }
             .refreshable {
                 shared.fetchData(forCode: shared.base.code)
             }
             
             .navigationTitle("\(shared.base.flag) \(shared.base.code)")
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    
+                    Button {
+                        shouldPresentSortPopover = true
+                    } label: {
+                        Text("Sort")
+                    }
+                    
+                    EditButton()
+                    
+                }
+            }
         }
         
-        .onAppear {
-            shared.fetchData(forCode: shared.base.code)
-        }
+        .popover(isPresented: $shouldPresentSortPopover, content: {
+            NavigationView {
+                SortView(selectedSort: shared.currentSort)
+            }
+        })
         .onChange(of: shared.tappedTwice) { tapped in
             if tapped {
                 
             }
+        }
+    }
+    
+    func move(from: IndexSet, to: Int) {
+        shared.sortedCurrencies.move(fromOffsets: from, toOffset: to)
+        
+        if shared.byFavorite {
+            let index = from[from.startIndex]
+            print(to)
+            
+            if index < shared.favoriteCodes.count {
+                if to <= shared.favoriteCodes.count {
+                    shared.favoriteCodes.move(fromOffsets: from, toOffset: to)
+                    defaults.set(shared.favoriteCodes, forKey: "favorites")
+                }
+            }
+        }
+        
+        if shared.currentSort == 5 {
+            shared.customSortCodes.move(fromOffsets: from, toOffset: to)
+            print(shared.customSortCodes)
+            defaults.set(shared.customSortCodes, forKey: "customSort")
         }
     }
 }

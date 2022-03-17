@@ -31,8 +31,20 @@ struct SettingsPickerView: View {
             
             Button {
                 
+                let oldBaseCode = defaults.string(forKey: "base")
+                
                 defaults.set(currencySelected, forKey: "base")
                 shared.base = Currency(baseCode: currencySelected)
+                
+                if let index = shared.favoriteCodes.firstIndex(of: currencySelected) {
+                    shared.favoriteCodes.remove(at: index)
+                    defaults.set(shared.favoriteCodes, forKey: "favorites")
+                }
+                
+                if shared.customSortCodes.firstIndex(of: oldBaseCode!) == nil {
+                    shared.customSortCodes.append(oldBaseCode!)
+                }
+                
                 shared.fetchData(forCode: shared.base.code)
                 shared.changeIcon(to: shared.base.code)
                 
