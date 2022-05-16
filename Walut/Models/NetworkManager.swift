@@ -14,6 +14,7 @@ class NetworkManager: ObservableObject {
     @Published var sortedCurrencies = [Currency]()
     @Published var currencies = [Currency]() //This array contains data of all the currencies.
     @Published var favoriteCodes = [String]()
+    @Published var chosenCurrencyTimeSeries = [Double]()
     
     @Published var allCurrencies = [Currency]() //This array contains data for base currency Pickers.
     
@@ -108,32 +109,82 @@ class NetworkManager: ObservableObject {
         }
     }
     
+    func getChartData(for currency: Currency) {
+        
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar.current
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        let startDate = Calendar.current.date(byAdding: .month, value: -1, to: Date())
+        let startDateString = formatter.string(from: startDate!)
+        
+        let endDate = Date()
+        let endDateString = formatter.string(from: endDate)
+        
+        if let url = URL(string: "https://api.exchangerate.host/timeseries?start_date=\(startDateString)&end_date=\(endDateString)&base=\(currency.code)&symbols=\(base.code)&places=3") {
+            let session = URLSession(configuration: .default)
+            let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 15)
+            let task = session.dataTask(with: request) { data, response, error in
+                if error == nil {
+                    let decoder = JSONDecoder()
+                    
+                    if let safeData = data {
+                        do {
+                            let results = try decoder.decode(CurrencyTimeSeriesData.self, from: safeData)
+                            
+                            let timeSeriesData = results.rates.ratesArray
+                            var timeSeriesArray = [Double()]
+                            
+                            for i in timeSeriesData {
+                                timeSeriesArray.append(i[self.base.code]!)
+                            }
+                            
+                            timeSeriesArray.remove(at: 0)
+                            
+                            DispatchQueue.main.async {
+                                self.chosenCurrencyTimeSeries = timeSeriesArray
+                                print(timeSeriesArray)
+                            }
+                        } catch {
+                            print(error)
+                        }
+                    }
+                } else {
+                    print(error!.localizedDescription)
+                }
+            }
+            task.resume()
+        }
+    }
+    
     //This method helps with sorting using SortManager object.
     func decodeAndSort() {
-        switch currentSort {
-        case 0:
-            sortedCurrencies = currencies
-        case 1:
-            sortedCurrencies = sortManager.sortByCode(array: currencies, atoz: false)
-        case 2:
-            sortedCurrencies = sortManager.sortByCode(array: currencies, atoz: true)
-        case 3:
-            sortedCurrencies = sortManager.sortByPrice(array: currencies, fromLargest: false)
-        case 4:
-            sortedCurrencies = sortManager.sortByPrice(array: currencies, fromLargest: true)
-        case 5:
-            if let baseIndex = customSortCodes.firstIndex(of: base.code) {
-                customSortCodes.remove(at: baseIndex)
-                defaults.set(customSortCodes, forKey: "customSort")
+        withAnimation {
+            switch currentSort {
+            case 0:
+                sortedCurrencies = currencies
+            case 1:
+                sortedCurrencies = sortManager.sortByCode(array: currencies, atoz: false)
+            case 2:
+                sortedCurrencies = sortManager.sortByCode(array: currencies, atoz: true)
+            case 3:
+                sortedCurrencies = sortManager.sortByPrice(array: currencies, fromLargest: false)
+            case 4:
+                sortedCurrencies = sortManager.sortByPrice(array: currencies, fromLargest: true)
+            case 5:
+                if let baseIndex = customSortCodes.firstIndex(of: base.code) {
+                    customSortCodes.remove(at: baseIndex)
+                    defaults.set(customSortCodes, forKey: "customSort")
+                }
+                sortedCurrencies = sortManager.customSort(array: currencies, toPattern: customSortCodes)
+                byFavorite = false
+            default:
+                sortedCurrencies = currencies
             }
-            sortedCurrencies = sortManager.customSort(array: currencies, toPattern: customSortCodes)
-            byFavorite = false
-        default:
-            sortedCurrencies = currencies
-        }
-        
-        if byFavorite {
-            sortedCurrencies = sortManager.favoritesFirst(array: sortedCurrencies, favorites: favoriteCodes)
+            
+            if byFavorite {
+                sortedCurrencies = sortManager.favoritesFirst(array: sortedCurrencies, favorites: favoriteCodes)
+            }
         }
     }
     

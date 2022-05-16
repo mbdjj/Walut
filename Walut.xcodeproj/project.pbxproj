@@ -86,6 +86,9 @@
 		3453AEED27B3C5C30088A637 /* PHP@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3453AEA527B3C5C30088A637 /* PHP@2x.png */; };
 		3453AEEF27B3E6230088A637 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3453AEEE27B3E6230088A637 /* SettingsView.swift */; };
 		3453AEF327B3E6B30088A637 /* SettingsPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3453AEF227B3E6B30088A637 /* SettingsPickerView.swift */; };
+		34AEB3DC283253CD003E9D4C /* CalculationChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34AEB3DB283253CD003E9D4C /* CalculationChartView.swift */; };
+		34AEB3E5283257ED003E9D4C /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 34AEB3E4283257ED003E9D4C /* SwiftUICharts */; };
+		34AEB3E7283260DF003E9D4C /* CurrencyTimeSeriesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34AEB3E6283260DF003E9D4C /* CurrencyTimeSeriesData.swift */; };
 		34BB2EB927B2FE27008F8B8B /* WalutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BB2EB827B2FE27008F8B8B /* WalutApp.swift */; };
 		34BB2EBB27B2FE27008F8B8B /* CurrencyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BB2EBA27B2FE27008F8B8B /* CurrencyList.swift */; };
 		34BB2EBD27B2FE27008F8B8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34BB2EBC27B2FE27008F8B8B /* Assets.xcassets */; };
@@ -180,6 +183,8 @@
 		3453AEA527B3C5C30088A637 /* PHP@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHP@2x.png"; sourceTree = "<group>"; };
 		3453AEEE27B3E6230088A637 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3453AEF227B3E6B30088A637 /* SettingsPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPickerView.swift; sourceTree = "<group>"; };
+		34AEB3DB283253CD003E9D4C /* CalculationChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationChartView.swift; sourceTree = "<group>"; };
+		34AEB3E6283260DF003E9D4C /* CurrencyTimeSeriesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTimeSeriesData.swift; sourceTree = "<group>"; };
 		34BB2EB527B2FE27008F8B8B /* Walut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Walut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34BB2EB827B2FE27008F8B8B /* WalutApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalutApp.swift; sourceTree = "<group>"; };
 		34BB2EBA27B2FE27008F8B8B /* CurrencyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyList.swift; sourceTree = "<group>"; };
@@ -201,6 +206,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34AEB3E5283257ED003E9D4C /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +219,7 @@
 				34BB2EBA27B2FE27008F8B8B /* CurrencyList.swift */,
 				34BB2EC727B2FF18008F8B8B /* CurrencyCell.swift */,
 				3453AE5927B39B920088A637 /* CalculationView.swift */,
+				34AEB3DB283253CD003E9D4C /* CalculationChartView.swift */,
 				3418EE6D27B4FEAF0069F188 /* SortView.swift */,
 				3418EE6F27B517EF0069F188 /* CellContextMenu.swift */,
 			);
@@ -291,6 +298,7 @@
 				34BB2ECC27B301AE008F8B8B /* NetworkManager.swift */,
 				344169A927B455CC007B9F58 /* SortManager.swift */,
 				34BB2ECE27B3024A008F8B8B /* CurrencyData.swift */,
+				34AEB3E6283260DF003E9D4C /* CurrencyTimeSeriesData.swift */,
 				34BB2ECA27B2FF6B008F8B8B /* Currency.swift */,
 			);
 			path = Models;
@@ -394,6 +402,9 @@
 			dependencies = (
 			);
 			name = Walut;
+			packageProductDependencies = (
+				34AEB3E4283257ED003E9D4C /* SwiftUICharts */,
+			);
 			productName = Walut;
 			productReference = 34BB2EB527B2FE27008F8B8B /* Walut.app */;
 			productType = "com.apple.product-type.application";
@@ -422,6 +433,9 @@
 				Base,
 			);
 			mainGroup = 34BB2EAC27B2FE27008F8B8B;
+			packageReferences = (
+				34AEB3E3283257ED003E9D4C /* XCRemoteSwiftPackageReference "ChartView" */,
+			);
 			productRefGroup = 34BB2EB627B2FE27008F8B8B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -524,10 +538,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3453AE5D27B39FC90088A637 /* BasePickerView.swift in Sources */,
+				34AEB3DC283253CD003E9D4C /* CalculationChartView.swift in Sources */,
 				34BB2ECF27B3024A008F8B8B /* CurrencyData.swift in Sources */,
 				34BB2ECB27B2FF6B008F8B8B /* Currency.swift in Sources */,
 				3418EE7027B517EF0069F188 /* CellContextMenu.swift in Sources */,
 				3453AE5A27B39B920088A637 /* CalculationView.swift in Sources */,
+				34AEB3E7283260DF003E9D4C /* CurrencyTimeSeriesData.swift in Sources */,
 				3453AEF327B3E6B30088A637 /* SettingsPickerView.swift in Sources */,
 				34BB2ED127B30814008F8B8B /* TabBarView.swift in Sources */,
 				3453AEEF27B3E6230088A637 /* SettingsView.swift in Sources */,
@@ -667,7 +683,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Walut/Preview Content\"";
-				DEVELOPMENT_TEAM = V7W2542538;
+				DEVELOPMENT_TEAM = CMJ553K76W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Walut/Info.plist;
@@ -681,7 +697,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.drmyy.Walut;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dreamypls.Walut;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -697,7 +713,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Walut/Preview Content\"";
-				DEVELOPMENT_TEAM = V7W2542538;
+				DEVELOPMENT_TEAM = CMJ553K76W;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Walut/Info.plist;
@@ -711,7 +727,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.drmyy.Walut;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dreamypls.Walut;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -741,6 +757,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		34AEB3E3283257ED003E9D4C /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = exactVersion;
+				version = 1.5.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		34AEB3E4283257ED003E9D4C /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 34AEB3E3283257ED003E9D4C /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 34BB2EAD27B2FE27008F8B8B /* Project object */;
 }

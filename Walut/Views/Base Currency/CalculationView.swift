@@ -18,6 +18,8 @@ struct CalculationView: View {
     @FocusState private var foreignTextFieldFocused: Bool
     @FocusState private var baseTextFieldFocused: Bool
     
+    @ObservedObject var networkManager = NetworkManager.shared
+    
     
     var body: some View {
         
@@ -104,5 +106,15 @@ struct CalculationView: View {
         }
         .navigationTitle("\(foreign.flag) \(foreign.code)")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear() {
+            networkManager.getChartData(for: foreign)
+        }
+        .toolbar {
+            NavigationLink {
+                CalculationChartView(currency: foreign, data: networkManager.chosenCurrencyTimeSeries)
+            } label: {
+                Image(systemName: "chart.xyaxis.line")
+            }
+        }
     }
 }

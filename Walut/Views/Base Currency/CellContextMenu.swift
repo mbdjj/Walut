@@ -26,7 +26,9 @@ struct CellContextMenu: View {
         Group {
             
             Button {
-                currency.isFavorite ? unfavoriteCurrency(currency) : favoriteCurrency(currency)
+                withAnimation {
+                    currency.isFavorite ? unfavoriteCurrency(currency) : favoriteCurrency(currency)
+                }
             } label: {
                 Label(currency.isFavorite ? "Unfavorite" : "Favorite", systemImage: currency.isFavorite ? "star.slash" : "star")
             }
