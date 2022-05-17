@@ -14,11 +14,12 @@ struct CalculationView: View {
     
     @State var foreignText: String = ""
     @State var baseText: String = ""
+    @State var shouldDisableChartButton = true
     
     @FocusState private var foreignTextFieldFocused: Bool
     @FocusState private var baseTextFieldFocused: Bool
     
-    @ObservedObject var networkManager = NetworkManager.shared
+    @ObservedObject var manager = NetworkManager.shared
     
     
     var body: some View {
@@ -107,13 +108,21 @@ struct CalculationView: View {
         .navigationTitle("\(foreign.flag) \(foreign.code)")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear() {
-            networkManager.getChartData(for: foreign)
+            manager.getChartData(for: foreign)
         }
         .toolbar {
             NavigationLink {
-                CalculationChartView(currency: foreign, data: networkManager.chosenCurrencyTimeSeries)
+                CalculationChartView(currency: foreign, data: manager.chosenCurrencyTimeSeries)
             } label: {
                 Image(systemName: "chart.xyaxis.line")
+            }
+            .disabled(shouldDisableChartButton)
+        }
+        .onChange(of: manager.chosenCurrencyTimeSeries.count) { newValue in
+            if newValue == 0 {
+                shouldDisableChartButton = true
+            } else {
+                shouldDisableChartButton = false
             }
         }
     }

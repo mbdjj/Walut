@@ -111,6 +111,8 @@ class NetworkManager: ObservableObject {
     
     func getChartData(for currency: Currency) {
         
+        chosenCurrencyTimeSeries = []
+        
         let formatter = DateFormatter()
         formatter.calendar = Calendar.current
         formatter.dateFormat = "yyyy-MM-dd"
