@@ -28,7 +28,7 @@ struct TabBarView: View {
                 
                 SettingsView()
                     .tabItem {
-                        Label("Settings", systemImage: "gear")
+                        Label(String(localized: "settings"), systemImage: "gear")
                     }
                     .tag(1)
             }

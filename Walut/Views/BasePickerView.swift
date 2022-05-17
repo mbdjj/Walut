@@ -23,7 +23,7 @@ struct BasePickerView: View {
     var body: some View {
         VStack {
             
-            Picker("Base currency", selection: $currencySelected) {
+            Picker(String(localized: "base_currency"), selection: $currencySelected) {
                 ForEach(shared.allCurrencies) { currency in
                     
                     Text("\(currency.flag) \(currency.fullName) (\(currency.code))")
@@ -55,7 +55,7 @@ struct BasePickerView: View {
                 HStack {
                     
                     Spacer()
-                    Text("Save")
+                    Text(String(localized: "save"))
                     Spacer()
                     
                 }
@@ -66,7 +66,7 @@ struct BasePickerView: View {
             Spacer()
             
         }
-        .navigationTitle("Choose your base")
+        .navigationTitle(String(localized: "base_choose"))
         
         .fullScreenCover(isPresented: $shouldShowTabBar, onDismiss: nil, content: {
             TabBarView()

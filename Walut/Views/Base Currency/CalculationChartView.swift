@@ -11,8 +11,8 @@ import SwiftUICharts
 struct CalculationChartView: View {
     
     let currency: Currency
-    
     let data: [Double]
+    
     let chartStyle = ChartStyle(backgroundColor: .clear, accentColor: .accentColor, gradientColor: GradientColor(start: .accentColor, end: .accentColor), textColor: .primary, legendTextColor: .gray, dropShadowColor: .clear)
     
     var body: some View {

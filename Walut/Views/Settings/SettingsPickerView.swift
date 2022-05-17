@@ -20,7 +20,7 @@ struct SettingsPickerView: View {
     var body: some View {
         VStack {
             
-            Picker("Base currency", selection: $currencySelected) {
+            Picker(String(localized: "base_currency"), selection: $currencySelected) {
                 ForEach(shared.allCurrencies) { currency in
                     
                     Text("\(currency.flag) \(currency.fullName) (\(currency.code))")
@@ -48,13 +48,13 @@ struct SettingsPickerView: View {
                 shared.fetchData(forCode: shared.base.code)
                 shared.changeIcon(to: shared.base.code)
                 
-                dismiss.callAsFunction()
+                dismiss()
                 
             } label: {
                 HStack {
                     
                     Spacer()
-                    Text("Save")
+                    Text(String(localized: "save"))
                     Spacer()
                     
                 }

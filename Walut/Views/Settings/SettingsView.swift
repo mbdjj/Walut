@@ -24,13 +24,13 @@ struct SettingsView: View {
                 NavigationLink {
                     SettingsPickerView()
                 } label: {
-                    Text("Change base currency")
+                    Text(String(localized: "settings_change_base"))
                 }
                 
-                Stepper("Decimal numbers (\(decimal))", value: $decimal, in: 3...6)
+                Stepper("\(String(localized: "settings_decimal_numbers")) (\(decimal))", value: $decimal, in: 3 ... 6)
                 
             }
-            .navigationTitle("Settings")
+            .navigationTitle(String(localized: "settings"))
         }
         
         .onChange(of: decimal) { newValue in

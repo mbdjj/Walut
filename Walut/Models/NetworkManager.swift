@@ -121,7 +121,7 @@ class NetworkManager: ObservableObject {
         let endDate = Date()
         let endDateString = formatter.string(from: endDate)
         
-        if let url = URL(string: "https://api.exchangerate.host/timeseries?start_date=\(startDateString)&end_date=\(endDateString)&base=\(currency.code)&symbols=\(base.code)&places=3") {
+        if let url = URL(string: "https://api.exchangerate.host/timeseries?start_date=\(startDateString)&end_date=\(endDateString)&base=\(currency.code)&symbols=\(base.code)") {
             let session = URLSession(configuration: .default)
             let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 15)
             let task = session.dataTask(with: request) { data, response, error in

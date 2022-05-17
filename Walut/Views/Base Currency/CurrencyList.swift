@@ -11,13 +11,13 @@ struct CurrencyList: View {
     
     @ObservedObject var shared = NetworkManager.shared
     
-    @State var selectedCurrency: Currency
+    //@State var selectedCurrency: Currency
     @State var shouldPresentSortPopover: Bool = false
     
     let defaults = UserDefaults.standard
     
     init() {
-        selectedCurrency = Currency(baseCode: "PLN")
+        //selectedCurrency = Currency(baseCode: "PLN")
     }
     
     var body: some View {
@@ -47,7 +47,7 @@ struct CurrencyList: View {
                     Button {
                         shouldPresentSortPopover = true
                     } label: {
-                        Text("Sort")
+                        Text(String(localized: "sort"))
                     }
                     
                     EditButton()

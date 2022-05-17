@@ -92,7 +92,7 @@ struct CalculationView: View {
                 
                 HStack {
                     Spacer()
-                    Text("Clear")
+                    Text(String(localized: "clear"))
                     Spacer()
                 }
                 

@@ -30,14 +30,14 @@ struct CellContextMenu: View {
                     currency.isFavorite ? unfavoriteCurrency(currency) : favoriteCurrency(currency)
                 }
             } label: {
-                Label(currency.isFavorite ? "Unfavorite" : "Favorite", systemImage: currency.isFavorite ? "star.slash" : "star")
+                Label(currency.isFavorite ? String(localized: "menu_unfavorite") : String(localized: "menu_favorite"), systemImage: currency.isFavorite ? "star.slash" : "star")
             }
 
             
             Button {
                 presentShareSheet()
             } label: {
-                Label("Share", systemImage: "square.and.arrow.up")
+                Label(String(localized: "share"), systemImage: "square.and.arrow.up")
             }
 
             
