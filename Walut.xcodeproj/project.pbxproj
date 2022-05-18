@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		3418EE6E27B4FEAF0069F188 /* SortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3418EE6D27B4FEAF0069F188 /* SortView.swift */; };
 		3418EE7027B517EF0069F188 /* CellContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3418EE6F27B517EF0069F188 /* CellContextMenu.swift */; };
+		341BFE4A2834BAD6005C990F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34E5534828336A4F00FF20FB /* Localizable.strings */; };
+		341BFE4B2834BB4C005C990F /* SortManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344169A927B455CC007B9F58 /* SortManager.swift */; };
+		341BFE4D2834BF46005C990F /* BasePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341BFE4C2834BF46005C990F /* BasePickerView.swift */; };
+		341BFE4F2834C12C005C990F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341BFE4E2834C12C005C990F /* ContentView.swift */; };
 		344169AA27B455CC007B9F58 /* SortManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344169A927B455CC007B9F58 /* SortManager.swift */; };
 		3453AE5A27B39B920088A637 /* CalculationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3453AE5927B39B920088A637 /* CalculationView.swift */; };
 		3453AE5D27B39FC90088A637 /* BasePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3453AE5C27B39FC90088A637 /* BasePickerView.swift */; };
@@ -86,6 +90,21 @@
 		3453AEED27B3C5C30088A637 /* PHP@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3453AEA527B3C5C30088A637 /* PHP@2x.png */; };
 		3453AEEF27B3E6230088A637 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3453AEEE27B3E6230088A637 /* SettingsView.swift */; };
 		3453AEF327B3E6B30088A637 /* SettingsPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3453AEF227B3E6B30088A637 /* SettingsPickerView.swift */; };
+		3479935B2833D00A0092F515 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3479935A2833D00A0092F515 /* Assets.xcassets */; };
+		347993612833D00A0092F515 /* WatchWalut WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 347993602833D00A0092F515 /* WatchWalut WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		347993662833D00A0092F515 /* WalutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347993652833D00A0092F515 /* WalutApp.swift */; };
+		347993682833D00A0092F515 /* CurrencyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347993672833D00A0092F515 /* CurrencyList.swift */; };
+		3479936A2833D00A0092F515 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347993692833D00A0092F515 /* NotificationController.swift */; };
+		3479936C2833D00A0092F515 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3479936B2833D00A0092F515 /* NotificationView.swift */; };
+		3479936E2833D00A0092F515 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3479936D2833D00A0092F515 /* ComplicationController.swift */; };
+		347993702833D00A0092F515 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3479936F2833D00A0092F515 /* Assets.xcassets */; };
+		347993732833D00A0092F515 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 347993722833D00A0092F515 /* Preview Assets.xcassets */; };
+		347993782833D00A0092F515 /* Walut.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 347993582833D0090092F515 /* Walut.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		347993832833D1A80092F515 /* CurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347993822833D1A80092F515 /* CurrencyCell.swift */; };
+		347993872833D3C60092F515 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347993862833D3C60092F515 /* NetworkManager.swift */; };
+		347993882833D4570092F515 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BB2ECA27B2FF6B008F8B8B /* Currency.swift */; };
+		347993892833D4A50092F515 /* CurrencyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BB2ECE27B3024A008F8B8B /* CurrencyData.swift */; };
+		34971D8D2834CF810043A063 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34971D8C2834CF810043A063 /* DetailView.swift */; };
 		34AEB3DC283253CD003E9D4C /* CalculationChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34AEB3DB283253CD003E9D4C /* CalculationChartView.swift */; };
 		34AEB3E5283257ED003E9D4C /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 34AEB3E4283257ED003E9D4C /* SwiftUICharts */; };
 		34AEB3E7283260DF003E9D4C /* CurrencyTimeSeriesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34AEB3E6283260DF003E9D4C /* CurrencyTimeSeriesData.swift */; };
@@ -104,9 +123,53 @@
 		34E5534628336A4F00FF20FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34E5534828336A4F00FF20FB /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		347993622833D00A0092F515 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 34BB2EAD27B2FE27008F8B8B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3479935F2833D00A0092F515;
+			remoteInfo = "WatchWalut WatchKit Extension";
+		};
+		347993762833D00A0092F515 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 34BB2EAD27B2FE27008F8B8B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 347993572833D0090092F515;
+			remoteInfo = WatchWalut;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		347993792833D00A0092F515 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				347993782833D00A0092F515 /* Walut.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3479937C2833D00A0092F515 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				347993612833D00A0092F515 /* WatchWalut WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		3418EE6D27B4FEAF0069F188 /* SortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortView.swift; sourceTree = "<group>"; };
 		3418EE6F27B517EF0069F188 /* CellContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellContextMenu.swift; sourceTree = "<group>"; };
+		341BFE4C2834BF46005C990F /* BasePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePickerView.swift; sourceTree = "<group>"; };
+		341BFE4E2834C12C005C990F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		344169A927B455CC007B9F58 /* SortManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortManager.swift; sourceTree = "<group>"; };
 		3453AE5927B39B920088A637 /* CalculationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationView.swift; sourceTree = "<group>"; };
 		3453AE5C27B39FC90088A637 /* BasePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePickerView.swift; sourceTree = "<group>"; };
@@ -184,6 +247,21 @@
 		3453AEA527B3C5C30088A637 /* PHP@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHP@2x.png"; sourceTree = "<group>"; };
 		3453AEEE27B3E6230088A637 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3453AEF227B3E6B30088A637 /* SettingsPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPickerView.swift; sourceTree = "<group>"; };
+		347993582833D0090092F515 /* Walut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Walut.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3479935A2833D00A0092F515 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		347993602833D00A0092F515 /* WatchWalut WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "WatchWalut WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		347993652833D00A0092F515 /* WalutApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalutApp.swift; sourceTree = "<group>"; };
+		347993672833D00A0092F515 /* CurrencyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyList.swift; sourceTree = "<group>"; };
+		347993692833D00A0092F515 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		3479936B2833D00A0092F515 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		3479936D2833D00A0092F515 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		3479936F2833D00A0092F515 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		347993722833D00A0092F515 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		347993742833D00A0092F515 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		347993752833D00A0092F515 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		347993822833D1A80092F515 /* CurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCell.swift; sourceTree = "<group>"; };
+		347993862833D3C60092F515 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		34971D8C2834CF810043A063 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		34AEB3DB283253CD003E9D4C /* CalculationChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationChartView.swift; sourceTree = "<group>"; };
 		34AEB3E6283260DF003E9D4C /* CurrencyTimeSeriesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTimeSeriesData.swift; sourceTree = "<group>"; };
 		34BB2EB527B2FE27008F8B8B /* Walut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Walut.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -205,6 +283,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3479935D2833D00A0092F515 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		34BB2EB227B2FE27008F8B8B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -238,6 +323,67 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		347993592833D0090092F515 /* WatchWalut */ = {
+			isa = PBXGroup;
+			children = (
+				3479935A2833D00A0092F515 /* Assets.xcassets */,
+			);
+			path = WatchWalut;
+			sourceTree = "<group>";
+		};
+		347993642833D00A0092F515 /* WatchWalut WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				347993652833D00A0092F515 /* WalutApp.swift */,
+				347993852833D3AA0092F515 /* Models */,
+				347993842833D38F0092F515 /* Views */,
+				347993812833D0B10092F515 /* Notifications */,
+				3479936F2833D00A0092F515 /* Assets.xcassets */,
+				347993742833D00A0092F515 /* Info.plist */,
+				347993752833D00A0092F515 /* PushNotificationPayload.apns */,
+				347993712833D00A0092F515 /* Preview Content */,
+			);
+			path = "WatchWalut WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		347993712833D00A0092F515 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				347993722833D00A0092F515 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		347993812833D0B10092F515 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				347993692833D00A0092F515 /* NotificationController.swift */,
+				3479936B2833D00A0092F515 /* NotificationView.swift */,
+				3479936D2833D00A0092F515 /* ComplicationController.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		347993842833D38F0092F515 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				341BFE4E2834C12C005C990F /* ContentView.swift */,
+				341BFE4C2834BF46005C990F /* BasePickerView.swift */,
+				347993672833D00A0092F515 /* CurrencyList.swift */,
+				347993822833D1A80092F515 /* CurrencyCell.swift */,
+				34971D8C2834CF810043A063 /* DetailView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		347993852833D3AA0092F515 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				347993862833D3C60092F515 /* NetworkManager.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		3498CD2F27C7A79D00594817 /* Other Currency */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,6 +395,8 @@
 			isa = PBXGroup;
 			children = (
 				34BB2EB727B2FE27008F8B8B /* Walut */,
+				347993592833D0090092F515 /* WatchWalut */,
+				347993642833D00A0092F515 /* WatchWalut WatchKit Extension */,
 				34BB2EB627B2FE27008F8B8B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -257,6 +405,8 @@
 			isa = PBXGroup;
 			children = (
 				34BB2EB527B2FE27008F8B8B /* Walut.app */,
+				347993582833D0090092F515 /* Walut.app */,
+				347993602833D00A0092F515 /* WatchWalut WatchKit Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -393,6 +543,40 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		347993572833D0090092F515 /* WatchWalut */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 347993802833D00A0092F515 /* Build configuration list for PBXNativeTarget "WatchWalut" */;
+			buildPhases = (
+				347993562833D0090092F515 /* Resources */,
+				3479937C2833D00A0092F515 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				347993632833D00A0092F515 /* PBXTargetDependency */,
+			);
+			name = WatchWalut;
+			productName = WatchWalut;
+			productReference = 347993582833D0090092F515 /* Walut.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		3479935F2833D00A0092F515 /* WatchWalut WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3479937F2833D00A0092F515 /* Build configuration list for PBXNativeTarget "WatchWalut WatchKit Extension" */;
+			buildPhases = (
+				3479935C2833D00A0092F515 /* Sources */,
+				3479935D2833D00A0092F515 /* Frameworks */,
+				3479935E2833D00A0092F515 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "WatchWalut WatchKit Extension";
+			productName = "WatchWalut WatchKit Extension";
+			productReference = 347993602833D00A0092F515 /* WatchWalut WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		34BB2EB427B2FE27008F8B8B /* Walut */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 34BB2EC327B2FE27008F8B8B /* Build configuration list for PBXNativeTarget "Walut" */;
@@ -400,10 +584,12 @@
 				34BB2EB127B2FE27008F8B8B /* Sources */,
 				34BB2EB227B2FE27008F8B8B /* Frameworks */,
 				34BB2EB327B2FE27008F8B8B /* Resources */,
+				347993792833D00A0092F515 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				347993772833D00A0092F515 /* PBXTargetDependency */,
 			);
 			name = Walut;
 			packageProductDependencies = (
@@ -420,9 +606,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1320;
+				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
+					347993572833D0090092F515 = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
+					3479935F2833D00A0092F515 = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
 					34BB2EB427B2FE27008F8B8B = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
@@ -446,11 +638,31 @@
 			projectRoot = "";
 			targets = (
 				34BB2EB427B2FE27008F8B8B /* Walut */,
+				347993572833D0090092F515 /* WatchWalut */,
+				3479935F2833D00A0092F515 /* WatchWalut WatchKit Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		347993562833D0090092F515 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3479935B2833D00A0092F515 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3479935E2833D00A0092F515 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				347993732833D00A0092F515 /* Preview Assets.xcassets in Resources */,
+				341BFE4A2834BAD6005C990F /* Localizable.strings in Resources */,
+				347993702833D00A0092F515 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		34BB2EB327B2FE27008F8B8B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -539,6 +751,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3479935C2833D00A0092F515 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				347993892833D4A50092F515 /* CurrencyData.swift in Sources */,
+				347993832833D1A80092F515 /* CurrencyCell.swift in Sources */,
+				341BFE4F2834C12C005C990F /* ContentView.swift in Sources */,
+				3479936A2833D00A0092F515 /* NotificationController.swift in Sources */,
+				341BFE4D2834BF46005C990F /* BasePickerView.swift in Sources */,
+				347993682833D00A0092F515 /* CurrencyList.swift in Sources */,
+				347993872833D3C60092F515 /* NetworkManager.swift in Sources */,
+				34971D8D2834CF810043A063 /* DetailView.swift in Sources */,
+				341BFE4B2834BB4C005C990F /* SortManager.swift in Sources */,
+				347993882833D4570092F515 /* Currency.swift in Sources */,
+				3479936E2833D00A0092F515 /* ComplicationController.swift in Sources */,
+				347993662833D00A0092F515 /* WalutApp.swift in Sources */,
+				3479936C2833D00A0092F515 /* NotificationView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		34BB2EB127B2FE27008F8B8B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -564,6 +796,19 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		347993632833D00A0092F515 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3479935F2833D00A0092F515 /* WatchWalut WatchKit Extension */;
+			targetProxy = 347993622833D00A0092F515 /* PBXContainerItemProxy */;
+		};
+		347993772833D00A0092F515 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 347993572833D0090092F515 /* WatchWalut */;
+			targetProxy = 347993762833D00A0092F515 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		34E5534828336A4F00FF20FB /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
@@ -577,6 +822,120 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3479937A2833D00A0092F515 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CMJ553K76W;
+				GENERATE_INFOPLIST_FILE = YES;
+				IBSC_MODULE = WatchWalut_WatchKit_Extension;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.dreamypls.Walut;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dreamypls.Walut.watchkitapp;
+				PRODUCT_NAME = Walut;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+			};
+			name = Debug;
+		};
+		3479937B2833D00A0092F515 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CMJ553K76W;
+				GENERATE_INFOPLIST_FILE = YES;
+				IBSC_MODULE = WatchWalut_WatchKit_Extension;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.dreamypls.Walut;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dreamypls.Walut.watchkitapp;
+				PRODUCT_NAME = Walut;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+			};
+			name = Release;
+		};
+		3479937D2833D00A0092F515 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"WatchWalut WatchKit Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = CMJ553K76W;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WatchWalut WatchKit Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Walut Extension";
+				INFOPLIST_KEY_CLKComplicationPrincipalClass = WatchWalut_WatchKit_Extension.ComplicationController;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dreamypls.Walut.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+			};
+			name = Debug;
+		};
+		3479937E2833D00A0092F515 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"WatchWalut WatchKit Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = CMJ553K76W;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WatchWalut WatchKit Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Walut Extension";
+				INFOPLIST_KEY_CLKComplicationPrincipalClass = WatchWalut_WatchKit_Extension.ComplicationController;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dreamypls.Walut.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+			};
+			name = Release;
+		};
 		34BB2EC127B2FE27008F8B8B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -758,6 +1117,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3479937F2833D00A0092F515 /* Build configuration list for PBXNativeTarget "WatchWalut WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3479937D2833D00A0092F515 /* Debug */,
+				3479937E2833D00A0092F515 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		347993802833D00A0092F515 /* Build configuration list for PBXNativeTarget "WatchWalut" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3479937A2833D00A0092F515 /* Debug */,
+				3479937B2833D00A0092F515 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		34BB2EB027B2FE27008F8B8B /* Build configuration list for PBXProject "Walut" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
