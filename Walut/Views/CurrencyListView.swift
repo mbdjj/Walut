@@ -16,30 +16,35 @@ struct CurrencyListView: View {
         NavigationView {
             List {
                 ForEach(networkManager.currencyArray) { currency in
-                    HStack {
-                        
-                        Text(currency.flag)
-                            .font(.system(size: 50))
-                        
-                        VStack(alignment: .leading) {
+                    NavigationLink {
+                        CalculationView(base: model.baseCurrency, foreign: currency)
+                    } label: {
+                        HStack {
                             
-                            Text(currency.fullName)
-                                .font(.system(size: 19))
-                                .fontWeight(.medium)
+                            Text(currency.flag)
+                                .font(.system(size: 50))
                             
-                            Text(currency.code)
-                                .font(.system(size: 17))
+                            VStack(alignment: .leading) {
+                                
+                                Text(currency.fullName)
+                                    .font(.system(size: 19))
+                                    .fontWeight(.medium)
+                                
+                                Text(currency.code)
+                                    .font(.system(size: 17))
+                                
+                                Spacer()
+                                
+                            }
                             
                             Spacer()
                             
+                            Text("\(String(format: "%.\(model.decimal)f", currency.price)) \(model.baseCurrency.symbol)")
+                                .font(.system(size: 17))
+                            
                         }
-                        
-                        Spacer()
-                        
-                        Text("\(String(format: "%.\(model.decimal)f", currency.price)) \(model.baseCurrency.symbol)")
-                            .font(.system(size: 17))
-                        
                     }
+
                 }
             }
             .navigationTitle("\(model.baseCurrency.flag) \(model.baseCurrency.code)")
