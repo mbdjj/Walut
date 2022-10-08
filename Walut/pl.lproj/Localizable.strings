@@ -1,0 +1,66 @@
+/* 
+  Localizable.strings
+  Walut
+
+  Created by Marcin Bartminski on 08/10/2022.
+  
+*/
+
+"AUD" = "Dolar australijski";
+"BRL" = "Real brazylijski";
+"BGN" = "Lew bułgarski";
+"CAD" = "Dolar kanadyjski";
+"CNY" = "Juan chiński";
+"HRK" = "Kuna chorwacka";
+"CZK" = "Korona czeska";
+"DKK" = "Korona duńska";
+"EUR" = "Euro";
+"HKD" = "Dolar Hongkongu";
+"HUF" = "Forint węgierski";
+"INR" = "Rupia indyjska";
+"IDR" = "Rupia indonezyjska";
+"ILS" = "Nowy izraelski szekel";
+"JPY" = "Jen japoński";
+"MYR" = "Ringgit malezyjski";
+"MXN" = "Peso meksykańskie";
+"RON" = "Lej rumuński";
+"NZD" = "Dolar nowozelandzki";
+"NOK" = "Korona norweska";
+"PHP" = "Peso filipińskie";
+"PLN" = "Złoty polski";
+"GBP" = "Funt brytyjski";
+"RUB" = "Rubel rosyjski";
+"SGD" = "Dolar singapurski";
+"ZAR" = "Rand RPA";
+"KRW" = "Won południowokoreański";
+"SEK" = "Korona szwedzka";
+"CHF" = "Frank szwajcarski";
+"THB" = "Bat tajlandzki";
+"TRY" = "Lira turecka";
+"USD" = "Dolar amerykański";
+
+"settings" = "Ustawienia";
+"settings_change_base" = "Zmień walutę bazową";
+"settings_decimal_numbers" = "Liczby po przecinku";
+
+"base_currency" = "Waluta bazowa";
+"base_choose" = "Wybierz walutę bazową";
+
+"sort" = "Sortuj";
+"sort_by_code" = "Po kodzie";
+"sort_by_code_ztoa" = "(od Z do A)";
+"sort_by_code_atoz" = "(od A do Z)";
+"sort_by_price" = "Po cenie";
+"sort_by_price_highest" = "(od najwyższej)";
+"sort_by_price_lowest" = "(od najniższej)";
+"sort_custom" = "Własne";
+"sort_by_favorite" = "Po ulubionych";
+"sort_nav_title" = "Sortuj waluty";
+
+"menu_favorite" = "Dodaj do ulubionych";
+"menu_unfavorite" = "Usuń z ulubionych";
+
+"save" = "Zapisz";
+"clear" = "Wyczyść";
+"share" = "Udostępnij";
+"done" = "Gotowe";

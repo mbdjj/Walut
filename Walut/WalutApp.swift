@@ -11,7 +11,7 @@ import SwiftUI
 struct WalutApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ViewManagingView()
         }
     }
 }

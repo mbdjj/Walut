@@ -1,0 +1,66 @@
+/* 
+  Localizable.strings
+  Walut
+
+  Created by Marcin Bartminski on 08/10/2022.
+  
+*/
+
+"AUD" = "Australian dollar";
+"BRL" = "Brazilian real";
+"BGN" = "Bulgarian lev";
+"CAD" = "Canadian dollar";
+"CNY" = "Chinese yuan";
+"HRK" = "Croatian kuna";
+"CZK" = "Czech koruna";
+"DKK" = "Danish krone";
+"EUR" = "Euro";
+"HKD" = "Hong Kong dollar";
+"HUF" = "Hungarian forint";
+"INR" = "Indian rupee";
+"IDR" = "Indonesian rupiah";
+"ILS" = "Israeli new shekel";
+"JPY" = "Japanese yen";
+"MYR" = "Malaysian ringgit";
+"MXN" = "Mexican peso";
+"RON" = "Romanian leu";
+"NZD" = "New Zealand dollar";
+"NOK" = "Norwegian krone";
+"PHP" = "Phillippine peso";
+"PLN" = "Polish zloty";
+"GBP" = "British pound";
+"RUB" = "Russian ruble";
+"SGD" = "Singapure dollar";
+"ZAR" = "South African rand";
+"KRW" = "South Korean won";
+"SEK" = "Swedish krona";
+"CHF" = "Swiss franc";
+"THB" = "Thai baht";
+"TRY" = "Turkish lira";
+"USD" = "US dollar";
+
+"settings" = "Settings";
+"settings_change_base" = "Change base currency";
+"settings_decimal_numbers" = "Decimal numbers";
+
+"base_currency" = "Base currency";
+"base_choose" = "Choose your base";
+
+"sort" = "Sort";
+"sort_by_code" = "By code";
+"sort_by_code_ztoa" = "(Z to A)";
+"sort_by_code_atoz" = "(A to Z)";
+"sort_by_price" = "By price";
+"sort_by_price_highest" = "(from highest)";
+"sort_by_price_lowest" = "(from lowest)";
+"sort_custom" = "Custom";
+"sort_by_favorite" = "By favorite";
+"sort_nav_title" = "Sort currencies";
+
+"menu_favorite" = "Favorite";
+"menu_unfavorite" = "Unfavorite";
+
+"save" = "Save";
+"clear" = "Clear";
+"share" = "Share";
+"done" = "Done";
