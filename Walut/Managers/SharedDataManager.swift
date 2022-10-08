@@ -9,7 +9,7 @@ import Foundation
 
 struct SharedDataManager {
     
-    let allCodesArray = ["AUD", "BRL", "BGN", "CAD", "CNY", "HRK", "CZK", "DKK", "EUR", "HKD", "HUF", "INR", "IDR", "ILS", "JPY", "MYR", "MXN", "RON", "NZD", "NOK", "PHP", "PLN", "GBP", "RUB", "SGD", "ZAR", "KRW", "SEK", "CHF", "THB", "TRY", "USD"]
+    let allCodesArray = ["AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HRK", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK", "SGD", "THB", "TRY", "USD", "ZAR"]
     
     static let shared = SharedDataManager()
     
