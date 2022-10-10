@@ -12,6 +12,7 @@ class NetworkManager: ObservableObject {
     let shared = SharedDataManager.shared
     
     @Published var currencyArray = [Currency]()
+    @Published var ratesArray = [RatesData]()
     
     
     func fetchCurrencyData(for base: Currency) {
@@ -65,6 +66,53 @@ class NetworkManager: ObservableObject {
             task.resume()
         } else {
             print("nie działa")
+        }
+    }
+    
+    func getChartData(for currency: Currency, base: Currency) {
+        ratesArray = []
+        
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar.current
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        let startDate = Calendar.current.date(byAdding: .month, value: -1, to: Date())
+        let startDateString = formatter.string(from: startDate!)
+        
+        let endDate = Date()
+        let endDateString = formatter.string(from: endDate)
+        
+        if let url = URL(string: "https://api.exchangerate.host/timeseries?start_date=\(startDateString)&end_date=\(endDateString)&base=\(currency.code)&symbols=\(base.code)") {
+            let session = URLSession(configuration: .default)
+            let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 15)
+            let task = session.dataTask(with: request) { data, response, error in
+                if error == nil {
+                    let decoder = JSONDecoder()
+                    
+                    if let safeData = data {
+                        do {
+                            let results = try decoder.decode(CurrencyTimeSeriesData.self, from: safeData)
+                            
+                            let timeSeriesData = results.rates.ratesArray
+                            let keyData = results.rates.keyArray
+                            var timeSeriesArray = [RatesData]()
+                            
+                            for i in 0..<timeSeriesData.count {
+                                timeSeriesArray.append(.init(date: keyData[i], value: timeSeriesData[i][base.code]!))
+                            }
+                            
+                            DispatchQueue.main.async {
+                                self.ratesArray = timeSeriesArray
+                            }
+                        } catch {
+                            print(error)
+                        }
+                    }
+                } else {
+                    print(error!.localizedDescription)
+                }
+            }
+            task.resume()
         }
     }
     

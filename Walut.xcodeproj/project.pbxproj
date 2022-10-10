@@ -85,6 +85,9 @@
 		3447F88528F0C4E400B59B25 /* PHP@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3447F83A28F0C4E400B59B25 /* PHP@1x.png */; };
 		3447F88628F0C4E400B59B25 /* SEK@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3447F83B28F0C4E400B59B25 /* SEK@3x.png */; };
 		3497430128F1E58A00373E0F /* CalculationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3497430028F1E58A00373E0F /* CalculationView.swift */; };
+		3498CC9428F4502200961C61 /* RatesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3498CC9328F4502200961C61 /* RatesData.swift */; };
+		3498CC9628F4504900961C61 /* TimeSeriesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3498CC9528F4504900961C61 /* TimeSeriesData.swift */; };
+		3498CC9828F4533000961C61 /* CalculationChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3498CC9728F4533000961C61 /* CalculationChartView.swift */; };
 		34A2346028F05B5C00C81292 /* WalutApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A2345F28F05B5C00C81292 /* WalutApp.swift */; };
 		34A2346428F05B5D00C81292 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34A2346328F05B5D00C81292 /* Assets.xcassets */; };
 		34A2346728F05B5D00C81292 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 34A2346628F05B5D00C81292 /* Preview Assets.xcassets */; };
@@ -179,6 +182,9 @@
 		3447F83A28F0C4E400B59B25 /* PHP@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHP@1x.png"; sourceTree = "<group>"; };
 		3447F83B28F0C4E400B59B25 /* SEK@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SEK@3x.png"; sourceTree = "<group>"; };
 		3497430028F1E58A00373E0F /* CalculationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationView.swift; sourceTree = "<group>"; };
+		3498CC9328F4502200961C61 /* RatesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesData.swift; sourceTree = "<group>"; };
+		3498CC9528F4504900961C61 /* TimeSeriesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSeriesData.swift; sourceTree = "<group>"; };
+		3498CC9728F4533000961C61 /* CalculationChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationChartView.swift; sourceTree = "<group>"; };
 		34A2345C28F05B5C00C81292 /* Walut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Walut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34A2345F28F05B5C00C81292 /* WalutApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalutApp.swift; sourceTree = "<group>"; };
 		34A2346328F05B5D00C81292 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -346,6 +352,7 @@
 				34A2346D28F05BAE00C81292 /* BasePickerView.swift */,
 				3441ABD728F1709F009528FD /* CurrencyListView.swift */,
 				3497430028F1E58A00373E0F /* CalculationView.swift */,
+				3498CC9728F4533000961C61 /* CalculationChartView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -364,6 +371,8 @@
 			children = (
 				34A2347328F061D700C81292 /* Currency.swift */,
 				34ED0C1E28F1751C006C4F38 /* CurrencyData.swift */,
+				3498CC9328F4502200961C61 /* RatesData.swift */,
+				3498CC9528F4504900961C61 /* TimeSeriesData.swift */,
 			);
 			path = "Custom Types";
 			sourceTree = "<group>";
@@ -515,10 +524,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				34ED0C2328F1C24F006C4F38 /* ViewManagingView.swift in Sources */,
+				3498CC9828F4533000961C61 /* CalculationChartView.swift in Sources */,
 				34ED0C2128F17592006C4F38 /* SharedDataManager.swift in Sources */,
 				34ED0C1F28F1751C006C4F38 /* CurrencyData.swift in Sources */,
 				3441ABD828F1709F009528FD /* CurrencyListView.swift in Sources */,
 				34ED0C1D28F172EB006C4F38 /* CurrencyListViewModel.swift in Sources */,
+				3498CC9428F4502200961C61 /* RatesData.swift in Sources */,
 				34A2347428F061D700C81292 /* Currency.swift in Sources */,
 				3447F7E728F0BB3F00B59B25 /* AppIconManager.swift in Sources */,
 				34ED0C1B28F172A6006C4F38 /* NetworkManager.swift in Sources */,
@@ -526,6 +537,7 @@
 				34A2346E28F05BAE00C81292 /* BasePickerView.swift in Sources */,
 				3497430128F1E58A00373E0F /* CalculationView.swift in Sources */,
 				34A2347028F05C3B00C81292 /* BasePickerViewModel.swift in Sources */,
+				3498CC9628F4504900961C61 /* TimeSeriesData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

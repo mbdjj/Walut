@@ -14,9 +14,12 @@ struct CalculationView: View {
     
     @State var foreignAmount: Double = 0.0
     @State var baseAmount: Double = 0.0
+    @State var shouldDisableChartButton = true
     
     @FocusState private var foreignTextFieldFocused: Bool
     @FocusState private var baseTextFieldFocused: Bool
+    
+    @ObservedObject var networkManager = NetworkManager()
     
     var body: some View {
         ScrollView {
@@ -90,6 +93,31 @@ struct CalculationView: View {
         }
         .navigationTitle("\(foreign.flag) \(foreign.code)")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear() {
+            DispatchQueue.main.async {
+                shouldDisableChartButton = true
+                networkManager.getChartData(for: foreign, base: base)
+            }
+        }
+        .toolbar {
+            NavigationLink {
+                if shouldDisableChartButton {
+                    Text("dupa")
+                } else {
+                    CalculationChartView(currency: foreign, data: networkManager.ratesArray)
+                }
+            } label: {
+                Image(systemName: "chart.xyaxis.line")
+            }
+            .disabled(shouldDisableChartButton)
+        }
+        .onChange(of: networkManager.ratesArray.count) { newValue in
+            if newValue == 0 {
+                shouldDisableChartButton = true
+            } else {
+                shouldDisableChartButton = false
+            }
+        }
     }
 }
 
