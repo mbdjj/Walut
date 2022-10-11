@@ -9,9 +9,12 @@ import SwiftUI
 
 struct ViewManagingView: View {
     
+    @State var selection = 0
+    
     let isBaseSelected: Bool
     
     let defaults = UserDefaults.standard
+    @ObservedObject var shared = SharedDataManager.shared
     
     init() {
         self.isBaseSelected = defaults.bool(forKey: "isBaseSelected")
@@ -19,7 +22,18 @@ struct ViewManagingView: View {
     
     var body: some View {
         if isBaseSelected {
-            CurrencyListView()
+            TabView(selection: $selection) {
+                CurrencyListView()
+                    .tabItem {
+                        Label(shared.base.code, systemImage: "dollarsign.circle")
+                    }
+                    .tag(0)
+                SettingsView()
+                    .tabItem {
+                        Label("Settings", systemImage: "gear")
+                    }
+                    .tag(1)
+            }
         } else {
             BasePickerView()
         }

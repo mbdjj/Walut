@@ -9,15 +9,16 @@ import SwiftUI
 
 struct CurrencyListView: View {
     
-    @ObservedObject var model = CurrencyListViewModel()
+    //@ObservedObject var model = CurrencyListViewModel()
     @ObservedObject var networkManager = NetworkManager()
+    @ObservedObject var shared = SharedDataManager.shared
     
     var body: some View {
         NavigationView {
             List {
                 ForEach(networkManager.currencyArray) { currency in
                     NavigationLink {
-                        CalculationView(base: model.baseCurrency, foreign: currency)
+                        CalculationView(base: shared.base, foreign: currency)
                     } label: {
                         HStack {
                             
@@ -39,7 +40,7 @@ struct CurrencyListView: View {
                             
                             Spacer()
                             
-                            Text("\(String(format: "%.\(model.decimal)f", currency.price)) \(model.baseCurrency.symbol)")
+                            Text("\(String(format: "%.\(shared.decimal)f", currency.price)) \(shared.base.symbol)")
                                 .font(.system(size: 17))
                             
                         }
@@ -47,10 +48,10 @@ struct CurrencyListView: View {
 
                 }
             }
-            .navigationTitle("\(model.baseCurrency.flag) \(model.baseCurrency.code)")
+            .navigationTitle("\(shared.base.flag) \(shared.base.code)")
         }
         .onAppear {
-            networkManager.fetchCurrencyData(for: model.baseCurrency)
+            networkManager.fetchCurrencyData(for: shared.base)
         }
     }
 }
