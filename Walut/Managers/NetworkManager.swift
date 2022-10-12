@@ -70,7 +70,6 @@ class NetworkManager: ObservableObject {
     }
     
     func getChartData(for currency: Currency, base: Currency) {
-        ratesArray = []
         
         let formatter = DateFormatter()
         formatter.calendar = Calendar.current

@@ -5,7 +5,7 @@
 //  Created by Marcin Bartminski on 07/10/2022.
 //
 
-import Foundation
+import SwiftUI
 
 class BasePickerViewModel: ObservableObject {
     
@@ -22,7 +22,7 @@ class BasePickerViewModel: ObservableObject {
     
     let defaults = UserDefaults.standard
     let iconManager = AppIconManager()
-    let shared = SharedDataManager.shared
+    var shared = SharedDataManager.shared
     
     init() {
         for code in shared.allCodesArray {
@@ -39,9 +39,15 @@ class BasePickerViewModel: ObservableObject {
         defaults.set(selected, forKey: "base")
         defaults.set(true, forKey: "isBaseSelected")
         
-        iconManager.changeIcon(to: selected)
+        shared.name = name
+        shared.base = Currency(baseCode: selected)
+        shared.decimal = decimal
         
-        shouldDisplayFullScreenCover.toggle()
+        DispatchQueue.main.async {
+            withAnimation {
+                self.shared.isBaseSelected = true
+            }
+        }
     }
     
 }

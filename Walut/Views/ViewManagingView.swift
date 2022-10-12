@@ -11,17 +11,17 @@ struct ViewManagingView: View {
     
     @State var selection = 0
     
-    let isBaseSelected: Bool
+    //let isBaseSelected: Bool
     
     let defaults = UserDefaults.standard
     @ObservedObject var shared = SharedDataManager.shared
     
     init() {
-        self.isBaseSelected = defaults.bool(forKey: "isBaseSelected")
+        //self.isBaseSelected = defaults.bool(forKey: "isBaseSelected")
     }
     
     var body: some View {
-        if isBaseSelected {
+        if shared.isBaseSelected {
             TabView(selection: $selection) {
                 CurrencyListView()
                     .tabItem {

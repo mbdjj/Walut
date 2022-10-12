@@ -9,6 +9,9 @@ import Foundation
 
 class SharedDataManager: ObservableObject {
     
+    @Published var isBaseSelected = false
+    
+    @Published var name: String
     @Published var base: Currency
     @Published var decimal: Int
     
@@ -19,6 +22,9 @@ class SharedDataManager: ObservableObject {
     static let shared = SharedDataManager()
     
     init() {
+        isBaseSelected = defaults.bool(forKey: "isBaseSelected")
+        
+        name = defaults.string(forKey: "name") ?? "User"
         base = Currency(baseCode: defaults.string(forKey: "base") ?? "AUD")
         decimal = defaults.integer(forKey: "decimal")
     }
