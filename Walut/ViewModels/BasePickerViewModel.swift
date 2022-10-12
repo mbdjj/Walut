@@ -43,6 +43,8 @@ class BasePickerViewModel: ObservableObject {
         shared.base = Currency(baseCode: selected)
         shared.decimal = decimal
         
+        iconManager.changeIcon(to: selected)
+        
         DispatchQueue.main.async {
             withAnimation {
                 self.shared.isBaseSelected = true
