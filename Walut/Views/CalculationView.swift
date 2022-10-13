@@ -95,7 +95,6 @@ struct CalculationView: View {
         .navigationBarTitleDisplayMode(.inline)
         .onAppear() {
             DispatchQueue.main.async {
-                shouldDisableChartButton = true
                 networkManager.getChartData(for: foreign, base: base)
             }
         }
