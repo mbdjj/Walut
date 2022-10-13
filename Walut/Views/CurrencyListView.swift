@@ -13,6 +13,10 @@ struct CurrencyListView: View {
     @ObservedObject var networkManager = NetworkManager()
     @ObservedObject var shared = SharedDataManager.shared
     
+    init() {
+        networkManager.fetchCurrencyData(for: shared.base)
+    }
+    
     var body: some View {
         NavigationView {
             List {
@@ -45,13 +49,16 @@ struct CurrencyListView: View {
                             
                         }
                     }
+                    .contextMenu {
+                        CellContextMenu(for: currency)
+                    }
 
                 }
             }
             .navigationTitle("\(shared.base.flag) \(shared.base.code)")
-        }
-        .onAppear {
-            networkManager.fetchCurrencyData(for: shared.base)
+            .refreshable {
+                networkManager.fetchCurrencyData(for: shared.base)
+            }
         }
     }
 }

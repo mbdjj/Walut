@@ -64,3 +64,6 @@
 "clear" = "Clear";
 "share" = "Share";
 "done" = "Done";
+
+"textToShare0" = "'s ";
+"textToShare1" = " price is now at ";

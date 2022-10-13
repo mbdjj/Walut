@@ -64,3 +64,6 @@
 "clear" = "Wyczyść";
 "share" = "Udostępnij";
 "done" = "Gotowe";
+
+"textToShare0" = " ";
+"textToShare1" = " kosztuje teraz ";
