@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		342D433A28F7E37F001C69AD /* CurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342D433928F7E37F001C69AD /* CurrencyCell.swift */; };
 		3441ABD828F1709F009528FD /* CurrencyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3441ABD728F1709F009528FD /* CurrencyListView.swift */; };
 		3447F7E728F0BB3F00B59B25 /* AppIconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3447F7E628F0BB3F00B59B25 /* AppIconManager.swift */; };
 		3447F83C28F0C4E400B59B25 /* ZAR@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3447F7F128F0C4E300B59B25 /* ZAR@3x.png */; };
@@ -106,6 +107,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		342D433928F7E37F001C69AD /* CurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCell.swift; sourceTree = "<group>"; };
 		3441ABD728F1709F009528FD /* CurrencyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListView.swift; sourceTree = "<group>"; };
 		3447F7E628F0BB3F00B59B25 /* AppIconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconManager.swift; sourceTree = "<group>"; };
 		3447F7EB28F0BE4800B59B25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -389,6 +391,7 @@
 		34AC47B828F7D8BD00724165 /* Custom Components */ = {
 			isa = PBXGroup;
 			children = (
+				342D433928F7E37F001C69AD /* CurrencyCell.swift */,
 				34AC47B628F7D8B400724165 /* CellContextMenu.swift */,
 			);
 			path = "Custom Components";
@@ -543,6 +546,7 @@
 				34ED0C2328F1C24F006C4F38 /* ViewManagingView.swift in Sources */,
 				3498CC9828F4533000961C61 /* CalculationChartView.swift in Sources */,
 				34ED0C2128F17592006C4F38 /* SharedDataManager.swift in Sources */,
+				342D433A28F7E37F001C69AD /* CurrencyCell.swift in Sources */,
 				34ED0C1F28F1751C006C4F38 /* CurrencyData.swift in Sources */,
 				3441ABD828F1709F009528FD /* CurrencyListView.swift in Sources */,
 				34ED0C1D28F172EB006C4F38 /* CurrencyListViewModel.swift in Sources */,

@@ -24,30 +24,7 @@ struct CurrencyListView: View {
                     NavigationLink {
                         CalculationView(base: shared.base, foreign: currency)
                     } label: {
-                        HStack {
-                            
-                            Text(currency.flag)
-                                .font(.system(size: 50))
-                            
-                            VStack(alignment: .leading) {
-                                
-                                Text(currency.fullName)
-                                    .font(.system(size: 19))
-                                    .fontWeight(.medium)
-                                
-                                Text(currency.code)
-                                    .font(.system(size: 17))
-                                
-                                Spacer()
-                                
-                            }
-                            
-                            Spacer()
-                            
-                            Text("\(String(format: "%.\(shared.decimal)f", currency.price)) \(shared.base.symbol)")
-                                .font(.system(size: 17))
-                            
-                        }
+                        CurrencyCell(for: currency)
                     }
                     .contextMenu {
                         CellContextMenu(for: currency)

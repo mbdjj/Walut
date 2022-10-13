@@ -65,5 +65,8 @@
 "share" = "Share";
 "done" = "Done";
 
-"textToShare0" = "'s ";
-"textToShare1" = " price is now at ";
+"text_to_share0" = "'s ";
+"text_to_share1" = " price is now at ";
+
+"hello" = "Hello";
+"your_name" = "Your name";

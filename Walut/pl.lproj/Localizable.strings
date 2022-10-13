@@ -65,5 +65,8 @@
 "share" = "Udostępnij";
 "done" = "Gotowe";
 
-"textToShare0" = " ";
-"textToShare1" = " kosztuje teraz ";
+"text_to_share0" = " ";
+"text_to_share1" = " kosztuje teraz ";
+
+"hello" = "Witaj";
+"your_name" = "Twoje imię";

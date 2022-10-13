@@ -74,7 +74,7 @@ struct CellContextMenu: View {
 //    }
     
     func presentShareSheet() {
-        let text = "\(currency.fullName)\(String(localized: "textToShare0"))(\(currency.code))\(String(localized: "textToShare1"))\(String(format: "%.\(shared.decimal)f", currency.price)) \(base.symbol)"
+        let text = "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(shared.decimal)f", currency.price)) \(base.symbol)"
 
         let activityVC = UIActivityViewController(activityItems: [text], applicationActivities: nil)
         let scenes = UIApplication.shared.connectedScenes

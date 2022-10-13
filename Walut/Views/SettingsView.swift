@@ -15,16 +15,16 @@ struct SettingsView: View {
         NavigationView {
             List {
                 
-                Picker("Base currency", selection: $model.selectedBase) {
+                Picker(String(localized: "base_currency"), selection: $model.selectedBase) {
                     ForEach(model.pickerData) { currency in
                         Text("\(currency.flag) \(currency.code)")
                     }
                 }
                 
-                Stepper("Decimal places (\(model.decimal))", value: $model.decimal, in: 2...7)
+                Stepper("\(String(localized: "settings_decimal_numbers")) (\(model.decimal))", value: $model.decimal, in: 2...7)
                 
             }
-            .navigationTitle("Settings")
+            .navigationTitle(String(localized: "settings"))
         }
         .onChange(of: model.selectedBase) { newValue in
             model.saveBase()

@@ -30,7 +30,7 @@ struct ViewManagingView: View {
                     .tag(0)
                 SettingsView()
                     .tabItem {
-                        Label("Settings", systemImage: "gear")
+                        Label(String(localized: "settings"), systemImage: "gear")
                     }
                     .tag(1)
             }
