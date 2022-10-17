@@ -24,7 +24,7 @@ struct BasePickerView: View {
                     .submitLabel(.done)
                 
                 Section {
-                    Picker(String(localized: "base_curerncy"), selection: $model.selected) {
+                    Picker(String(localized: "base_currency"), selection: $model.selected) {
                         ForEach(model.currencyArray) { currency in
                             Text("\(currency.flag) \(currency.code)")
                         }
