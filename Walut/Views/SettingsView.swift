@@ -33,7 +33,7 @@ struct SettingsView: View {
                                 .font(.system(.title3))
                                 .fontWeight(.medium)
                             
-                            Text("Walut user")
+                            Text(model.shared.chosenTitle)
                                 .font(.system(.footnote))
                                 .foregroundColor(.secondary)
                         }

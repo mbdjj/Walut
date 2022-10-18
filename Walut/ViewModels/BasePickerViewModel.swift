@@ -35,6 +35,8 @@ class BasePickerViewModel: ObservableObject {
     
     func saveAndContinue() {
         defaults.set(name, forKey: "name")
+        defaults.set([0], forKey: "titleIDArray")
+        defaults.set(0, forKey: "chosenTitle")
         defaults.set(decimal, forKey: "decimal")
         defaults.set(selected, forKey: "base")
         defaults.set(true, forKey: "isBaseSelected")
