@@ -9,16 +9,22 @@ import Foundation
 
 class SettingsViewModel: ObservableObject {
     
+    @Published var name: String
+    
     @Published var selectedBase: String
     @Published var decimal: Int
     
     @Published var pickerData = [Currency]()
+    
+    var letter: String { "\(name.first!)" }
     
     let defaults = UserDefaults.standard
     var shared = SharedDataManager.shared
     let iconManager = AppIconManager()
     
     init() {
+        name = shared.name
+        
         selectedBase = shared.base.code
         decimal = shared.decimal
         
