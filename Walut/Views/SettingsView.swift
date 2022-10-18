@@ -16,29 +16,34 @@ struct SettingsView: View {
             List {
                 
                 Section {
-                    HStack {
-                        Text(model.letter)
-                            .font(.system(.title))
-                            .bold()
-                            .padding()
-                            .foregroundColor(.white)
-                            .background(
-                                Color.accentColor
-                                    .clipShape(Circle())
-                            )
-                            .padding(.vertical, 4)
-                        
-                        VStack(alignment: .leading) {
-                            Text(model.name)
-                                .font(.system(.title3))
-                                .fontWeight(.medium)
+                    NavigationLink {
+                        ProfileView()
+                    } label: {
+                        HStack {
+                            Text(model.letter)
+                                .font(.system(.title))
+                                .bold()
+                                .padding()
+                                .foregroundColor(.white)
+                                .background(
+                                    Color.accentColor
+                                        .clipShape(Circle())
+                                )
+                                .padding(.vertical, 4)
                             
-                            Text(model.shared.chosenTitle)
-                                .font(.system(.footnote))
-                                .foregroundColor(.secondary)
+                            VStack(alignment: .leading) {
+                                Text(model.name)
+                                    .font(.system(.title3))
+                                    .fontWeight(.medium)
+                                
+                                Text(model.shared.chosenTitle)
+                                    .font(.system(.footnote))
+                                    .foregroundColor(.secondary)
+                            }
+                            .padding(.leading, 8)
                         }
-                        .padding(.leading, 8)
                     }
+
                 }
                 
                 Section {
@@ -49,6 +54,14 @@ struct SettingsView: View {
                     }
                     
                     Stepper("\(String(localized: "settings_decimal_numbers")) (\(model.decimal))", value: $model.decimal, in: 2...7)
+                }
+                
+                Section {
+                    TextField("Enter secret code", text: $model.secretCode)
+                        .onSubmit {
+                            model.checkCode()
+                        }
+                        .submitLabel(.done)
                 }
                 
             }

@@ -14,6 +14,8 @@ class SettingsViewModel: ObservableObject {
     @Published var selectedBase: String
     @Published var decimal: Int
     
+    @Published var secretCode = ""
+    
     @Published var pickerData = [Currency]()
     
     var letter: String { "\(name.first!)" }
@@ -42,6 +44,16 @@ class SettingsViewModel: ObservableObject {
     func saveDecimal() {
         shared.decimal = decimal
         defaults.set(decimal, forKey: "decimal")
+    }
+    
+    func checkCode() {
+        if let secretID = shared.secretDictionary[secretCode] {
+            if shared.titleIDArray.firstIndex(of: secretID) == nil {
+                shared.titleIDArray.append(secretID)
+                shared.defaults.set(shared.titleIDArray, forKey: "titleIDArray")
+            }
+        }
+        print(shared.titleIDArray)
     }
     
 }

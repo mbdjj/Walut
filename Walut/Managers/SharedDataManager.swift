@@ -20,6 +20,7 @@ class SharedDataManager: ObservableObject {
     
     let allCodesArray = ["AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HRK", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK", "SGD", "THB", "TRY", "USD", "ZAR"]
     let titleArray = [String(localized: "title0"), String(localized: "title1")]
+    let secretDictionary = ["marcinBartminski": 1]
     
     let defaults = UserDefaults.standard
     

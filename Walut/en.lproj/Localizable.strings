@@ -71,5 +71,9 @@
 "hello" = "Hello";
 "your_name" = "Your name";
 
+"profile" = "Profile";
+"change_data" = "Change your data";
+"title" = "Title";
+
 "title0" = "Walut user";
 "title1" = "Developer";
