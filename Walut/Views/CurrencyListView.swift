@@ -9,7 +9,6 @@ import SwiftUI
 
 struct CurrencyListView: View {
     
-    //@ObservedObject var model = CurrencyListViewModel()
     @ObservedObject var networkManager = NetworkManager()
     @ObservedObject var shared = SharedDataManager.shared
     
