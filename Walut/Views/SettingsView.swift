@@ -57,7 +57,7 @@ struct SettingsView: View {
                 }
                 
                 Section {
-                    TextField("Enter secret code", text: $model.secretCode)
+                    TextField(String(localized: "settings_enter_code"), text: $model.secretCode)
                         .onSubmit {
                             model.checkCode()
                         }

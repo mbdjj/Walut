@@ -42,6 +42,7 @@
 "settings" = "Settings";
 "settings_change_base" = "Change base currency";
 "settings_decimal_numbers" = "Decimal numbers";
+"settings_enter_code" = "Enter secret code";
 
 "base_currency" = "Base currency";
 "base_choose" = "Choose your base";

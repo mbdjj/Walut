@@ -42,6 +42,7 @@
 "settings" = "Ustawienia";
 "settings_change_base" = "Zmień walutę bazową";
 "settings_decimal_numbers" = "Liczby po przecinku";
+"settings_enter_code" = "Wprowadź sekretny kod";
 
 "base_currency" = "Waluta bazowa";
 "base_choose" = "Wybierz walutę bazową";
