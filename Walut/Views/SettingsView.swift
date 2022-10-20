@@ -64,6 +64,43 @@ struct SettingsView: View {
                         .submitLabel(.done)
                 }
                 
+                Section {
+                    NavigationLink {
+                        List {
+                            HStack {
+                                Text(String(localized: "support"))
+                                    .fontWeight(.medium)
+                                
+                                Spacer()
+                                
+                                VStack {
+                                    Text("☕️")
+                                        .font(.title)
+                                    Text("5,99 zł")
+                                        .foregroundColor(.accentColor)
+                                }
+                            }
+                            
+                            HStack {
+                                Text(String(localized: "support_plus"))
+                                    .fontWeight(.medium)
+                                
+                                Spacer()
+                                
+                                VStack {
+                                    Text("🌯")
+                                        .font(.title)
+                                    Text("24,99 zł")
+                                        .foregroundColor(.accentColor)
+                                }
+                            }
+                        }
+                    } label: {
+                        Text(String(localized: "support"))
+                    }
+
+                }
+                
             }
             .navigationTitle(String(localized: "settings"))
         }
