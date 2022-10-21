@@ -16,6 +16,11 @@ struct CalculationChartView: View {
     var minValueYAxis: Double
     var maxValueYAxis: Double
     
+    @State var chartDate: String
+    @State var chartValue: Double
+    
+    let shared = SharedDataManager.shared
+    
     init(currency: Currency, data: [RatesData]) {
         self.currency = currency
         self.data = data
@@ -37,6 +42,10 @@ struct CalculationChartView: View {
                 self.maxValueYAxis = item.value
             }
         }
+        
+        let last = data.last!
+        chartDate = last.date
+        chartValue = last.value
     }
     
     var body: some View {
@@ -49,6 +58,39 @@ struct CalculationChartView: View {
             }
             .aspectRatio(1, contentMode: .fit)
             .chartYScale(domain: minValueYAxis...maxValueYAxis)
+            .chartOverlay { proxy in
+                GeometryReader { geometry in
+                    Rectangle().fill(.clear).contentShape(Rectangle())
+                        .gesture(
+                            DragGesture()
+                                .onChanged { value in
+                                    let origin = geometry[proxy.plotAreaFrame].origin
+                                    let location = CGPoint(
+                                        x: value.location.x - origin.x,
+                                        y: value.location.y - origin.y
+                                    )
+                                    
+                                    if let chartData = proxy.value(at: location, as: (String, Double).self) {
+                                        chartDate = chartData.0
+                                        
+                                        for data in self.data {
+                                            if chartDate == data.date {
+                                                chartValue = data.value
+                                            }
+                                        }
+                                    }
+                                }
+                        )
+                }
+            }
+            
+            HStack {
+                Spacer()
+                
+                Text("1 \(currency.symbol) = \(String(format: "%.\(shared.decimal)f", chartValue)) \(shared.base.symbol) (\(chartDate))")
+                    .padding()
+                    .font(.title2)
+            }
             
             Spacer()
         }
