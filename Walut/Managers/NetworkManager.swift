@@ -14,6 +14,9 @@ class NetworkManager: ObservableObject {
     @Published var currencyArray = [Currency]()
     @Published var ratesArray = [RatesData]()
     
+    @Published var errorMessage = ""
+    @Published var shouldDisplayErrorAlert = false
+    
     
     func fetchCurrencyData(for base: Currency) {
         
@@ -48,17 +51,21 @@ class NetworkManager: ObservableObject {
                                 //self.decodeAndSort()
                             }
                         } catch {
-                            print(error)
+                            DispatchQueue.main.async {
+                                self.errorMessage = error.localizedDescription
+                                self.shouldDisplayErrorAlert = true
+                            }
                         }
                     }
                 } else {
-                    print(error!.localizedDescription)
+                    DispatchQueue.main.async {
+                        self.errorMessage = error!.localizedDescription
+                        self.shouldDisplayErrorAlert = true
+                    }
                 }
             }
             
             task.resume()
-        } else {
-            print("nie działa")
         }
     }
     

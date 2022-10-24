@@ -65,6 +65,7 @@
 "clear" = "Clear";
 "share" = "Share";
 "done" = "Done";
+"error" = "Error";
 
 "text_to_share0" = "'s ";
 "text_to_share1" = " price is now at ";

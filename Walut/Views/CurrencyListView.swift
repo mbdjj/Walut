@@ -35,6 +35,16 @@ struct CurrencyListView: View {
             .refreshable {
                 networkManager.fetchCurrencyData(for: shared.base)
             }
+            .alert(String(localized: "error"), isPresented: $networkManager.shouldDisplayErrorAlert) {
+                Button {
+                    networkManager.shouldDisplayErrorAlert = false
+                    networkManager.errorMessage = ""
+                } label: {
+                    Text("OK")
+                }
+            } message: {
+                Text("\(networkManager.errorMessage)")
+            }
         }
     }
 }
