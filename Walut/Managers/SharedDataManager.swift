@@ -9,6 +9,7 @@ import Foundation
 
 class SharedDataManager: ObservableObject {
     
+    @Published var onboardingDone = false
     @Published var isBaseSelected = false
     
     @Published var name: String

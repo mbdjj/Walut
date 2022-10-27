@@ -66,6 +66,9 @@
 "share" = "Udostępnij";
 "done" = "Gotowe";
 "error" = "Błąd";
+"back" = "Wróc";
+"next" = "Dalej";
+"continue" = "Kontynuuj";
 
 "text_to_share0" = " ";
 "text_to_share1" = " kosztuje teraz ";
@@ -83,3 +86,12 @@
 
 "support" = "Wesprzyj twórcę";
 "support_plus" = "Wesprzyj twórcę bardziej";
+
+"onboarding0" = "Witaj w Walut!";
+"onboarding1" = "Sprawdzaj aktualne kursy!";
+"onboarding2" = "Szybko sprawdzaj konwersje!";
+"onboarding3" = "Teraz z wykresami!";
+"onboarding_desc0" = "Walut jest prostą aplikacją, dzięki której sprawdzisz kursy walut.";
+"onboarding_desc1" = "Walut pobiera dane z internetu i prezentuje je w prostej postaci.";
+"onboarding_desc2" = "Walut pozwala sprawdzić ile będzie kosztować dowolna ilość Twojej domowej waluty.";
+"onboarding_desc3" = "Sprawdzaj dane nawet sprzed miesiąca.";

@@ -66,6 +66,9 @@
 "share" = "Share";
 "done" = "Done";
 "error" = "Error";
+"back" = "Back";
+"next" = "Next";
+"continue" = "Continue";
 
 "text_to_share0" = "'s ";
 "text_to_share1" = " price is now at ";
@@ -83,3 +86,12 @@
 
 "support" = "Support the developer";
 "support_plus" = "Support the developer more";
+
+"onboarding0" = "Welcome to Walut!";
+"onboarding1" = "Check current rates!";
+"onboarding2" = "Quickly check conversion!";
+"onboarding3" = "Now with charts!";
+"onboarding_desc0" = "Walut is a simple app to quickly check current exchange rates.";
+"onboarding_desc1" = "Walut takes data from the Internet and presents it to you in a simple way.";
+"onboarding_desc2" = "Walut allows you to check how much will cost any amount of your home currency.";
+"onboarding_desc3" = "Check data from up to a month ago.";
