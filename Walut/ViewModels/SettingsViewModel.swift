@@ -17,6 +17,7 @@ class SettingsViewModel: ObservableObject {
     
     @Published var secretCode = ""
     @Published var shouldDisplayAlert: Bool = false
+    var shouldSaveTitle = false
     @Published var titleIDToSave = 0
     
     @Published var alertTitle = ""
@@ -53,14 +54,19 @@ class SettingsViewModel: ObservableObject {
     }
     
     func saveTitles() {
-        shared.titleIDArray.append(titleIDToSave)
-        shared.defaults.set(shared.titleIDArray, forKey: "titleIDArray")
+        if shouldSaveTitle {
+            shared.titleIDArray.append(titleIDToSave)
+            shared.defaults.set(shared.titleIDArray, forKey: "titleIDArray")
+        }
     }
     
     func checkCode() {
+        shouldSaveTitle = false
+        
         if let secretID = shared.secretDictionary[secretCode] {
             if shared.titleIDArray.firstIndex(of: secretID) == nil {
                 titleIDToSave = secretID
+                shouldSaveTitle = true
                 
                 let t = shared.titleArray[secretID]
                 alertTitle = String(localized: "alert_positive_title")
