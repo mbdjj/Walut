@@ -95,3 +95,11 @@
 "onboarding_desc1" = "Walut pobiera dane z internetu i prezentuje je w prostej postaci.";
 "onboarding_desc2" = "Walut pozwala sprawdzić ile będzie kosztować dowolna ilość Twojej domowej waluty.";
 "onboarding_desc3" = "Sprawdzaj dane nawet sprzed miesiąca.";
+
+"alert_positive_title" = "Odblokowano nowy tytuł!";
+"alert_positive_message_1" = "Odblokowano tytuł";
+"alert_positive_message_2" = ". Możesz zacząć go używać w zakładce profil.";
+"alert_repeated_title" = "Już posiadasz ten tytuł.";
+"alert_repeated_message" = "Ten tytuł został już odblokowany w przeszłości. Nie martw się, masz już go.";
+"alert_invalid_title" = "Niepoprawny kod.";
+"alert_invalid_message" = "Niestety nie ma tytułu za wpisany kod (jeszcze).";

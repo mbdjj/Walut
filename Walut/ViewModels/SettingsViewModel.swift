@@ -63,15 +63,15 @@ class SettingsViewModel: ObservableObject {
                 titleIDToSave = secretID
                 
                 let t = shared.titleArray[secretID]
-                alertTitle = "Unlocked new title!"
-                alertMessage = "You have unlocked the \(t) title! You can equip it in you profile."
+                alertTitle = String(localized: "alert_positive_title")
+                alertMessage = "\(String(localized: "alert_positive_message_1")) \(t) \(String(localized: "alert_positive_message_2"))"
             } else {
-                alertTitle = "You already have this title."
-                alertMessage = "You've unlocked this title in the past. No worries, you already have it."
+                alertTitle = String(localized: "alert_repeated_title")
+                alertMessage = String(localized: "alert_repeated_message")
             }
         } else {
-            alertTitle = "Invalid code"
-            alertMessage = "Unfortunately there is no title for this code (yet)."
+            alertTitle = String(localized: "alert_invalid_title")
+            alertMessage = String(localized: "alert_invalid_message")
         }
         
         secretCode = ""

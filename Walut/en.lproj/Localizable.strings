@@ -95,3 +95,11 @@
 "onboarding_desc1" = "Walut takes data from the Internet and presents it to you in a simple way.";
 "onboarding_desc2" = "Walut allows you to check how much will cost any amount of your home currency.";
 "onboarding_desc3" = "Check data from up to a month ago.";
+
+"alert_positive_title" = "Unlocked new title!";
+"alert_positive_message_1" = "You have unlocked the";
+"alert_positive_message_2" = "title! You can equip it in you profile.";
+"alert_repeated_title" = "You already have this title.";
+"alert_repeated_message" = "You've unlocked this title in the past. No worries, you already have it.";
+"alert_invalid_title" = "Invalid code.";
+"alert_invalid_message" = "Unfortunately there is no title for this code (yet).";
