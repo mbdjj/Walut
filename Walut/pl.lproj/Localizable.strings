@@ -43,6 +43,7 @@
 "settings_change_base" = "Zmień walutę bazową";
 "settings_decimal_numbers" = "Liczby po przecinku";
 "settings_enter_code" = "Wprowadź sekretny kod";
+"settings_quick_conversion" = "Tryb szybkiej konwersji";
 
 "base_currency" = "Waluta bazowa";
 "base_choose" = "Wybierz walutę bazową";
@@ -103,3 +104,5 @@
 "alert_repeated_message" = "Ten tytuł został już odblokowany w przeszłości. Nie martw się, masz już go.";
 "alert_invalid_title" = "Niepoprawny kod.";
 "alert_invalid_message" = "Niestety nie ma tytułu za wpisany kod (jeszcze).";
+
+"quick_convert" = "Wprowadź kwotę w Twojej walucie";

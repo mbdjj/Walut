@@ -14,6 +14,7 @@ class SettingsViewModel: ObservableObject {
     
     @Published var selectedBase: String
     @Published var decimal: Int
+    @Published var quickConvertOn: Bool
     
     @Published var secretCode = ""
     @Published var shouldDisplayAlert: Bool = false
@@ -36,6 +37,7 @@ class SettingsViewModel: ObservableObject {
         
         selectedBase = shared.base.code
         decimal = shared.decimal
+        quickConvertOn = shared.quickConvert
         
         for code in shared.allCodesArray {
             self.pickerData.append(Currency(baseCode: code))
@@ -58,6 +60,11 @@ class SettingsViewModel: ObservableObject {
             shared.titleIDArray.append(titleIDToSave)
             shared.defaults.set(shared.titleIDArray, forKey: "titleIDArray")
         }
+    }
+    
+    func saveConvertMode() {
+        shared.quickConvert = quickConvertOn
+        shared.defaults.set(quickConvertOn, forKey: "quickConvert")
     }
     
     func checkCode() {

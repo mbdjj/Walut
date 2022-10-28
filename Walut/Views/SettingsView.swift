@@ -54,6 +54,11 @@ struct SettingsView: View {
                     }
                     
                     Stepper("\(String(localized: "settings_decimal_numbers")) (\(model.decimal))", value: $model.decimal, in: 2...7)
+                    
+                    Toggle(String(localized: "settings_quick_conversion"), isOn: $model.quickConvertOn)
+                        .onChange(of: model.quickConvertOn) { _ in
+                            model.saveConvertMode()
+                        }
                 }
                 
                 Section {

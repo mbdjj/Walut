@@ -43,6 +43,7 @@
 "settings_change_base" = "Change base currency";
 "settings_decimal_numbers" = "Decimal numbers";
 "settings_enter_code" = "Enter secret code";
+"settings_quick_conversion" = "Quick conversion mode";
 
 "base_currency" = "Base currency";
 "base_choose" = "Choose your base";
@@ -103,3 +104,5 @@
 "alert_repeated_message" = "You've unlocked this title in the past. No worries, you already have it.";
 "alert_invalid_title" = "Invalid code.";
 "alert_invalid_message" = "Unfortunately there is no title for this code (yet).";
+
+"quick_convert" = "Enter amount in you currency";

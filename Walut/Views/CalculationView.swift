@@ -72,6 +72,9 @@ struct CalculationView: View {
             
             Button {
                 
+                foreignTextFieldFocused = false
+                baseTextFieldFocused = false
+                
                 foreignAmount = 0.0
                 baseAmount = 0.0
                 
@@ -101,7 +104,7 @@ struct CalculationView: View {
         .toolbar {
             NavigationLink {
                 if shouldDisableChartButton {
-                    Text("dupa")
+                    Text("You shouldn't be here")
                 } else {
                     CalculationChartView(currency: foreign, data: networkManager.ratesArray)
                 }
@@ -117,6 +120,7 @@ struct CalculationView: View {
                 shouldDisableChartButton = false
             }
         }
+        .scrollDismissesKeyboard(.immediately)
     }
 }
 
