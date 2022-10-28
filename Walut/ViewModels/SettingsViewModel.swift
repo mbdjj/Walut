@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class SettingsViewModel: ObservableObject {
     
@@ -15,6 +16,11 @@ class SettingsViewModel: ObservableObject {
     @Published var decimal: Int
     
     @Published var secretCode = ""
+    @Published var shouldDisplayAlert: Bool = false
+    @Published var titleIDToSave = 0
+    
+    @Published var alertTitle = ""
+    @Published var alertMessage = ""
     
     @Published var pickerData = [Currency]()
     
@@ -46,14 +52,29 @@ class SettingsViewModel: ObservableObject {
         defaults.set(decimal, forKey: "decimal")
     }
     
+    func saveTitles() {
+        shared.titleIDArray.append(titleIDToSave)
+        shared.defaults.set(shared.titleIDArray, forKey: "titleIDArray")
+    }
+    
     func checkCode() {
         if let secretID = shared.secretDictionary[secretCode] {
             if shared.titleIDArray.firstIndex(of: secretID) == nil {
-                shared.titleIDArray.append(secretID)
-                shared.defaults.set(shared.titleIDArray, forKey: "titleIDArray")
+                titleIDToSave = secretID
+                
+                let t = shared.titleArray[secretID]
+                alertTitle = "Unlocked new title!"
+                alertMessage = "You have unlocked the \(t) title! You can equip it in you profile."
+            } else {
+                alertTitle = "You already have this title."
+                alertMessage = "You've unlocked this title in the past. No worries, you already have it."
             }
+        } else {
+            alertTitle = "Invalid code"
+            alertMessage = "Unfortunately there is no title for this code (yet)."
         }
-        print(shared.titleIDArray)
+        
+        secretCode = ""
     }
     
 }
