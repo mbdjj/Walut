@@ -102,6 +102,13 @@ struct CalculationView: View {
             }
         }
         .toolbar {
+            
+            Button {
+                shareSheet(for: generateSnapshot())
+            } label: {
+                Image(systemName: "square.and.arrow.up")
+            }
+            
             NavigationLink {
                 if shouldDisableChartButton {
                     Text("You shouldn't be here")
@@ -121,6 +128,28 @@ struct CalculationView: View {
             }
         }
         .scrollDismissesKeyboard(.immediately)
+    }
+    
+    //MARK: - Share function
+    
+    var chartToShare: some View {
+        ChartToShare(currency: foreign, data: networkManager.ratesArray)
+    }
+    
+    @MainActor private func generateSnapshot() -> UIImage {
+        let renderer = ImageRenderer(content: chartToShare)
+        renderer.scale = 3.0
+     
+        return renderer.uiImage ?? UIImage()
+    }
+    
+    func shareSheet(for image: UIImage) {
+//        let text = "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(shared.decimal)f", currency.price)) \(base.symbol)"
+
+        let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first as? UIWindowScene
+        windowScene?.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
     }
 }
 

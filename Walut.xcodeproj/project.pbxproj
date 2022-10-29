@@ -88,6 +88,7 @@
 		3447F88428F0C4E400B59B25 /* NOK@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3447F83928F0C4E400B59B25 /* NOK@1x.png */; };
 		3447F88528F0C4E400B59B25 /* PHP@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3447F83A28F0C4E400B59B25 /* PHP@1x.png */; };
 		3447F88628F0C4E400B59B25 /* SEK@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3447F83B28F0C4E400B59B25 /* SEK@3x.png */; };
+		3483639E290D28D5000DA0DB /* ChartToShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3483639D290D28D5000DA0DB /* ChartToShare.swift */; };
 		3497430128F1E58A00373E0F /* CalculationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3497430028F1E58A00373E0F /* CalculationView.swift */; };
 		3498532828F57029003E0FC9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3498532728F57029003E0FC9 /* SettingsView.swift */; };
 		3498532A28F570A2003E0FC9 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3498532928F570A2003E0FC9 /* SettingsViewModel.swift */; };
@@ -193,6 +194,7 @@
 		3447F83928F0C4E400B59B25 /* NOK@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NOK@1x.png"; sourceTree = "<group>"; };
 		3447F83A28F0C4E400B59B25 /* PHP@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHP@1x.png"; sourceTree = "<group>"; };
 		3447F83B28F0C4E400B59B25 /* SEK@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SEK@3x.png"; sourceTree = "<group>"; };
+		3483639D290D28D5000DA0DB /* ChartToShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartToShare.swift; sourceTree = "<group>"; };
 		3497430028F1E58A00373E0F /* CalculationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationView.swift; sourceTree = "<group>"; };
 		3498532728F57029003E0FC9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3498532928F570A2003E0FC9 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 				342A047E290A5BAF00C10652 /* OnboardingPage.swift */,
 				342D433928F7E37F001C69AD /* CurrencyCell.swift */,
 				34AC47B628F7D8B400724165 /* CellContextMenu.swift */,
+				3483639D290D28D5000DA0DB /* ChartToShare.swift */,
 			);
 			path = "Custom Components";
 			sourceTree = "<group>";
@@ -560,6 +563,7 @@
 				34ED0C2128F17592006C4F38 /* SharedDataManager.swift in Sources */,
 				342D433A28F7E37F001C69AD /* CurrencyCell.swift in Sources */,
 				34ED0C1F28F1751C006C4F38 /* CurrencyData.swift in Sources */,
+				3483639E290D28D5000DA0DB /* ChartToShare.swift in Sources */,
 				3441ABD828F1709F009528FD /* CurrencyListView.swift in Sources */,
 				342A047B290A5A7B00C10652 /* OnboardingView.swift in Sources */,
 				349E3F7A28FEB108004831E2 /* ProfileViewModel.swift in Sources */,

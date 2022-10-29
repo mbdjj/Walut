@@ -41,9 +41,6 @@ struct CalculationChartView: View {
                 self.maxValueYAxis = item.value
             }
         }
-        
-        //_currentActive = State(initialValue: data.last!)
-        
     }
     
     var body: some View {
@@ -54,7 +51,7 @@ struct CalculationChartView: View {
                     .padding(.horizontal)
                     .font(.system(.title2, weight: .semibold))
                 
-                Text("\(String(format: "%.\(shared.decimal)f", currentActive?.value ?? data.last!.value)) \(shared.base.symbol)" /*(\(chartDate))"*/)
+                Text("\(String(format: "%.\(shared.decimal)f", currentActive?.value ?? data.last!.value)) \(shared.base.symbol)")
                     .padding(.horizontal)
                     .font(.largeTitle)
                     .bold()
