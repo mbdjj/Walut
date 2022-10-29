@@ -11,13 +11,12 @@ import Charts
 struct CalculationChartView: View {
     
     let currency: Currency
-    let data: [RatesData]
+    @State var data: [RatesData]
     
     var minValueYAxis: Double
     var maxValueYAxis: Double
     
-    @State var chartDate: String
-    @State var chartValue: Double
+    @State var currentActive: RatesData?
     
     let shared = SharedDataManager.shared
     
@@ -43,57 +42,86 @@ struct CalculationChartView: View {
             }
         }
         
-        let last = data.last!
-        chartDate = last.date
-        chartValue = last.value
+        //_currentActive = State(initialValue: data.last!)
+        
     }
     
     var body: some View {
         VStack {
-            Chart {
-                ForEach(data) { rate in
-                    LineMark(x: .value("Time", rate.date),
-                             y: .value("Value", rate.value))
+            VStack(alignment: .leading) {
+                
+                Text(currentActive?.dateFormattedString ?? data.last!.dateFormattedString)
+                    .padding(.horizontal)
+                    .font(.system(.title2, weight: .semibold))
+                
+                Text("\(String(format: "%.\(shared.decimal)f", currentActive?.value ?? data.last!.value)) \(shared.base.symbol)" /*(\(chartDate))"*/)
+                    .padding(.horizontal)
+                    .font(.largeTitle)
+                    .bold()
+                
+                Chart {
+                    ForEach(data) { rate in
+                        LineMark(
+                            x: .value("Date", rate.date),
+                            y: .value("Value", rate.animate ? rate.value : minValueYAxis)
+                        )
+                        .foregroundStyle(Color.accentColor.gradient)
+                        .interpolationMethod(.catmullRom)
+                        
+                        if let currentActive, currentActive.id == rate.id {
+                            RuleMark(x: .value("Date", currentActive.date))
+                                .foregroundStyle(Color.accentColor.gradient)
+                                .lineStyle(.init(lineWidth: 2, miterLimit: 2, dash: [2], dashPhase: 5))
+                        }
+                    }
                 }
-            }
-            .aspectRatio(1, contentMode: .fit)
-            .chartYScale(domain: minValueYAxis...maxValueYAxis)
-            .chartOverlay { proxy in
-                GeometryReader { geometry in
-                    Rectangle().fill(.clear).contentShape(Rectangle())
-                        .gesture(
-                            DragGesture()
-                                .onChanged { value in
-                                    let origin = geometry[proxy.plotAreaFrame].origin
-                                    let location = CGPoint(
-                                        x: value.location.x - origin.x,
-                                        y: value.location.y - origin.y
-                                    )
-                                    
-                                    if let chartData = proxy.value(at: location, as: (String, Double).self) {
-                                        chartDate = chartData.0
+                .frame(height: 250)
+                .chartYScale(domain: minValueYAxis - minValueYAxis * 0.01 ... maxValueYAxis + maxValueYAxis * 0.01)
+                .onAppear {
+                    for (index, _) in data.enumerated() {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * 0.05) {
+                            withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.8, blendDuration: 0.4)) {
+                                data[index].animate = true
+                            }
+                        }
+                    }
+                }
+                .chartOverlay { proxy in
+                    GeometryReader { geometry in
+                        Rectangle().fill(.clear).contentShape(Rectangle())
+                            .gesture(
+                                DragGesture()
+                                    .onChanged { value in
+                                        let location = value.location
                                         
-                                        for data in self.data {
-                                            if chartDate == data.date {
-                                                chartValue = data.value
+                                        if let date: Date = proxy.value(atX: location.x) {
+                                            let formatter = DateFormatter()
+                                            formatter.calendar = Calendar.current
+                                            formatter.dateFormat = "rrrr-MM-dd"
+                                            let dateString = formatter.string(from: date)
+                                            if let currentItem = data.first(where: { item in
+                                                dateString == item.dateString
+                                            }) {
+                                                self.currentActive = currentItem
                                             }
                                         }
                                     }
-                                }
-                        )
+                                    .onEnded({ _ in
+                                        self.currentActive = nil
+                                    })
+                            )
+                    }
                 }
             }
-            
-            HStack {
-                Spacer()
-                
-                Text("1 \(currency.symbol) = \(String(format: "%.\(shared.decimal)f", chartValue)) \(shared.base.symbol) (\(chartDate))")
-                    .padding()
-                    .font(.title2)
+            .padding()
+            .background {
+                RoundedRectangle(cornerRadius: 20, style: .continuous)
+                    .fill(.background.shadow(.drop(radius: 2)))
             }
             
             Spacer()
         }
+        .padding()
     }
     
 }
@@ -101,7 +129,15 @@ struct CalculationChartView: View {
 struct CalculationChartView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            CalculationChartView(currency: Currency(baseCode: "USD"), data: [RatesData(date: "test", value: 0.5), RatesData(date: "dzisiaj", value: 3), RatesData(date: "jutro", value: 2.16)])
+            CalculationChartView(currency: Currency(baseCode: "USD"), data: [
+                RatesData(date: "2022/10/29", value: 2.5),
+                RatesData(date: "2022/10/30", value: 3),
+                RatesData(date: "2022/10/31", value: 2.16),
+                RatesData(date: "2022/11/01", value: 3),
+                RatesData(date: "2022/11/02", value: 3),
+                RatesData(date: "2022/11/03", value: 3),
+                RatesData(date: "2022/11/04", value: 3)
+            ])
                 .navigationBarTitleDisplayMode(.inline)
         }
     }
