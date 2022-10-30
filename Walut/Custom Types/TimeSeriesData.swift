@@ -9,6 +9,7 @@ import Foundation
 
 struct CurrencyTimeSeriesData: Decodable {
     let success: Bool
+    let base: String
     let rates: TimeSeriesRates
 }
 

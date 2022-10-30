@@ -127,13 +127,13 @@ struct CalculationChartView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             CalculationChartView(currency: Currency(baseCode: "USD"), data: [
-                RatesData(date: "2022/10/29", value: 2.5),
-                RatesData(date: "2022/10/30", value: 3),
-                RatesData(date: "2022/10/31", value: 2.16),
-                RatesData(date: "2022/11/01", value: 3),
-                RatesData(date: "2022/11/02", value: 3),
-                RatesData(date: "2022/11/03", value: 3),
-                RatesData(date: "2022/11/04", value: 3)
+                RatesData(code: "USD", date: "2022/10/29", value: 2.5),
+                RatesData(code: "USD", date: "2022/10/30", value: 3),
+                RatesData(code: "USD", date: "2022/10/31", value: 2.16),
+                RatesData(code: "USD", date: "2022/11/01", value: 3),
+                RatesData(code: "USD", date: "2022/11/02", value: 3),
+                RatesData(code: "USD", date: "2022/11/03", value: 3),
+                RatesData(code: "USD", date: "2022/11/04", value: 3)
             ])
                 .navigationBarTitleDisplayMode(.inline)
         }

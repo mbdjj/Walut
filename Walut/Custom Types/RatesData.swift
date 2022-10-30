@@ -9,6 +9,8 @@ import Foundation
 
 struct RatesData: Identifiable {
     
+    let currencyString: String
+    
     let dateString: String
     let value: Double
     
@@ -33,7 +35,8 @@ struct RatesData: Identifiable {
     
     var id: String { dateString }
     
-    init(date: String, value: Double) {
+    init(code: String, date: String, value: Double) {
+        self.currencyString = code
         self.dateString = date
         self.value = value
     }

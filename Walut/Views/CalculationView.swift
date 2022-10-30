@@ -119,6 +119,7 @@ struct CalculationView: View {
                 } label: {
                     Label("Chart", systemImage: "chart.xyaxis.line")
                 }
+                .disabled(shouldDisableChartButton)
             } label: {
                 Image(systemName: "square.and.arrow.up")
             }

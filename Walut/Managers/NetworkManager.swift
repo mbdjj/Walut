@@ -71,6 +71,8 @@ class NetworkManager: ObservableObject {
     
     func getChartData(for currency: Currency, base: Currency) {
         
+        ratesArray = []
+        
         let formatter = DateFormatter()
         formatter.calendar = Calendar.current
         formatter.dateFormat = "yyyy-MM-dd"
@@ -97,7 +99,7 @@ class NetworkManager: ObservableObject {
                             var timeSeriesArray = [RatesData]()
                             
                             for i in 0..<timeSeriesData.count {
-                                timeSeriesArray.append(.init(date: keyData[i], value: timeSeriesData[i][base.code]!))
+                                timeSeriesArray.append(.init(code: results.base, date: keyData[i], value: timeSeriesData[i][base.code]!))
                             }
                             
                             DispatchQueue.main.async {
