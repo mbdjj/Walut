@@ -12,6 +12,8 @@ struct CalculationView: View {
     let base: Currency
     let foreign: Currency
     
+    let decimal: Int
+    
     @State var foreignAmount: Double = 0.0
     @State var baseAmount: Double = 0.0
     @State var shouldDisableChartButton = true
@@ -103,8 +105,20 @@ struct CalculationView: View {
         }
         .toolbar {
             
-            Button {
-                shareSheet(for: generateSnapshot())
+            Menu {
+                Button {
+                    let textToShare = "\(foreign.fullName)\(String(localized: "text_to_share0"))(\(foreign.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(decimal)f", foreign.price)) \(base.symbol)"
+                    
+                    shareSheet(for: textToShare)
+                } label: {
+                    Label("Text", systemImage: "text.bubble")
+                }
+                
+                Button {
+                    shareSheet(for: generateSnapshot())
+                } label: {
+                    Label("Chart", systemImage: "chart.xyaxis.line")
+                }
             } label: {
                 Image(systemName: "square.and.arrow.up")
             }
@@ -144,9 +158,14 @@ struct CalculationView: View {
     }
     
     func shareSheet(for image: UIImage) {
-//        let text = "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(shared.decimal)f", currency.price)) \(base.symbol)"
-
         let activityVC = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first as? UIWindowScene
+        windowScene?.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
+    }
+    
+    func shareSheet(for text: String) {
+        let activityVC = UIActivityViewController(activityItems: [text], applicationActivities: nil)
         let scenes = UIApplication.shared.connectedScenes
         let windowScene = scenes.first as? UIWindowScene
         windowScene?.windows.first?.rootViewController?.present(activityVC, animated: true, completion: nil)
@@ -155,6 +174,6 @@ struct CalculationView: View {
 
 struct CalculationView_Previews: PreviewProvider {
     static var previews: some View {
-        CalculationView(base: Currency(baseCode: "PLN"), foreign: Currency(code: "USD", rate: 0.2))
+        CalculationView(base: Currency(baseCode: "PLN"), foreign: Currency(code: "USD", rate: 0.2), decimal: 3)
     }
 }

@@ -12,7 +12,7 @@ struct CurrencyListView: View {
     @ObservedObject var networkManager = NetworkManager()
     @ObservedObject var shared = SharedDataManager.shared
     
-    @State var quichConvertValue = 1.0
+    @State var quickConvertValue = 1.0
     
     init() {
         networkManager.fetchCurrencyData(for: shared.base)
@@ -24,7 +24,7 @@ struct CurrencyListView: View {
                 
                 if shared.quickConvert {
                     Section {
-                        TextField("Value", value: $quichConvertValue, format: .currency(code: shared.base.code))
+                        TextField("Value", value: $quickConvertValue, format: .currency(code: shared.base.code))
                             .keyboardType(.decimalPad)
                     } header: {
                         Text(String(localized: "quick_convert"))
@@ -33,9 +33,9 @@ struct CurrencyListView: View {
                 
                 ForEach(networkManager.currencyArray) { currency in
                     NavigationLink {
-                        CalculationView(base: shared.base, foreign: currency)
+                        CalculationView(base: shared.base, foreign: currency, decimal: shared.decimal)
                     } label: {
-                        CurrencyCell(for: currency, mode: shared.quickConvert ? .quickConvert : .normal, value: quichConvertValue)
+                        CurrencyCell(for: currency, mode: shared.quickConvert ? .quickConvert : .normal, value: quickConvertValue)
                     }
                     .contextMenu {
                         CellContextMenu(for: currency)
