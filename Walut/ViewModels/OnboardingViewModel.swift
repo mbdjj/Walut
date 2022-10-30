@@ -11,9 +11,9 @@ class OnboardingViewModel: ObservableObject {
     
     let onboardingData = [
         OnboardingData(emoji: "👋", title: String(localized: "onboarding0"), description: String(localized: "onboarding_desc0")),
-        OnboardingData(emoji: "💰", title: String(localized: "onboarding1"), description: String(localized: "onboarding_desc0")),
-        OnboardingData(emoji: "🔢", title: String(localized: "onboarding2"), description: String(localized: "onboarding_desc0")),
-        OnboardingData(emoji: "📈", title: String(localized: "onboarding3"), description: String(localized: "onboarding_desc0"))
+        OnboardingData(emoji: "💰", title: String(localized: "onboarding1"), description: String(localized: "onboarding_desc1")),
+        OnboardingData(emoji: "🔢", title: String(localized: "onboarding2"), description: String(localized: "onboarding_desc2")),
+        OnboardingData(emoji: "📈", title: String(localized: "onboarding3"), description: String(localized: "onboarding_desc3"))
     ]
     
 }

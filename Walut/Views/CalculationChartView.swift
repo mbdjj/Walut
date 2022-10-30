@@ -76,8 +76,8 @@ struct CalculationChartView: View {
                 .chartYScale(domain: minValueYAxis - minValueYAxis * 0.01 ... maxValueYAxis + maxValueYAxis * 0.01)
                 .onAppear {
                     for (index, _) in data.enumerated() {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * 0.05) {
-                            withAnimation(.interactiveSpring(response: 0.8, dampingFraction: 0.8, blendDuration: 0.4)) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * 0.03) {
+                            withAnimation(.easeInOut(duration: 0.5)) {
                                 data[index].animate = true
                             }
                         }
