@@ -37,9 +37,6 @@ struct CurrencyListView: View {
                     } label: {
                         CurrencyCell(for: currency, mode: shared.quickConvert ? .quickConvert : .normal, value: quickConvertValue)
                     }
-                    .contextMenu {
-                        CellContextMenu(for: currency)
-                    }
 
                 }
             }
