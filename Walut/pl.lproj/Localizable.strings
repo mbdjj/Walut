@@ -106,3 +106,6 @@
 "alert_invalid_message" = "Niestety nie ma tytułu za wpisany kod (jeszcze).";
 
 "quick_convert" = "Wprowadź kwotę w Twojej walucie";
+
+"share_text" = "Tekst";
+"share_chart" = "Wykres";

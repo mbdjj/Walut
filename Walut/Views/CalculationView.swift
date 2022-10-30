@@ -111,13 +111,13 @@ struct CalculationView: View {
                     
                     shareSheet(for: textToShare)
                 } label: {
-                    Label("Text", systemImage: "text.bubble")
+                    Label(String(localized: "share_text"), systemImage: "text.bubble")
                 }
                 
                 Button {
                     shareSheet(for: generateSnapshot())
                 } label: {
-                    Label("Chart", systemImage: "chart.xyaxis.line")
+                    Label(String(localized: "share_chart"), systemImage: "chart.xyaxis.line")
                 }
                 .disabled(shouldDisableChartButton)
             } label: {
