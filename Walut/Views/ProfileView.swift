@@ -15,22 +15,6 @@ struct ProfileView: View {
     
     var body: some View {
         List {
-//            HStack {
-//                Spacer()
-//
-//                Text(model.letter)
-//                    .font(.system(.largeTitle))
-//                    .bold()
-//                    .padding(24)
-//                    .foregroundColor(.white)
-//                    .background(
-//                        Color.accentColor
-//                            .clipShape(Circle())
-//                    )
-//
-//                Spacer()
-//            }
-            
             Section {
                 TextField(String(localized: "your_name"), text: $model.name)
                 
@@ -46,9 +30,12 @@ struct ProfileView: View {
         .navigationTitle(String(localized: "profile"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            Button(String(localized: "save")) {
+            Button {
                 model.save()
                 presentationMode.wrappedValue.dismiss()
+            } label: {
+                Text(String(localized: "save"))
+                    .bold()
             }
         }
     }

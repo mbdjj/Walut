@@ -11,6 +11,7 @@ class NetworkManager: ObservableObject {
     
     let shared = SharedDataManager.shared
     
+    @Published var favoritesArray = [Currency]()
     @Published var currencyArray = [Currency]()
     @Published var ratesArray = [RatesData]()
     
@@ -32,23 +33,40 @@ class NetworkManager: ObservableObject {
                             let results = try decoder.decode(CurrencyData.self, from: safeData)
                             
                             var currencyArray = [Currency]()
+                            var favoritesArray = [Currency]()
                             
                             for code in self.shared.allCodesArray {
                                 let currency = Currency(code: code, rate: results.rates.getRate(of: code))
-//                                if self.favoriteCodes.firstIndex(of: code) != nil {
-//                                    currency.isFavorite = true
-//                                }
-                                currencyArray.append(currency)
+                                if self.shared.favorites.firstIndex(of: code) != nil {
+                                    favoritesArray.append(currency)
+                                } else {
+                                    currencyArray.append(currency)
+                                }
                             }
                             
-                            guard let index = currencyArray.firstIndex(of: Currency(baseCode: base.code)) else { return }
-                            currencyArray.remove(at: index)
+                            for code in self.shared.favorites {
+                                let indexFrom = favoritesArray.firstIndex { $0.code == code }!
+                                let indexTo = self.shared.favorites.firstIndex(of: code)!
+                                
+                                let currency = favoritesArray.remove(at: indexFrom)
+                                favoritesArray.insert(currency, at: indexTo)
+                            }
+                            
+                            if let index = currencyArray.firstIndex(of: Currency(baseCode: base.code)) {
+                                currencyArray.remove(at: index)
+                            } else {
+                                if let index = favoritesArray.firstIndex(of: Currency(baseCode: base.code)) {
+                                    favoritesArray.remove(at: index)
+                                } else {
+                                    return
+                                }
+                            }
                             
                             print("Fetched data for \(base.code)")
                             
                             DispatchQueue.main.async {
                                 self.currencyArray = currencyArray
-                                //self.decodeAndSort()
+                                self.favoritesArray = favoritesArray
                             }
                         } catch {
                             DispatchQueue.main.async {

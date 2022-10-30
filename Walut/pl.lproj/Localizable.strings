@@ -59,6 +59,8 @@
 "sort_by_favorite" = "Po ulubionych";
 "sort_nav_title" = "Sortuj waluty";
 
+"favorite_currencies" = "Ulubione waluty";
+"favorites" = "Ulubione";
 "menu_favorite" = "Dodaj do ulubionych";
 "menu_unfavorite" = "Usuń z ulubionych";
 

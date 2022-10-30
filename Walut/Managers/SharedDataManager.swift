@@ -20,6 +20,8 @@ class SharedDataManager: ObservableObject {
     @Published var decimal: Int
     @Published var quickConvert: Bool
     
+    var favorites: [String]
+    
     let allCodesArray = ["AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HRK", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK", "SGD", "THB", "TRY", "USD", "ZAR"]
     let titleArray = [String(localized: "title0"), String(localized: "title1"), String(localized: "title2")]
     let secretDictionary = ["marcinBartminski": 1, "earlyAccess": 2]
@@ -38,6 +40,8 @@ class SharedDataManager: ObservableObject {
         base = Currency(baseCode: defaults.string(forKey: "base") ?? "AUD")
         decimal = defaults.integer(forKey: "decimal")
         quickConvert = defaults.bool(forKey: "quickConvert")
+        
+        favorites = defaults.stringArray(forKey: "favorites") ?? []
     }
     
 }

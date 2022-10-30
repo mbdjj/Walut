@@ -21,7 +21,7 @@ struct SettingsView: View {
                     } label: {
                         HStack {
                             Text(model.letter)
-                                .font(.system(.title))
+                                .font(.system(.title, design: .rounded))
                                 .bold()
                                 .padding()
                                 .foregroundColor(.white)
@@ -59,6 +59,13 @@ struct SettingsView: View {
                         .onChange(of: model.quickConvertOn) { _ in
                             model.saveConvertMode()
                         }
+                    
+                    NavigationLink {
+                        FavoritesView()
+                    } label: {
+                        Text(String(localized: "favorite_currencies"))
+                    }
+
                 }
                 
                 Section {
@@ -111,6 +118,7 @@ struct SettingsView: View {
                                 }
                             }
                         }
+                        .navigationTitle(String(localized: "support"))
                     } label: {
                         Text(String(localized: "support"))
                     }

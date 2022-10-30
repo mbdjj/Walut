@@ -59,6 +59,8 @@
 "sort_by_favorite" = "By favorite";
 "sort_nav_title" = "Sort currencies";
 
+"favorite_currencies" = "Favorite currencies";
+"favorites" = "Favorites";
 "menu_favorite" = "Favorite";
 "menu_unfavorite" = "Unfavorite";
 

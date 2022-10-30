@@ -31,17 +31,36 @@ struct CurrencyListView: View {
                     }
                 }
                 
-                ForEach(networkManager.currencyArray) { currency in
-                    NavigationLink {
-                        CalculationView(base: shared.base, foreign: currency, decimal: shared.decimal)
-                    } label: {
-                        CurrencyCell(for: currency, mode: shared.quickConvert ? .quickConvert : .normal, value: quickConvertValue)
-                            .onDrag {
-                                let textToShare = "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(shared.decimal)f", currency.price)) \(shared.base.symbol)"
-                                return NSItemProvider(object: textToShare as NSString)
+                if !networkManager.favoritesArray.isEmpty {
+                    Section {
+                        ForEach(networkManager.favoritesArray) { currency in
+                            NavigationLink {
+                                CalculationView(base: shared.base, foreign: currency, decimal: shared.decimal)
+                            } label: {
+                                CurrencyCell(for: currency, mode: shared.quickConvert ? .quickConvert : .normal, value: quickConvertValue)
+                                    .onDrag {
+                                        let textToShare = "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(shared.decimal)f", currency.price)) \(shared.base.symbol)"
+                                        return NSItemProvider(object: textToShare as NSString)
+                                    }
                             }
-                    }
 
+                        }
+                    }
+                }
+                
+                Section {
+                    ForEach(networkManager.currencyArray) { currency in
+                        NavigationLink {
+                            CalculationView(base: shared.base, foreign: currency, decimal: shared.decimal)
+                        } label: {
+                            CurrencyCell(for: currency, mode: shared.quickConvert ? .quickConvert : .normal, value: quickConvertValue)
+                                .onDrag {
+                                    let textToShare = "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(shared.decimal)f", currency.price)) \(shared.base.symbol)"
+                                    return NSItemProvider(object: textToShare as NSString)
+                                }
+                        }
+
+                    }
                 }
             }
             .navigationTitle("\(shared.base.flag) \(shared.base.code)")
