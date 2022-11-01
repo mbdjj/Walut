@@ -77,7 +77,7 @@ class SettingsViewModel: ObservableObject {
                 
                 let t = shared.titleArray[secretID]
                 alertTitle = String(localized: "alert_positive_title")
-                alertMessage = "\(String(localized: "alert_positive_message_1")) \(t) \(String(localized: "alert_positive_message_2"))"
+                alertMessage = "\(String(localized: "alert_positive_message_1")) \(t)\(String(localized: "alert_positive_message_2"))"
             } else {
                 alertTitle = String(localized: "alert_repeated_title")
                 alertMessage = String(localized: "alert_repeated_message")
