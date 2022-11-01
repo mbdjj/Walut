@@ -42,6 +42,7 @@ struct BasePickerView: View {
                     } label: {
                         Text(String(localized: "save"))
                     }
+                    .bold()
                     .disabled(model.saveButtonDisabled)
                     .onChange(of: model.name) { newValue in
                         if newValue == "" {

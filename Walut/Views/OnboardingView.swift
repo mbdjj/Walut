@@ -68,6 +68,7 @@ struct OnboardingView: View {
                         }
                     }
                     .foregroundColor(.white)
+                    .bold()
                 }
             }
         }
