@@ -101,7 +101,7 @@
 
 "alert_positive_title" = "Odblokowano nowy tytuł!";
 "alert_positive_message_1" = "Odblokowano tytuł";
-"alert_positive_message_2" = ". Możesz zacząć go używać w zakładce profil.";
+"alert_positive_message_2" = "! Możesz zacząć go używać w zakładce profil.";
 "alert_repeated_title" = "Już posiadasz ten tytuł.";
 "alert_repeated_message" = "Ten tytuł został już odblokowany w przeszłości. Nie martw się, masz już go.";
 "alert_invalid_title" = "Niepoprawny kod.";
