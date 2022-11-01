@@ -33,51 +33,34 @@ struct CurrencyCell: View {
     }
     
     var body: some View {
-        ZStack {
+        HStack {
             
-            if currency.isFavorite {
-                HStack {
-                    Spacer()
-                    VStack {
-                        Image(systemName: "star.fill")
-                            .foregroundColor(Color.yellow)
-                            .font(.system(size: 10))
-                            //.padding(4)
-                        
-                        Spacer()
-                    }
-                }
-            }
+            Text(currency.flag)
+                .font(.system(size: 50))
             
-            HStack {
+            VStack(alignment: .leading) {
                 
-                Text(currency.flag)
-                    .font(.system(size: 50))
+                Text(currency.fullName)
+                    .font(.system(size: 19))
+                    .fontWeight(.medium)
                 
-                VStack(alignment: .leading) {
-                    
-                    Text(currency.fullName)
-                        .font(.system(size: 19))
-                        .fontWeight(.medium)
-                    
-                    Text(currency.code)
-                        .font(.system(size: 17))
-                    
-                    Spacer()
-                    
-                }
+                Text(currency.code)
+                    .font(.system(size: 17))
                 
                 Spacer()
                 
-                if mode == .normal {
-                    Text("\(String(format: "%.\(decimal)f", currency.price)) \(base.symbol)")
-                        .font(.system(size: 17))
-                } else if mode == .quickConvert {
-                    Text("\(String(format: "%.\(decimal)f", currency.rate * value)) \(currency.symbol)")
-                        .font(.system(size: 17))
-                }
-                
             }
+            
+            Spacer()
+            
+            if mode == .normal {
+                Text("\(String(format: "%.\(decimal)f", currency.price)) \(base.symbol)")
+                    .font(.system(size: 17))
+            } else if mode == .quickConvert {
+                Text("\(String(format: "%.\(decimal)f", currency.rate * value)) \(currency.symbol)")
+                    .font(.system(size: 17))
+            }
+            
         }
     }
 }
