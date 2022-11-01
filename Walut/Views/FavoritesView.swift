@@ -14,8 +14,21 @@ struct FavoritesView: View {
     var body: some View {
         List {
             ForEach(model.favorites) { favorite in
-                Text("\(favorite.flag) \(favorite.code) - \(favorite.fullName)")
-                    .font(.title3)
+                HStack {
+                    Text(favorite.flag)
+                        .font(.system(size: 50))
+                    
+                    VStack(alignment: .leading) {
+                        
+                        Text(favorite.fullName)
+                            .font(.system(size: 19))
+                            .fontWeight(.medium)
+                        
+                        Text(favorite.code)
+                            .font(.system(size: 17))
+                        
+                    }
+                }
             }
             .onDelete(perform: model.delete)
             .onMove(perform: model.move)
