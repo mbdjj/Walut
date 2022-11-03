@@ -89,36 +89,7 @@ struct SettingsView: View {
                 
                 Section {
                     NavigationLink {
-                        List {
-                            HStack {
-                                Text(String(localized: "support"))
-                                    .fontWeight(.medium)
-                                
-                                Spacer()
-                                
-                                VStack {
-                                    Text("☕️")
-                                        .font(.title)
-                                    Text("5,99 zł")
-                                        .foregroundColor(.accentColor)
-                                }
-                            }
-                            
-                            HStack {
-                                Text(String(localized: "support_plus"))
-                                    .fontWeight(.medium)
-                                
-                                Spacer()
-                                
-                                VStack {
-                                    Text("🌯")
-                                        .font(.title)
-                                    Text("24,99 zł")
-                                        .foregroundColor(.accentColor)
-                                }
-                            }
-                        }
-                        .navigationTitle(String(localized: "support"))
+                        SupportDevView()
                     } label: {
                         Text(String(localized: "support"))
                     }

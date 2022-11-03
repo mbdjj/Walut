@@ -5,7 +5,6 @@
 //  Created by Marcin Bartminski on 11/10/2022.
 //
 
-import Foundation
 import SwiftUI
 
 class SettingsViewModel: ObservableObject {
