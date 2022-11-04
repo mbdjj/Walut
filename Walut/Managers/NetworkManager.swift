@@ -117,7 +117,7 @@ class NetworkManager: ObservableObject {
                             var timeSeriesArray = [RatesData]()
                             
                             for i in 0..<timeSeriesData.count {
-                                timeSeriesArray.append(.init(code: results.base, date: keyData[i], value: timeSeriesData[i][base.code]!))
+                                timeSeriesArray.append(.init(code: results.base, date: keyData[i], value: timeSeriesData[i][base.code] ?? 0))
                             }
                             
                             DispatchQueue.main.async {

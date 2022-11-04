@@ -1,0 +1,63 @@
+{
+  "identifier" : "EF8876B0",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "4.99",
+      "familyShareable" : false,
+      "internalID" : "6444194176",
+      "localizations" : [
+        {
+          "description" : "Może to trochę dużo, ale apka całkiem fajna.",
+          "displayName" : "Wesprzyj twórcę bardziej",
+          "locale" : "pl"
+        },
+        {
+          "description" : "It is much, but it's an honest app.",
+          "displayName" : "Support the developer more",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "ga.bartminski.WalutApp.SupportMedium",
+      "referenceName" : "Support Medium",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "6444179634",
+      "localizations" : [
+        {
+          "description" : "If you want to support me, you can. :)",
+          "displayName" : "Support the developer",
+          "locale" : "en_US"
+        },
+        {
+          "description" : "Jeśli chcesz, możesz mnie wesprzeć. :)",
+          "displayName" : "Wesprzyj twórcę",
+          "locale" : "pl"
+        }
+      ],
+      "productID" : "ga.bartminski.WalutApp.SupportSmall",
+      "referenceName" : "Support Small",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6444106558",
+    "_askToBuyEnabled" : false,
+    "_developerTeamID" : "CMJ553K76W",
+    "_lastSynchronizedDate" : 689196327.72445202,
+    "_locale" : "pl",
+    "_storefront" : "USA"
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 2,
+    "minor" : 0
+  }
+}

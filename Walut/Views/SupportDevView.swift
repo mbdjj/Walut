@@ -8,19 +8,38 @@
 import SwiftUI
 
 struct SupportDevView: View {
+    
+    @ObservedObject var model = SupportDevViewModel()
+    
     var body: some View {
         List {
-            HStack {
-                Text(String(localized: "support"))
-                    .fontWeight(.medium)
-                
-                Spacer()
-                
-                VStack {
-                    Text("☕️")
-                        .font(.title)
-                    Text("5,99 zł")
-                        .foregroundColor(.accentColor)
+            ForEach(model.products) { product in
+                Button {
+                    Task.init {
+                        try await model.purchase(product)
+                    }
+                } label: {
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(product.displayName)
+                                .fontWeight(.medium)
+                                .foregroundColor(.primary)
+                            
+                            Text(product.description)
+                                .font(.system(.caption))
+                                .foregroundColor(.secondary)
+                        }
+                        
+                        Spacer()
+                        
+                        VStack {
+                            Text(product.id == "ga.bartminski.WalutApp.SupportSmall" ? "☕️" : "🌯")
+                                .font(.title)
+                            Text(product.displayPrice)
+                                .foregroundColor(.accentColor)
+                                .font(.caption)
+                        }
+                    }
                 }
             }
         }
