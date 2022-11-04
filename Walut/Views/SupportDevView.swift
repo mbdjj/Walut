@@ -44,6 +44,10 @@ struct SupportDevView: View {
             }
         }
         .navigationTitle(String(localized: "support"))
+        .sheet(isPresented: $model.shouldShowThanks) {
+            ThanksView(title: model.titleToPresent, arrayToSave: model.arrayToSave)
+        }
+        
     }
 }
 

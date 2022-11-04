@@ -11,6 +11,12 @@ import StoreKit
 class SupportDevViewModel: ObservableObject {
     
     @Published var products = [Product]()
+    @Published var shouldShowThanks = false
+    var titleToPresent = ""
+    var arrayToSave = [Int]()
+    
+    let shared = SharedDataManager.shared
+    let defaults = UserDefaults.standard
     
     var taskHandle: Task<Void, Error>?
     
@@ -27,7 +33,9 @@ class SupportDevViewModel: ObservableObject {
         do {
             let products = try await Product.products(for: ["ga.bartminski.WalutApp.SupportSmall", "ga.bartminski.WalutApp.SupportMedium"])
             
-            self.products = sortedByPrice(products)
+            DispatchQueue.main.async {
+                self.products = self.sortedByPrice(products)
+            }
         } catch {
             print(error)
         }
@@ -44,7 +52,7 @@ class SupportDevViewModel: ObservableObject {
         case .success(let verification):
             let transaction = try checkVerified(verification)
             
-            //await updateContent()
+            updateContent(for: product.id)
             
             await transaction.finish()
             
@@ -72,14 +80,38 @@ class SupportDevViewModel: ObservableObject {
                 do {
                     let transaction = try self.checkVerified(result)
                     
-                    print("Verified")
-                    //await updateContent()
+                    self.updateContent(for: transaction.productID)
                     
                     await transaction.finish()
                 } catch {
                     print("Transaction failed verification")
                 }
             }
+        }
+    }
+    
+    func updateContent(for productID: String) {
+        
+        var titleID = 0
+        
+        if productID == "ga.bartminski.WalutApp.SupportSmall" {
+            titleID = 3
+        } else if productID == "ga.bartminski.WalutApp.SupportMedium" {
+            titleID = 4
+        }
+        
+        titleToPresent = shared.titleArray[titleID]
+        var titleIDArray = shared.titleIDArray
+        
+        if titleIDArray.firstIndex(of: titleID) == nil {
+            titleIDArray.append(titleID)
+            defaults.set(titleIDArray, forKey: "titleIDArray")
+        }
+        
+        arrayToSave = titleIDArray
+        
+        DispatchQueue.main.async {
+            self.shouldShowThanks = true
         }
     }
     

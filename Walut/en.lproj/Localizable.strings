@@ -86,6 +86,8 @@
 "title0" = "Walut user";
 "title1" = "Developer";
 "title2" = "Early enjoyer";
+"supporter_title" = "Supporter";
+"supporter_big_title" = "Wholesome supporter";
 
 "support" = "Support the developer";
 "support_plus" = "Support the developer more";
@@ -101,7 +103,7 @@
 
 "alert_positive_title" = "Unlocked new title!";
 "alert_positive_message_1" = "You have unlocked the";
-"alert_positive_message_2" = " title! You can equip it in you profile.";
+"alert_positive_message_2" = " title! You can equip it in your profile.";
 "alert_repeated_title" = "You already have this title.";
 "alert_repeated_message" = "You've unlocked this title in the past. No worries, you already have it.";
 "alert_invalid_title" = "Invalid code.";

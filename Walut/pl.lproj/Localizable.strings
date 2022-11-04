@@ -86,6 +86,8 @@
 "title0" = "Użytkownik Walut";
 "title1" = "Programista";
 "title2" = "Wczesny fan";
+"supporter_title" = "Wspierający";
+"supporter_big_title" = "Mocarny wspierający";
 
 "support" = "Wesprzyj twórcę";
 "support_plus" = "Wesprzyj twórcę bardziej";
