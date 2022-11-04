@@ -23,7 +23,7 @@ struct ThanksView: View {
                 
                 Spacer()
                 
-                Text("Thank you for your support.")
+                Text(String(localized: "support_thanks"))
                     .foregroundColor(.white)
                     .font(.system(.title, design: .rounded))
                     .bold()
@@ -33,9 +33,10 @@ struct ThanksView: View {
                 
                 Spacer()
                 
-                Text("Enjoy your new \(title) title. \nYou can equip it in your profile.")
+                Text("\(String(localized: "support_enjoy_1"))\(title)\(String(localized: "support_enjoy_2"))")
                     .foregroundColor(.white)
                     .padding(.bottom)
+                    .multilineTextAlignment(.center)
                 
                 Button {
                     shared.titleIDArray = arrayToSave

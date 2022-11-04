@@ -90,7 +90,10 @@
 "supporter_big_title" = "Mocarny wspierający";
 
 "support" = "Wesprzyj twórcę";
-"support_plus" = "Wesprzyj twórcę bardziej";
+"support_title" = "Wesprzyj";
+"support_thanks" = "Dziękuję za Twoje wsparcie.";
+"support_enjoy_1" = "Naciesz się swoim nowym tytułem ";
+"support_enjoy_2" = ". \nMożesz zacząć go używać w zakładce profil.";
 
 "onboarding0" = "Witaj w Walut!";
 "onboarding1" = "Sprawdzaj aktualne kursy!";

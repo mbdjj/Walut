@@ -90,7 +90,10 @@
 "supporter_big_title" = "Wholesome supporter";
 
 "support" = "Support the developer";
-"support_plus" = "Support the developer more";
+"support_title" = "Support";
+"support_thanks" = "Thank you for your support.";
+"support_enjoy_1" = "Enjoy your new ";
+"support_enjoy_2" = " title. \nYou can equip it in your profile.";
 
 "onboarding0" = "Welcome to Walut!";
 "onboarding1" = "Check current rates!";
