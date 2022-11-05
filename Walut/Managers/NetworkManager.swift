@@ -18,6 +18,8 @@ class NetworkManager: ObservableObject {
     @Published var errorMessage = ""
     @Published var shouldDisplayErrorAlert = false
     
+    let defaults = UserDefaults.standard
+    
     
     func fetchCurrencyData(for base: Currency) {
         
@@ -63,6 +65,8 @@ class NetworkManager: ObservableObject {
                             }
                             
                             print("Fetched data for \(base.code)")
+                            
+                            self.saveDate() // saving date for smarter refreshing
                             
                             DispatchQueue.main.async {
                                 self.currencyArray = currencyArray
@@ -133,6 +137,42 @@ class NetworkManager: ObservableObject {
             }
             task.resume()
         }
+    }
+    
+    // MARK: - Date checking refresh
+    
+    func dateCheckingRefresh() {
+        let date = getDateFromDefaults()
+        let now = Date.now
+        
+        if let date = date {
+            if date.timeIntervalSinceReferenceDate - now.timeIntervalSinceReferenceDate > 3600 {
+                fetchCurrencyData(for: shared.base)
+            } else {
+                return
+            }
+        } else {
+            fetchCurrencyData(for: shared.base)
+        }
+    }
+    
+    private func getDateFromDefaults() -> Date? {
+        let dateString = defaults.string(forKey: "lastUpdate") ?? "2022-02-23 00:00:00" // my birthday :)
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar.current
+        formatter.dateFormat = "rrrr-MM-dd HH:mm:ss"
+        
+        return formatter.date(from: dateString)
+    }
+    
+    private func saveDate() {
+        let date = Date.now
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar.current
+        formatter.dateFormat = "rrrr-MM-dd HH:mm:ss"
+        
+        let dateString = formatter.string(from: date)
+        defaults.set(dateString, forKey: "lastUpdate")
     }
     
 }

@@ -78,6 +78,9 @@ struct CurrencyListView: View {
                 Text("\(networkManager.errorMessage)")
             }
             .scrollDismissesKeyboard(.immediately)
+            .onAppear {
+                networkManager.dateCheckingRefresh()
+            }
         }
     }
 }
