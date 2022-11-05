@@ -113,7 +113,7 @@ struct CalculationChartView: View {
             .padding()
             .background {
                 RoundedRectangle(cornerRadius: 20, style: .continuous)
-                    .fill(.background.shadow(.drop(radius: 2)))
+                    .fill(.background.shadow(.drop(color: .secondary, radius: 2)))
             }
             
             Spacer()
