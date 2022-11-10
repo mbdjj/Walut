@@ -10,7 +10,6 @@
 		341CF6242913BCB40012FA5B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 341CF6232913BCB40012FA5B /* StoreKit.framework */; };
 		341CF626291430B40012FA5B /* SupportDevView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341CF625291430B40012FA5B /* SupportDevView.swift */; };
 		341CF628291431930012FA5B /* SupportDevViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341CF627291431930012FA5B /* SupportDevViewModel.swift */; };
-		341CF62A291438D30012FA5B /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 341CF629291438D30012FA5B /* Configuration.storekit */; };
 		342A047B290A5A7B00C10652 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342A047A290A5A7B00C10652 /* OnboardingView.swift */; };
 		342A047D290A5B7B00C10652 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342A047C290A5B7B00C10652 /* OnboardingViewModel.swift */; };
 		342A047F290A5BAF00C10652 /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342A047E290A5BAF00C10652 /* OnboardingPage.swift */; };
@@ -92,6 +91,7 @@
 		3447F88428F0C4E400B59B25 /* NOK@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3447F83928F0C4E400B59B25 /* NOK@1x.png */; };
 		3447F88528F0C4E400B59B25 /* PHP@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3447F83A28F0C4E400B59B25 /* PHP@1x.png */; };
 		3447F88628F0C4E400B59B25 /* SEK@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3447F83B28F0C4E400B59B25 /* SEK@3x.png */; };
+		347514982919A55A0092864A /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 347514972919A55A0092864A /* Configuration.storekit */; };
 		3483639E290D28D5000DA0DB /* ChartToShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3483639D290D28D5000DA0DB /* ChartToShare.swift */; };
 		34890F5C2914E6460059B5C3 /* ThanksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34890F5B2914E6460059B5C3 /* ThanksView.swift */; };
 		3497430128F1E58A00373E0F /* CalculationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3497430028F1E58A00373E0F /* CalculationView.swift */; };
@@ -121,7 +121,6 @@
 		341CF6232913BCB40012FA5B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		341CF625291430B40012FA5B /* SupportDevView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportDevView.swift; sourceTree = "<group>"; };
 		341CF627291431930012FA5B /* SupportDevViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportDevViewModel.swift; sourceTree = "<group>"; };
-		341CF629291438D30012FA5B /* Configuration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		342A047A290A5A7B00C10652 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		342A047C290A5B7B00C10652 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		342A047E290A5BAF00C10652 /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
@@ -204,6 +203,7 @@
 		3447F83928F0C4E400B59B25 /* NOK@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NOK@1x.png"; sourceTree = "<group>"; };
 		3447F83A28F0C4E400B59B25 /* PHP@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHP@1x.png"; sourceTree = "<group>"; };
 		3447F83B28F0C4E400B59B25 /* SEK@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SEK@3x.png"; sourceTree = "<group>"; };
+		347514972919A55A0092864A /* Configuration.storekit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		3483639D290D28D5000DA0DB /* ChartToShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartToShare.swift; sourceTree = "<group>"; };
 		34890F5B2914E6460059B5C3 /* ThanksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThanksView.swift; sourceTree = "<group>"; };
 		3497430028F1E58A00373E0F /* CalculationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationView.swift; sourceTree = "<group>"; };
@@ -364,7 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				34A2345F28F05B5C00C81292 /* WalutApp.swift */,
-				341CF629291438D30012FA5B /* Configuration.storekit */,
+				347514972919A55A0092864A /* Configuration.storekit */,
 				3447F7E828F0BC2E00B59B25 /* Managers */,
 				34A2347528F061DC00C81292 /* Custom Types */,
 				34A2347228F0609A00C81292 /* ViewModels */,
@@ -549,7 +549,7 @@
 				3447F83C28F0C4E400B59B25 /* ZAR@3x.png in Resources */,
 				3447F87028F0C4E400B59B25 /* BGN@2x.png in Resources */,
 				3447F84E28F0C4E400B59B25 /* CHF@3x.png in Resources */,
-				341CF62A291438D30012FA5B /* Configuration.storekit in Resources */,
+				347514982919A55A0092864A /* Configuration.storekit in Resources */,
 				3447F87B28F0C4E400B59B25 /* JPY@2x.png in Resources */,
 				3447F87728F0C4E400B59B25 /* EUR@1x.png in Resources */,
 				3447F85728F0C4E400B59B25 /* KRW@1x.png in Resources */,
@@ -754,7 +754,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Walut/Preview Content\"";
 				DEVELOPMENT_TEAM = CMJ553K76W;
 				ENABLE_PREVIEWS = YES;
@@ -789,7 +789,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Walut/Preview Content\"";
 				DEVELOPMENT_TEAM = CMJ553K76W;
 				ENABLE_PREVIEWS = YES;
