@@ -41,6 +41,7 @@ struct SupportDevView: View {
                         }
                     }
                 }
+                .disabled(model.shouldDisableButtons)
             }
         }
         .navigationTitle(String(localized: "support_title"))

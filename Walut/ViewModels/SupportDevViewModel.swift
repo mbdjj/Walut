@@ -12,6 +12,7 @@ class SupportDevViewModel: ObservableObject {
     
     @Published var products = [Product]()
     @Published var shouldShowThanks = false
+    @Published var shouldDisableButtons = false
     var titleToPresent = ""
     var arrayToSave = [Int]()
     
@@ -41,11 +42,15 @@ class SupportDevViewModel: ObservableObject {
         }
     }
     
-    func sortedByPrice(_ array: [Product]) -> [Product] {
+    private func sortedByPrice(_ array: [Product]) -> [Product] {
         return array.sorted { $0.price < $1.price }
     }
     
     func purchase(_ product: Product) async throws -> StoreKit.Transaction? {
+        DispatchQueue.main.async {
+            self.shouldDisableButtons = true
+        }
+        
         let result = try await product.purchase()
         
         switch result {
@@ -56,10 +61,22 @@ class SupportDevViewModel: ObservableObject {
             
             await transaction.finish()
             
+            DispatchQueue.main.async {
+                self.shouldDisableButtons = false
+            }
+            
             return transaction
         case .pending, .userCancelled:
+            DispatchQueue.main.async {
+                self.shouldDisableButtons = false
+            }
+            
             return nil
         default:
+            DispatchQueue.main.async {
+                self.shouldDisableButtons = false
+            }
+            
             return nil
         }
     }
