@@ -28,7 +28,7 @@ struct CalculationView: View {
             
             Spacer(minLength: 80)
             
-            HStack {
+            HStack(alignment: .bottom) {
                 
                 VStack(alignment: .leading) {
                     
@@ -45,12 +45,10 @@ struct CalculationView: View {
                                 baseAmount = newValue / foreign.rate
                             }
                         }
-                        
-                    
                 }
                 
                 Text("=")
-                    .padding(.top, 30)
+                    .padding(.bottom, 8)
                 
                 VStack(alignment: .leading) {
                     
@@ -67,7 +65,6 @@ struct CalculationView: View {
                                 foreignAmount = newValue / foreign.price
                             }
                         }
-                    
                 }
                 
             }
