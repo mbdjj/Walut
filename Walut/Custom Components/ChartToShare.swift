@@ -64,7 +64,7 @@ struct ChartToShare: View {
                             x: .value("Date", rate.date),
                             y: .value("Value", rate.value)
                         )
-                        .foregroundStyle(Color.accentColor)
+                        .foregroundStyle(Color.walut.gradient)
                         .interpolationMethod(.catmullRom)
                     }
                 }
@@ -79,6 +79,10 @@ struct ChartToShare: View {
         }
         .background(Color.white)
     }
+}
+
+extension Color {
+    static let walut = Color(red: 0, green: 0.725, blue: 0.682)
 }
 
 struct ChartToShare_Previews: PreviewProvider {

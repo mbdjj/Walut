@@ -92,6 +92,16 @@
 		3447F88528F0C4E400B59B25 /* PHP@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3447F83A28F0C4E400B59B25 /* PHP@1x.png */; };
 		3447F88628F0C4E400B59B25 /* SEK@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3447F83B28F0C4E400B59B25 /* SEK@3x.png */; };
 		347514982919A55A0092864A /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 347514972919A55A0092864A /* Configuration.storekit */; };
+		348346E9292612A3003710CA /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 348346E8292612A3003710CA /* WidgetKit.framework */; };
+		348346EB292612A3003710CA /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 348346EA292612A3003710CA /* SwiftUI.framework */; };
+		348346EE292612A3003710CA /* WalutWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348346ED292612A3003710CA /* WalutWidgetBundle.swift */; };
+		348346F0292612A3003710CA /* WalutWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348346EF292612A3003710CA /* WalutWidget.swift */; };
+		348346F2292612A4003710CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 348346F1292612A4003710CA /* Assets.xcassets */; };
+		348346FC292612D3003710CA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348346FB292612D3003710CA /* NetworkManager.swift */; };
+		348346FD2926135B003710CA /* RatesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3498CC9328F4502200961C61 /* RatesData.swift */; };
+		348346FE2926135E003710CA /* TimeSeriesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3498CC9528F4504900961C61 /* TimeSeriesData.swift */; };
+		348346FF29261DAF003710CA /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A2347328F061D700C81292 /* Currency.swift */; };
+		348347022926245E003710CA /* WalutWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 348346E7292612A3003710CA /* WalutWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3483639E290D28D5000DA0DB /* ChartToShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3483639D290D28D5000DA0DB /* ChartToShare.swift */; };
 		34890F5C2914E6460059B5C3 /* ThanksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34890F5B2914E6460059B5C3 /* ThanksView.swift */; };
 		3497430128F1E58A00373E0F /* CalculationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3497430028F1E58A00373E0F /* CalculationView.swift */; };
@@ -116,6 +126,30 @@
 		34ED0C2328F1C24F006C4F38 /* ViewManagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C2228F1C24F006C4F38 /* ViewManagingView.swift */; };
 		34ED0C2828F1C6FF006C4F38 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34ED0C2A28F1C6FF006C4F38 /* Localizable.strings */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3483470029262447003710CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 34A2345428F05B5C00C81292 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 348346E6292612A3003710CA;
+			remoteInfo = WalutWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		348346F7292612A4003710CA /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				348347022926245E003710CA /* WalutWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		341CF6232913BCB40012FA5B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -204,6 +238,14 @@
 		3447F83A28F0C4E400B59B25 /* PHP@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PHP@1x.png"; sourceTree = "<group>"; };
 		3447F83B28F0C4E400B59B25 /* SEK@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SEK@3x.png"; sourceTree = "<group>"; };
 		347514972919A55A0092864A /* Configuration.storekit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
+		348346E7292612A3003710CA /* WalutWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WalutWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		348346E8292612A3003710CA /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		348346EA292612A3003710CA /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		348346ED292612A3003710CA /* WalutWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalutWidgetBundle.swift; sourceTree = "<group>"; };
+		348346EF292612A3003710CA /* WalutWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalutWidget.swift; sourceTree = "<group>"; };
+		348346F1292612A4003710CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		348346F3292612A4003710CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		348346FB292612D3003710CA /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		3483639D290D28D5000DA0DB /* ChartToShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartToShare.swift; sourceTree = "<group>"; };
 		34890F5B2914E6460059B5C3 /* ThanksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThanksView.swift; sourceTree = "<group>"; };
 		3497430028F1E58A00373E0F /* CalculationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationView.swift; sourceTree = "<group>"; };
@@ -233,6 +275,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		348346E4292612A3003710CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				348346EB292612A3003710CA /* SwiftUI.framework in Frameworks */,
+				348346E9292612A3003710CA /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		34A2345928F05B5C00C81292 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -248,6 +299,8 @@
 			isa = PBXGroup;
 			children = (
 				341CF6232913BCB40012FA5B /* StoreKit.framework */,
+				348346E8292612A3003710CA /* WidgetKit.framework */,
+				348346EA292612A3003710CA /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -344,11 +397,24 @@
 			path = AppIconAlternate;
 			sourceTree = "<group>";
 		};
+		348346EC292612A3003710CA /* WalutWidget */ = {
+			isa = PBXGroup;
+			children = (
+				348346ED292612A3003710CA /* WalutWidgetBundle.swift */,
+				348346EF292612A3003710CA /* WalutWidget.swift */,
+				348346FB292612D3003710CA /* NetworkManager.swift */,
+				348346F1292612A4003710CA /* Assets.xcassets */,
+				348346F3292612A4003710CA /* Info.plist */,
+			);
+			path = WalutWidget;
+			sourceTree = "<group>";
+		};
 		34A2345328F05B5C00C81292 = {
 			isa = PBXGroup;
 			children = (
 				34A5A6B0292002A000613135 /* README.md */,
 				34A2345E28F05B5C00C81292 /* Walut */,
+				348346EC292612A3003710CA /* WalutWidget */,
 				34A2345D28F05B5C00C81292 /* Products */,
 				341CF6222913BCB40012FA5B /* Frameworks */,
 			);
@@ -358,6 +424,7 @@
 			isa = PBXGroup;
 			children = (
 				34A2345C28F05B5C00C81292 /* Walut.app */,
+				348346E7292612A3003710CA /* WalutWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -444,6 +511,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		348346E6292612A3003710CA /* WalutWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 348346FA292612A4003710CA /* Build configuration list for PBXNativeTarget "WalutWidgetExtension" */;
+			buildPhases = (
+				348346E3292612A3003710CA /* Sources */,
+				348346E4292612A3003710CA /* Frameworks */,
+				348346E5292612A3003710CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WalutWidgetExtension;
+			productName = WalutWidgetExtension;
+			productReference = 348346E7292612A3003710CA /* WalutWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		34A2345B28F05B5C00C81292 /* Walut */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 34A2346A28F05B5D00C81292 /* Build configuration list for PBXNativeTarget "Walut" */;
@@ -451,10 +535,12 @@
 				34A2345828F05B5C00C81292 /* Sources */,
 				34A2345928F05B5C00C81292 /* Frameworks */,
 				34A2345A28F05B5C00C81292 /* Resources */,
+				348346F7292612A4003710CA /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				3483470129262447003710CA /* PBXTargetDependency */,
 			);
 			name = Walut;
 			productName = Walut;
@@ -468,9 +554,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1400;
+				LastSwiftUpdateCheck = 1410;
 				LastUpgradeCheck = 1410;
 				TargetAttributes = {
+					348346E6292612A3003710CA = {
+						CreatedOnToolsVersion = 14.1;
+					};
 					34A2345B28F05B5C00C81292 = {
 						CreatedOnToolsVersion = 14.0.1;
 					};
@@ -490,11 +579,20 @@
 			projectRoot = "";
 			targets = (
 				34A2345B28F05B5C00C81292 /* Walut */,
+				348346E6292612A3003710CA /* WalutWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		348346E5292612A3003710CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				348346F2292612A4003710CA /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		34A2345A28F05B5C00C81292 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -584,6 +682,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		348346E3292612A3003710CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				348346FF29261DAF003710CA /* Currency.swift in Sources */,
+				348346FC292612D3003710CA /* NetworkManager.swift in Sources */,
+				348346EE292612A3003710CA /* WalutWidgetBundle.swift in Sources */,
+				348346F0292612A3003710CA /* WalutWidget.swift in Sources */,
+				348346FE2926135E003710CA /* TimeSeriesData.swift in Sources */,
+				348346FD2926135B003710CA /* RatesData.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		34A2345828F05B5C00C81292 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -621,6 +732,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		3483470129262447003710CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 348346E6292612A3003710CA /* WalutWidgetExtension */;
+			targetProxy = 3483470029262447003710CA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		34ED0C2A28F1C6FF006C4F38 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
@@ -634,6 +753,62 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		348346F8292612A4003710CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CMJ553K76W;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WalutWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WalutWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = ga.bartminski.WalutApp.WalutWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		348346F9292612A4003710CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = CMJ553K76W;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WalutWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WalutWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = ga.bartminski.WalutApp.WalutWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		34A2346828F05B5D00C81292 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -753,10 +928,11 @@
 		34A2346B28F05B5D00C81292 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Walut/Preview Content\"";
 				DEVELOPMENT_TEAM = CMJ553K76W;
 				ENABLE_PREVIEWS = YES;
@@ -773,7 +949,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = ga.bartminski.WalutApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -788,10 +964,11 @@
 		34A2346C28F05B5D00C81292 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Walut/Preview Content\"";
 				DEVELOPMENT_TEAM = CMJ553K76W;
 				ENABLE_PREVIEWS = YES;
@@ -808,7 +985,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = ga.bartminski.WalutApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -823,6 +1000,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		348346FA292612A4003710CA /* Build configuration list for PBXNativeTarget "WalutWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				348346F8292612A4003710CA /* Debug */,
+				348346F9292612A4003710CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		34A2345728F05B5C00C81292 /* Build configuration list for PBXProject "Walut" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
