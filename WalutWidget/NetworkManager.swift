@@ -23,7 +23,7 @@ class NetworkManager {
         formatter.calendar = Calendar.current
         formatter.dateFormat = "yyyy-MM-dd"
         
-        let startDate = Calendar.current.date(byAdding: .day, value: -1, to: Date())
+        let startDate = Calendar.current.date(byAdding: .day, value: -1, to: .now)
         let startDateString = formatter.string(from: startDate!)
         
         let endDate = Date()
@@ -33,7 +33,8 @@ class NetworkManager {
             throw NetworkError.invalidURL
         }
         
-        let (data, response) = try await URLSession.shared.data(from: url)
+        let req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 5)
+        let (data, response) = try await URLSession.shared.data(for: req)
         
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
             throw NetworkError.invalidResponse
