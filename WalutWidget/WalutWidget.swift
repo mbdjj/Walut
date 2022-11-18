@@ -48,7 +48,7 @@ struct WalutWidgetEntryView : View {
         let yesterday = entry.rates[0].value
         let today = entry.rates[1].value
         
-        return (today - yesterday) / yesterday
+        return (today - yesterday) / yesterday * 100
     }
     var percentColor: Color {
         if differencePercent == 0 {
@@ -86,7 +86,7 @@ struct WalutWidgetEntryView : View {
                     .foregroundColor(.walut)
                 
                 Label {
-                    Text("\(String(format: "%.3f", differencePercent))%")
+                    Text("\(String(format: "%.2f", differencePercent))%")
                 } icon: {
                     symbol
                 }
