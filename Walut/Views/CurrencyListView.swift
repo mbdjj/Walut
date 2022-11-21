@@ -9,13 +9,14 @@ import SwiftUI
 
 struct CurrencyListView: View {
     
-    @ObservedObject var networkManager = NetworkManager()
+    //@ObservedObject var networkManager = NetworkManager()
+    @ObservedObject var model = CurrencyListViewModel()
     @ObservedObject var shared = SharedDataManager.shared
     
     @State var quickConvertValue = 1.0
     
     init() {
-        networkManager.fetchCurrencyData(for: shared.base)
+        //networkManager.fetchCurrencyData(for: shared.base)
     }
     
     var body: some View {
@@ -31,9 +32,9 @@ struct CurrencyListView: View {
                     }
                 }
                 
-                if !networkManager.favoritesArray.isEmpty {
+                if !model.favoritesArray.isEmpty {
                     Section {
-                        ForEach(networkManager.favoritesArray) { currency in
+                        ForEach(model.favoritesArray) { currency in
                             NavigationLink {
                                 CalculationView(base: shared.base, foreign: currency, decimal: shared.decimal)
                             } label: {
@@ -49,7 +50,7 @@ struct CurrencyListView: View {
                 }
                 
                 Section {
-                    ForEach(networkManager.currencyArray) { currency in
+                    ForEach(model.currencyArray) { currency in
                         NavigationLink {
                             CalculationView(base: shared.base, foreign: currency, decimal: shared.decimal)
                         } label: {
@@ -65,21 +66,23 @@ struct CurrencyListView: View {
             }
             .navigationTitle("\(shared.base.flag) \(shared.base.code)")
             .refreshable {
-                networkManager.fetchCurrencyData(for: shared.base)
+                Task {
+                    await model.refreshData()
+                }
             }
-            .alert(String(localized: "error"), isPresented: $networkManager.shouldDisplayErrorAlert) {
+            .alert(String(localized: "error"), isPresented: $model.shouldDisplayErrorAlert) {
                 Button {
-                    networkManager.shouldDisplayErrorAlert = false
-                    networkManager.errorMessage = ""
+                    model.shouldDisplayErrorAlert = false
+                    model.errorMessage = ""
                 } label: {
                     Text("OK")
                 }
             } message: {
-                Text("\(networkManager.errorMessage)")
+                Text("\(model.errorMessage)")
             }
             .scrollDismissesKeyboard(.immediately)
             .onAppear {
-                networkManager.dateCheckingRefresh()
+                //networkManager.dateCheckingRefresh()
             }
         }
     }
