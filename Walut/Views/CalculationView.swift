@@ -14,14 +14,17 @@ struct CalculationView: View {
     
     let decimal: Int
     
-    @State var foreignAmount: Double = 0.0
-    @State var baseAmount: Double = 0.0
-    @State var shouldDisableChartButton = true
-    
     @FocusState private var foreignTextFieldFocused: Bool
     @FocusState private var baseTextFieldFocused: Bool
     
-    @ObservedObject var networkManager = NetworkManager()
+    @ObservedObject var model: CalculationViewModel
+    
+    init(base: Currency, foreign: Currency, decimal: Int) {
+        self.base = base
+        self.foreign = foreign
+        self.decimal = decimal
+        self.model = CalculationViewModel(base: base, foreign: foreign, decimal: decimal)
+    }
     
     var body: some View {
         ScrollView {
@@ -35,14 +38,14 @@ struct CalculationView: View {
                     Text("\(foreign.flag) \(foreign.fullName)")
                         .padding(.horizontal)
                     
-                    TextField("", value: $foreignAmount, format: .currency(code: foreign.code))
+                    TextField("", value: $model.foreignAmount, format: .currency(code: foreign.code))
                         .keyboardType(.decimalPad)
                         .padding(.horizontal)
                         .textFieldStyle(.roundedBorder)
                         .focused($foreignTextFieldFocused)
-                        .onChange(of: foreignAmount) { newValue in
+                        .onChange(of: model.foreignAmount) { newValue in
                             if foreignTextFieldFocused {
-                                baseAmount = newValue / foreign.rate
+                                model.baseAmount = newValue / foreign.rate
                             }
                         }
                 }
@@ -55,14 +58,14 @@ struct CalculationView: View {
                     Text("\(base.flag) \(base.fullName)")
                         .padding(.horizontal)
                     
-                    TextField("", value: $baseAmount, format: .currency(code: base.code))
+                    TextField("", value: $model.baseAmount, format: .currency(code: base.code))
                         .keyboardType(.decimalPad)
                         .padding(.horizontal)
                         .textFieldStyle(.roundedBorder)
                         .focused($baseTextFieldFocused)
-                        .onChange(of: baseAmount) { newValue in
+                        .onChange(of: model.baseAmount) { newValue in
                             if baseTextFieldFocused {
-                                foreignAmount = newValue / foreign.price
+                                model.foreignAmount = newValue / foreign.price
                             }
                         }
                 }
@@ -74,8 +77,8 @@ struct CalculationView: View {
                 foreignTextFieldFocused = false
                 baseTextFieldFocused = false
                 
-                foreignAmount = 0.0
-                baseAmount = 0.0
+                model.foreignAmount = 0.0
+                model.baseAmount = 0.0
                 
             } label: {
                 
@@ -95,11 +98,6 @@ struct CalculationView: View {
         }
         .navigationTitle("\(foreign.flag) \(foreign.code)")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear() {
-            DispatchQueue.main.async {
-                networkManager.getChartData(for: foreign, base: base)
-            }
-        }
         .toolbar {
             
             Menu {
@@ -116,28 +114,21 @@ struct CalculationView: View {
                 } label: {
                     Label(String(localized: "share_chart"), systemImage: "chart.xyaxis.line")
                 }
-                .disabled(shouldDisableChartButton)
+                .disabled(model.shouldDisableChartButton)
             } label: {
                 Image(systemName: "square.and.arrow.up")
             }
             
             NavigationLink {
-                if shouldDisableChartButton {
+                if model.shouldDisableChartButton {
                     Text("You shouldn't be here")
                 } else {
-                    CalculationChartView(currency: foreign, data: networkManager.ratesArray)
+                    CalculationChartView(currency: foreign, data: model.shareChartData)
                 }
             } label: {
                 Image(systemName: "chart.xyaxis.line")
             }
-            .disabled(shouldDisableChartButton)
-        }
-        .onChange(of: networkManager.ratesArray.count) { newValue in
-            if newValue == 0 {
-                shouldDisableChartButton = true
-            } else {
-                shouldDisableChartButton = false
-            }
+            .disabled(model.shouldDisableChartButton)
         }
         .scrollDismissesKeyboard(.immediately)
     }
@@ -145,7 +136,7 @@ struct CalculationView: View {
     //MARK: - Share function
     
     var chartToShare: some View {
-        ChartToShare(currency: foreign, data: networkManager.ratesArray)
+        ChartToShare(currency: foreign, data: model.shareChartData)
     }
     
     @MainActor private func generateSnapshot() -> UIImage {

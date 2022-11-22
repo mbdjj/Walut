@@ -9,15 +9,10 @@ import SwiftUI
 
 struct CurrencyListView: View {
     
-    //@ObservedObject var networkManager = NetworkManager()
     @ObservedObject var model = CurrencyListViewModel()
     @ObservedObject var shared = SharedDataManager.shared
     
     @State var quickConvertValue = 1.0
-    
-    init() {
-        //networkManager.fetchCurrencyData(for: shared.base)
-    }
     
     var body: some View {
         NavigationView {
@@ -82,7 +77,9 @@ struct CurrencyListView: View {
             }
             .scrollDismissesKeyboard(.immediately)
             .onAppear {
-                //networkManager.dateCheckingRefresh()
+                Task {
+                    await model.checkRefreshData()
+                }
             }
         }
     }

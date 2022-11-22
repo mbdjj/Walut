@@ -30,8 +30,20 @@ class CurrencyListViewModel: ObservableObject {
             let data = try await networkManager.getCurrencyData(for: shared.base)
             present(data: data)
         } catch {
-            errorMessage = error.localizedDescription
-            shouldDisplayErrorAlert = true
+            DispatchQueue.main.async {
+                self.errorMessage = error.localizedDescription
+                self.shouldDisplayErrorAlert = true
+            }
+        }
+    }
+    
+    func checkRefreshData() async {
+        let shouldRefresh = networkManager.shouldRefresh()
+        
+        if shouldRefresh {
+            await self.refreshData()
+        } else {
+            return
         }
     }
     
