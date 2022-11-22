@@ -23,7 +23,7 @@ struct Provider: TimelineProvider {
             let nextUpdate = Date().addingTimeInterval(3600) // 1 hour
             
             do {
-                let rates = try await NetworkManager.shared.getCurrentPrice(for: "USD", baseCode: "PLN")
+                let rates = try await NetworkManager.shared.getSmallWidgetData(for: "USD", baseCode: "PLN")
                 let entry = CurrencyEntry(date: .now, rates: rates)
                 
                 let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))

@@ -99,7 +99,6 @@
 		348346EE292612A3003710CA /* WalutWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348346ED292612A3003710CA /* WalutWidgetBundle.swift */; };
 		348346F0292612A3003710CA /* WalutWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348346EF292612A3003710CA /* WalutWidget.swift */; };
 		348346F2292612A4003710CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 348346F1292612A4003710CA /* Assets.xcassets */; };
-		348346FC292612D3003710CA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348346FB292612D3003710CA /* NetworkManager.swift */; };
 		348346FD2926135B003710CA /* RatesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3498CC9328F4502200961C61 /* RatesData.swift */; };
 		348346FE2926135E003710CA /* TimeSeriesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3498CC9528F4504900961C61 /* TimeSeriesData.swift */; };
 		348346FF29261DAF003710CA /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A2347328F061D700C81292 /* Currency.swift */; };
@@ -122,6 +121,8 @@
 		34A2347428F061D700C81292 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A2347328F061D700C81292 /* Currency.swift */; };
 		34CAB492290F11CA00D877E5 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CAB491290F11CA00D877E5 /* FavoritesView.swift */; };
 		34CAB494290F128100D877E5 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CAB493290F128100D877E5 /* FavoritesViewModel.swift */; };
+		34E0A201292CFCDB00EF3CBC /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C1A28F172A6006C4F38 /* NetworkManager.swift */; };
+		34E0A203292CFD3C00EF3CBC /* CurrencyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C1E28F1751C006C4F38 /* CurrencyData.swift */; };
 		34ED0C1B28F172A6006C4F38 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C1A28F172A6006C4F38 /* NetworkManager.swift */; };
 		34ED0C1F28F1751C006C4F38 /* CurrencyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C1E28F1751C006C4F38 /* CurrencyData.swift */; };
 		34ED0C2128F17592006C4F38 /* SharedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C2028F17592006C4F38 /* SharedDataManager.swift */; };
@@ -249,7 +250,6 @@
 		348346EF292612A3003710CA /* WalutWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalutWidget.swift; sourceTree = "<group>"; };
 		348346F1292612A4003710CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		348346F3292612A4003710CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		348346FB292612D3003710CA /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		3483639D290D28D5000DA0DB /* ChartToShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartToShare.swift; sourceTree = "<group>"; };
 		34890F5B2914E6460059B5C3 /* ThanksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThanksView.swift; sourceTree = "<group>"; };
 		3497430028F1E58A00373E0F /* CalculationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationView.swift; sourceTree = "<group>"; };
@@ -406,7 +406,6 @@
 			children = (
 				348346ED292612A3003710CA /* WalutWidgetBundle.swift */,
 				348346EF292612A3003710CA /* WalutWidget.swift */,
-				348346FB292612D3003710CA /* NetworkManager.swift */,
 				348346F1292612A4003710CA /* Assets.xcassets */,
 				348346F3292612A4003710CA /* Info.plist */,
 			);
@@ -692,10 +691,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34E0A201292CFCDB00EF3CBC /* NetworkManager.swift in Sources */,
 				348346FF29261DAF003710CA /* Currency.swift in Sources */,
-				348346FC292612D3003710CA /* NetworkManager.swift in Sources */,
 				348346EE292612A3003710CA /* WalutWidgetBundle.swift in Sources */,
 				348346F0292612A3003710CA /* WalutWidget.swift in Sources */,
+				34E0A203292CFD3C00EF3CBC /* CurrencyData.swift in Sources */,
 				348346FE2926135E003710CA /* TimeSeriesData.swift in Sources */,
 				348346FD2926135B003710CA /* RatesData.swift in Sources */,
 			);
