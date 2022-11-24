@@ -14,7 +14,16 @@ struct CurrencyCell: View {
     
     let decimal: Int
     
-    @ObservedObject var model: CurrencyCellViewModel
+    var percent: Double { (currency.price - currency.yesterdayPrice) / currency.yesterdayPrice * 100 }
+    var percentColor: Color {
+        if percent == 0 {
+            return .secondary
+        } else if percent > 0 {
+            return .green
+        } else {
+            return .red
+        }
+    }
     
     let shared = SharedDataManager.shared
     
@@ -27,8 +36,6 @@ struct CurrencyCell: View {
         self.decimal = shared.decimal
         self.mode = mode
         self.value = value
-        
-        self.model = CurrencyCellViewModel(currency: currency, base: shared.base)
     }
     
     enum CellMode {
@@ -67,10 +74,10 @@ struct CurrencyCell: View {
                 }
                 
                 if shared.showPercent {
-                    Text("\(String(format: "%.2f", model.percent))%")
+                    Text("\(String(format: "%.2f", percent))%")
                         .font(.caption2)
                     .fontWeight(.semibold)
-                    .foregroundColor(model.percentColor)
+                    .foregroundColor(percentColor)
                 }
             }
             

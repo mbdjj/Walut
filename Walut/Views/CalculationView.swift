@@ -163,6 +163,6 @@ struct CalculationView: View {
 
 struct CalculationView_Previews: PreviewProvider {
     static var previews: some View {
-        CalculationView(base: Currency(baseCode: "PLN"), foreign: Currency(code: "USD", rate: 0.2), decimal: 3)
+        CalculationView(base: Currency(baseCode: "PLN"), foreign: Currency(code: "USD", rate: 0.2, yesterday: 0.3), decimal: 3)
     }
 }

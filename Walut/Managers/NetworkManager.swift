@@ -20,21 +20,31 @@ struct NetworkManager {
         guard let url = URL(string: "https://api.exchangerate.host/latest?base=\(base.code)") else {
             throw NetworkError.invalidURL
         }
+        guard let yesterdayUrl = URL(string: "https://api.exchangerate.host/\(yesterdayString())?base=\(base.code)") else {
+            throw NetworkError.invalidURL
+        }
         
         let req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData)
         let (data, response) = try await URLSession.shared.data(for: req)
         
+        let yesterdayReq = URLRequest(url: yesterdayUrl, cachePolicy: .reloadIgnoringLocalCacheData)
+        let (yesterdayData, yesterdayResponse) = try await URLSession.shared.data(for: yesterdayReq)
+        
         guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            throw NetworkError.invalidResponse
+        }
+        guard let yesterdayResponse = yesterdayResponse as? HTTPURLResponse, yesterdayResponse.statusCode == 200 else {
             throw NetworkError.invalidResponse
         }
         
         do {
             let results = try decoder.decode(CurrencyData.self, from: data)
+            let yesterdayResults = try decoder.decode(CurrencyData.self, from: yesterdayData)
             
             var currencyArray = [Currency]()
             
             for code in self.allCodesArray {
-                let currency = Currency(code: code, rate: results.rates.getRate(of: code))
+                let currency = Currency(code: code, rate: results.rates.getRate(of: code), yesterday: yesterdayResults.rates.getRate(of: code))
                 currencyArray.append(currency)
             }
             
@@ -129,6 +139,17 @@ struct NetworkManager {
             throw NetworkError.decodingError
         }
         
+    }
+    
+    func yesterdayString() -> String {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar.current
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: .now)
+        let yesterdayString = formatter.string(from: yesterday!)
+        
+        return yesterdayString
     }
     
     // MARK: - NetworkErrors

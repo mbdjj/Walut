@@ -9,14 +9,16 @@ import Foundation
 
 struct Currency: Identifiable, Equatable {
     
-    init(code: String, rate: Double) { //We can initiate a Currency object
+    init(code: String, rate: Double, yesterday: Double) { //We can initiate a Currency object
         self.code = code
         self.rate = rate
+        self.yesterdayRate = yesterday
     }
     
     init(baseCode: String) {
         self.code = baseCode
         self.rate = 1.0
+        self.yesterdayRate = 1.0
     }
     
     let code: String
@@ -24,7 +26,9 @@ struct Currency: Identifiable, Equatable {
     var fullName: String { getName(of: code) }
     var symbol: String { getSymbol(of: code) }
     let rate: Double
+    let yesterdayRate: Double
     var price: Double { 1 / rate }
+    var yesterdayPrice: Double { 1 / yesterdayRate }
     
     var isFavorite: Bool = false
     

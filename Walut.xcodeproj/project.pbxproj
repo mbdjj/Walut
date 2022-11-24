@@ -93,7 +93,6 @@
 		3447F88628F0C4E400B59B25 /* SEK@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3447F83B28F0C4E400B59B25 /* SEK@3x.png */; };
 		344A71EB292C13200065F689 /* CurrencyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344A71EA292C13200065F689 /* CurrencyListViewModel.swift */; };
 		344A71ED292C29C10065F689 /* CalculationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344A71EC292C29C10065F689 /* CalculationViewModel.swift */; };
-		34654EA8292F566200683B9F /* CurrencyCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34654EA7292F566200683B9F /* CurrencyCellViewModel.swift */; };
 		347514982919A55A0092864A /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 347514972919A55A0092864A /* Configuration.storekit */; };
 		348346E9292612A3003710CA /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 348346E8292612A3003710CA /* WidgetKit.framework */; };
 		348346EB292612A3003710CA /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 348346EA292612A3003710CA /* SwiftUI.framework */; };
@@ -243,7 +242,6 @@
 		3447F83B28F0C4E400B59B25 /* SEK@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SEK@3x.png"; sourceTree = "<group>"; };
 		344A71EA292C13200065F689 /* CurrencyListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListViewModel.swift; sourceTree = "<group>"; };
 		344A71EC292C29C10065F689 /* CalculationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationViewModel.swift; sourceTree = "<group>"; };
-		34654EA7292F566200683B9F /* CurrencyCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCellViewModel.swift; sourceTree = "<group>"; };
 		347514972919A55A0092864A /* Configuration.storekit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		348346E7292612A3003710CA /* WalutWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WalutWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		348346E8292612A3003710CA /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -485,7 +483,6 @@
 				342A047C290A5B7B00C10652 /* OnboardingViewModel.swift */,
 				34A2346F28F05C3B00C81292 /* BasePickerViewModel.swift */,
 				344A71EA292C13200065F689 /* CurrencyListViewModel.swift */,
-				34654EA7292F566200683B9F /* CurrencyCellViewModel.swift */,
 				344A71EC292C29C10065F689 /* CalculationViewModel.swift */,
 				3498532928F570A2003E0FC9 /* SettingsViewModel.swift */,
 				341CF627291431930012FA5B /* SupportDevViewModel.swift */,
@@ -728,7 +725,6 @@
 				349E3F7828FEAFDE004831E2 /* ProfileView.swift in Sources */,
 				3498532828F57029003E0FC9 /* SettingsView.swift in Sources */,
 				34ED0C1B28F172A6006C4F38 /* NetworkManager.swift in Sources */,
-				34654EA8292F566200683B9F /* CurrencyCellViewModel.swift in Sources */,
 				34A2346028F05B5C00C81292 /* WalutApp.swift in Sources */,
 				34A2346E28F05BAE00C81292 /* BasePickerView.swift in Sources */,
 				341CF626291430B40012FA5B /* SupportDevView.swift in Sources */,
