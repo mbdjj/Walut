@@ -14,6 +14,7 @@ class SettingsViewModel: ObservableObject {
     @Published var selectedBase: String
     @Published var decimal: Int
     @Published var quickConvertOn: Bool
+    @Published var showPercent: Bool
     
     @Published var secretCode = ""
     @Published var shouldDisplayAlert: Bool = false
@@ -37,6 +38,7 @@ class SettingsViewModel: ObservableObject {
         selectedBase = shared.base.code
         decimal = shared.decimal
         quickConvertOn = shared.quickConvert
+        showPercent = shared.showPercent
         
         for code in shared.allCodesArray {
             self.pickerData.append(Currency(baseCode: code))
@@ -64,6 +66,11 @@ class SettingsViewModel: ObservableObject {
     func saveConvertMode() {
         shared.quickConvert = quickConvertOn
         shared.defaults.set(quickConvertOn, forKey: "quickConvert")
+    }
+    
+    func saveShowPercent() {
+        shared.showPercent = showPercent
+        shared.defaults.set(showPercent, forKey: "showPercent")
     }
     
     func checkCode() {

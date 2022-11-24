@@ -14,20 +14,24 @@ struct CurrencyCell: View {
     
     let decimal: Int
     
+    @ObservedObject var model: CurrencyCellViewModel
+    
     let shared = SharedDataManager.shared
     
-    let mode: CurrencyCell.cellMode
+    let mode: CurrencyCell.CellMode
     let value: Double
     
-    init(for currency: Currency, mode: CurrencyCell.cellMode, value: Double) {
+    init(for currency: Currency, mode: CurrencyCell.CellMode, value: Double) {
         self.currency = currency
         self.base = shared.base
         self.decimal = shared.decimal
         self.mode = mode
         self.value = value
+        
+        self.model = CurrencyCellViewModel(currency: currency, base: shared.base)
     }
     
-    enum cellMode {
+    enum CellMode {
         case normal
         case quickConvert
     }
@@ -53,16 +57,27 @@ struct CurrencyCell: View {
             
             Spacer()
             
-            if mode == .normal {
-                Text("\(String(format: "%.\(decimal)f", currency.price)) \(base.symbol)")
-                    .font(.system(size: 17))
-            } else if mode == .quickConvert {
-                Text("\(String(format: "%.\(decimal)f", currency.rate * value)) \(currency.symbol)")
-                    .font(.system(size: 17))
+            VStack(alignment: .trailing) {
+                if mode == .normal {
+                    Text("\(String(format: "%.\(decimal)f", currency.price)) \(base.symbol)")
+                        .font(.system(size: 17))
+                } else if mode == .quickConvert {
+                    Text("\(String(format: "%.\(decimal)f", currency.rate * value)) \(currency.symbol)")
+                        .font(.system(size: 17))
+                }
+                
+                if shared.showPercent {
+                    Text("\(String(format: "%.2f", model.percent))%")
+                        .font(.caption2)
+                    .fontWeight(.semibold)
+                    .foregroundColor(model.percentColor)
+                }
             }
             
         }
     }
+    
+    
 }
 
 struct CurrencyCell_Previews: PreviewProvider {

@@ -44,6 +44,7 @@
 "settings_decimal_numbers" = "Decimal numbers";
 "settings_enter_code" = "Enter secret code";
 "settings_quick_conversion" = "Quick conversion mode";
+"settings_show_percent" = "Show percent difference";
 
 "base_currency" = "Base currency";
 "base_choose" = "Choose your base";

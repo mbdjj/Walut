@@ -60,6 +60,11 @@ struct SettingsView: View {
                             model.saveConvertMode()
                         }
                     
+                    Toggle(String(localized: "settings_show_percent"), isOn: $model.showPercent)
+                        .onChange(of: model.showPercent) { _ in
+                            model.saveShowPercent()
+                        }
+                    
                     NavigationLink {
                         FavoritesView()
                     } label: {

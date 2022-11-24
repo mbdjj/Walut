@@ -19,6 +19,7 @@ class SharedDataManager: ObservableObject {
     @Published var base: Currency
     @Published var decimal: Int
     @Published var quickConvert: Bool
+    @Published var showPercent: Bool
     
     @Published var favorites: [String]
     
@@ -40,6 +41,7 @@ class SharedDataManager: ObservableObject {
         base = Currency(baseCode: defaults.string(forKey: "base") ?? "AUD")
         decimal = defaults.integer(forKey: "decimal")
         quickConvert = defaults.bool(forKey: "quickConvert")
+        showPercent = defaults.bool(forKey: "showPercent")
         
         favorites = defaults.stringArray(forKey: "favorites") ?? []
     }
