@@ -2,7 +2,7 @@
 
 ![Walut logo](./Walut/Assets.xcassets/AppIcon.appiconset/60.png)
 
-Walut is a simple app which allows you to check current currency rates. It's written in SwiftUI and uses [exchangerate.host's API](exchangerate.host).
+Walut is a simple app which allows you to check current currency rates. It's written in SwiftUI and uses [exchangerate.host's API](https://exchangerate.host).
 
 **[Download Walut on the App Store](https://apps.apple.com/pl/app/walut/id6444106558)**
 
