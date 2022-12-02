@@ -36,6 +36,7 @@ struct ThanksView: View {
                 Text("\(String(localized: "support_enjoy_1"))\(title)\(String(localized: "support_enjoy_2"))")
                     .foregroundColor(.white)
                     .padding(.bottom)
+                    .padding(.horizontal)
                     .multilineTextAlignment(.center)
                 
                 Button {

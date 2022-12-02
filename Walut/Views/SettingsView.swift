@@ -32,9 +32,17 @@ struct SettingsView: View {
                                 .padding(.vertical, 4)
                             
                             VStack(alignment: .leading) {
-                                Text(model.name)
-                                    .font(.system(.title3))
-                                    .fontWeight(.medium)
+                                HStack {
+                                    Text(model.name)
+                                        .font(.system(.title3))
+                                        .fontWeight(.medium)
+                                    
+                                    if model.isSupporter {
+                                        Image(systemName: "checkmark.seal.fill")
+                                            .foregroundColor(.gray)
+                                            .font(.subheadline)
+                                    }
+                                }
                                 
                                 Text(model.shared.chosenTitle)
                                     .font(.system(.footnote))

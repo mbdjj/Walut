@@ -28,6 +28,18 @@ class SettingsViewModel: ObservableObject {
     
     var letter: String { "\(name.first!)" }
     
+    var isSupporter: Bool {
+        for id in shared.titleIDArray {
+            if id == 2 {
+                return true
+            } else if id == 3 {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
     let defaults = UserDefaults.standard
     var shared = SharedDataManager.shared
     let iconManager = AppIconManager()
