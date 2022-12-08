@@ -48,6 +48,14 @@ struct CalculationView: View {
                                 model.baseAmount = newValue / foreign.rate
                             }
                         }
+                        .onDrag {
+                            let text = "\(model.foreignAmount.formatted(.currency(code: model.foreign.code))) = \(model.baseAmount.formatted(.currency(code: model.base.code)))"
+                            
+                            return NSItemProvider(object: text as NSString)
+                        } preview: {
+                            Text("\(model.foreignAmount.formatted(.currency(code: model.foreign.code))) = \(model.baseAmount.formatted(.currency(code: model.base.code)))")
+                        }
+
                 }
                 
                 Text("=")
@@ -67,6 +75,13 @@ struct CalculationView: View {
                             if baseTextFieldFocused {
                                 model.foreignAmount = newValue / foreign.price
                             }
+                        }
+                        .onDrag {
+                            let text = "\(model.baseAmount.formatted(.currency(code: model.base.code))) = \(model.foreignAmount.formatted(.currency(code: model.foreign.code)))"
+                            
+                            return NSItemProvider(object: text as NSString)
+                        } preview: {
+                            Text("\(model.baseAmount.formatted(.currency(code: model.base.code))) = \(model.foreignAmount.formatted(.currency(code: model.foreign.code)))")
                         }
                 }
                 
