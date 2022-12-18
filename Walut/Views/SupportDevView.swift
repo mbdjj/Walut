@@ -47,6 +47,7 @@ struct SupportDevView: View {
         .navigationTitle(String(localized: "support_title"))
         .sheet(isPresented: $model.shouldShowThanks) {
             ThanksView(title: model.titleToPresent, arrayToSave: model.arrayToSave)
+                .presentationDetents([.medium, .large])
         }
         
     }
