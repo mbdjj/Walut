@@ -12,7 +12,7 @@ struct SettingsView: View {
     @ObservedObject var model = SettingsViewModel()
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 
                 Section {

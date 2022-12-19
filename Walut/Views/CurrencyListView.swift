@@ -15,7 +15,7 @@ struct CurrencyListView: View {
     @State var quickConvertValue = 1.0
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 
                 if shared.quickConvert {

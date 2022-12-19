@@ -16,7 +16,7 @@ struct OnboardingView: View {
     
     var body: some View {
         
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Color.accentColor
                     .ignoresSafeArea()
