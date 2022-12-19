@@ -124,6 +124,14 @@ struct CalculationView: View {
             
             Menu {
                 Button {
+                    let textToShare = "\(model.foreignAmount.formatted(.currency(code: model.foreign.code))) = \(model.baseAmount.formatted(.currency(code: model.base.code)))"
+                    
+                    shareSheet(for: textToShare)
+                } label: {
+                    Label(String(localized: "share_value"), systemImage: "equal.circle")
+                }
+                
+                Button {
                     let textToShare = "\(foreign.fullName)\(String(localized: "text_to_share0"))(\(foreign.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(decimal)f", foreign.price)) \(base.symbol)"
                     
                     shareSheet(for: textToShare)
@@ -185,6 +193,8 @@ struct CalculationView: View {
 
 struct CalculationView_Previews: PreviewProvider {
     static var previews: some View {
-        CalculationView(base: Currency(baseCode: "PLN"), foreign: Currency(code: "USD", rate: 0.2, yesterday: 0.3), decimal: 3)
+        NavigationStack {
+            CalculationView(base: Currency(baseCode: "PLN"), foreign: Currency(code: "USD", rate: 0.2, yesterday: 0.3), decimal: 3)
+        }
     }
 }
