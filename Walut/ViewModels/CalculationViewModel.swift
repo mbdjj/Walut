@@ -29,8 +29,10 @@ class CalculationViewModel: ObservableObject {
         self.foreign = foreign
         self.decimal = decimal
         
-        Task {
-            await refreshData()
+        if !SharedDataManager.shared.reduceDataUsage {
+            Task {
+                await refreshData()
+            }
         }
     }
     

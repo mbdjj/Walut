@@ -45,6 +45,7 @@
 "settings_enter_code" = "Wprowadź sekretny kod";
 "settings_quick_conversion" = "Tryb szybkiej konwersji";
 "settings_show_percent" = "Pokaż procentową różnicę";
+"settings_reduce_data" = "Zredukuj zużycie danych";
 
 "base_currency" = "Waluta bazowa";
 "base_choose" = "Wybierz walutę bazową";

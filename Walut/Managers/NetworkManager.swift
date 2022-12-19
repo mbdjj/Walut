@@ -91,6 +91,8 @@ struct NetworkManager {
                 timeSeriesArray.append(.init(code: results.base, date: keyData[i], value: timeSeriesData[i][base.code] ?? 0))
             }
             
+            print("Fetched chart data for \(currency.code)")
+            
             return timeSeriesArray
             
         } catch {

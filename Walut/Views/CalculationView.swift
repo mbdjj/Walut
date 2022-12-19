@@ -113,6 +113,13 @@ struct CalculationView: View {
         }
         .navigationTitle("\(foreign.flag) \(foreign.code)")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            if SharedDataManager.shared.reduceDataUsage && model.ratesData.isEmpty {
+                Task {
+                    await model.refreshData()
+                }
+            }
+        }
         .toolbar {
             
             Menu {
