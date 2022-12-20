@@ -57,6 +57,9 @@
 "sort_by_price" = "By price";
 "sort_by_price_highest" = "(from highest)";
 "sort_by_price_lowest" = "(from lowest)";
+"sort_by_change" = "By change";
+"sort_by_change_increase" = "(from highest increase)";
+"sort_by_change_decrease" = "(from highest decrease)";
 "sort_custom" = "Custom";
 "sort_by_favorite" = "By favorite";
 "sort_nav_title" = "Sort currencies";

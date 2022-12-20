@@ -15,6 +15,8 @@ class CurrencyListViewModel: ObservableObject {
     @Published var errorMessage = ""
     @Published var shouldDisplayErrorAlert = false
     
+    @Published var shouldShowSortView = false
+    
     let shared = SharedDataManager.shared
     let networkManager = NetworkManager.shared
     

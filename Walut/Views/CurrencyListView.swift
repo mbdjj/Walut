@@ -60,6 +60,13 @@ struct CurrencyListView: View {
                 }
             }
             .navigationTitle("\(shared.base.flag) \(shared.base.code)")
+            .toolbar {
+                Button {
+                    model.shouldShowSortView = true
+                } label: {
+                    Image(systemName: "arrow.up.arrow.down")
+                }
+            }
             .refreshable {
                 Task {
                     await model.refreshData()
@@ -80,6 +87,10 @@ struct CurrencyListView: View {
                 Task {
                     await model.checkRefreshData()
                 }
+            }
+            .sheet(isPresented: $model.shouldShowSortView) {
+                SortView()
+                    .presentationDetents([.medium, .large])
             }
         }
     }

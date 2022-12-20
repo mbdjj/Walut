@@ -69,6 +69,12 @@ struct SettingsView: View {
                         Text(String(localized: "favorite_currencies"))
                     }
                     
+                    NavigationLink {
+                        SortView()
+                    } label: {
+                        Text(String(localized: "sort"))
+                    }
+                    
                 }
                 
                 Section {

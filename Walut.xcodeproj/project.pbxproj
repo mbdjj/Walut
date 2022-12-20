@@ -121,6 +121,8 @@
 		34A2347428F061D700C81292 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A2347328F061D700C81292 /* Currency.swift */; };
 		34CAB492290F11CA00D877E5 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CAB491290F11CA00D877E5 /* FavoritesView.swift */; };
 		34CAB494290F128100D877E5 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CAB493290F128100D877E5 /* FavoritesViewModel.swift */; };
+		34D5AFE92951B25C0043B72A /* SortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D5AFE82951B25C0043B72A /* SortView.swift */; };
+		34D5AFEB2951B6550043B72A /* SortViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D5AFEA2951B6550043B72A /* SortViewModel.swift */; };
 		34E0A201292CFCDB00EF3CBC /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C1A28F172A6006C4F38 /* NetworkManager.swift */; };
 		34E0A203292CFD3C00EF3CBC /* CurrencyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C1E28F1751C006C4F38 /* CurrencyData.swift */; };
 		34ED0C1B28F172A6006C4F38 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C1A28F172A6006C4F38 /* NetworkManager.swift */; };
@@ -270,6 +272,8 @@
 		34A5A6B0292002A000613135 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		34CAB491290F11CA00D877E5 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		34CAB493290F128100D877E5 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
+		34D5AFE82951B25C0043B72A /* SortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortView.swift; sourceTree = "<group>"; };
+		34D5AFEA2951B6550043B72A /* SortViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortViewModel.swift; sourceTree = "<group>"; };
 		34ED0C1A28F172A6006C4F38 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		34ED0C1E28F1751C006C4F38 /* CurrencyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyData.swift; sourceTree = "<group>"; };
 		34ED0C2028F17592006C4F38 /* SharedDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataManager.swift; sourceTree = "<group>"; };
@@ -466,6 +470,7 @@
 				342A047A290A5A7B00C10652 /* OnboardingView.swift */,
 				34A2346D28F05BAE00C81292 /* BasePickerView.swift */,
 				3441ABD728F1709F009528FD /* CurrencyListView.swift */,
+				34D5AFE82951B25C0043B72A /* SortView.swift */,
 				3497430028F1E58A00373E0F /* CalculationView.swift */,
 				3498CC9728F4533000961C61 /* CalculationChartView.swift */,
 				3498532728F57029003E0FC9 /* SettingsView.swift */,
@@ -483,6 +488,7 @@
 				342A047C290A5B7B00C10652 /* OnboardingViewModel.swift */,
 				34A2346F28F05C3B00C81292 /* BasePickerViewModel.swift */,
 				344A71EA292C13200065F689 /* CurrencyListViewModel.swift */,
+				34D5AFEA2951B6550043B72A /* SortViewModel.swift */,
 				344A71EC292C29C10065F689 /* CalculationViewModel.swift */,
 				3498532928F570A2003E0FC9 /* SettingsViewModel.swift */,
 				341CF627291431930012FA5B /* SupportDevViewModel.swift */,
@@ -707,6 +713,7 @@
 			files = (
 				34ED0C2328F1C24F006C4F38 /* ViewManagingView.swift in Sources */,
 				3498CC9828F4533000961C61 /* CalculationChartView.swift in Sources */,
+				34D5AFEB2951B6550043B72A /* SortViewModel.swift in Sources */,
 				34ED0C2128F17592006C4F38 /* SharedDataManager.swift in Sources */,
 				34890F5C2914E6460059B5C3 /* ThanksView.swift in Sources */,
 				342D433A28F7E37F001C69AD /* CurrencyCell.swift in Sources */,
@@ -728,6 +735,7 @@
 				34A2346028F05B5C00C81292 /* WalutApp.swift in Sources */,
 				34A2346E28F05BAE00C81292 /* BasePickerView.swift in Sources */,
 				341CF626291430B40012FA5B /* SupportDevView.swift in Sources */,
+				34D5AFE92951B25C0043B72A /* SortView.swift in Sources */,
 				3497430128F1E58A00373E0F /* CalculationView.swift in Sources */,
 				34CAB492290F11CA00D877E5 /* FavoritesView.swift in Sources */,
 				344A71EB292C13200065F689 /* CurrencyListViewModel.swift in Sources */,
