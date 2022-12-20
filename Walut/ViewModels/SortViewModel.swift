@@ -10,18 +10,103 @@ import Foundation
 class SortViewModel: ObservableObject {
     
     @Published var selectedSort: SortType
-    
+    @Published var selectedDirection: SortDirection
     @Published var sortByFavorite: Bool
+    
+    var shared = SharedDataManager.shared
+    let defaults = UserDefaults.standard
     
     init() {
         self.selectedSort = .byCode
+        self.selectedDirection = .ascending
         self.sortByFavorite = true
+        
+        decodeSort()
+    }
+    
+    func decodeSort() {
+        switch shared.sortIndex {
+            
+        // Sorting by code
+        case 0:
+            selectedSort = .byCode
+            selectedDirection = .ascending
+        case 1:
+            selectedSort = .byCode
+            selectedDirection = .descending
+            
+        // Sorting by price
+        case 2:
+            selectedSort = .byPrice
+            selectedDirection = .ascending
+        case 3:
+            selectedSort = .byPrice
+            selectedDirection = .descending
+            
+        // Sorting by change
+        case 4:
+            selectedSort = .byChange
+            selectedDirection = .ascending
+        case 5:
+            selectedSort = .byChange
+            selectedDirection = .descending
+            
+        // If something goes wrong
+        default:
+            selectedSort = .byCode
+            selectedDirection = .ascending
+        }
+        
+        sortByFavorite = shared.sortByFavorite
+    }
+    
+    func saveSortAsIndex() {
+        var index = 0
+        
+        if selectedSort == .byCode && selectedDirection == .ascending {
+            index = 0
+        } else if selectedSort == .byCode && selectedDirection == .descending {
+            index = 1
+        } else if selectedSort == .byPrice && selectedDirection == .ascending {
+            index = 2
+        } else if selectedSort == .byPrice && selectedDirection == .descending {
+            index = 3
+        } else if selectedSort == .byChange && selectedDirection == .ascending {
+            index = 4
+        } else if selectedSort == .byChange && selectedDirection == .descending {
+            index = 5
+        }
+        
+        shared.sortIndex = index
+        defaults.set(index, forKey: "sort")
+    }
+    
+    func saveByFavorite() {
+        shared.sortByFavorite = sortByFavorite
+        defaults.set(sortByFavorite, forKey: "byFavorite")
+    }
+    
+    func toggleDirection() {
+        if selectedDirection == .ascending {
+            selectedDirection = .descending
+        } else {
+            selectedDirection = .ascending
+        }
     }
     
 }
+
+
+
+// MARK: - Sorting enums
 
 enum SortType {
     case byCode
     case byPrice
     case byChange
+}
+
+enum SortDirection {
+    case ascending
+    case descending
 }

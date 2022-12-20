@@ -52,15 +52,10 @@
 
 "sort" = "Sortuj";
 "sort_by_code" = "Po kodzie";
-"sort_by_code_ztoa" = "(od Z do A)";
-"sort_by_code_atoz" = "(od A do Z)";
 "sort_by_price" = "Po cenie";
-"sort_by_price_highest" = "(od najwyższej)";
-"sort_by_price_lowest" = "(od najniższej)";
 "sort_by_change" = "Po zmianie";
-"sort_by_change_increase" = "(od najwyższego wzrostu)";
-"sort_by_change_decrease" = "(od najwyższego spadku)";
-"sort_custom" = "Własne";
+"sort_ascending" = "Rosnąco";
+"sort_descending" = "Malejąco";
 "sort_by_favorite" = "Po ulubionych";
 "sort_nav_title" = "Sortuj waluty";
 
@@ -77,6 +72,7 @@
 "back" = "Wróć";
 "next" = "Dalej";
 "continue" = "Kontynuuj";
+"cancel" = "Anuluj";
 
 "text_to_share0" = " ";
 "text_to_share1" = " kosztuje teraz ";

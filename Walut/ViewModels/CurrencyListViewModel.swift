@@ -17,8 +17,13 @@ class CurrencyListViewModel: ObservableObject {
     
     @Published var shouldShowSortView = false
     
+    var sortIndex: Int { shared.sortIndex }
+    var sortDirection: SortDirection { shared.sortIndex % 2 == 0 ? .ascending : .descending }
+    var byFavorite: Bool { shared.sortByFavorite }
+    
     let shared = SharedDataManager.shared
     let networkManager = NetworkManager.shared
+    let sorting = SortingManager()
     
     init() {
         Task {
@@ -50,11 +55,23 @@ class CurrencyListViewModel: ObservableObject {
     }
     
     private func present(data: [Currency]) {
-        let (currencyArray, favoritesArray) = splitFavorites(from: data)
-        
-        DispatchQueue.main.async {
-            self.favoritesArray = favoritesArray
-            self.currencyArray = currencyArray
+        if byFavorite {
+            var (currencyArray, favoritesArray) = splitFavorites(from: data)
+            
+            currencyArray = sort(array: currencyArray)
+            
+            DispatchQueue.main.async {
+                self.favoritesArray = favoritesArray
+                self.currencyArray = currencyArray
+            }
+        } else {
+            var currencyArray = removeBase(from: data)
+            
+            currencyArray = sort(array: currencyArray)
+            
+            DispatchQueue.main.async {
+                self.currencyArray = currencyArray
+            }
         }
     }
     
@@ -91,12 +108,32 @@ class CurrencyListViewModel: ObservableObject {
         } else {
             if let index = favoritesArray.firstIndex(of: Currency(baseCode: shared.base.code)) {
                 favoritesArray.remove(at: index)
-            } else {
-                return ([], [])
             }
         }
         
         return (currencyArray, favoritesArray)
+    }
+    
+    private func removeBase(from array: [Currency]) -> [Currency] {
+        var currencyArray = array
+        
+        if let index = currencyArray.firstIndex(of: Currency(baseCode: shared.base.code)) {
+            currencyArray.remove(at: index)
+        }
+        
+        return currencyArray
+    }
+    
+    private func sort(array: [Currency]) -> [Currency] {
+        if sortIndex == 0 || sortIndex == 1 {
+            return sorting.byCode(array, direction: sortDirection)
+        } else if sortIndex == 2 || sortIndex == 3 {
+            return sorting.byPrice(array, direction: sortDirection)
+        } else if sortIndex == 4 || sortIndex == 5 {
+            return sorting.byChange(array, direction: sortDirection)
+        } else {
+            return array
+        }
     }
     
 }

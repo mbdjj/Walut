@@ -10,6 +10,7 @@ import SwiftUI
 struct SortView: View {
     
     @ObservedObject var model = SortViewModel()
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         NavigationStack {
@@ -38,12 +39,47 @@ struct SortView: View {
                 }
                 
                 Section {
+                    Button {
+                        model.selectedDirection = .ascending
+                    } label: {
+                        Text(String(localized: "sort_ascending"))
+                            .fontWeight(model.selectedDirection == .ascending ? .bold : .regular)
+                    }
+                    
+                    Button {
+                        model.selectedDirection = .descending
+                    } label: {
+                        Text(String(localized: "sort_descending"))
+                            .fontWeight(model.selectedDirection == .descending ? .bold : .regular)
+                    }
+                }
+                
+                Section {
                     Toggle(isOn: $model.sortByFavorite) {
                         Text(String(localized: "sort_by_favorite"))
                     }
                 }
             }
             .navigationTitle(String(localized: "sort"))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        dismiss.callAsFunction()
+                    } label: {
+                        Text(String(localized: "cancel"))
+                    }
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        model.saveSortAsIndex()
+                        model.saveByFavorite()
+                    } label: {
+                        Text(String(localized: "save"))
+                            .bold()
+                    }
+                }
+            }
         }
     }
 }

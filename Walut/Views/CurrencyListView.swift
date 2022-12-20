@@ -90,7 +90,7 @@ struct CurrencyListView: View {
             }
             .sheet(isPresented: $model.shouldShowSortView) {
                 SortView()
-                    .presentationDetents([.medium, .large])
+                    .interactiveDismissDisabled()
             }
         }
     }

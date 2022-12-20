@@ -52,15 +52,10 @@
 
 "sort" = "Sort";
 "sort_by_code" = "By code";
-"sort_by_code_ztoa" = "(Z to A)";
-"sort_by_code_atoz" = "(A to Z)";
 "sort_by_price" = "By price";
-"sort_by_price_highest" = "(from highest)";
-"sort_by_price_lowest" = "(from lowest)";
 "sort_by_change" = "By change";
-"sort_by_change_increase" = "(from highest increase)";
-"sort_by_change_decrease" = "(from highest decrease)";
-"sort_custom" = "Custom";
+"sort_ascending" = "Ascending";
+"sort_descending" = "Descending";
 "sort_by_favorite" = "By favorite";
 "sort_nav_title" = "Sort currencies";
 
@@ -77,6 +72,7 @@
 "back" = "Back";
 "next" = "Next";
 "continue" = "Continue";
+"cancel" = "Cancel";
 
 "text_to_share0" = "'s ";
 "text_to_share1" = " price is now at ";

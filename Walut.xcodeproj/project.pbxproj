@@ -105,6 +105,7 @@
 		348347022926245E003710CA /* WalutWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 348346E7292612A3003710CA /* WalutWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3483639E290D28D5000DA0DB /* ChartToShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3483639D290D28D5000DA0DB /* ChartToShare.swift */; };
 		34890F5C2914E6460059B5C3 /* ThanksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34890F5B2914E6460059B5C3 /* ThanksView.swift */; };
+		348CE6EF2951E32400E89078 /* SortingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348CE6EE2951E32400E89078 /* SortingManager.swift */; };
 		3497430128F1E58A00373E0F /* CalculationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3497430028F1E58A00373E0F /* CalculationView.swift */; };
 		3498532828F57029003E0FC9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3498532728F57029003E0FC9 /* SettingsView.swift */; };
 		3498532A28F570A2003E0FC9 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3498532928F570A2003E0FC9 /* SettingsViewModel.swift */; };
@@ -254,6 +255,7 @@
 		348346F3292612A4003710CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3483639D290D28D5000DA0DB /* ChartToShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartToShare.swift; sourceTree = "<group>"; };
 		34890F5B2914E6460059B5C3 /* ThanksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThanksView.swift; sourceTree = "<group>"; };
+		348CE6EE2951E32400E89078 /* SortingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingManager.swift; sourceTree = "<group>"; };
 		3497430028F1E58A00373E0F /* CalculationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationView.swift; sourceTree = "<group>"; };
 		3498532728F57029003E0FC9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3498532928F570A2003E0FC9 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 				3447F7E628F0BB3F00B59B25 /* AppIconManager.swift */,
 				34ED0C1A28F172A6006C4F38 /* NetworkManager.swift */,
 				34ED0C2028F17592006C4F38 /* SharedDataManager.swift */,
+				348CE6EE2951E32400E89078 /* SortingManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -728,6 +731,7 @@
 				34A2347428F061D700C81292 /* Currency.swift in Sources */,
 				3498532A28F570A2003E0FC9 /* SettingsViewModel.swift in Sources */,
 				3447F7E728F0BB3F00B59B25 /* AppIconManager.swift in Sources */,
+				348CE6EF2951E32400E89078 /* SortingManager.swift in Sources */,
 				342A047F290A5BAF00C10652 /* OnboardingPage.swift in Sources */,
 				349E3F7828FEAFDE004831E2 /* ProfileView.swift in Sources */,
 				3498532828F57029003E0FC9 /* SettingsView.swift in Sources */,
