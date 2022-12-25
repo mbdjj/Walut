@@ -41,11 +41,13 @@ class BasePickerViewModel: ObservableObject {
         defaults.set(selected, forKey: "base")
         defaults.set(true, forKey: "isBaseSelected")
         defaults.set(true, forKey: "showPercent")
+        defaults.set(true, forKey: "byFavorite")
         
         shared.name = name
         shared.base = Currency(baseCode: selected)
         shared.decimal = decimal
         shared.showPercent = true
+        shared.sortByFavorite = true
         
         iconManager.changeIcon(to: selected)
         
