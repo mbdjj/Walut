@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SortView: View {
     
+    @State var isSheet: Bool
+    
     @ObservedObject var model = SortViewModel()
     @Environment(\.dismiss) var dismiss
     
@@ -62,11 +64,13 @@ struct SortView: View {
             }
             .navigationTitle(String(localized: "sort"))
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        dismiss.callAsFunction()
-                    } label: {
-                        Text(String(localized: "cancel"))
+                if isSheet {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button {
+                            dismiss.callAsFunction()
+                        } label: {
+                            Text(String(localized: "cancel"))
+                        }
                     }
                 }
                 
@@ -86,6 +90,6 @@ struct SortView: View {
 
 struct SortView_Previews: PreviewProvider {
     static var previews: some View {
-        SortView()
+        SortView(isSheet: true)
     }
 }

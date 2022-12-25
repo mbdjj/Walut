@@ -89,7 +89,7 @@ struct CurrencyListView: View {
                 }
             }
             .sheet(isPresented: $model.shouldShowSortView) {
-                SortView()
+                SortView(isSheet: true)
                     .interactiveDismissDisabled()
             }
         }

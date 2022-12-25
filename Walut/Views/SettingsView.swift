@@ -70,9 +70,9 @@ struct SettingsView: View {
                     }
                     
                     NavigationLink {
-                        SortView()
+                        SortView(isSheet: false)
                     } label: {
-                        Text(String(localized: "sort"))
+                        Text(String(localized: "sort_nav_title"))
                     }
                     
                 }
