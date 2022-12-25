@@ -24,6 +24,6 @@ struct OnboardingData: Identifiable {
     let title: String
     let description: String
     
-    var id: String { return UUID().uuidString }
+    var id: String { UUID().uuidString }
     
 }

@@ -35,17 +35,19 @@ struct OnboardingView: View {
                 .indexViewStyle(.page(backgroundDisplayMode: .always))
             }
             .toolbar {
-                ToolbarItemGroup(placement: .navigationBarLeading) {
-                    Button {
-                        if selection > 0 {
-                            withAnimation {
-                                selection -= 1
+                if selection != 0 {
+                    ToolbarItemGroup(placement: .navigationBarLeading) {
+                        Button {
+                            if selection > 0 {
+                                withAnimation {
+                                    selection -= 1
+                                }
                             }
+                        } label: {
+                            Text(String(localized: "back"))
                         }
-                    } label: {
-                        Text(String(localized: "back"))
+                        .foregroundColor(.white)
                     }
-                    .foregroundColor(.white)
                 }
                 
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
