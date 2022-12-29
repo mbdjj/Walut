@@ -66,19 +66,23 @@ struct WalutWidgetEntryView : View {
     var entry: CurrencyEntry
 
     var body: some View {
-        switch family {
-        case .systemSmall:
-            PercentView(rates: entry.rates)
-        case .systemMedium:
-            HStack {
+        ZStack {
+            Color(uiColor: .systemGray6)
+            
+            switch family {
+            case .systemSmall:
                 PercentView(rates: entry.rates)
-                
-                if let chartData = entry.chartData {
-                    WidgetChartView(data: chartData)
+            case .systemMedium:
+                HStack {
+                    PercentView(rates: entry.rates)
+                    
+                    if let chartData = entry.chartData {
+                        WidgetChartView(data: chartData)
+                    }
                 }
+            default:
+                Text(entry.date.formatted(.dateTime))
             }
-        default:
-            Text(entry.date.formatted(.dateTime))
         }
     }
 }
