@@ -10,6 +10,9 @@
 		341CF6242913BCB40012FA5B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 341CF6232913BCB40012FA5B /* StoreKit.framework */; };
 		341CF626291430B40012FA5B /* SupportDevView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341CF625291430B40012FA5B /* SupportDevView.swift */; };
 		341CF628291431930012FA5B /* SupportDevViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341CF627291431930012FA5B /* SupportDevViewModel.swift */; };
+		341DFC0A295DAFAF00BDCBDB /* PercentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341DFC09295DAFAF00BDCBDB /* PercentView.swift */; };
+		341DFC0C295DB42100BDCBDB /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341DFC0B295DB42100BDCBDB /* MockData.swift */; };
+		341DFC0E295DB44300BDCBDB /* WidgetChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341DFC0D295DB44300BDCBDB /* WidgetChartView.swift */; };
 		342A047B290A5A7B00C10652 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342A047A290A5A7B00C10652 /* OnboardingView.swift */; };
 		342A047D290A5B7B00C10652 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342A047C290A5B7B00C10652 /* OnboardingViewModel.swift */; };
 		342A047F290A5BAF00C10652 /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342A047E290A5BAF00C10652 /* OnboardingPage.swift */; };
@@ -161,6 +164,9 @@
 		341CF6232913BCB40012FA5B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		341CF625291430B40012FA5B /* SupportDevView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportDevView.swift; sourceTree = "<group>"; };
 		341CF627291431930012FA5B /* SupportDevViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportDevViewModel.swift; sourceTree = "<group>"; };
+		341DFC09295DAFAF00BDCBDB /* PercentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentView.swift; sourceTree = "<group>"; };
+		341DFC0B295DB42100BDCBDB /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		341DFC0D295DB44300BDCBDB /* WidgetChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetChartView.swift; sourceTree = "<group>"; };
 		342A047A290A5A7B00C10652 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		342A047C290A5B7B00C10652 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		342A047E290A5BAF00C10652 /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
@@ -413,6 +419,9 @@
 			children = (
 				348346ED292612A3003710CA /* WalutWidgetBundle.swift */,
 				348346EF292612A3003710CA /* WalutWidget.swift */,
+				341DFC09295DAFAF00BDCBDB /* PercentView.swift */,
+				341DFC0D295DB44300BDCBDB /* WidgetChartView.swift */,
+				341DFC0B295DB42100BDCBDB /* MockData.swift */,
 				348346F1292612A4003710CA /* Assets.xcassets */,
 				348346F3292612A4003710CA /* Info.plist */,
 			);
@@ -700,13 +709,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				341DFC0A295DAFAF00BDCBDB /* PercentView.swift in Sources */,
 				34E0A201292CFCDB00EF3CBC /* NetworkManager.swift in Sources */,
 				348346FF29261DAF003710CA /* Currency.swift in Sources */,
 				348346EE292612A3003710CA /* WalutWidgetBundle.swift in Sources */,
+				341DFC0C295DB42100BDCBDB /* MockData.swift in Sources */,
 				348346F0292612A3003710CA /* WalutWidget.swift in Sources */,
 				34E0A203292CFD3C00EF3CBC /* CurrencyData.swift in Sources */,
 				348346FE2926135E003710CA /* TimeSeriesData.swift in Sources */,
 				348346FD2926135B003710CA /* RatesData.swift in Sources */,
+				341DFC0E295DB44300BDCBDB /* WidgetChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

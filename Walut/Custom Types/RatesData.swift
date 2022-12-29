@@ -41,9 +41,4 @@ struct RatesData: Identifiable {
         self.value = value
     }
     
-    static let placeholderArraySmall = [
-        RatesData(code: "EUR", date: "2022-11-16", value: 1.0),
-        RatesData(code: "EUR", date: "2022-11-17", value: 1.1)
-    ]
-    
 }

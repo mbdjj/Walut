@@ -7,14 +7,15 @@
 
 import WidgetKit
 import SwiftUI
+import Charts
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> CurrencyEntry {
-        CurrencyEntry(date: Date(), rates: RatesData.placeholderArraySmall)
+        CurrencyEntry(date: Date(), rates: MockData.rates, chartData: MockData.chartData)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (CurrencyEntry) -> ()) {
-        let entry = CurrencyEntry(date: Date(), rates: RatesData.placeholderArraySmall)
+        let entry = CurrencyEntry(date: Date(), rates: MockData.rates, chartData: MockData.chartData)
         completion(entry)
     }
 
@@ -24,7 +25,13 @@ struct Provider: TimelineProvider {
             
             do {
                 let rates = try await NetworkManager.shared.getSmallWidgetData(for: "USD", baseCode: "PLN")
-                let entry = CurrencyEntry(date: .now, rates: rates)
+                
+                var chartData: [RatesData]?
+                if context.family == .systemMedium {
+                    chartData = try await NetworkManager.shared.getChartData(forCode: "USD", baseCode: "PLN")
+                }
+                
+                let entry = CurrencyEntry(date: .now, rates: rates, chartData: chartData)
                 
                 let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
                 completion(timeline)
@@ -38,68 +45,40 @@ struct Provider: TimelineProvider {
 struct CurrencyEntry: TimelineEntry {
     let date: Date
     let rates: [RatesData]
+    
+    let chartData: [RatesData]?
+    
+    init(date: Date, rates: [RatesData]) {
+        self.date = date
+        self.rates = rates
+        self.chartData = nil
+    }
+    
+    init(date: Date, rates: [RatesData], chartData: [RatesData]?) {
+        self.date = date
+        self.rates = rates
+        self.chartData = chartData
+    }
 }
 
 struct WalutWidgetEntryView : View {
+    @Environment(\.widgetFamily) var family
     var entry: CurrencyEntry
-    
-    var entryCurrency: Currency { Currency(baseCode: entry.rates[0].currencyString) }
-    var differencePercent: Double {
-        let yesterday = entry.rates[0].value
-        let today = entry.rates[1].value
-        
-        return (today - yesterday) / yesterday * 100
-    }
-    var percentColor: Color {
-        if differencePercent == 0 {
-            return .secondary
-        } else if differencePercent > 0 {
-            return .green
-        } else {
-            return .red
-        }
-    }
-    var symbol: Image {
-        if differencePercent == 0 {
-            return Image(systemName: "arrow.right")
-        } else if differencePercent > 0 {
-            return Image(systemName: "arrow.up.right")
-        } else {
-            return Image(systemName: "arrow.down.right")
-        }
-    }
 
     var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Spacer()
+        switch family {
+        case .systemSmall:
+            PercentView(rates: entry.rates)
+        case .systemMedium:
+            HStack {
+                PercentView(rates: entry.rates)
                 
-                Text("\(entryCurrency.flag) \(entryCurrency.code)")
-                    .font(.title3)
-                    .fontWeight(.bold)
-                
-                Text("\(String(format: "%.3f", entry.rates.last?.value ?? 1.2)) \(Currency(baseCode: "PLN").symbol)")
-                    .font(.largeTitle)
-                    .fontWeight(.heavy)
-                    .minimumScaleFactor(0.6)
-                    .lineLimit(1)
-                    .foregroundColor(.walut)
-                
-                Label {
-                    Text("\(String(format: "%.2f", differencePercent))%")
-                } icon: {
-                    symbol
+                if let chartData = entry.chartData {
+                    WidgetChartView(data: chartData)
                 }
-                .fontWeight(.semibold)
-                .foregroundColor(percentColor)
-
-                
-                Spacer()
-                Spacer()
             }
-            .padding()
-            
-            Spacer()
+        default:
+            Text(entry.date.formatted(.dateTime))
         }
     }
 }
@@ -113,14 +92,14 @@ struct WalutWidget: Widget {
         }
         .configurationDisplayName("Currency Tracker")
         .description("A widget to track currency of your choice.")
-        .supportedFamilies([.systemSmall])
+        .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
 
 struct WalutWidget_Previews: PreviewProvider {
     static var previews: some View {
-        WalutWidgetEntryView(entry: CurrencyEntry(date: Date(), rates: RatesData.placeholderArraySmall))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        WalutWidgetEntryView(entry: CurrencyEntry(date: Date(), rates: MockData.rates, chartData: MockData.chartData))
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }
 
