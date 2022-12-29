@@ -10,8 +10,10 @@ import SwiftUI
 struct PercentView: View {
     
     let rates: [RatesData]
+    let baseCode: String
     
     var entryCurrency: Currency { Currency(baseCode: rates[0].currencyString) }
+    var baseCurrency: Currency { Currency(baseCode: baseCode) }
     var differencePercent: Double {
         let yesterday = rates[0].value
         let today = rates[1].value
@@ -46,7 +48,7 @@ struct PercentView: View {
                     .font(.title3)
                     .fontWeight(.bold)
                 
-                Text("\(String(format: "%.3f", rates.last?.value ?? 1.2)) \(Currency(baseCode: "PLN").symbol)")
+                Text("\(String(format: "%.3f", rates.last?.value ?? 1.2)) \(baseCurrency.symbol)")
                     .font(.largeTitle)
                     .fontWeight(.heavy)
                     .minimumScaleFactor(0.6)

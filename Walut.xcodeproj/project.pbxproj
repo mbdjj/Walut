@@ -98,6 +98,8 @@
 		344A71ED292C29C10065F689 /* CalculationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344A71EC292C29C10065F689 /* CalculationViewModel.swift */; };
 		347514982919A55A0092864A /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 347514972919A55A0092864A /* Configuration.storekit */; };
 		3481E081295DBFEB00322363 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34ED0C2A28F1C6FF006C4F38 /* Localizable.strings */; };
+		3481E08C295DE09100322363 /* WalutWidgetIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3481E08B295DE09100322363 /* WalutWidgetIntents.intentdefinition */; };
+		3481E08D295DE09100322363 /* WalutWidgetIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3481E08B295DE09100322363 /* WalutWidgetIntents.intentdefinition */; };
 		348346E9292612A3003710CA /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 348346E8292612A3003710CA /* WidgetKit.framework */; };
 		348346EB292612A3003710CA /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 348346EA292612A3003710CA /* SwiftUI.framework */; };
 		348346EE292612A3003710CA /* WalutWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348346ED292612A3003710CA /* WalutWidgetBundle.swift */; };
@@ -253,6 +255,7 @@
 		344A71EA292C13200065F689 /* CurrencyListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListViewModel.swift; sourceTree = "<group>"; };
 		344A71EC292C29C10065F689 /* CalculationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationViewModel.swift; sourceTree = "<group>"; };
 		347514972919A55A0092864A /* Configuration.storekit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
+		3481E08B295DE09100322363 /* WalutWidgetIntents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = WalutWidgetIntents.intentdefinition; sourceTree = "<group>"; };
 		348346E7292612A3003710CA /* WalutWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WalutWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		348346E8292612A3003710CA /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		348346EA292612A3003710CA /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -425,6 +428,7 @@
 				341DFC0B295DB42100BDCBDB /* MockData.swift */,
 				348346F1292612A4003710CA /* Assets.xcassets */,
 				348346F3292612A4003710CA /* Info.plist */,
+				3481E08B295DE09100322363 /* WalutWidgetIntents.intentdefinition */,
 			);
 			path = WalutWidget;
 			sourceTree = "<group>";
@@ -717,6 +721,7 @@
 				348346EE292612A3003710CA /* WalutWidgetBundle.swift in Sources */,
 				341DFC0C295DB42100BDCBDB /* MockData.swift in Sources */,
 				348346F0292612A3003710CA /* WalutWidget.swift in Sources */,
+				3481E08D295DE09100322363 /* WalutWidgetIntents.intentdefinition in Sources */,
 				34E0A203292CFD3C00EF3CBC /* CurrencyData.swift in Sources */,
 				348346FE2926135E003710CA /* TimeSeriesData.swift in Sources */,
 				348346FD2926135B003710CA /* RatesData.swift in Sources */,
@@ -742,6 +747,7 @@
 				349E3F7A28FEB108004831E2 /* ProfileViewModel.swift in Sources */,
 				3498CC9428F4502200961C61 /* RatesData.swift in Sources */,
 				344A71ED292C29C10065F689 /* CalculationViewModel.swift in Sources */,
+				3481E08C295DE09100322363 /* WalutWidgetIntents.intentdefinition in Sources */,
 				34A2347428F061D700C81292 /* Currency.swift in Sources */,
 				3498532A28F570A2003E0FC9 /* SettingsViewModel.swift in Sources */,
 				3447F7E728F0BB3F00B59B25 /* AppIconManager.swift in Sources */,

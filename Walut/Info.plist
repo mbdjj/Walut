@@ -194,5 +194,9 @@
 			<false/>
 		</dict>
 	</dict>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>ChangeCurrenciesIntent</string>
+	</array>
 </dict>
 </plist>
