@@ -90,8 +90,8 @@ struct WalutWidget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             WalutWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("Currency Tracker")
-        .description("A widget to track currency of your choice.")
+        .configurationDisplayName(String(localized: "widget_title"))
+        .description(String(localized: "widget_description"))
         .supportedFamilies([.systemSmall, .systemMedium])
     }
 }

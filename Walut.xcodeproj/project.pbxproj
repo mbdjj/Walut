@@ -97,6 +97,7 @@
 		344A71EB292C13200065F689 /* CurrencyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344A71EA292C13200065F689 /* CurrencyListViewModel.swift */; };
 		344A71ED292C29C10065F689 /* CalculationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344A71EC292C29C10065F689 /* CalculationViewModel.swift */; };
 		347514982919A55A0092864A /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 347514972919A55A0092864A /* Configuration.storekit */; };
+		3481E081295DBFEB00322363 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34ED0C2A28F1C6FF006C4F38 /* Localizable.strings */; };
 		348346E9292612A3003710CA /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 348346E8292612A3003710CA /* WidgetKit.framework */; };
 		348346EB292612A3003710CA /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 348346EA292612A3003710CA /* SwiftUI.framework */; };
 		348346EE292612A3003710CA /* WalutWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348346ED292612A3003710CA /* WalutWidgetBundle.swift */; };
@@ -613,6 +614,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				348346F2292612A4003710CA /* Assets.xcassets in Resources */,
+				3481E081295DBFEB00322363 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

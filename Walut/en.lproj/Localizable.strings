@@ -118,3 +118,6 @@
 "share_text" = "Text";
 "share_chart" = "Chart";
 "share_value" = "Value";
+
+"widget_title" = "Currency Tracker";
+"widget_description" = "A widget to track currency of your choice. Enjoy updated rates and yesterday's rate difference percetage.";
