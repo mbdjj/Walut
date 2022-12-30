@@ -62,14 +62,14 @@ struct CurrencyListView: View {
                 } else {
                     if shared.sortByFavorite {
                         Section {
-                            ForEach(shared.favorites, id: \.self) { _ in
+                            ForEach(0 ..< model.numbersForPlaceholders().0, id: \.self) { _ in
                                 LoadingCell()
                             }
                         }
                     }
                     
                     Section {
-                        ForEach(shared.allCodesArray, id: \.self) { _ in
+                        ForEach(shared.sortByFavorite ? 0 ..< model.numbersForPlaceholders().1 : 0 ..< shared.allCodesArray.count - 1, id: \.self) { _ in
                             LoadingCell()
                         }
                     }

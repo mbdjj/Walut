@@ -38,6 +38,19 @@ class CurrencyListViewModel: ObservableObject {
     }
     
     
+    func numbersForPlaceholders() -> (Int, Int) {
+        var favorites = shared.favorites
+        var baseCode = shared.base.code
+        
+        if let index = favorites.firstIndex(of: baseCode) {
+            favorites.remove(at: index)
+            
+            return (favorites.count, shared.allCodesArray.count - favorites.count)
+        } else {
+            return (favorites.count, shared.allCodesArray.count - favorites.count - 1)
+        }
+    }
+    
     func refreshData() async {
         do {
             let data = try await networkManager.getCurrencyData(for: shared.base)
