@@ -28,6 +28,10 @@ class CurrencyListViewModel: ObservableObject {
     let sorting = SortingManager()
     
     init() {
+        DispatchQueue.main.async {
+            self.loading = true
+        }
+        
         Task {
             await refreshData()
         }
@@ -35,12 +39,6 @@ class CurrencyListViewModel: ObservableObject {
     
     
     func refreshData() async {
-        DispatchQueue.main.async {
-            withAnimation {
-                self.loading = true
-            }
-        }
-        
         do {
             let data = try await networkManager.getCurrencyData(for: shared.base)
             present(data: data)
