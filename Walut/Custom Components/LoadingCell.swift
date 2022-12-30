@@ -8,19 +8,25 @@
 import SwiftUI
 
 struct LoadingCell: View {
+    
+    var randomName: String {
+        let randomCode = SharedDataManager.shared.allCodesArray.randomElement()
+        return Currency(baseCode: randomCode!).fullName
+    }
+    
     var body: some View {
         HStack {
             
-            Text("🇵🇱")
+            Text("AA")
                 .font(.system(size: 50))
             
             VStack(alignment: .leading) {
                 
-                Text("Polish Złoty")
+                Text(randomName)
                     .font(.system(size: 19))
                     .fontWeight(.medium)
                 
-                Text("PLN")
+                Text("ABCD")
                     .font(.system(size: 17))
                 
                 Spacer()
@@ -29,16 +35,20 @@ struct LoadingCell: View {
             
             Spacer()
             
-            VStack(alignment: .trailing) {
-                Text("\(String(format: "%.\(SharedDataManager.shared.decimal)f", 1.001)) zł")
-                    .font(.system(size: 17))
-                
-                if SharedDataManager.shared.showPercent {
-                    Text("\(String(format: "%.2f", 0.01))%")
-                        .font(.caption2)
-                    .fontWeight(.semibold)
-                    .foregroundColor(Bool.random() ? .green : .red)
+            HStack {
+                VStack(alignment: .trailing) {
+                    Text("1.001 zł")
+                        .font(.system(size: 17))
+                    
+                    if SharedDataManager.shared.showPercent {
+                        Text("0.01%")
+                            .font(.caption2)
+                        .fontWeight(.semibold)
+                        .foregroundColor(Bool.random() ? .green : .red)
+                    }
                 }
+                
+                Text("a")
             }
             
         }
@@ -48,7 +58,15 @@ struct LoadingCell: View {
 
 struct LoadingCell_Previews: PreviewProvider {
     static var previews: some View {
-        LoadingCell()
-            .previewLayout(.fixed(width: 450, height: 90))
+        NavigationStack {
+            List {
+                NavigationLink {
+                    Text("dupa")
+                } label: {
+                    CurrencyCell(for: Currency(baseCode: "PLN"), mode: .normal, value: 1)
+                }
+                LoadingCell()
+            }
+        }
     }
 }

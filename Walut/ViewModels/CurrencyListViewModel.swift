@@ -40,7 +40,7 @@ class CurrencyListViewModel: ObservableObject {
     
     func numbersForPlaceholders() -> (Int, Int) {
         var favorites = shared.favorites
-        var baseCode = shared.base.code
+        let baseCode = shared.base.code
         
         if let index = favorites.firstIndex(of: baseCode) {
             favorites.remove(at: index)
