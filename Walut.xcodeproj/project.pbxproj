@@ -96,6 +96,7 @@
 		3447F88628F0C4E400B59B25 /* SEK@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3447F83B28F0C4E400B59B25 /* SEK@3x.png */; };
 		344A71EB292C13200065F689 /* CurrencyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344A71EA292C13200065F689 /* CurrencyListViewModel.swift */; };
 		344A71ED292C29C10065F689 /* CalculationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344A71EC292C29C10065F689 /* CalculationViewModel.swift */; };
+		344E9987295ED7A200921DBC /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344E9986295ED7A200921DBC /* LoadingCell.swift */; };
 		347514982919A55A0092864A /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 347514972919A55A0092864A /* Configuration.storekit */; };
 		3481E081295DBFEB00322363 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34ED0C2A28F1C6FF006C4F38 /* Localizable.strings */; };
 		3481E08C295DE09100322363 /* WalutWidgetIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3481E08B295DE09100322363 /* WalutWidgetIntents.intentdefinition */; };
@@ -254,6 +255,7 @@
 		3447F83B28F0C4E400B59B25 /* SEK@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SEK@3x.png"; sourceTree = "<group>"; };
 		344A71EA292C13200065F689 /* CurrencyListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListViewModel.swift; sourceTree = "<group>"; };
 		344A71EC292C29C10065F689 /* CalculationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationViewModel.swift; sourceTree = "<group>"; };
+		344E9986295ED7A200921DBC /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		347514972919A55A0092864A /* Configuration.storekit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
 		3481E08B295DE09100322363 /* WalutWidgetIntents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = WalutWidgetIntents.intentdefinition; sourceTree = "<group>"; };
 		348346E7292612A3003710CA /* WalutWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WalutWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -531,6 +533,7 @@
 			children = (
 				342A047E290A5BAF00C10652 /* OnboardingPage.swift */,
 				342D433928F7E37F001C69AD /* CurrencyCell.swift */,
+				344E9986295ED7A200921DBC /* LoadingCell.swift */,
 				3483639D290D28D5000DA0DB /* ChartToShare.swift */,
 			);
 			path = "Custom Components";
@@ -737,6 +740,7 @@
 				3498CC9828F4533000961C61 /* CalculationChartView.swift in Sources */,
 				34D5AFEB2951B6550043B72A /* SortViewModel.swift in Sources */,
 				34ED0C2128F17592006C4F38 /* SharedDataManager.swift in Sources */,
+				344E9987295ED7A200921DBC /* LoadingCell.swift in Sources */,
 				34890F5C2914E6460059B5C3 /* ThanksView.swift in Sources */,
 				342D433A28F7E37F001C69AD /* CurrencyCell.swift in Sources */,
 				34ED0C1F28F1751C006C4F38 /* CurrencyData.swift in Sources */,

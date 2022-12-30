@@ -5,12 +5,14 @@
 //  Created by Marcin Bartminski on 21/11/2022.
 //
 
-import Foundation
+import SwiftUI
 
 class CurrencyListViewModel: ObservableObject {
     
     @Published var favoritesArray = [Currency]()
     @Published var currencyArray = [Currency]()
+    
+    @Published var loading: Bool = false
     
     @Published var errorMessage = ""
     @Published var shouldDisplayErrorAlert = false
@@ -33,6 +35,12 @@ class CurrencyListViewModel: ObservableObject {
     
     
     func refreshData() async {
+        DispatchQueue.main.async {
+            withAnimation {
+                self.loading = true
+            }
+        }
+        
         do {
             let data = try await networkManager.getCurrencyData(for: shared.base)
             present(data: data)
@@ -71,6 +79,12 @@ class CurrencyListViewModel: ObservableObject {
             
             DispatchQueue.main.async {
                 self.currencyArray = currencyArray
+            }
+        }
+        
+        DispatchQueue.main.async {
+            withAnimation {
+                self.loading = false
             }
         }
     }
