@@ -18,6 +18,9 @@ class CalculationViewModel: ObservableObject {
     
     let decimal: Int
     
+    var isCustom: Bool { SharedDataManager.shared.isCustomDate }
+    var customDate: Date { SharedDataManager.shared.customDate }
+    
     @Published var foreignAmount: Double = 0.0
     @Published var baseAmount: Double = 0.0
     @Published var shouldDisableChartButton = true
@@ -38,8 +41,13 @@ class CalculationViewModel: ObservableObject {
     
     func refreshData() async {
         do {
-            let data = try await networkManager.getChartData(for: foreign, base: base)
-            loadData(with: data)
+            if isCustom {
+                let data = try await networkManager.getChartData(for: foreign, base: base, date: customDate)
+                loadData(with: data)
+            } else {
+                let data = try await networkManager.getChartData(for: foreign, base: base)
+                loadData(with: data)
+            }
         } catch {
             
         }
