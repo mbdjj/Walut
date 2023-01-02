@@ -23,6 +23,8 @@ class CurrencyListViewModel: ObservableObject {
     var sortIndex: Int { shared.sortIndex }
     var sortDirection: SortDirection { shared.sortIndex % 2 == 0 ? .ascending : .descending }
     var byFavorite: Bool { shared.sortByFavorite }
+    var isCustomDate: Bool { shared.isCustomDate }
+    var customDate: Date { shared.customDate }
     
     let shared = SharedDataManager.shared
     let networkManager = NetworkManager.shared
@@ -54,8 +56,13 @@ class CurrencyListViewModel: ObservableObject {
     
     func refreshData() async {
         do {
-            let data = try await networkManager.getCurrencyData(for: shared.base)
-            present(data: data)
+            if isCustomDate {
+                let data = try await networkManager.getCurrencyData(for: shared.base, date: customDate)
+                present(data: data)
+            } else {
+                let data = try await networkManager.getCurrencyData(for: shared.base)
+                present(data: data)
+            }
         } catch {
             DispatchQueue.main.async {
                 self.errorMessage = error.localizedDescription

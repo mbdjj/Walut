@@ -77,16 +77,36 @@ struct CurrencyListView: View {
             }
             .navigationTitle("\(shared.base.flag) \(shared.base.code)")
             .toolbar {
-                Button {
-                    model.shouldShowDatePickView = true
-                } label: {
-                    Image(systemName: "calendar")
+                if shared.isCustomDate {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Text(shared.customDateString())
+                            .foregroundColor(.gray)
+                            .fontWeight(.medium)
+                    }
                 }
                 
-                Button {
-                    model.shouldShowSortView = true
-                } label: {
-                    Image(systemName: "arrow.up.arrow.down")
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Button {
+                        model.shouldShowDatePickView = true
+                    } label: {
+                        if shared.isCustomDate {
+                            Image(systemName: "calendar")
+                                .foregroundColor(Color(uiColor: .systemBackground))
+                                .frame(width: 35, height: 35)
+                                .background {
+                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                        .foregroundColor(.walut)
+                                }
+                        } else {
+                            Image(systemName: "calendar")
+                        }
+                    }
+                    
+                    Button {
+                        model.shouldShowSortView = true
+                    } label: {
+                        Image(systemName: "arrow.up.arrow.down")
+                    }
                 }
             }
             .refreshable {
@@ -116,7 +136,7 @@ struct CurrencyListView: View {
             }
             .sheet(isPresented: $model.shouldShowDatePickView) {
                 DatePickView()
-                    .presentationDetents([.medium, .large])
+                    //.presentationDetents([.medium, .large])
             }
         }
     }

@@ -59,6 +59,11 @@
 "sort_by_favorite" = "Po ulubionych";
 "sort_nav_title" = "Sortuj waluty";
 
+"date_historical_rates" = "Historyczne kursy";
+"date_mode" = "Tryb daty kursów";
+"date_current" = "Obecna";
+"date_custom" = "Wybrana";
+
 "favorite_currencies" = "Ulubione waluty";
 "favorites" = "Ulubione";
 "menu_favorite" = "Dodaj do ulubionych";

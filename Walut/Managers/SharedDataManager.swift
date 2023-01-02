@@ -67,4 +67,8 @@ class SharedDataManager: ObservableObject {
         return formatter.date(from: text) ?? .now
     }
     
+    func customDateString() -> String {
+        return formatter.string(from: customDate)
+    }
+    
 }

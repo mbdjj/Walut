@@ -14,8 +14,16 @@ struct NetworkManager {
     private let allCodesArray = ["AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HRK", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK", "SGD", "THB", "TRY", "USD", "ZAR"]
     
     let defaults = UserDefaults.standard
+    let formatter = DateFormatter()
+    
+    init() {
+        // DateFormatter configuration
+        formatter.calendar = Calendar.current
+        formatter.dateFormat = "yyyy-MM-dd"
+    }
     
     
+    // MARK: - Methods for fetching currency data
     func getCurrencyData(for base: Currency) async throws -> [Currency] {
         guard let url = URL(string: "https://api.exchangerate.host/latest?base=\(base.code)") else {
             throw NetworkError.invalidURL
@@ -57,6 +65,50 @@ struct NetworkManager {
         }
     }
     
+    func getCurrencyData(for base: Currency, date: Date) async throws -> [Currency] {
+        let dateStrings = stringsForURLs(from: date)
+        
+        guard let url = URL(string: "https://api.exchangerate.host/\(dateStrings.0)?base=\(base.code)") else {
+            throw NetworkError.invalidURL
+        }
+        guard let yesterdayUrl = URL(string: "https://api.exchangerate.host/\(dateStrings.1)?base=\(base.code)") else {
+            throw NetworkError.invalidURL
+        }
+        
+        let req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData)
+        let (data, response) = try await URLSession.shared.data(for: req)
+        
+        let yesterdayReq = URLRequest(url: yesterdayUrl, cachePolicy: .reloadIgnoringLocalCacheData)
+        let (yesterdayData, yesterdayResponse) = try await URLSession.shared.data(for: yesterdayReq)
+        
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            throw NetworkError.invalidResponse
+        }
+        guard let yesterdayResponse = yesterdayResponse as? HTTPURLResponse, yesterdayResponse.statusCode == 200 else {
+            throw NetworkError.invalidResponse
+        }
+        
+        do {
+            let results = try decoder.decode(CurrencyData.self, from: data)
+            let yesterdayResults = try decoder.decode(CurrencyData.self, from: yesterdayData)
+            
+            var currencyArray = [Currency]()
+            
+            for code in self.allCodesArray {
+                let currency = Currency(code: code, rate: results.rates.getRate(of: code), yesterday: yesterdayResults.rates.getRate(of: code))
+                currencyArray.append(currency)
+            }
+            
+            print("Fetched currency data for \(base.code) on \(dateString(from: date))")
+            self.saveDate()
+            
+            return currencyArray
+        } catch {
+            throw NetworkError.decodingError
+        }
+    }
+    
+    // MARK: - Methods for fetching chart data
     func getChartData(for currency: Currency, base: Currency) async throws -> [RatesData] {
         
         let formatter = DateFormatter()
@@ -145,6 +197,7 @@ struct NetworkManager {
         
     }
     
+    // MARK: - Methods for fetching data for small widget
     func getSmallWidgetData(for currencyCode: String, baseCode: String) async throws -> [RatesData] {
         
         let formatter = DateFormatter()
@@ -187,15 +240,19 @@ struct NetworkManager {
         
     }
     
+    // MARK: - Methods for making string from date
+    func dateString(from date: Date) -> String {
+        return formatter.string(from: date)
+    }
+    
     func yesterdayString() -> String {
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar.current
-        formatter.dateFormat = "yyyy-MM-dd"
-        
         let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: .now)
-        let yesterdayString = formatter.string(from: yesterday!)
-        
-        return yesterdayString
+        return dateString(from: yesterday!)
+    }
+    
+    func stringsForURLs(from date: Date) -> (String, String) {
+        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: date)
+        return (dateString(from: date), dateString(from: yesterday!))
     }
     
     // MARK: - NetworkErrors

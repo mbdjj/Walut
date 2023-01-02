@@ -20,26 +20,24 @@ struct DatePickView: View {
             List {
                 Section {
                     Picker("Choose date", selection: $model.pickerValue) {
-                        Text("Current")
+                        Text("date_current")
                             .tag(0)
-                        Text("Custom")
+                        Text("date_custom")
                             .tag(1)
                     }
                     .pickerStyle(.segmented)
-                } header: {
-                    Text("Date mode")
-                }
-                
-                if shouldShowDatePicker {
-                    Section {
-                        DatePicker(selection: $model.customDate, displayedComponents: .date) {
+                    
+                    if shouldShowDatePicker {
+                        DatePicker(selection: $model.customDate, in: model.range, displayedComponents: .date) {
                             Text("")
                         }
                         .datePickerStyle(.graphical)
                     }
+                } header: {
+                    Text("date_mode")
                 }
             }
-            .navigationTitle("Date")
+            .navigationTitle("date_historical_rates")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

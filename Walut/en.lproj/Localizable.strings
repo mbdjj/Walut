@@ -59,6 +59,11 @@
 "sort_by_favorite" = "By favorite";
 "sort_nav_title" = "Sort currencies";
 
+"date_historical_rates" = "Historical rates";
+"date_mode" = "Rates date mode";
+"date_current" = "Current";
+"date_custom" = "Custom";
+
 "favorite_currencies" = "Favorite currencies";
 "favorites" = "Favorites";
 "menu_favorite" = "Favorite";

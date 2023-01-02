@@ -19,6 +19,8 @@ class DatePickViewModel: ObservableObject {
         return pickerValue != initialPickerValue || customDate != initialCustomDate
     }
     
+    var range: ClosedRange<Date> { formatter.date(from: "2005-07-02")! ... .now }
+    
     var formatter = DateFormatter()
     
     let shared = SharedDataManager.shared
