@@ -18,6 +18,8 @@
 		342A047F290A5BAF00C10652 /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342A047E290A5BAF00C10652 /* OnboardingPage.swift */; };
 		342D433A28F7E37F001C69AD /* CurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342D433928F7E37F001C69AD /* CurrencyCell.swift */; };
 		3441ABD828F1709F009528FD /* CurrencyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3441ABD728F1709F009528FD /* CurrencyListView.swift */; };
+		3443E4CA2962D58500749277 /* DatePickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3443E4C92962D58400749277 /* DatePickView.swift */; };
+		3443E4CC2962D6C900749277 /* DatePickViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3443E4CB2962D6C900749277 /* DatePickViewModel.swift */; };
 		3447F7E728F0BB3F00B59B25 /* AppIconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3447F7E628F0BB3F00B59B25 /* AppIconManager.swift */; };
 		3447F83C28F0C4E400B59B25 /* ZAR@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3447F7F128F0C4E300B59B25 /* ZAR@3x.png */; };
 		3447F83D28F0C4E400B59B25 /* EUR@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3447F7F228F0C4E300B59B25 /* EUR@3x.png */; };
@@ -176,6 +178,8 @@
 		342A047E290A5BAF00C10652 /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
 		342D433928F7E37F001C69AD /* CurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCell.swift; sourceTree = "<group>"; };
 		3441ABD728F1709F009528FD /* CurrencyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListView.swift; sourceTree = "<group>"; };
+		3443E4C92962D58400749277 /* DatePickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickView.swift; sourceTree = "<group>"; };
+		3443E4CB2962D6C900749277 /* DatePickViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickViewModel.swift; sourceTree = "<group>"; };
 		3447F7E628F0BB3F00B59B25 /* AppIconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIconManager.swift; sourceTree = "<group>"; };
 		3447F7EB28F0BE4800B59B25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		3447F7F128F0C4E300B59B25 /* ZAR@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZAR@3x.png"; sourceTree = "<group>"; };
@@ -490,6 +494,7 @@
 				34A2346D28F05BAE00C81292 /* BasePickerView.swift */,
 				3441ABD728F1709F009528FD /* CurrencyListView.swift */,
 				34D5AFE82951B25C0043B72A /* SortView.swift */,
+				3443E4C92962D58400749277 /* DatePickView.swift */,
 				3497430028F1E58A00373E0F /* CalculationView.swift */,
 				3498CC9728F4533000961C61 /* CalculationChartView.swift */,
 				3498532728F57029003E0FC9 /* SettingsView.swift */,
@@ -508,6 +513,7 @@
 				34A2346F28F05C3B00C81292 /* BasePickerViewModel.swift */,
 				344A71EA292C13200065F689 /* CurrencyListViewModel.swift */,
 				34D5AFEA2951B6550043B72A /* SortViewModel.swift */,
+				3443E4CB2962D6C900749277 /* DatePickViewModel.swift */,
 				344A71EC292C29C10065F689 /* CalculationViewModel.swift */,
 				3498532928F570A2003E0FC9 /* SettingsViewModel.swift */,
 				341CF627291431930012FA5B /* SupportDevViewModel.swift */,
@@ -749,12 +755,14 @@
 				3441ABD828F1709F009528FD /* CurrencyListView.swift in Sources */,
 				342A047B290A5A7B00C10652 /* OnboardingView.swift in Sources */,
 				349E3F7A28FEB108004831E2 /* ProfileViewModel.swift in Sources */,
+				3443E4CA2962D58500749277 /* DatePickView.swift in Sources */,
 				3498CC9428F4502200961C61 /* RatesData.swift in Sources */,
 				344A71ED292C29C10065F689 /* CalculationViewModel.swift in Sources */,
 				3481E08C295DE09100322363 /* WalutWidgetIntents.intentdefinition in Sources */,
 				34A2347428F061D700C81292 /* Currency.swift in Sources */,
 				3498532A28F570A2003E0FC9 /* SettingsViewModel.swift in Sources */,
 				3447F7E728F0BB3F00B59B25 /* AppIconManager.swift in Sources */,
+				3443E4CC2962D6C900749277 /* DatePickViewModel.swift in Sources */,
 				348CE6EF2951E32400E89078 /* SortingManager.swift in Sources */,
 				342A047F290A5BAF00C10652 /* OnboardingPage.swift in Sources */,
 				349E3F7828FEAFDE004831E2 /* ProfileView.swift in Sources */,

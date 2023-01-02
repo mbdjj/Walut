@@ -59,7 +59,7 @@ struct CurrencyListView: View {
 
                         }
                     }
-                } else {
+                } else {  // placeholder cells while loading
                     if shared.sortByFavorite {
                         Section {
                             ForEach(0 ..< model.numbersForPlaceholders().0, id: \.self) { _ in
@@ -77,6 +77,12 @@ struct CurrencyListView: View {
             }
             .navigationTitle("\(shared.base.flag) \(shared.base.code)")
             .toolbar {
+                Button {
+                    model.shouldShowDatePickView = true
+                } label: {
+                    Image(systemName: "calendar")
+                }
+                
                 Button {
                     model.shouldShowSortView = true
                 } label: {
@@ -107,6 +113,10 @@ struct CurrencyListView: View {
             .sheet(isPresented: $model.shouldShowSortView) {
                 SortView(isSheet: true)
                     .interactiveDismissDisabled()
+            }
+            .sheet(isPresented: $model.shouldShowDatePickView) {
+                DatePickView()
+                    .presentationDetents([.medium, .large])
             }
         }
     }

@@ -25,6 +25,9 @@ class SharedDataManager: ObservableObject {
     @Published var sortIndex: Int
     @Published var sortByFavorite: Bool
     
+    @Published var isCustomDate: Bool
+    @Published var customDate: Date = .now
+    
     @Published var favorites: [String]
     
     let allCodesArray = ["AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HRK", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK", "SGD", "THB", "TRY", "USD", "ZAR"]
@@ -32,6 +35,7 @@ class SharedDataManager: ObservableObject {
     let secretDictionary = ["marcinBartminski": 1, "earlyAccess": 2]
     
     let defaults = UserDefaults.standard
+    var formatter = DateFormatter()
     
     static let shared = SharedDataManager()
     
@@ -52,6 +56,15 @@ class SharedDataManager: ObservableObject {
         sortByFavorite = defaults.bool(forKey: "byFavorite")
         
         favorites = defaults.stringArray(forKey: "favorites") ?? []
+        
+        formatter.calendar = Calendar.current
+        formatter.dateFormat = "yyyy-MM-dd"
+        isCustomDate = defaults.bool(forKey: "isCustomDate")
+        customDate = customDate(from: defaults.string(forKey: "customDate") ?? "")
+    }
+    
+    func customDate(from text: String) -> Date {
+        return formatter.date(from: text) ?? .now
     }
     
 }

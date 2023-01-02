@@ -18,6 +18,7 @@ class CurrencyListViewModel: ObservableObject {
     @Published var shouldDisplayErrorAlert = false
     
     @Published var shouldShowSortView = false
+    @Published var shouldShowDatePickView = false
     
     var sortIndex: Int { shared.sortIndex }
     var sortDirection: SortDirection { shared.sortIndex % 2 == 0 ? .ascending : .descending }
