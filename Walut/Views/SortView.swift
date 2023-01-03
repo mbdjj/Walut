@@ -21,21 +21,21 @@ struct SortView: View {
                     Button {
                         model.selectedSort = .byCode
                     } label: {
-                        Text(String(localized: "sort_by_code"))
+                        Text("sort_by_code")
                             .fontWeight(model.selectedSort == .byCode ? .bold : .regular)
                     }
                     
                     Button {
                         model.selectedSort = .byPrice
                     } label: {
-                        Text(String(localized: "sort_by_price"))
+                        Text("sort_by_price")
                             .fontWeight(model.selectedSort == .byPrice ? .bold : .regular)
                     }
                     
                     Button {
                         model.selectedSort = .byChange
                     } label: {
-                        Text(String(localized: "sort_by_change"))
+                        Text("sort_by_change")
                             .fontWeight(model.selectedSort == .byChange ? .bold : .regular)
                     }
                 }
@@ -44,32 +44,32 @@ struct SortView: View {
                     Button {
                         model.selectedDirection = .ascending
                     } label: {
-                        Text(String(localized: "sort_ascending"))
+                        Text("sort_ascending")
                             .fontWeight(model.selectedDirection == .ascending ? .bold : .regular)
                     }
                     
                     Button {
                         model.selectedDirection = .descending
                     } label: {
-                        Text(String(localized: "sort_descending"))
+                        Text("sort_descending")
                             .fontWeight(model.selectedDirection == .descending ? .bold : .regular)
                     }
                 }
                 
                 Section {
                     Toggle(isOn: $model.sortByFavorite) {
-                        Text(String(localized: "sort_by_favorite"))
+                        Text("sort_by_favorite")
                     }
                 }
             }
-            .navigationTitle(String(localized: "sort"))
+            .navigationTitle("sort")
             .toolbar {
                 if isSheet {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button {
                             dismiss.callAsFunction()
                         } label: {
-                            Text(String(localized: "cancel"))
+                            Text("cancel")
                         }
                     }
                 }
@@ -79,12 +79,13 @@ struct SortView: View {
                         model.saveSortAsIndex()
                         model.saveByFavorite()
                     } label: {
-                        Text(String(localized: "save"))
+                        Text("save")
                             .bold()
                     }
                 }
             }
         }
+        .interactiveDismissDisabled(model.changed)
     }
 }
 

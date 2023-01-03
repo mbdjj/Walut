@@ -9,19 +9,27 @@ import Foundation
 
 class SortViewModel: ObservableObject {
     
-    @Published var selectedSort: SortType
-    @Published var selectedDirection: SortDirection
-    @Published var sortByFavorite: Bool
+    @Published var selectedSort: SortType = .byCode
+    @Published var selectedDirection: SortDirection = .ascending
+    @Published var sortByFavorite: Bool = true
+    
+    var initialSelectedSort: SortType = .byCode
+    var initialSelectedDirection: SortDirection = .ascending
+    var initialSortByFavorite: Bool = true
+    
+    var changed: Bool {
+        selectedSort != initialSelectedSort || selectedDirection != initialSelectedDirection || sortByFavorite != initialSortByFavorite
+    }
     
     var shared = SharedDataManager.shared
     let defaults = UserDefaults.standard
     
     init() {
-        self.selectedSort = .byCode
-        self.selectedDirection = .ascending
-        self.sortByFavorite = true
-        
         decodeSort()
+        
+        initialSelectedSort = selectedSort
+        initialSelectedDirection = selectedDirection
+        initialSortByFavorite = sortByFavorite
     }
     
     func decodeSort() {
@@ -84,14 +92,6 @@ class SortViewModel: ObservableObject {
     func saveByFavorite() {
         shared.sortByFavorite = sortByFavorite
         defaults.set(sortByFavorite, forKey: "byFavorite")
-    }
-    
-    func toggleDirection() {
-        if selectedDirection == .ascending {
-            selectedDirection = .descending
-        } else {
-            selectedDirection = .ascending
-        }
     }
     
 }

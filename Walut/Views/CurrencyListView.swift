@@ -132,11 +132,9 @@ struct CurrencyListView: View {
             }
             .sheet(isPresented: $model.shouldShowSortView) {
                 SortView(isSheet: true)
-                    .interactiveDismissDisabled()
             }
             .sheet(isPresented: $model.shouldShowDatePickView) {
                 DatePickView()
-                    //.presentationDetents([.medium, .large])
             }
         }
     }
