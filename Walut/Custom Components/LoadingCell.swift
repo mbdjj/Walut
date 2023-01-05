@@ -9,9 +9,19 @@ import SwiftUI
 
 struct LoadingCell: View {
     
+    let showPercent: Bool
+    
     var randomName: String {
         let randomCode = SharedDataManager.shared.allCodesArray.randomElement()
         return Currency(baseCode: randomCode!).fullName
+    }
+    
+    init() {
+        showPercent = SharedDataManager.shared.showPercent
+    }
+    
+    init(showPercent: Bool) {
+        self.showPercent = showPercent
     }
     
     var body: some View {
@@ -40,7 +50,7 @@ struct LoadingCell: View {
                     Text("1.001 zł")
                         .font(.system(size: 17))
                     
-                    if SharedDataManager.shared.showPercent {
+                    if showPercent {
                         Text("0.01%")
                             .font(.caption2)
                         .fontWeight(.semibold)

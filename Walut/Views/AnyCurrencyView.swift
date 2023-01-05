@@ -38,11 +38,7 @@ struct AnyCurrencyView: View {
                         }
 
                     } else {
-                        HStack {
-                            Spacer()
-                            ProgressView()
-                            Spacer()
-                        }
+                        LoadingCell(showPercent: false)
                     }
                 }
             }
