@@ -39,7 +39,7 @@ struct SettingsView: View {
                                     
                                     if model.isSupporter {
                                         Image(systemName: "checkmark.seal.fill")
-                                            .foregroundColor(.gray)
+                                            .foregroundColor(.walut)
                                             .font(.subheadline)
                                     }
                                 }

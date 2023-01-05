@@ -30,15 +30,11 @@ class SettingsViewModel: ObservableObject {
     var letter: String { "\(name.first!)" }
     
     var isSupporter: Bool {
-        for id in shared.titleIDArray {
-            if id == 2 {
-                return true
-            } else if id == 3 {
-                return true
-            }
+        if shared.titleIDArray.contains([3]) || shared.titleIDArray.contains([4]) {
+            return true
+        } else {
+            return false
         }
-        
-        return false
     }
     
     let defaults = UserDefaults.standard
