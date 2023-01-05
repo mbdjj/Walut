@@ -132,7 +132,7 @@ struct CalculationView: View {
                 }
                 
                 Button {
-                    let textToShare = "\(foreign.fullName)\(String(localized: "text_to_share0"))(\(foreign.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(decimal)f", foreign.price)) \(base.symbol)"
+                    let textToShare = "\(foreign.fullName)\(String(localized: "text_to_share0"))(\(foreign.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(decimal)f", foreign.price)) \(base.symbol) (\(base.code))"
                     
                     shareSheet(for: textToShare)
                 } label: {
@@ -153,7 +153,7 @@ struct CalculationView: View {
                 if model.shouldDisableChartButton {
                     Text("You shouldn't be here")
                 } else {
-                    CalculationChartView(currency: foreign, data: model.shareChartData)
+                    CalculationChartView(currency: foreign, base: base, data: model.shareChartData)
                 }
             } label: {
                 Image(systemName: "chart.xyaxis.line")
@@ -166,7 +166,7 @@ struct CalculationView: View {
     //MARK: - Share function
     
     var chartToShare: some View {
-        ChartToShare(currency: foreign, data: model.shareChartData)
+        ChartToShare(currency: foreign, base: base, data: model.shareChartData)
     }
     
     @MainActor private func generateSnapshot() -> UIImage {

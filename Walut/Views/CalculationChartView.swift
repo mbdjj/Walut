@@ -10,6 +10,7 @@ import Charts
 
 struct CalculationChartView: View {
     
+    let base: Currency
     let currency: Currency
     @State var data: [RatesData]
     
@@ -20,8 +21,9 @@ struct CalculationChartView: View {
     
     let shared = SharedDataManager.shared
     
-    init(currency: Currency, data: [RatesData]) {
+    init(currency: Currency, base: Currency, data: [RatesData]) {
         self.currency = currency
+        self.base = base
         self.data = data
         
         if !data.isEmpty {
@@ -51,7 +53,7 @@ struct CalculationChartView: View {
                     .padding(.horizontal)
                     .font(.system(.title2, weight: .semibold))
                 
-                Text("\(String(format: "%.\(shared.decimal)f", currentActive?.value ?? data.last!.value)) \(shared.base.symbol)")
+                Text("\(String(format: "%.\(shared.decimal)f", currentActive?.value ?? data.last!.value)) \(base.symbol)")
                     .padding(.horizontal)
                     .font(.largeTitle)
                     .bold()
@@ -126,7 +128,7 @@ struct CalculationChartView: View {
 struct CalculationChartView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            CalculationChartView(currency: Currency(baseCode: "USD"), data: [
+            CalculationChartView(currency: Currency(baseCode: "USD"), base: Currency(baseCode: "PLN"), data: [
                 RatesData(code: "USD", date: "2022/10/29", value: 2.5),
                 RatesData(code: "USD", date: "2022/10/30", value: 3),
                 RatesData(code: "USD", date: "2022/10/31", value: 2.16),

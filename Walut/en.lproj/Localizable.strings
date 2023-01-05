@@ -126,3 +126,9 @@
 
 "widget_title" = "Currency Tracker";
 "widget_description" = "A widget to track currency of your choice. Enjoy updated rates and yesterday's rate difference percetage.";
+
+"any_currency" = "Any";
+"any_currency_title" = "Any currency";
+"from_currency" = "From currency";
+"to_currency" = "To currency";
+"calculate" = "Calculate";

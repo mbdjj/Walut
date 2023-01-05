@@ -9,10 +9,16 @@ import Foundation
 
 struct Currency: Identifiable, Equatable {
     
-    init(code: String, rate: Double, yesterday: Double) { //We can initiate a Currency object
+    init(code: String, rate: Double, yesterday: Double) {
         self.code = code
         self.rate = rate
         self.yesterdayRate = yesterday
+    }
+    
+    init(code: String, rate: Double) {
+        self.code = code
+        self.rate = rate
+        self.yesterdayRate = 1.0
     }
     
     init(baseCode: String) {

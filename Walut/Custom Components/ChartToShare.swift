@@ -10,6 +10,7 @@ import Charts
 
 struct ChartToShare: View {
     
+    let base: Currency
     let currency: Currency
     let data: [RatesData]
     
@@ -17,8 +18,9 @@ struct ChartToShare: View {
     var minValueYAxis: Double
     var maxValueYAxis: Double
     
-    init(currency: Currency, data: [RatesData]) {
+    init(currency: Currency, base: Currency, data: [RatesData]) {
         self.currency = currency
+        self.base = base
         self.data = data
         
         if !data.isEmpty {
@@ -42,7 +44,7 @@ struct ChartToShare: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("\(currency.flag) \(currency.code) - \(shared.base.flag) \(shared.base.code)")
+            Text("\(currency.flag) \(currency.code) - \(base.flag) \(base.code)")
                 .font(.largeTitle)
                 .bold()
                 .padding()
@@ -87,7 +89,7 @@ extension Color {
 
 struct ChartToShare_Previews: PreviewProvider {
     static var previews: some View {
-        ChartToShare(currency: Currency(baseCode: "USD"), data: [
+        ChartToShare(currency: Currency(baseCode: "USD"), base: Currency(baseCode: "PLN"), data: [
             RatesData(code: "USD", date: "2022/10/29", value: 2.5),
             RatesData(code: "USD", date: "2022/10/30", value: 3),
             RatesData(code: "USD", date: "2022/10/31", value: 2.16),

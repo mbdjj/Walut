@@ -14,6 +14,8 @@ struct CurrencyCell: View {
     
     let decimal: Int
     
+    let shouldShowPercent: Bool
+    
     var percent: Double { (currency.price - currency.yesterdayPrice) / currency.yesterdayPrice * 100 }
     var percentColor: Color {
         if percent == 0 {
@@ -36,6 +38,16 @@ struct CurrencyCell: View {
         self.decimal = shared.decimal
         self.mode = mode
         self.value = value
+        self.shouldShowPercent = shared.showPercent
+    }
+    
+    init(for currency: Currency, base: Currency) {
+        self.currency = currency
+        self.base = base
+        self.decimal = shared.decimal
+        self.mode = .normal
+        self.value = 0
+        self.shouldShowPercent = false
     }
     
     enum CellMode {
@@ -73,7 +85,7 @@ struct CurrencyCell: View {
                         .font(.system(size: 17))
                 }
                 
-                if shared.showPercent {
+                if shouldShowPercent {
                     Text("\(String(format: "%.2f", percent))%")
                         .font(.caption2)
                     .fontWeight(.semibold)

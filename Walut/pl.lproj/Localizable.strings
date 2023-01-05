@@ -126,3 +126,9 @@
 
 "widget_title" = "Tracker Walut";
 "widget_description" = "Widżet pozwalający na śledzenie wybranej waluty. Razem z aktualizowanymi kursami i różnicą procentową od wczorajszego kursu.";
+
+"any_currency" = "Dowolna";
+"any_currency_title" = "Dowolna waluta";
+"from_currency" = "Z waluty";
+"to_currency" = "Na walutę";
+"calculate" = "Oblicz";
