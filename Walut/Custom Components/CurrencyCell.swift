@@ -56,43 +56,58 @@ struct CurrencyCell: View {
     }
     
     var body: some View {
-        HStack {
-            
-            Text(currency.flag)
-                .font(.system(size: 50))
-            
-            VStack(alignment: .leading) {
+        ZStack {
+            HStack {
                 
-                Text(currency.fullName)
-                    .font(.system(size: 19))
-                    .fontWeight(.medium)
+                Text(currency.flag)
+                    .font(.system(size: 50))
                 
-                Text(currency.code)
-                    .font(.system(size: 17))
+                VStack(alignment: .leading) {
+                    
+                    Text(currency.fullName)
+                        .font(.system(size: 19))
+                        .fontWeight(.medium)
+                    
+                    Text(currency.code)
+                        .font(.system(size: 17))
+                    
+                    Spacer()
+                    
+                }
                 
                 Spacer()
                 
-            }
-            
-            Spacer()
-            
-            VStack(alignment: .trailing) {
-                if mode == .normal {
-                    Text("\(String(format: "%.\(decimal)f", currency.price)) \(base.symbol)")
-                        .font(.system(size: 17))
-                } else if mode == .quickConvert {
-                    Text("\(String(format: "%.\(decimal)f", currency.rate * value)) \(currency.symbol)")
-                        .font(.system(size: 17))
+                VStack(alignment: .trailing) {
+                    if mode == .normal {
+                        Text("\(String(format: "%.\(decimal)f", currency.price)) \(base.symbol)")
+                            .font(.system(size: 17))
+                    } else if mode == .quickConvert {
+                        Text("\(String(format: "%.\(decimal)f", currency.rate * value)) \(currency.symbol)")
+                            .font(.system(size: 17))
+                    }
+                    
+                    if shouldShowPercent {
+                        Text("\(String(format: "%.2f", percent))%")
+                            .font(.caption2)
+                        .fontWeight(.semibold)
+                        .foregroundColor(percentColor)
+                    }
                 }
                 
-                if shouldShowPercent {
-                    Text("\(String(format: "%.2f", percent))%")
-                        .font(.caption2)
-                    .fontWeight(.semibold)
-                    .foregroundColor(percentColor)
-                }
             }
             
+            if currency.isFavorite {
+                VStack {
+                    HStack {
+                        Spacer()
+                        Image(systemName: "star.fill")
+                            .foregroundColor(.yellow)
+                            .font(.caption)
+                            //.padding()
+                    }
+                    Spacer()
+                }
+            }
         }
     }
     

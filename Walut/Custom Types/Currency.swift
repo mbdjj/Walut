@@ -36,7 +36,7 @@ struct Currency: Identifiable, Equatable {
     var price: Double { 1 / rate }
     var yesterdayPrice: Double { 1 / yesterdayRate }
     
-    var isFavorite: Bool = false
+    var isFavorite: Bool { SharedDataManager.shared.favorites.contains(self.code) }
     
     var id: String { code }
     

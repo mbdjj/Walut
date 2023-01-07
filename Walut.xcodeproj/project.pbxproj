@@ -99,6 +99,7 @@
 		344A71EB292C13200065F689 /* CurrencyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344A71EA292C13200065F689 /* CurrencyListViewModel.swift */; };
 		344A71ED292C29C10065F689 /* CalculationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344A71EC292C29C10065F689 /* CalculationViewModel.swift */; };
 		344E9987295ED7A200921DBC /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344E9986295ED7A200921DBC /* LoadingCell.swift */; };
+		34671B0A296A03AC0023D88C /* SharedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C2028F17592006C4F38 /* SharedDataManager.swift */; };
 		347514982919A55A0092864A /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 347514972919A55A0092864A /* Configuration.storekit */; };
 		3481A7F42966BB2800370546 /* AnyCurrencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3481A7F32966BB2800370546 /* AnyCurrencyView.swift */; };
 		3481A7F62966BB8C00370546 /* AnyCurrencyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3481A7F52966BB8C00370546 /* AnyCurrencyViewModel.swift */; };
@@ -740,6 +741,7 @@
 				34E0A203292CFD3C00EF3CBC /* CurrencyData.swift in Sources */,
 				348346FE2926135E003710CA /* TimeSeriesData.swift in Sources */,
 				348346FD2926135B003710CA /* RatesData.swift in Sources */,
+				34671B0A296A03AC0023D88C /* SharedDataManager.swift in Sources */,
 				341DFC0E295DB44300BDCBDB /* WidgetChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

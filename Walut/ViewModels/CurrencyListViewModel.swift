@@ -114,7 +114,7 @@ class CurrencyListViewModel: ObservableObject {
         var currencyArray = [Currency]()
         
         for currency in array {
-            if shared.favorites.firstIndex(of: currency.code) != nil {
+            if currency.isFavorite {
                 favoritesArray.append(currency)
             } else {
                 currencyArray.append(currency)
