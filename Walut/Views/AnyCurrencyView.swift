@@ -49,6 +49,13 @@ struct AnyCurrencyView: View {
                 }
             }
             .navigationTitle("any_currency_title")
+            .toolbar {
+                Button {
+                    model.swapSelection()
+                } label: {
+                    Image(systemName: "rectangle.2.swap")
+                }
+            }
             .refreshable {
                 Task {
                     await model.loadData()

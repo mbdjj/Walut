@@ -54,13 +54,17 @@ class AnyCurrencyViewModel: ObservableObject {
         }
     }
     
-    func present(data: Currency) {
+    private func present(data: Currency) {
         DispatchQueue.main.async {
             self.toCurrency = data
             withAnimation {
                 self.dataLoaded = true
             }
         }
+    }
+    
+    func swapSelection() {
+        (selectedFromCurrency, selectedToCurrency) = (selectedToCurrency, selectedFromCurrency)
     }
     
 }
