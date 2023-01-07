@@ -9,13 +9,13 @@ import SwiftUI
 
 class AnyCurrencyViewModel: ObservableObject {
     
-    @Published var selectedFromCurrency: String
-    @Published var selectedToCurrency: String
+    @AppStorage("fromCurrency") var selectedFromCurrency: String = "---"
+    @AppStorage("toCurrency") var selectedToCurrency: String = "---"
     
     @Published var dataLoaded: Bool
     
     @Published var toCurrency: Currency
-    var fromCurrency: Currency { Currency(baseCode: selectedFromCurrency) }
+    var fromCurrency: Currency
     
     @Published var pickerData = [Currency]()
     
@@ -23,9 +23,8 @@ class AnyCurrencyViewModel: ObservableObject {
     
     
     init() {
-        selectedFromCurrency = "AUD"
-        selectedToCurrency = "AUD"
         toCurrency = Currency(baseCode: "AUD")
+        fromCurrency = Currency(baseCode: "AUD")
         
         dataLoaded = false
         
@@ -44,11 +43,14 @@ class AnyCurrencyViewModel: ObservableObject {
                 self.dataLoaded = false
             }
         }
-        do {
-            let currency = try await networkManager.getData(for: Currency(baseCode: selectedToCurrency), base: fromCurrency)
-            present(data: currency)
-        } catch {
-            print(error.localizedDescription)
+        if selectedToCurrency != "---" && selectedFromCurrency != "---" {
+            do {
+                fromCurrency = Currency(baseCode: selectedFromCurrency)
+                let currency = try await networkManager.getData(for: Currency(baseCode: selectedToCurrency), base: fromCurrency)
+                present(data: currency)
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
     

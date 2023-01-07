@@ -16,12 +16,18 @@ struct AnyCurrencyView: View {
             List {
                 Section {
                     Picker("from_currency", selection: $model.selectedFromCurrency) {
+                        if model.selectedFromCurrency == "---" {
+                            Text("---")
+                        }
                         ForEach(model.pickerData) { currency in
                             Text("\(currency.flag) \(currency.code)")
                         }
                     }
                     
                     Picker("to_currency", selection: $model.selectedToCurrency) {
+                        if model.selectedToCurrency == "---" {
+                            Text("---")
+                        }
                         ForEach(model.pickerData) { currency in
                             Text("\(currency.flag) \(currency.code)")
                         }
