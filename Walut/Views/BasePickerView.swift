@@ -57,9 +57,6 @@ struct BasePickerView: View {
         .onAppear {
             shouldNameFieldBeFocused = true
         }
-        .fullScreenCover(isPresented: $model.shouldDisplayFullScreenCover) {
-            ViewManagingView()
-        }
     }
 }
 

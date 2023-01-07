@@ -18,7 +18,6 @@ class BasePickerViewModel: ObservableObject {
     @Published var decimal = 3
     
     @Published var saveButtonDisabled = true
-    @Published var shouldDisplayFullScreenCover = false
     
     let defaults = UserDefaults.standard
     let iconManager = AppIconManager()
@@ -42,12 +41,14 @@ class BasePickerViewModel: ObservableObject {
         defaults.set(true, forKey: "isBaseSelected")
         defaults.set(true, forKey: "showPercent")
         defaults.set(true, forKey: "byFavorite")
+        defaults.set(true, forKey: "reduceData")
         
         shared.name = name
         shared.base = Currency(baseCode: selected)
         shared.decimal = decimal
         shared.showPercent = true
         shared.sortByFavorite = true
+        shared.reduceDataUsage = true
         
         iconManager.changeIcon(to: selected)
         
