@@ -46,6 +46,10 @@ struct CalculationChartView: View {
                 self.maxValueYAxis = item.value
             }
         }
+        
+        let values = splitDouble(data.last!.value)
+        _currentNum = State(initialValue: values.0)
+        _currentDecimal = State(initialValue: values.1)
     }
     
     var body: some View {
@@ -56,7 +60,6 @@ struct CalculationChartView: View {
                     .font(.system(.title2, weight: .semibold))
                 
                 HStack {
-                    //Text("\(String(format: "%.\(shared.decimal)f", currentActive?.value ?? data.last!.value)) \(base.symbol)")
                     HStack(spacing: 0) {
                         RollingCounter(font: .largeTitle, weight: .bold, value: $currentNum)
                         Text(".")
@@ -97,7 +100,7 @@ struct CalculationChartView: View {
                 .chartYScale(domain: minValueYAxis - minValueYAxis * 0.01 ... maxValueYAxis + maxValueYAxis * 0.01)
                 .onAppear {
                     for (index, _) in data.enumerated() {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * 0.03) {
+                        DispatchQueue.main.async {
                             withAnimation(.easeInOut(duration: 0.5)) {
                                 data[index].animate = true
                             }
@@ -130,10 +133,6 @@ struct CalculationChartView: View {
                             )
                     }
                 }
-            }
-            .onAppear {
-                (currentNum, currentDecimal) = splitDouble(data
-                    .last!.value)
             }
             .onChange(of: currentActive) { newValue in
                 (currentNum, currentDecimal) = splitDouble(newValue?.value ?? data

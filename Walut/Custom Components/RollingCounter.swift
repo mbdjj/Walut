@@ -48,20 +48,20 @@ struct RollingCounter: View {
             animationRange = Array(repeating: "0", count: "\(value)".count)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.06) {
-                updateText()
+                updateText(atStart: true)
             }
         }
         .onChange(of: value) { newValue in
             let extra = "\(value)".count - animationRange.count
             if extra > 0 {
                 for _ in 0 ..< extra {
-                    withAnimation(.easeIn(duration: 0.1)) {
+                    withAnimation(.easeInOut(duration: 0.1)) {
                         animationRange.append("0")
                     }
                 }
             } else {
                 for _ in 0 ..< (-extra) {
-                    withAnimation(.easeIn(duration: 0.1)) {
+                    withAnimation(.easeInOut(duration: 0.1)) {
                         animationRange.removeLast()
                     }
                 }
@@ -71,10 +71,10 @@ struct RollingCounter: View {
         }
     }
     
-    func updateText() {
+    func updateText(atStart: Bool = false) {
         let stringValue = "\(value)"
         for (index, value) in zip(0 ..< stringValue.count, stringValue) {
-            withAnimation(.easeInOut) {
+            withAnimation(.easeInOut(duration: atStart ? 0.5 : 0.1)) {
                 animationRange[index] = String(value)
             }
         }
