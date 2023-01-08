@@ -19,6 +19,9 @@ struct CalculationChartView: View {
     
     @State var currentActive: RatesData?
     
+    @State var currentNum: String = "0"
+    @State var currentDecimal: String = "0"
+    
     let shared = SharedDataManager.shared
     
     init(currency: Currency, base: Currency, data: [RatesData]) {
@@ -46,17 +49,33 @@ struct CalculationChartView: View {
     }
     
     var body: some View {
-        VStack {
+        List {
             VStack(alignment: .leading) {
                 
                 Text(currentActive?.dateFormattedString ?? data.last!.dateFormattedString)
-                    .padding(.horizontal)
                     .font(.system(.title2, weight: .semibold))
                 
-                Text("\(String(format: "%.\(shared.decimal)f", currentActive?.value ?? data.last!.value)) \(base.symbol)")
-                    .padding(.horizontal)
-                    .font(.largeTitle)
-                    .bold()
+                HStack {
+                    //Text("\(String(format: "%.\(shared.decimal)f", currentActive?.value ?? data.last!.value)) \(base.symbol)")
+                    HStack(spacing: 0) {
+                        RollingCounter(font: .largeTitle, weight: .bold, value: $currentNum)
+                        Text(".")
+                            .font(.largeTitle)
+                            .bold()
+                        RollingCounter(font: .largeTitle, weight: .bold, value: $currentDecimal)
+                        Text(" \(base.symbol)")
+                            .font(.largeTitle)
+                            .bold()
+                    }
+                    
+                    Spacer()
+                    
+//                    HStack(spacing: 0) {
+//                        RollingCounter(color: .gray, value: $currentPercent)
+//                        Text("%")
+//                            .foregroundColor(.gray)
+//                    }
+                }
                 
                 Chart {
                     ForEach(data) { rate in
@@ -112,15 +131,24 @@ struct CalculationChartView: View {
                     }
                 }
             }
-            .padding()
-            .background {
-                RoundedRectangle(cornerRadius: 20, style: .continuous)
-                    .fill(.background.shadow(.drop(color: .secondary, radius: 2)))
+            .onAppear {
+                (currentNum, currentDecimal) = splitDouble(data
+                    .last!.value)
             }
-            
-            Spacer()
+            .onChange(of: currentActive) { newValue in
+                (currentNum, currentDecimal) = splitDouble(newValue?.value ?? data
+                    .last!.value)
+            }
         }
-        .padding()
+    }
+    
+    func splitDouble(_ value: Double) -> (String, String) {
+        let stringValue = "\(value)"
+        let nums = stringValue.split(separator: ".")
+        let num1 = "\(nums[0])"
+        let num2 = "\(nums[1].prefix(shared.decimal))"
+        
+        return (num1, num2)
     }
     
 }
