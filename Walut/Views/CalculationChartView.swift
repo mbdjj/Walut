@@ -19,15 +19,8 @@ struct CalculationChartView: View {
     
     @State var currentActive: RatesData?
     
-    @State var currentNum: String = "0"
-    @State var currentDecimal: String = "0"
-    
     @State var percent: Double = 0.0
-    
-    @State var percentNum: String = "0"
-    @State var percentDecimal: String = "0"
-    
-    @State var percentArrowUp: Bool = true
+    var percentArrowUp: Bool { percent >= 0 }
     
     let shared = SharedDataManager.shared
     
@@ -53,10 +46,6 @@ struct CalculationChartView: View {
                 self.maxValueYAxis = item.value
             }
         }
-        
-        let values = splitDouble(data.last!.value)
-        _currentNum = State(initialValue: values.0)
-        _currentDecimal = State(initialValue: values.1)
     }
     
     var body: some View {
@@ -67,16 +56,9 @@ struct CalculationChartView: View {
                     .font(.system(.title2, weight: .semibold))
                 
                 HStack {
-                    HStack(spacing: 0) {
-                        RollingCounter(font: .largeTitle, weight: .bold, value: $currentNum)
-                        Text(".")
-                            .font(.largeTitle)
-                            .bold()
-                        RollingCounter(font: .largeTitle, weight: .bold, value: $currentDecimal)
-                        Text(" \(base.symbol)")
-                            .font(.largeTitle)
-                            .bold()
-                    }
+                    Text("\(String(format: "%.\(shared.decimal)f", currentActive?.value ?? data.last!.value)) \(currency.symbol)")
+                        .font(.largeTitle)
+                        .bold()
                     
                     Spacer()
                     
@@ -85,15 +67,11 @@ struct CalculationChartView: View {
                             .font(.caption)
                             .foregroundColor(.gray)
                             .rotationEffect(percentArrowUp ? Angle(degrees: 0) : Angle(degrees: 180))
+                            .animation(.easeInOut(duration: 0.1), value: percentArrowUp)
                         
-                        HStack(spacing: 0) {
-                            RollingCounter(color: .gray, value: $percentNum)
-                            Text(".")
-                                .foregroundColor(.gray)
-                            RollingCounter(color: .gray, value: $percentDecimal)
-                            Text("%")
-                                .foregroundColor(.gray)
-                        }
+                        Text("\(String(format: "%.2f", abs(percent)))%")
+                            .font(.caption)
+                            .foregroundColor(.gray)
                     }
                 }
                 
@@ -123,25 +101,6 @@ struct CalculationChartView: View {
                             }
                         }
                     }
-                    
-                    if currentActive == nil {
-                        let price = data.last!.value
-                        let start = data.first!.value
-                        percent = (price - start) / start * 100
-                        
-                        if percent >= 0 {
-                            withAnimation {
-                                percentArrowUp = true
-                            }
-                        } else {
-                            withAnimation {
-                                percentArrowUp = false
-                            }
-                            percent *= -1
-                        }
-                        
-                        (percentNum, percentDecimal) = splitDouble(percent, isPercent: true)
-                    }
                 }
                 .chartOverlay { proxy in
                     GeometryReader { geometry in
@@ -170,60 +129,27 @@ struct CalculationChartView: View {
                     }
                 }
             }
+            .onAppear {
+                let price = data.last!.value
+                let start = data.first!.value
+                percent = (price - start) / start * 100
+            }
             .onChange(of: currentActive) { newValue in
                 if newValue == nil {
                     let price = data.last!.value
                     let start = data.first!.value
                     percent = (price - start) / start * 100
-                    
-                    if percent >= 0 {
-                        withAnimation {
-                            percentArrowUp = true
-                        }
-                    } else {
-                        withAnimation {
-                            percentArrowUp = false
-                        }
-                        percent *= -1
-                    }
-                    
-                    (percentNum, percentDecimal) = splitDouble(percent, isPercent: true)
                 } else {
                     let index = data.firstIndex(of: newValue!)!
                     if index > 0 {
                         let price = data[index].value
                         let yesterday = data[index - 1].value
                         percent = (price - yesterday) / yesterday * 100
-                        
-                        if percent >= 0 {
-                            withAnimation {
-                                percentArrowUp = true
-                            }
-                        } else {
-                            withAnimation {
-                                percentArrowUp = false
-                            }
-                            percent *= -1
-                        }
-                        
-                        (percentNum, percentDecimal) = splitDouble(percent, isPercent: true)
                     }
                 }
-                (currentNum, currentDecimal) = splitDouble(newValue?.value ?? data
-                    .last!.value)
             }
         }
     }
-    
-    func splitDouble(_ value: Double, isPercent: Bool = false) -> (String, String) {
-        let stringValue = "\(value)"
-        let nums = stringValue.split(separator: ".")
-        let num1 = "\(nums[0])"
-        let num2 = "\(nums[1].prefix(isPercent ? 2 : shared.decimal))"
-        
-        return (num1, num2)
-    }
-    
 }
 
 struct CalculationChartView_Previews: PreviewProvider {
