@@ -56,7 +56,7 @@ struct CalculationChartView: View {
                     .font(.system(.title2, weight: .semibold))
                 
                 HStack {
-                    Text("\(String(format: "%.\(shared.decimal)f", currentActive?.value ?? data.last!.value)) \(currency.symbol)")
+                    Text("\(String(format: "%.\(shared.decimal)f", currentActive?.value ?? data.last!.value)) \(base.symbol)")
                         .font(.largeTitle)
                         .bold()
                     
