@@ -65,13 +65,14 @@ struct CalculationChartView: View {
                     HStack(spacing: 4) {
                         Image(systemName: "arrow.up")
                             .font(.caption)
-                            .foregroundColor(.gray)
+                            .foregroundColor(percentArrowUp ? .green : .red)
                             .rotationEffect(percentArrowUp ? Angle(degrees: 0) : Angle(degrees: 180))
                             .animation(.easeInOut(duration: 0.1), value: percentArrowUp)
                         
                         Text("\(String(format: "%.2f", abs(percent)))%")
                             .font(.caption)
-                            .foregroundColor(.gray)
+                            .foregroundColor(percentArrowUp ? .green : .red)
+                            .animation(.easeInOut(duration: 0.1), value: percentArrowUp)
                     }
                 }
                 
