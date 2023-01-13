@@ -14,6 +14,9 @@ struct CalculationView: View {
     
     let decimal: Int
     
+    @State var isFavorite: Bool
+    @State var animating: Bool = false
+    
     @FocusState private var foreignTextFieldFocused: Bool
     @FocusState private var baseTextFieldFocused: Bool
     
@@ -24,6 +27,8 @@ struct CalculationView: View {
         self.foreign = foreign
         self.decimal = decimal
         self.model = CalculationViewModel(base: base, foreign: foreign, decimal: decimal)
+        
+        _isFavorite = State(initialValue: foreign.isFavorite)
     }
     
     var body: some View {
@@ -88,25 +93,57 @@ struct CalculationView: View {
             }
             
             Button {
-                
                 foreignTextFieldFocused = false
                 baseTextFieldFocused = false
                 
                 model.foreignAmount = 0.0
                 model.baseAmount = 0.0
-                
             } label: {
-                
                 HStack {
                     Spacer()
                     Text(String(localized: "clear"))
                     Spacer()
                 }
-                
             }
+            .buttonStyle(.borderedProminent)
+            .padding(.top, 8)
+            .padding(.horizontal)
+            
+            HStack(spacing: 0) {
+                Menu {
+                    Button {
+                        let textToShare = "\(model.foreignAmount.formatted(.currency(code: model.foreign.code))) = \(model.baseAmount.formatted(.currency(code: model.base.code)))"
+                        
+                        shareSheet(for: textToShare)
+                    } label: {
+                        Label(String(localized: "share_value"), systemImage: "equal.circle")
+                    }
+                    
+                    Button {
+                        let textToShare = "\(foreign.fullName)\(String(localized: "text_to_share0"))(\(foreign.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(decimal)f", foreign.price)) \(base.symbol) (\(base.code))"
+                        
+                        shareSheet(for: textToShare)
+                    } label: {
+                        Label(String(localized: "share_text"), systemImage: "text.bubble")
+                    }
+                    
+                    Button {
+                        shareSheet(for: generateSnapshot())
+                    } label: {
+                        Label(String(localized: "share_chart"), systemImage: "chart.xyaxis.line")
+                    }
+                    .disabled(model.shouldDisableChartButton)
+                } label: {
+                    HStack {
+                        Spacer()
+                        Label("share", systemImage: "square.and.arrow.up")
+                        Spacer()
+                    }
+                }
                 .buttonStyle(.borderedProminent)
                 .padding(.top, 8)
                 .padding(.horizontal)
+            }
             
             Spacer()
             
@@ -120,34 +157,32 @@ struct CalculationView: View {
                 }
             }
         }
+        .onChange(of: animating, perform: { _ in
+            if animating {
+                withAnimation {
+                    isFavorite.toggle()
+                }
+                
+                model.handleFavorites(for: foreign, isFavorite: isFavorite)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        animating = false
+                    }
+                }
+            }
+        })
         .toolbar {
             
-            Menu {
-                Button {
-                    let textToShare = "\(model.foreignAmount.formatted(.currency(code: model.foreign.code))) = \(model.baseAmount.formatted(.currency(code: model.base.code)))"
-                    
-                    shareSheet(for: textToShare)
-                } label: {
-                    Label(String(localized: "share_value"), systemImage: "equal.circle")
+            Image(systemName: isFavorite ? "star.fill" : "star")
+                .foregroundColor(.yellow)
+                .onTapGesture {
+                    withAnimation(.easeInOut(duration: 0.2)) {
+                        animating = true
+                    }
                 }
-                
-                Button {
-                    let textToShare = "\(foreign.fullName)\(String(localized: "text_to_share0"))(\(foreign.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(decimal)f", foreign.price)) \(base.symbol) (\(base.code))"
-                    
-                    shareSheet(for: textToShare)
-                } label: {
-                    Label(String(localized: "share_text"), systemImage: "text.bubble")
-                }
-                
-                Button {
-                    shareSheet(for: generateSnapshot())
-                } label: {
-                    Label(String(localized: "share_chart"), systemImage: "chart.xyaxis.line")
-                }
-                .disabled(model.shouldDisableChartButton)
-            } label: {
-                Image(systemName: "square.and.arrow.up")
-            }
+                .scaleEffect(animating ? 1.2 : 1.0)
+                .rotationEffect(Angle(degrees: animating ? 30 : 0))
             
             NavigationLink {
                 if model.shouldDisableChartButton {

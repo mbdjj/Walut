@@ -5,7 +5,7 @@
 //  Created by Marcin Bartminski on 21/11/2022.
 //
 
-import Foundation
+import SwiftUI
 
 class CalculationViewModel: ObservableObject {
     
@@ -53,12 +53,34 @@ class CalculationViewModel: ObservableObject {
         }
     }
     
-    func loadData(with data: [RatesData]) {
+    private func loadData(with data: [RatesData]) {
         DispatchQueue.main.async {
             self.ratesData = data
             self.shareChartData = data
             
-            self.shouldDisableChartButton = false
+            withAnimation {
+                self.shouldDisableChartButton = false
+            }
+        }
+    }
+    
+    func handleFavorites(for currency: Currency, isFavorite: Bool) {
+        if isFavorite {
+            favorite(currency: currency)
+        } else {
+            unfavorite(currency: currency)
+        }
+        
+        UserDefaults.standard.set(SharedDataManager.shared.favorites, forKey: "favorites")
+    }
+    
+    private func favorite(currency: Currency) {
+        SharedDataManager.shared.favorites.append(currency.code)
+    }
+    
+    private func unfavorite(currency: Currency) {
+        if let i = SharedDataManager.shared.favorites.firstIndex(where: { currency.code == $0 }) {
+            SharedDataManager.shared.favorites.remove(at: i)
         }
     }
     
