@@ -165,10 +165,12 @@ struct CalculationView: View {
                 
                 model.handleFavorites(for: foreign, isFavorite: isFavorite)
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    withAnimation(.easeInOut(duration: 0.2)) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                    withAnimation(.easeInOut(duration: 0.25)) {
                         animating = false
                     }
+                    let impact = UIImpactFeedbackGenerator(style: .medium)
+                    impact.impactOccurred()
                 }
             }
         })
@@ -177,12 +179,14 @@ struct CalculationView: View {
             Image(systemName: isFavorite ? "star.fill" : "star")
                 .foregroundColor(.yellow)
                 .onTapGesture {
-                    withAnimation(.easeInOut(duration: 0.2)) {
+                    withAnimation(.easeInOut(duration: 0.25)) {
                         animating = true
                     }
+                    let impact = UIImpactFeedbackGenerator(style: .medium)
+                    impact.impactOccurred()
                 }
-                .scaleEffect(animating ? 1.2 : 1.0)
-                .rotationEffect(Angle(degrees: animating ? 30 : 0))
+                .scaleEffect(animating ? 1.25 : 1.0)
+                .rotationEffect(Angle(degrees: animating ? 40 : 0))
             
             NavigationLink {
                 if model.shouldDisableChartButton {
