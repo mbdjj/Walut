@@ -149,6 +149,10 @@ struct CalculationChartView: View {
                     }
                 }
             }
+            .onChange(of: currentActive == nil) { newValue in
+                let impact = UIImpactFeedbackGenerator(style: .medium)
+                impact.impactOccurred()
+            }
         }
     }
 }
