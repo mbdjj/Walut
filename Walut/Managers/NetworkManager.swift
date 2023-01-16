@@ -49,11 +49,8 @@ struct NetworkManager {
             let results = try decoder.decode(CurrencyData.self, from: data)
             let yesterdayResults = try decoder.decode(CurrencyData.self, from: yesterdayData)
             
-            var currencyArray = [Currency]()
-            
-            for code in self.allCodesArray {
-                let currency = Currency(code: code, rate: results.rates.getRate(of: code), yesterday: yesterdayResults.rates.getRate(of: code))
-                currencyArray.append(currency)
+            let currencyArray = self.allCodesArray.map {
+                Currency(code: $0, rate: results.rates.getRate(of: $0), yesterday: yesterdayResults.rates.getRate(of: $0))
             }
             
             print("Fetched currency data for \(base.code)")
@@ -92,11 +89,8 @@ struct NetworkManager {
             let results = try decoder.decode(CurrencyData.self, from: data)
             let yesterdayResults = try decoder.decode(CurrencyData.self, from: yesterdayData)
             
-            var currencyArray = [Currency]()
-            
-            for code in self.allCodesArray {
-                let currency = Currency(code: code, rate: results.rates.getRate(of: code), yesterday: yesterdayResults.rates.getRate(of: code))
-                currencyArray.append(currency)
+            let currencyArray = self.allCodesArray.map {
+                Currency(code: $0, rate: results.rates.getRate(of: $0), yesterday: yesterdayResults.rates.getRate(of: $0))
             }
             
             print("Fetched currency data for \(base.code) on \(dateString(from: date))")
