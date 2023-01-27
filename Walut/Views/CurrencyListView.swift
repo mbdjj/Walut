@@ -14,6 +14,8 @@ struct CurrencyListView: View {
     
     @State var quickConvertValue = 1.0
     
+    @State var queryString: String = ""
+    
     var body: some View {
         NavigationStack {
             List {
@@ -30,7 +32,7 @@ struct CurrencyListView: View {
                 if !model.loading {
                     if !model.favoritesArray.isEmpty {
                         Section {
-                            ForEach(model.favoritesArray) { currency in
+                            ForEach(results.0) { currency in
                                 NavigationLink {
                                     CalculationView(base: shared.base, foreign: currency, decimal: shared.decimal)
                                 } label: {
@@ -46,7 +48,7 @@ struct CurrencyListView: View {
                     }
                     
                     Section {
-                        ForEach(model.currencyArray) { currency in
+                        ForEach(results.1) { currency in
                             NavigationLink {
                                 CalculationView(base: shared.base, foreign: currency, decimal: shared.decimal)
                             } label: {
@@ -56,7 +58,6 @@ struct CurrencyListView: View {
                                         return NSItemProvider(object: textToShare as NSString)
                                     }
                             }
-
                         }
                     }
                 } else {  // placeholder cells while loading
@@ -136,6 +137,20 @@ struct CurrencyListView: View {
             .sheet(isPresented: $model.shouldShowDatePickView) {
                 DatePickView()
             }
+            .searchable(text: $queryString) {
+                
+            }
+        }
+    }
+    
+    var results: ([Currency], [Currency]) {
+        if queryString.isEmpty {
+            return (model.favoritesArray, model.currencyArray)
+        } else {
+            let filteredFav = model.favoritesArray.filter { $0.code.lowercased().contains(queryString.lowercased()) || $0.fullName.lowercased().contains(queryString.lowercased()) }
+            let filteredCur = model.currencyArray.filter { $0.code.lowercased().contains(queryString.lowercased()) || $0.fullName.lowercased().contains(queryString.lowercased()) }
+            
+            return (filteredFav, filteredCur)
         }
     }
 }
