@@ -82,7 +82,7 @@ struct CalculationChartView: View {
                             x: .value("Date", rate.date),
                             y: .value("Value", rate.animate ? rate.value : minValueYAxis)
                         )
-                        .foregroundStyle(Color.accentColor.gradient)
+                        .foregroundStyle(Color.walut.gradient.opacity(currentActive == nil ? 1 : 0.5))
                         .interpolationMethod(.catmullRom)
                         
                         if let currentActive, currentActive.id == rate.id {
@@ -107,7 +107,7 @@ struct CalculationChartView: View {
                     GeometryReader { geometry in
                         Rectangle().fill(.clear).contentShape(Rectangle())
                             .gesture(
-                                DragGesture()
+                                DragGesture(minimumDistance: 0)
                                     .onChanged { value in
                                         let location = value.location
                                         
