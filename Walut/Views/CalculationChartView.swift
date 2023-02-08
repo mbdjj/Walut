@@ -147,10 +147,13 @@ struct CalculationChartView: View {
                         let yesterday = data[index - 1].value
                         percent = (price - yesterday) / yesterday * 100
                     }
+                    
+                    let impact = UIImpactFeedbackGenerator(style: .soft)
+                    impact.impactOccurred()
                 }
             }
-            .onChange(of: currentActive == nil) { newValue in
-                let impact = UIImpactFeedbackGenerator(style: .medium)
+            .onChange(of: currentActive == nil) { _ in
+                let impact = UIImpactFeedbackGenerator(style: .heavy)
                 impact.impactOccurred()
             }
         }
