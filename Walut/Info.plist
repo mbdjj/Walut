@@ -181,6 +181,13 @@
 					<string>ZAR</string>
 				</array>
 			</dict>
+            <key>UAH</key>
+            <dict>
+                <key>CFBundleIconFiles</key>
+                <array>
+                    <string>UAH</string>
+                </array>
+            </dict>
 		</dict>
 		<key>CFBundlePrimaryIcon</key>
 		<dict>
