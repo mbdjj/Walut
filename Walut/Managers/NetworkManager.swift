@@ -11,7 +11,7 @@ struct NetworkManager {
     
     static let shared = NetworkManager()
     private let decoder = JSONDecoder()
-    private let allCodesArray = ["AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HRK", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK", "SGD", "THB", "TRY", "USD", "ZAR"]
+    private let allCodesArray: [String]
     
     let defaults = UserDefaults.standard
     let formatter = DateFormatter()
@@ -20,6 +20,8 @@ struct NetworkManager {
         // DateFormatter configuration
         formatter.calendar = Calendar.current
         formatter.dateFormat = "yyyy-MM-dd"
+        
+        allCodesArray = SharedDataManager.shared.allCodesArray
     }
     
     

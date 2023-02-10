@@ -75,7 +75,8 @@ struct Currency: Identifiable, Equatable {
         "CHF": "🇨🇭",
         "THB": "🇹🇭",
         "TRY": "🇹🇷",
-        "USD": "🇺🇸"
+        "USD": "🇺🇸",
+        "UAH": "🇺🇦"
     ]
     
     private let symbolDictionary = [
@@ -110,7 +111,8 @@ struct Currency: Identifiable, Equatable {
         "CHF": "Fr.",
         "THB": "฿",
         "TRY": "₺",
-        "USD": "$"
+        "USD": "$",
+        "UAH": "₴"
     ]
     
     private let nameDictionary = [
@@ -145,7 +147,8 @@ struct Currency: Identifiable, Equatable {
         "CHF": String(localized: "CHF"),
         "THB": String(localized: "THB"),
         "TRY": String(localized: "TRY"),
-        "USD": String(localized: "USD")
+        "USD": String(localized: "USD"),
+        "UAH": String(localized: "UAH")
     ]
     
     private func getEmoji(of currency: String) -> String {

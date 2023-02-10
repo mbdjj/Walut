@@ -166,7 +166,7 @@ struct Rates: Decodable {
     //let TTD: Double
     //let TWD: Double
     //let TZS: Double
-    //let UAH: Double
+    let UAH: Double
     //let UGX: Double
     let USD: Double
     //let UYU: Double
@@ -222,7 +222,8 @@ struct Rates: Decodable {
             "CHF": CHF,
             "THB": THB,
             "TRY": TRY,
-            "USD": USD
+            "USD": USD,
+            "UAH": UAH
         ]
         
         return dict

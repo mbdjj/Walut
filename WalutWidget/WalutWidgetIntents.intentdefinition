@@ -33,7 +33,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>1</integer>
 					<key>INEnumValueName</key>
-					<string>value</string>
+					<string>BGN</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -43,7 +43,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>2</integer>
 					<key>INEnumValueName</key>
-					<string>value1</string>
+					<string>BRL</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -53,7 +53,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>3</integer>
 					<key>INEnumValueName</key>
-					<string>value2</string>
+					<string>CAD</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -63,7 +63,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>4</integer>
 					<key>INEnumValueName</key>
-					<string>value3</string>
+					<string>CHF</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -73,7 +73,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>5</integer>
 					<key>INEnumValueName</key>
-					<string>value4</string>
+					<string>CNY</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -83,7 +83,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>6</integer>
 					<key>INEnumValueName</key>
-					<string>value5</string>
+					<string>CZK</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -93,7 +93,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>7</integer>
 					<key>INEnumValueName</key>
-					<string>value6</string>
+					<string>DKK</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -103,7 +103,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>8</integer>
 					<key>INEnumValueName</key>
-					<string>value7</string>
+					<string>EUR</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -113,7 +113,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>9</integer>
 					<key>INEnumValueName</key>
-					<string>value8</string>
+					<string>GBP</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -123,7 +123,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>10</integer>
 					<key>INEnumValueName</key>
-					<string>value9</string>
+					<string>HKD</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -133,7 +133,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>11</integer>
 					<key>INEnumValueName</key>
-					<string>value10</string>
+					<string>HRK</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -143,7 +143,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>12</integer>
 					<key>INEnumValueName</key>
-					<string>value11</string>
+					<string>HUF</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -153,7 +153,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>13</integer>
 					<key>INEnumValueName</key>
-					<string>value12</string>
+					<string>IDR</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -163,7 +163,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>14</integer>
 					<key>INEnumValueName</key>
-					<string>value13</string>
+					<string>ILS</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -173,7 +173,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>15</integer>
 					<key>INEnumValueName</key>
-					<string>value14</string>
+					<string>INR</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -183,7 +183,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>16</integer>
 					<key>INEnumValueName</key>
-					<string>value15</string>
+					<string>JPY</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -193,7 +193,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>17</integer>
 					<key>INEnumValueName</key>
-					<string>value16</string>
+					<string>KRW</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -203,7 +203,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>18</integer>
 					<key>INEnumValueName</key>
-					<string>value17</string>
+					<string>MXN</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -213,7 +213,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>19</integer>
 					<key>INEnumValueName</key>
-					<string>value18</string>
+					<string>MYR</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -223,7 +223,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>20</integer>
 					<key>INEnumValueName</key>
-					<string>value19</string>
+					<string>NOK</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -233,7 +233,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>21</integer>
 					<key>INEnumValueName</key>
-					<string>value20</string>
+					<string>NZD</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -243,7 +243,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>22</integer>
 					<key>INEnumValueName</key>
-					<string>value21</string>
+					<string>PHP</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -253,7 +253,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>23</integer>
 					<key>INEnumValueName</key>
-					<string>value22</string>
+					<string>PLN</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -263,7 +263,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>24</integer>
 					<key>INEnumValueName</key>
-					<string>value23</string>
+					<string>RON</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -273,7 +273,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>25</integer>
 					<key>INEnumValueName</key>
-					<string>value24</string>
+					<string>RUB</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -283,7 +283,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>26</integer>
 					<key>INEnumValueName</key>
-					<string>value25</string>
+					<string>SEK</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -293,7 +293,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>27</integer>
 					<key>INEnumValueName</key>
-					<string>value26</string>
+					<string>SGD</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -303,7 +303,7 @@
 					<key>INEnumValueIndex</key>
 					<integer>28</integer>
 					<key>INEnumValueName</key>
-					<string>value27</string>
+					<string>THB</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
@@ -313,27 +313,37 @@
 					<key>INEnumValueIndex</key>
 					<integer>29</integer>
 					<key>INEnumValueName</key>
-					<string>value28</string>
+					<string>TRY</string>
+				</dict>
+				<dict>
+					<key>INEnumValueDisplayName</key>
+					<string>🇺🇦 UAH</string>
+					<key>INEnumValueDisplayNameID</key>
+					<string>9ltlgx</string>
+					<key>INEnumValueIndex</key>
+					<integer>30</integer>
+					<key>INEnumValueName</key>
+					<string>UAH</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
 					<string>🇺🇸 USD</string>
 					<key>INEnumValueDisplayNameID</key>
-					<string>B5hJyF</string>
+					<string>jXx0cU</string>
 					<key>INEnumValueIndex</key>
-					<integer>30</integer>
+					<integer>31</integer>
 					<key>INEnumValueName</key>
-					<string>value29</string>
+					<string>USD</string>
 				</dict>
 				<dict>
 					<key>INEnumValueDisplayName</key>
 					<string>🇿🇦 ZAR</string>
 					<key>INEnumValueDisplayNameID</key>
-					<string>Dgm1tW</string>
+					<string>e45UPa</string>
 					<key>INEnumValueIndex</key>
-					<integer>31</integer>
+					<integer>32</integer>
 					<key>INEnumValueName</key>
-					<string>value30</string>
+					<string>ZAR</string>
 				</dict>
 			</array>
 		</dict>
@@ -343,7 +353,7 @@
 	<key>INIntentDefinitionNamespace</key>
 	<string>WJADqR</string>
 	<key>INIntentDefinitionSystemVersion</key>
-	<string>22A380</string>
+	<string>22C65</string>
 	<key>INIntentDefinitionToolsBuildVersion</key>
 	<string>14C18</string>
 	<key>INIntentDefinitionToolsVersion</key>
