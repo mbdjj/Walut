@@ -23,14 +23,13 @@ struct AppIconManager {
                 
                 return
             }
-        }
-        
-        
-        UIApplication.shared.setAlternateIconName(iconName) { error in
-            if error != nil {
-                print("Failed to change app icon: \(error!.localizedDescription)")
-            } else {
-                print("App icon changed successfully")
+        } else {
+            UIApplication.shared.setAlternateIconName(iconName) { error in
+                if error != nil {
+                    print("Failed to change app icon: \(error!.localizedDescription)")
+                } else {
+                    print("App icon changed successfully")
+                }
             }
         }
     }
