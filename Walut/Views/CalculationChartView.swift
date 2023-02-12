@@ -24,9 +24,10 @@ struct CalculationChartView: View {
     
     let shared = SharedDataManager.shared
     
-    init(currency: Currency, base: Currency, data: [RatesData]) {
+    init(currency: Currency, base: Currency) {
         self.currency = currency
         self.base = base
+        let data = currency.chartData!
         self.data = data
         
         if !data.isEmpty {
@@ -163,15 +164,7 @@ struct CalculationChartView: View {
 struct CalculationChartView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            CalculationChartView(currency: Currency(baseCode: "USD"), base: Currency(baseCode: "PLN"), data: [
-                RatesData(code: "USD", date: "2022/10/29", value: 2.5),
-                RatesData(code: "USD", date: "2022/10/30", value: 3),
-                RatesData(code: "USD", date: "2022/10/31", value: 2.16),
-                RatesData(code: "USD", date: "2022/11/01", value: 3),
-                RatesData(code: "USD", date: "2022/11/02", value: 3),
-                RatesData(code: "USD", date: "2022/11/03", value: 3),
-                RatesData(code: "USD", date: "2022/11/04", value: 3)
-            ])
+            CalculationChartView(currency: Currency(baseCode: "USD"), base: Currency(baseCode: "PLN"))
                 .navigationBarTitleDisplayMode(.inline)
         }
     }

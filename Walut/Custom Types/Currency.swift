@@ -31,10 +31,13 @@ struct Currency: Identifiable, Equatable {
     var flag: String { getEmoji(of: code) }
     var fullName: String { getName(of: code) }
     var symbol: String { getSymbol(of: code) }
+    
     let rate: Double
     let yesterdayRate: Double
     var price: Double { 1 / rate }
     var yesterdayPrice: Double { 1 / yesterdayRate }
+    
+    var chartData: [RatesData]?
     
     var isFavorite: Bool { SharedDataManager.shared.favorites.contains(self.code) }
     

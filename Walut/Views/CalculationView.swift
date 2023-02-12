@@ -192,7 +192,7 @@ struct CalculationView: View {
                 if model.shouldDisableChartButton {
                     Text("You shouldn't be here")
                 } else {
-                    CalculationChartView(currency: foreign, base: base, data: model.shareChartData)
+                    CalculationChartView(currency: foreign, base: base)
                 }
             } label: {
                 Image(systemName: "chart.xyaxis.line")

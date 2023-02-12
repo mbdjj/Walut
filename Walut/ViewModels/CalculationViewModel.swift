@@ -14,7 +14,7 @@ class CalculationViewModel: ObservableObject {
     var shareChartData: [RatesData] = []
     
     let base: Currency
-    let foreign: Currency
+    var foreign: Currency
     
     let decimal: Int
     
@@ -55,7 +55,8 @@ class CalculationViewModel: ObservableObject {
     
     private func loadData(with data: [RatesData]) {
         DispatchQueue.main.async {
-            self.ratesData = data
+            self.foreign.chartData = data
+            //self.ratesData = data
             self.shareChartData = data
             
             withAnimation {
