@@ -27,7 +27,7 @@ struct CalculationChartView: View {
     init(currency: Currency, base: Currency) {
         self.currency = currency
         self.base = base
-        let data = currency.chartData!
+        let data = currency.chartData ?? []
         self.data = data
         
         if !data.isEmpty {

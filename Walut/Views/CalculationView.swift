@@ -151,7 +151,7 @@ struct CalculationView: View {
         .navigationTitle("\(foreign.flag) \(foreign.code)")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            if SharedDataManager.shared.reduceDataUsage && model.ratesData.isEmpty {
+            if SharedDataManager.shared.reduceDataUsage && model.foreign.chartData == nil {
                 Task {
                     await model.refreshData()
                 }
@@ -192,7 +192,7 @@ struct CalculationView: View {
                 if model.shouldDisableChartButton {
                     Text("You shouldn't be here")
                 } else {
-                    CalculationChartView(currency: foreign, base: base)
+                    CalculationChartView(currency: model.foreign, base: base)
                 }
             } label: {
                 Image(systemName: "chart.xyaxis.line")
@@ -208,7 +208,8 @@ struct CalculationView: View {
         ChartToShare(currency: foreign, base: base, data: model.shareChartData)
     }
     
-    @MainActor private func generateSnapshot() -> UIImage {
+    @MainActor
+    private func generateSnapshot() -> UIImage {
         let renderer = ImageRenderer(content: chartToShare)
         renderer.scale = 3.0
      

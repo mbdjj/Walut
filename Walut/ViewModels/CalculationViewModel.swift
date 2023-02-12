@@ -9,12 +9,10 @@ import SwiftUI
 
 class CalculationViewModel: ObservableObject {
     
-    @Published var ratesData: [RatesData] = []
-    
     var shareChartData: [RatesData] = []
     
     let base: Currency
-    var foreign: Currency
+    @Published var foreign: Currency
     
     let decimal: Int
     
@@ -56,7 +54,6 @@ class CalculationViewModel: ObservableObject {
     private func loadData(with data: [RatesData]) {
         DispatchQueue.main.async {
             self.foreign.chartData = data
-            //self.ratesData = data
             self.shareChartData = data
             
             withAnimation {
