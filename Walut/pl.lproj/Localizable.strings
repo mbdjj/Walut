@@ -137,3 +137,5 @@
 "from_currency" = "Z waluty";
 "to_currency" = "Na walutę";
 "calculate" = "Oblicz";
+
+"overview_past_month" = "Ostatni miesiąc";

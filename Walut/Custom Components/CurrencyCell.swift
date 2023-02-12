@@ -67,9 +67,11 @@ struct CurrencyCell: View {
                     Text(currency.fullName)
                         .font(.system(size: 19))
                         .fontWeight(.medium)
+                        .foregroundColor(.primary)
                     
                     Text(currency.code)
                         .font(.system(size: 17))
+                        .foregroundColor(.primary)
                     
                     Spacer()
                     
@@ -81,9 +83,11 @@ struct CurrencyCell: View {
                     if mode == .normal {
                         Text("\(String(format: "%.\(decimal)f", currency.price)) \(base.symbol)")
                             .font(.system(size: 17))
+                            .foregroundColor(.primary)
                     } else if mode == .quickConvert {
                         Text("\(String(format: "%.\(decimal)f", currency.rate * value)) \(currency.symbol)")
                             .font(.system(size: 17))
+                            .foregroundColor(.primary)
                     }
                     
                     if shouldShowPercent {

@@ -33,8 +33,9 @@ struct CurrencyListView: View {
                     if !model.favoritesArray.isEmpty {
                         Section {
                             ForEach(results.0) { currency in
-                                NavigationLink {
-                                    CalculationView(base: shared.base, foreign: currency, decimal: shared.decimal)
+                                Button {
+                                    //CalculationView(base: shared.base, foreign: currency, decimal: shared.decimal)
+                                    model.selectedCurrency = currency
                                 } label: {
                                     CurrencyCell(for: currency, mode: shared.quickConvert ? .quickConvert : .normal, value: quickConvertValue)
                                         .onDrag {
@@ -49,8 +50,9 @@ struct CurrencyListView: View {
                     
                     Section {
                         ForEach(results.1) { currency in
-                            NavigationLink {
-                                CalculationView(base: shared.base, foreign: currency, decimal: shared.decimal)
+                            Button {
+                                //CalculationView(base: shared.base, foreign: currency, decimal: shared.decimal)
+                                model.selectedCurrency = currency
                             } label: {
                                 CurrencyCell(for: currency, mode: shared.quickConvert ? .quickConvert : .normal, value: quickConvertValue)
                                     .onDrag {
@@ -139,6 +141,10 @@ struct CurrencyListView: View {
             }
             .searchable(text: $queryString) {
                 
+            }
+            .sheet(item: $model.selectedCurrency) { currency in
+                CurrencyOverviewView(currency: currency)
+                    .presentationDetents([.fraction(0.9), .large])
             }
         }
     }

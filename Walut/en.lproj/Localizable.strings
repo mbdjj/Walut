@@ -137,3 +137,5 @@
 "from_currency" = "From currency";
 "to_currency" = "To currency";
 "calculate" = "Calculate";
+
+"overview_past_month" = "Past month";

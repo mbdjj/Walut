@@ -139,6 +139,8 @@
 		34D4ADD42997EB2900EFD2A7 /* SEK@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D4AD862997EB2900EFD2A7 /* SEK@3x.png */; };
 		34D5AFE92951B25C0043B72A /* SortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D5AFE82951B25C0043B72A /* SortView.swift */; };
 		34D5AFEB2951B6550043B72A /* SortViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D5AFEA2951B6550043B72A /* SortViewModel.swift */; };
+		34DC74BD2998DE140042F968 /* CurrencyOverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DC74BC2998DE140042F968 /* CurrencyOverviewView.swift */; };
+		34DC74BF299983250042F968 /* CurrencyOverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DC74BE299983250042F968 /* CurrencyOverviewViewModel.swift */; };
 		34E0A201292CFCDB00EF3CBC /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C1A28F172A6006C4F38 /* NetworkManager.swift */; };
 		34E0A203292CFD3C00EF3CBC /* CurrencyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C1E28F1751C006C4F38 /* CurrencyData.swift */; };
 		34ED0C1B28F172A6006C4F38 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C1A28F172A6006C4F38 /* NetworkManager.swift */; };
@@ -303,6 +305,8 @@
 		34D4AD862997EB2900EFD2A7 /* SEK@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SEK@3x.png"; sourceTree = "<group>"; };
 		34D5AFE82951B25C0043B72A /* SortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortView.swift; sourceTree = "<group>"; };
 		34D5AFEA2951B6550043B72A /* SortViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortViewModel.swift; sourceTree = "<group>"; };
+		34DC74BC2998DE140042F968 /* CurrencyOverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyOverviewView.swift; sourceTree = "<group>"; };
+		34DC74BE299983250042F968 /* CurrencyOverviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyOverviewViewModel.swift; sourceTree = "<group>"; };
 		34ED0C1A28F172A6006C4F38 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		34ED0C1E28F1751C006C4F38 /* CurrencyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyData.swift; sourceTree = "<group>"; };
 		34ED0C2028F17592006C4F38 /* SharedDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataManager.swift; sourceTree = "<group>"; };
@@ -426,6 +430,7 @@
 				3443E4C92962D58400749277 /* DatePickView.swift */,
 				3497430028F1E58A00373E0F /* CalculationView.swift */,
 				3498CC9728F4533000961C61 /* CalculationChartView.swift */,
+				34DC74BC2998DE140042F968 /* CurrencyOverviewView.swift */,
 				3481A7F32966BB2800370546 /* AnyCurrencyView.swift */,
 				3498532728F57029003E0FC9 /* SettingsView.swift */,
 				341CF625291430B40012FA5B /* SupportDevView.swift */,
@@ -445,6 +450,7 @@
 				34D5AFEA2951B6550043B72A /* SortViewModel.swift */,
 				3443E4CB2962D6C900749277 /* DatePickViewModel.swift */,
 				344A71EC292C29C10065F689 /* CalculationViewModel.swift */,
+				34DC74BE299983250042F968 /* CurrencyOverviewViewModel.swift */,
 				3481A7F52966BB8C00370546 /* AnyCurrencyViewModel.swift */,
 				3498532928F570A2003E0FC9 /* SettingsViewModel.swift */,
 				341CF627291431930012FA5B /* SupportDevViewModel.swift */,
@@ -763,7 +769,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				34ED0C2328F1C24F006C4F38 /* ViewManagingView.swift in Sources */,
+				34DC74BF299983250042F968 /* CurrencyOverviewViewModel.swift in Sources */,
 				3498CC9828F4533000961C61 /* CalculationChartView.swift in Sources */,
+				34DC74BD2998DE140042F968 /* CurrencyOverviewView.swift in Sources */,
 				34D5AFEB2951B6550043B72A /* SortViewModel.swift in Sources */,
 				34ED0C2128F17592006C4F38 /* SharedDataManager.swift in Sources */,
 				344E9987295ED7A200921DBC /* LoadingCell.swift in Sources */,

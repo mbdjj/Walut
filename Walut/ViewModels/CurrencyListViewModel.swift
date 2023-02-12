@@ -12,6 +12,8 @@ class CurrencyListViewModel: ObservableObject {
     @Published var favoritesArray = [Currency]()
     @Published var currencyArray = [Currency]()
     
+    @Published var selectedCurrency: Currency?
+    
     @Published var loading: Bool = false
     
     @Published var errorMessage = ""

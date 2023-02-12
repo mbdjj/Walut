@@ -27,6 +27,46 @@ struct Currency: Identifiable, Equatable {
         self.yesterdayRate = 1.0
     }
     
+    static var placeholder: Currency {
+        var currency = Currency(code: "USD", rate: 4.464, yesterday: 4.466)
+        
+        currency.chartData = [
+            RatesData(code: "USD", date: "2023-01-12", value: 4.329),
+            RatesData(code: "USD", date: "2023-01-13", value: 4.328),
+            RatesData(code: "USD", date: "2023-01-14", value: 4.332),
+            RatesData(code: "USD", date: "2023-01-15", value: 4.333),
+            RatesData(code: "USD", date: "2023-01-16", value: 4.338),
+            RatesData(code: "USD", date: "2023-01-17", value: 4.352),
+            RatesData(code: "USD", date: "2023-01-18", value: 4.370),
+            RatesData(code: "USD", date: "2023-01-19", value: 4.135),
+            RatesData(code: "USD", date: "2023-01-20", value: 4.135),
+            RatesData(code: "USD", date: "2023-01-21", value: 4.328),
+            RatesData(code: "USD", date: "2023-01-22", value: 4.318),
+            RatesData(code: "USD", date: "2023-01-23", value: 4.326),
+            RatesData(code: "USD", date: "2023-01-24", value: 4.329),
+            RatesData(code: "USD", date: "2023-01-25", value: 4.327),
+            RatesData(code: "USD", date: "2023-01-26", value: 4.334),
+            RatesData(code: "USD", date: "2023-01-28", value: 4.336),
+            RatesData(code: "USD", date: "2023-01-29", value: 4.279),
+            RatesData(code: "USD", date: "2023-01-30", value: 4.292),
+            RatesData(code: "USD", date: "2023-01-31", value: 4.364),
+            RatesData(code: "USD", date: "2023-02-01", value: 4.368),
+            RatesData(code: "USD", date: "2023-02-02", value: 4.364),
+            RatesData(code: "USD", date: "2023-02-03", value: 4.421),
+            RatesData(code: "USD", date: "2023-02-04", value: 4.426),
+            RatesData(code: "USD", date: "2023-02-05", value: 4.422),
+            RatesData(code: "USD", date: "2023-02-06", value: 4.425),
+            RatesData(code: "USD", date: "2023-02-07", value: 4.462),
+            RatesData(code: "USD", date: "2023-02-08", value: 4.466),
+            RatesData(code: "USD", date: "2023-02-09", value: 4.464),
+            RatesData(code: "USD", date: "2023-02-10", value: 4.462),
+            RatesData(code: "USD", date: "2023-02-11", value: 4.468),
+            RatesData(code: "USD", date: "2023-02-12", value: 4.467)
+        ]
+        
+        return currency
+    }
+    
     let code: String
     var flag: String { getEmoji(of: code) }
     var fullName: String { getName(of: code) }
