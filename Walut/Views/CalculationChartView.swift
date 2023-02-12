@@ -143,11 +143,9 @@ struct CalculationChartView: View {
                     percent = (price - start) / start * 100
                 } else {
                     let index = data.firstIndex(of: newValue!)!
-                    if index > 0 {
-                        let price = data[index].value
-                        let yesterday = data[index - 1].value
-                        percent = (price - yesterday) / yesterday * 100
-                    }
+                    let price = data[index].value
+                    let start = data.first!.value
+                    percent = (price - start) / start * 100
                     
                     let impact = UIImpactFeedbackGenerator(style: .soft)
                     impact.impactOccurred()
