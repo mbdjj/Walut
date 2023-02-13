@@ -16,6 +16,12 @@ class CurrencyOverviewViewModel: ObservableObject {
     
     var isCustom: Bool { SharedDataManager.shared.isCustomDate }
     var customDate: Date { SharedDataManager.shared.customDate }
+    var decimal: Int { SharedDataManager.shared.decimal }
+    
+    @Published var foreignAmount: Double = 0.0
+    @Published var baseAmount: Double = 0.0
+    
+    @Published var infoLineLimit: Int? = 8
     
     let networkManager = NetworkManager.shared
     

@@ -162,7 +162,7 @@ struct CalculationChartView: View {
 struct CalculationChartView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            CalculationChartView(currency: Currency(baseCode: "USD"), base: Currency(baseCode: "PLN"))
+            CalculationChartView(currency: Currency.placeholder, base: Currency(baseCode: "PLN"))
                 .navigationBarTitleDisplayMode(.inline)
         }
     }

@@ -37,9 +37,29 @@ struct CurrencyOverviewView: View {
             return 0.0
         }
     }
-    var percentPositive: Bool { percent >= 0 }
+    var percentArrowDeg: Double {
+        if percent > 0 {
+            return 0
+        } else if percent < 0 {
+            return 180
+        } else {
+            return 90
+        }
+    }
+    var percentColor: Color {
+        if percent > 0 {
+            return .green
+        } else if percent < 0 {
+            return .red
+        } else {
+            return .gray
+        }
+    }
     
     @ObservedObject var model: CurrencyOverviewViewModel
+    
+    @FocusState private var foreignTextFieldFocused: Bool
+    @FocusState private var baseTextFieldFocused: Bool
     
     init(currency: Currency) {
         let base = SharedDataManager.shared.base
@@ -113,7 +133,7 @@ struct CurrencyOverviewView: View {
             
             HStack(alignment: .bottom) {
                 VStack(alignment: .leading) {
-                    Text("\(String(format: "%.3f", currentActive?.value ?? model.currency.price)) \(model.base.symbol)")
+                    Text("\(String(format: "%.\(model.decimal)f", currentActive?.value ?? model.currency.price)) \(model.base.symbol)")
                         .font(.system(.title, design: .rounded, weight: .bold))
                     
                     Text(model.currency.fullName)
@@ -124,13 +144,21 @@ struct CurrencyOverviewView: View {
                 Spacer()
                 
                 VStack(alignment: .trailing) {
-                    Text("\(Image(systemName: "arrow.\(percentPositive ? "up" : "down")")) \(String(format: "%.2f", abs(percent)))%")
-                        .font(.system(.title2, design: .rounded, weight: .bold))
-                        .foregroundColor(percentPositive ? .green : .red)
+                    HStack {
+                        Image(systemName: "arrow.up")
+                            .rotationEffect(Angle(degrees: percentArrowDeg))
+                            .font(.system(.title2, design: .rounded, weight: .bold))
+                            .foregroundColor(percentColor)
+                            .animation(.easeInOut(duration: 0.3), value: percentArrowDeg)
+                        Text("\(String(format: "%.2f", abs(percent)))%")
+                            .font(.system(.title2, design: .rounded, weight: .bold))
+                            .foregroundColor(percentColor)
+                            
+                    }
                     
                     Text(currentActive == nil ? String(localized: "overview_past_month") : currentActive!.dateFormattedString)
                         .font(.system(.title3, design: .rounded, weight: .medium))
-                        .foregroundColor(percentPositive ? .green : .red)
+                        .foregroundColor(percentColor)
                         .lineLimit(1)
                 }
             }
@@ -155,7 +183,7 @@ struct CurrencyOverviewView: View {
                         }
                     }
                 }
-                .frame(height: 300)
+                .frame(height: 250)
                 .chartYScale(domain: minValueYAxis - minValueYAxis * 0.01 ... maxValueYAxis + maxValueYAxis * 0.01)
                 .chartYAxis(.hidden)
                 //.chartXAxis(.hidden)
@@ -185,6 +213,16 @@ struct CurrencyOverviewView: View {
                             )
                     }
                 }
+                .onChange(of: currentActive) { newValue in
+                    if newValue != nil {
+                        let impact = UIImpactFeedbackGenerator(style: .soft)
+                        impact.impactOccurred()
+                    }
+                }
+                .onChange(of: currentActive == nil) { _ in
+                    let impact = UIImpactFeedbackGenerator(style: .heavy)
+                    impact.impactOccurred()
+                }
             } else {
                 ZStack {
                     Rectangle()
@@ -194,7 +232,108 @@ struct CurrencyOverviewView: View {
                     ProgressView()
                 }
             }
+            
+            // MARK: - todo chart length changing buttons
+            
+            // MARK: - CalculationView replacement
+            
+            Spacer(minLength: 60)
+            
+            HStack(spacing: 0) {
+                TextField("", value: $model.foreignAmount, format: .currency(code: model.currency.code))
+                    .frame(height: 50)
+                    .font(.system(.title3, design: .rounded, weight: .medium))
+                    .padding(.horizontal)
+                    .background {
+                        Color.white
+                    }
+                    .cornerRadius(25)
+                    .shadow(color: .walut, radius: 5, x: 0, y: 4)
+                    .keyboardType(.decimalPad)
+                    .padding(.horizontal, 16)
+                    .focused($foreignTextFieldFocused)
+                    .onChange(of: model.foreignAmount) { newValue in
+                        if foreignTextFieldFocused {
+                            model.baseAmount = newValue / model.currency.rate
+                        }
+                    }
+                
+                TextField("", value: $model.baseAmount, format: .currency(code: model.base.code))
+                    .frame(height: 50)
+                    .font(.system(.title3, design: .rounded, weight: .medium))
+                    .padding(.horizontal)
+                    .background {
+                        Color.white
+                    }
+                    .cornerRadius(25)
+                    .shadow(color: .walut, radius: 4, x: 0, y: 4)
+                    .keyboardType(.decimalPad)
+                    .padding(.trailing, 16)
+                    .focused($baseTextFieldFocused)
+                    .onChange(of: model.baseAmount) { newValue in
+                        if baseTextFieldFocused {
+                            model.foreignAmount = newValue / model.currency.price
+                        }
+                    }
+            }
+            .padding(.vertical)
+            
+            Button {
+                foreignTextFieldFocused = false
+                baseTextFieldFocused = false
+                
+                model.foreignAmount = 0.0
+                model.baseAmount = 0.0
+            } label: {
+                HStack {
+                    Spacer()
+                    Text("clear")
+                        .font(.system(.title3, design: .rounded, weight: .medium))
+                        .frame(height: 40)
+                        .foregroundColor(.gray)
+                    Spacer()
+                }
+                .background {
+                    Color(uiColor: .secondarySystemBackground)
+                }
+                .cornerRadius(20)
+                .padding(.horizontal)
+            }
+            
+            // MARK: - Currency info
+            
+            Spacer(minLength: 60)
+            
+            VStack(alignment: .leading, spacing: 12) {
+                Text("About \(model.currency.code)")
+                    .font(.system(.title3, design: .rounded, weight: .bold))
+                
+                Text("""
+                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum mauris metus, rutrum lobortis magna pretium quis. Maecenas a nulla elementum, consectetur quam ut, fringilla nisi. Phasellus pulvinar sodales ipsum a finibus. Vestibulum interdum nulla id magna cursus elementum. Etiam venenatis blandit augue, nec consectetur enim ullamcorper consectetur. Nunc ut enim sed justo luctus rhoncus quis quis arcu. Maecenas a placerat sem. Proin laoreet luctus sapien, non vulputate nulla egestas ut. Maecenas varius mauris nisl, non mollis massa hendrerit eu. Proin elementum, enim nec aliquet tempus, magna magna tincidunt leo, sed vestibulum metus dui in tortor. Praesent sit amet finibus nibh, sed molestie sem. Suspendisse pellentesque, felis sit amet semper fermentum, dui quam consectetur ligula, at tristique quam nibh ac lacus. Suspendisse potenti. Duis iaculis lorem enim, ut finibus est varius ac.
+                     
+                     Curabitur posuere pellentesque tellus, eu pulvinar urna hendrerit nec. In sed ipsum vel lorem varius varius. Integer ultricies malesuada leo. Etiam finibus et elit eget imperdiet. Donec gravida non nisi ac vestibulum. Nulla facilisi. Aliquam a mattis turpis, eget rutrum risus. Sed eu orci vitae leo convallis pharetra. Praesent eget efficitur diam.
+
+                     Morbi dignissim diam a dapibus egestas. Aenean pellentesque molestie tempor. Mauris suscipit nec justo ut rutrum. Donec id mi tempor, lobortis urna ac, porttitor enim. In posuere vitae diam id fermentum. Suspendisse convallis quis massa at ultrices. Integer elementum lorem eget odio bibendum, eu consequat erat dictum. Aenean eleifend varius metus, eu molestie augue hendrerit vel. Sed cursus auctor odio, non porta nibh aliquet ornare. Cras est sem, placerat nec libero eget, laoreet congue lectus. In at feugiat mi. Morbi vel neque quam.
+                     """)
+                .lineLimit(model.infoLineLimit)
+                .foregroundColor(.gray)
+                .font(.system(.body, design: .rounded))
+                
+                Button {
+                    if model.infoLineLimit == 8 {
+                        model.infoLineLimit = nil
+                    } else {
+                        model.infoLineLimit = 8
+                    }
+                } label: {
+                    Text("Read more \(Image(systemName: "arrow.right.circle"))")
+                        .font(.system(.body, design: .rounded, weight: .medium))
+                }
+            }
+            .padding()
+            
         }
+        .scrollDismissesKeyboard(.interactively)
     }
 }
 
