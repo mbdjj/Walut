@@ -226,8 +226,8 @@ struct CurrencyOverviewView: View {
             } else {
                 ZStack {
                     Rectangle()
-                        .frame(height: 300)
-                        .foregroundColor(Color(uiColor: .secondarySystemBackground))
+                        .frame(height: 250)
+                        .foregroundColor(Color(uiColor: .systemBackground))
                     
                     ProgressView()
                 }
@@ -239,16 +239,29 @@ struct CurrencyOverviewView: View {
             
             Spacer(minLength: 60)
             
+            HStack {
+                Text("\(model.currency.flag) \(model.currency.code)")
+                    .font(.system(.title3, design: .rounded, weight: .bold))
+                Spacer()
+                Text("\(model.base.flag) \(model.base.code)")
+                    .font(.system(.title3, design: .rounded, weight: .bold))
+                Spacer()
+            }
+            .padding(.horizontal)
+            
             HStack(spacing: 0) {
                 TextField("", value: $model.foreignAmount, format: .currency(code: model.currency.code))
                     .frame(height: 50)
                     .font(.system(.title3, design: .rounded, weight: .medium))
                     .padding(.horizontal)
                     .background {
-                        Color.white
+                        Color(uiColor: .systemBackground)
                     }
                     .cornerRadius(25)
-                    .shadow(color: .walut, radius: 5, x: 0, y: 4)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 25)
+                            .stroke(Color.walut, lineWidth: 1)
+                    }
                     .keyboardType(.decimalPad)
                     .padding(.horizontal, 16)
                     .focused($foreignTextFieldFocused)
@@ -263,10 +276,13 @@ struct CurrencyOverviewView: View {
                     .font(.system(.title3, design: .rounded, weight: .medium))
                     .padding(.horizontal)
                     .background {
-                        Color.white
+                        Color(uiColor: .systemBackground)
                     }
                     .cornerRadius(25)
-                    .shadow(color: .walut, radius: 4, x: 0, y: 4)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 25)
+                            .stroke(Color.walut, lineWidth: 1)
+                    }
                     .keyboardType(.decimalPad)
                     .padding(.trailing, 16)
                     .focused($baseTextFieldFocused)
@@ -276,7 +292,7 @@ struct CurrencyOverviewView: View {
                         }
                     }
             }
-            .padding(.vertical)
+            .padding(.bottom)
             
             Button {
                 foreignTextFieldFocused = false
@@ -305,16 +321,10 @@ struct CurrencyOverviewView: View {
             Spacer(minLength: 60)
             
             VStack(alignment: .leading, spacing: 12) {
-                Text("About \(model.currency.code)")
+                Text("\(String(localized: "overview_about")) \(model.currency.code)")
                     .font(.system(.title3, design: .rounded, weight: .bold))
                 
-                Text("""
-                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam dictum mauris metus, rutrum lobortis magna pretium quis. Maecenas a nulla elementum, consectetur quam ut, fringilla nisi. Phasellus pulvinar sodales ipsum a finibus. Vestibulum interdum nulla id magna cursus elementum. Etiam venenatis blandit augue, nec consectetur enim ullamcorper consectetur. Nunc ut enim sed justo luctus rhoncus quis quis arcu. Maecenas a placerat sem. Proin laoreet luctus sapien, non vulputate nulla egestas ut. Maecenas varius mauris nisl, non mollis massa hendrerit eu. Proin elementum, enim nec aliquet tempus, magna magna tincidunt leo, sed vestibulum metus dui in tortor. Praesent sit amet finibus nibh, sed molestie sem. Suspendisse pellentesque, felis sit amet semper fermentum, dui quam consectetur ligula, at tristique quam nibh ac lacus. Suspendisse potenti. Duis iaculis lorem enim, ut finibus est varius ac.
-                     
-                     Curabitur posuere pellentesque tellus, eu pulvinar urna hendrerit nec. In sed ipsum vel lorem varius varius. Integer ultricies malesuada leo. Etiam finibus et elit eget imperdiet. Donec gravida non nisi ac vestibulum. Nulla facilisi. Aliquam a mattis turpis, eget rutrum risus. Sed eu orci vitae leo convallis pharetra. Praesent eget efficitur diam.
-
-                     Morbi dignissim diam a dapibus egestas. Aenean pellentesque molestie tempor. Mauris suscipit nec justo ut rutrum. Donec id mi tempor, lobortis urna ac, porttitor enim. In posuere vitae diam id fermentum. Suspendisse convallis quis massa at ultrices. Integer elementum lorem eget odio bibendum, eu consequat erat dictum. Aenean eleifend varius metus, eu molestie augue hendrerit vel. Sed cursus auctor odio, non porta nibh aliquet ornare. Cras est sem, placerat nec libero eget, laoreet congue lectus. In at feugiat mi. Morbi vel neque quam.
-                     """)
+                Text(model.currency.info)
                 .lineLimit(model.infoLineLimit)
                 .foregroundColor(.gray)
                 .font(.system(.body, design: .rounded))
@@ -326,7 +336,7 @@ struct CurrencyOverviewView: View {
                         model.infoLineLimit = 8
                     }
                 } label: {
-                    Text("Read more \(Image(systemName: "arrow.right.circle"))")
+                    Text("Read \(model.infoLineLimit == nil ? "less" : "more") \(Image(systemName: "arrow.\(model.infoLineLimit == nil ? "up" : "right").circle"))")
                         .font(.system(.body, design: .rounded, weight: .medium))
                 }
             }

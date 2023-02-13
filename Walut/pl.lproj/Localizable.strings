@@ -40,6 +40,13 @@
 "USD" = "Dolar amerykański";
 "UAH" = "Hrywna ukraińska";
 
+"USD_info" = "
+    Dolar amerykański jest oficjalną walutą Stanów Zjednoczonych i jego terytoriów. Jest również szeroko stosowany jako waluta rezerwowa na całym świecie. Dolar amerykański jest jedną z najbardziej handlowanych walut na świecie, stanowiąc większość transakcji rynku wymiany walut. Dolar jest również benchmarkową walutą, używaną jako odniesienia do ustawiania kursów wymiany dla innych walut.
+
+    Wartość dolara amerykańskiego jest określana przez popyt i podaż na rynku wymiany walut. Federalne Rezerwy centralnego banku Stanów Zjednoczonych, ustalają politykę monetarną i wpływają na podaż dolarów poprzez zarządzanie stopami procentowymi i podażą pieniądza. Rząd Stanów Zjednoczonych odgrywa również dużą rolę w wartości dolara poprzez swoje polityki fiskalne i siłę swojej gospodarki.
+
+    Dolar amerykański ma bogatą historię, z jego pochodzeniem sięgającym końca XVIII wieku. Rząd Stanów Zjednoczonych wydał po raz pierwszy pieniądze papierowe w 1862 roku, w czasie wojny secesyjnej, a system Federalnej Rezerwy został ustanowiony w 1913 roku. Od tego czasu dolar amerykański przeszedł kilka zmian, z najnowszą będącą wprowadzeniem odnowionego 100-dolarowego banknotu w 2013 roku. Pomimo tych zmian, dolar amerykański pozostaje symbolem stabilności i siły dla Stanów Zjednoczonych i światowej gospodarki";
+
 "settings" = "Ustawienia";
 "settings_change_base" = "Zmień walutę bazową";
 "settings_decimal_numbers" = "Liczby po przecinku";
@@ -139,3 +146,4 @@
 "calculate" = "Oblicz";
 
 "overview_past_month" = "Ostatni miesiąc";
+"overview_about" = "O";

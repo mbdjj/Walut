@@ -71,6 +71,7 @@ struct Currency: Identifiable, Equatable {
     var flag: String { getEmoji(of: code) }
     var fullName: String { getName(of: code) }
     var symbol: String { getSymbol(of: code) }
+    var info: String { getInfo(of: code) }
     
     let rate: Double
     let yesterdayRate: Double
@@ -194,6 +195,42 @@ struct Currency: Identifiable, Equatable {
         "UAH": String(localized: "UAH")
     ]
     
+    private let infoDictionary = [
+        "AUD": String(localized: "AUD_info"),
+        "BRL": String(localized: "BRL_info"),
+        "BGN": String(localized: "BGN_info"),
+        "CAD": String(localized: "CAD_info"),
+        "CNY": String(localized: "CNY_info"),
+        "HRK": String(localized: "HRK_info"),
+        "CZK": String(localized: "CZK_info"),
+        "DKK": String(localized: "DKK_info"),
+        "EUR": String(localized: "EUR_info"),
+        "HKD": String(localized: "HKD_info"),
+        "HUF": String(localized: "HUF_info"),
+        "INR": String(localized: "INR_info"),
+        "IDR": String(localized: "IDR_info"),
+        "ILS": String(localized: "ILS_info"),
+        "JPY": String(localized: "JPY_info"),
+        "MYR": String(localized: "MYR_info"),
+        "MXN": String(localized: "MXN_info"),
+        "RON": String(localized: "RON_info"),
+        "NZD": String(localized: "NZD_info"),
+        "NOK": String(localized: "NOK_info"),
+        "PHP": String(localized: "PHP_info"),
+        "PLN": String(localized: "PLN_info"),
+        "GBP": String(localized: "GBP_info"),
+        "RUB": String(localized: "RUB_info"),
+        "SGD": String(localized: "SGD_info"),
+        "ZAR": String(localized: "ZAR_info"),
+        "KRW": String(localized: "KRW_info"),
+        "SEK": String(localized: "SEK_info"),
+        "CHF": String(localized: "CHF_info"),
+        "THB": String(localized: "THB_info"),
+        "TRY": String(localized: "TRY_info"),
+        "USD": String(localized: "USD_info"),
+        "UAH": String(localized: "UAH_info")
+    ]
+    
     private func getEmoji(of currency: String) -> String {
         return emojiDictionary[currency]!
     }
@@ -204,5 +241,9 @@ struct Currency: Identifiable, Equatable {
     
     private func getName(of currency: String) -> String {
         return nameDictionary[currency]!
+    }
+    
+    private func getInfo(of currency: String) -> String {
+        return infoDictionary[currency]!
     }
 }
