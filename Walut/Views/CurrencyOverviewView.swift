@@ -69,7 +69,7 @@ struct CurrencyOverviewView: View {
     }
     
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             
             // MARK: - Top bar
             
@@ -240,6 +240,14 @@ struct CurrencyOverviewView: View {
             Spacer(minLength: 60)
             
             HStack {
+                Text("Calculation")
+                    .font(.system(.title2, design: .rounded, weight: .bold))
+                Spacer()
+            }
+            .padding(.leading)
+            .padding(.vertical, 4)
+            
+            HStack {
                 Text("\(model.currency.flag) \(model.currency.code)")
                     .font(.system(.title3, design: .rounded, weight: .bold))
                 Spacer()
@@ -320,25 +328,36 @@ struct CurrencyOverviewView: View {
             
             Spacer(minLength: 60)
             
-            VStack(alignment: .leading, spacing: 12) {
-                Text("\(String(localized: "overview_about")) \(model.currency.code)")
-                    .font(.system(.title3, design: .rounded, weight: .bold))
-                
-                Text(model.currency.info)
-                .lineLimit(model.infoLineLimit)
-                .foregroundColor(.gray)
-                .font(.system(.body, design: .rounded))
-                
-                Button {
-                    if model.infoLineLimit == 8 {
-                        model.infoLineLimit = nil
-                    } else {
-                        model.infoLineLimit = 8
+            HStack {
+                VStack(alignment: .leading, spacing: 12) {
+                    Text("\(String(localized: "overview_about")) \(model.currency.code)")
+                        .font(.system(.title3, design: .rounded, weight: .bold))
+                    
+                    Text(model.currency.info)
+                    .lineLimit(model.infoLineLimit)
+                    .foregroundColor(.gray)
+                    .font(.system(.body, design: .rounded))
+                    
+                    Button {
+                        if model.infoLineLimit == 8 {
+                            model.infoLineLimit = nil
+                        } else {
+                            model.infoLineLimit = 8
+                        }
+                    } label: {
+                        let isExpanded = model.infoLineLimit == nil
+                        
+                        HStack(spacing: 4) {
+                            Text(String(localized: isExpanded ? "overview_less" : "overview_more"))
+                                .font(.system(.body, design: .rounded, weight: .medium))
+                            Image(systemName: "arrow.right.circle")
+                                .animation(.easeInOut(duration: 0.2), value: isExpanded)
+                                .rotationEffect(Angle(degrees: isExpanded ? -90 : 0))
+                        }
                     }
-                } label: {
-                    Text("Read \(model.infoLineLimit == nil ? "less" : "more") \(Image(systemName: "arrow.\(model.infoLineLimit == nil ? "up" : "right").circle"))")
-                        .font(.system(.body, design: .rounded, weight: .medium))
                 }
+                
+                Spacer()
             }
             .padding()
             
