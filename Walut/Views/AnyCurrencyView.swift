@@ -10,6 +10,7 @@ import SwiftUI
 struct AnyCurrencyView: View {
     
     @ObservedObject var model = AnyCurrencyViewModel()
+    @State private var showOverview = false
     
     var body: some View {
         NavigationStack {
@@ -36,10 +37,9 @@ struct AnyCurrencyView: View {
                 
                 Section {
                     if model.dataLoaded {
-                        NavigationLink {
-                            CalculationView(base: model.fromCurrency, foreign: model.toCurrency, decimal: SharedDataManager.shared.decimal)
+                        Button {
+                            showOverview = true
                         } label: {
-                            //Text("calculate")
                             CurrencyCell(for: model.toCurrency, base: model.fromCurrency)
                         }
 
@@ -61,15 +61,13 @@ struct AnyCurrencyView: View {
                     await model.loadData()
                 }
             }
-            .onChange(of: model.selectedFromCurrency) { _ in
+            .onChange(of: "\(model.selectedFromCurrency)\(model.selectedToCurrency)") { _ in
                 Task {
                     await model.loadData()
                 }
             }
-            .onChange(of: model.selectedToCurrency) { _ in
-                Task {
-                    await model.loadData()
-                }
+            .sheet(isPresented: $showOverview) {
+                CurrencyOverviewView(currency: model.toCurrency, base: model.fromCurrency)
             }
         }
     }

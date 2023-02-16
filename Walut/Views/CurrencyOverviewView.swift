@@ -63,8 +63,11 @@ struct CurrencyOverviewView: View {
     
     init(currency: Currency) {
         let base = SharedDataManager.shared.base
-        let currency = currency
         
+        self.model = CurrencyOverviewViewModel(currency: currency, base: base)
+    }
+    
+    init(currency: Currency, base: Currency) {
         self.model = CurrencyOverviewViewModel(currency: currency, base: base)
     }
     
@@ -82,6 +85,17 @@ struct CurrencyOverviewView: View {
                             .clipShape(Circle())
                     }
                     .shadow(color: .walut, radius: 5, x: 0, y: 4)
+                
+                if model.base.code != SharedDataManager.shared.base.code {
+                    Text(model.base.flag)
+                        .frame(width: 50, height: 50)
+                        .font(.largeTitle)
+                        .background {
+                            Color.walut
+                                .clipShape(Circle())
+                        }
+                        .shadow(color: .walut, radius: 5, x: 0, y: 4)
+                }
                 
                 Spacer()
                 
@@ -240,7 +254,7 @@ struct CurrencyOverviewView: View {
             Spacer(minLength: 60)
             
             HStack {
-                Text("Calculation")
+                Text("overview_calculation")
                     .font(.system(.title2, design: .rounded, weight: .bold))
                 Spacer()
             }
