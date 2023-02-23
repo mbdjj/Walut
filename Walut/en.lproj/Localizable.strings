@@ -40,13 +40,6 @@
 "USD" = "US dollar";
 "UAH" = "Ukrainian hryvnia";
 
-"USD_info" = "
-    The United States dollar, also known as the American dollar, is the official currency of the United States and its territories. It is also widely used as a reserve currency around the world. The U.S. dollar is one of the most traded currencies globally, making up the majority of foreign exchange market transactions. The dollar is also a benchmark currency, used as a reference for setting exchange rates for other currencies.
-
-    The value of the U.S. dollar is determined by the supply and demand for it in the foreign exchange market. The Federal Reserve, the central bank of the United States, sets monetary policy and influences the supply of dollars through the management of interest rates and the money supply. The U.S. government also plays a role in the value of the dollar through its fiscal policies and the strength of its economy.
-
-    The U.S. dollar has a rich history, with its origins tracing back to the late 1700s. The U.S. government first issued paper money in 1862, during the Civil War, and the Federal Reserve System was established in 1913. Since then, the U.S. dollar has gone through several redesigns, with the most recent being the introduction of the redesigned $100 bill in 2013. Despite these changes, the U.S. dollar remains a symbol of stability and strength for the United States and the world economy.";
-
 "settings" = "Settings";
 "settings_change_base" = "Change base currency";
 "settings_decimal_numbers" = "Decimal numbers";
@@ -150,3 +143,6 @@
 "overview_more" = "Read more";
 "overview_less" = "Read less";
 "overview_calculation" = "Calculation";
+
+"calc_from" = "From: ";
+"calc_to" = "To: ";

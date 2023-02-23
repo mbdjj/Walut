@@ -135,6 +135,26 @@ class CurrencyCalcViewModel: ObservableObject {
         decimalDigits = 0
     }
     
+    func handleFavorites() {
+        if !currency.isFavorite {
+            favorite(currency: currency)
+        } else {
+            unfavorite(currency: currency)
+        }
+        
+        UserDefaults.standard.set(SharedDataManager.shared.favorites, forKey: "favorites")
+    }
+    
+    private func favorite(currency: Currency) {
+        SharedDataManager.shared.favorites.append(currency.code)
+    }
+    
+    private func unfavorite(currency: Currency) {
+        if let i = SharedDataManager.shared.favorites.firstIndex(where: { currency.code == $0 }) {
+            SharedDataManager.shared.favorites.remove(at: i)
+        }
+    }
+    
 }
 
 enum AmountType {

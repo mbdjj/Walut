@@ -13,6 +13,8 @@ struct CurrencyCalcView: View {
     
     @Environment(\.dismiss) var dismiss
     
+    @State var chartCurrency: Currency?
+    
     init(currency: Currency, base: Currency = SharedDataManager.shared.base) {
         model = CurrencyCalcViewModel(currency: currency, base: base)
     }
@@ -28,11 +30,47 @@ struct CurrencyCalcView: View {
                 Spacer()
                 
                 Button {
+                    model.handleFavorites()
+                } label: {
+                    Image(systemName: "star\(model.currency.isFavorite ? ".fill" : "")")
+                        .font(.body)
+                        .frame(width: 30, height: 30)
+                        .foregroundColor(model.currency.isFavorite ? .yellow : .gray)
+                        .background {
+                            Color(uiColor: .secondarySystemBackground)
+                                .clipShape(Circle())
+                        }
+                }
+                
+                Menu {
+                    Button {
+                        
+                    } label: {
+                        Label("share_value", systemImage: "equal.circle")
+                    }
+                    
+                    Button {
+                        
+                    } label: {
+                        Label("share_text", systemImage: "text.bubble")
+                    }
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                        .font(.body)
+                        .frame(width: 30, height: 30)
+                        .foregroundColor(.gray)
+                        .background {
+                            Color(uiColor: .secondarySystemBackground)
+                                .clipShape(Circle())
+                        }
+                }
+                
+                Button {
                     dismiss.callAsFunction()
                 } label: {
                     Image(systemName: "xmark")
-                        .font(.title2.weight(.bold))
-                        .frame(width: 40, height: 40)
+                        .font(.body.weight(.bold))
+                        .frame(width: 30, height: 30)
                         .foregroundColor(.gray)
                         .background {
                             Color(uiColor: .secondarySystemBackground)
@@ -45,7 +83,7 @@ struct CurrencyCalcView: View {
             // MARK: - From and To currency
             
             HStack {
-                Text("From: ")
+                Text("calc_from")
                     .font(.system(.body, design: .rounded, weight: .medium))
                 
                 Button {
@@ -62,7 +100,7 @@ struct CurrencyCalcView: View {
                         }
                 }
                 
-                Text("To: ")
+                Text("calc_to")
                     .font(.system(.body, design: .rounded, weight: .medium))
                 
                 Button {
@@ -145,7 +183,7 @@ struct CurrencyCalcView: View {
                 Spacer()
                 
                 Button {
-                    
+                    chartCurrency = model.currency
                 } label: {
                     Text("share_chart")
                         .padding(.horizontal)
@@ -236,6 +274,9 @@ struct CurrencyCalcView: View {
             } else {
                 model.bottomAmount = top / model.currency.rate
             }
+        }
+        .sheet(item: $chartCurrency) { currency in
+            CurrencyChartView(currency: currency, base: model.base)
         }
     }
 }

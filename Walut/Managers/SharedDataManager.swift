@@ -83,7 +83,7 @@ class SharedDataManager: ObservableObject {
         return numFormatter.string(from: value as NSNumber) ?? "0"
     }
     func currencyLocaleString(value: Double, currencyCode: String) -> String {
-        var formatter = numFormatter
+        let formatter = numFormatter
         formatter.currencyCode = currencyCode
         return formatter.string(from: value as NSNumber) ?? "0"
     }

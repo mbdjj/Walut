@@ -8,7 +8,9 @@
 import SwiftUI
 import Charts
 
-struct CurrencyOverviewView: View {
+struct CurrencyChartView: View {
+    
+    @Environment(\.dismiss) var dismiss
     
     var minValueYAxis: Double {
         let data = model.currency.chartData ?? []
@@ -56,7 +58,7 @@ struct CurrencyOverviewView: View {
         }
     }
     
-    @ObservedObject var model: CurrencyOverviewViewModel
+    @ObservedObject var model: CurrencyChartViewModel
     
     @FocusState private var foreignTextFieldFocused: Bool
     @FocusState private var baseTextFieldFocused: Bool
@@ -64,11 +66,11 @@ struct CurrencyOverviewView: View {
     init(currency: Currency) {
         let base = SharedDataManager.shared.base
         
-        self.model = CurrencyOverviewViewModel(currency: currency, base: base)
+        self.model = CurrencyChartViewModel(currency: currency, base: base)
     }
     
     init(currency: Currency, base: Currency) {
-        self.model = CurrencyOverviewViewModel(currency: currency, base: base)
+        self.model = CurrencyChartViewModel(currency: currency, base: base)
     }
     
     var body: some View {
@@ -100,40 +102,24 @@ struct CurrencyOverviewView: View {
                 Spacer()
                 
                 Button {
-                    model.handleFavorites()
+                    
                 } label: {
-                    Image(systemName: "star\(model.currency.isFavorite ? ".fill" : "")")
-                        .font(.title2)
-                        .frame(width: 40, height: 40)
-                        .foregroundColor(model.currency.isFavorite ? .yellow : .gray)
+                    Image(systemName: "square.and.arrow.up")
+                        .font(.body)
+                        .frame(width: 30, height: 30)
+                        .foregroundColor(.gray)
                         .background {
                             Color(uiColor: .secondarySystemBackground)
                                 .clipShape(Circle())
                         }
                 }
                 
-                Menu {
-                    Button {
-                        
-                    } label: {
-                        Label("share_value", systemImage: "equal.circle")
-                    }
-                    
-                    Button {
-                        
-                    } label: {
-                        Label("share_text", systemImage: "text.bubble")
-                    }
-                    
-                    Button {
-                        
-                    } label: {
-                        Label("share_chart", systemImage: "chart.xyaxis.line")
-                    }
+                Button {
+                    dismiss.callAsFunction()
                 } label: {
-                    Image(systemName: "square.and.arrow.up")
-                        .font(.title3)
-                        .frame(width: 40, height: 40)
+                    Image(systemName: "xmark")
+                        .font(.body.weight(.bold))
+                        .frame(width: 30, height: 30)
                         .foregroundColor(.gray)
                         .background {
                             Color(uiColor: .secondarySystemBackground)
@@ -147,7 +133,7 @@ struct CurrencyOverviewView: View {
             
             HStack(alignment: .bottom) {
                 VStack(alignment: .leading) {
-                    Text("\(String(format: "%.\(model.decimal)f", currentActive?.value ?? model.currency.price)) \(model.base.symbol)")
+                    Text(SharedDataManager.shared.currencyLocaleString(value: currentActive?.value ?? model.currency.price, currencyCode: model.base.code))
                         .font(.system(.title, design: .rounded, weight: .bold))
                     
                     Text(model.currency.fullName)
@@ -249,134 +235,7 @@ struct CurrencyOverviewView: View {
             
             // MARK: - todo chart length changing buttons
             
-            // MARK: - CalculationView replacement
-            
-            Spacer(minLength: 60)
-            
-            HStack {
-                Text("overview_calculation")
-                    .font(.system(.title2, design: .rounded, weight: .bold))
-                Spacer()
-            }
-            .padding(.leading)
-            .padding(.vertical, 4)
-            
-            HStack {
-                Text("\(model.currency.flag) \(model.currency.code)")
-                    .font(.system(.title3, design: .rounded, weight: .bold))
-                Spacer()
-                Text("\(model.base.flag) \(model.base.code)")
-                    .font(.system(.title3, design: .rounded, weight: .bold))
-                Spacer()
-            }
-            .padding(.horizontal)
-            
-            HStack(spacing: 0) {
-                TextField("", value: $model.foreignAmount, format: .currency(code: model.currency.code))
-                    .frame(height: 50)
-                    .font(.system(.title3, design: .rounded, weight: .medium))
-                    .padding(.horizontal)
-                    .background {
-                        Color(uiColor: .systemBackground)
-                    }
-                    .cornerRadius(25)
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 25)
-                            .stroke(Color.walut, lineWidth: 1)
-                    }
-                    .keyboardType(.decimalPad)
-                    .padding(.horizontal, 16)
-                    .focused($foreignTextFieldFocused)
-                    .onChange(of: model.foreignAmount) { newValue in
-                        if foreignTextFieldFocused {
-                            model.baseAmount = newValue / model.currency.rate
-                        }
-                    }
-                
-                TextField("", value: $model.baseAmount, format: .currency(code: model.base.code))
-                    .frame(height: 50)
-                    .font(.system(.title3, design: .rounded, weight: .medium))
-                    .padding(.horizontal)
-                    .background {
-                        Color(uiColor: .systemBackground)
-                    }
-                    .cornerRadius(25)
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 25)
-                            .stroke(Color.walut, lineWidth: 1)
-                    }
-                    .keyboardType(.decimalPad)
-                    .padding(.trailing, 16)
-                    .focused($baseTextFieldFocused)
-                    .onChange(of: model.baseAmount) { newValue in
-                        if baseTextFieldFocused {
-                            model.foreignAmount = newValue / model.currency.price
-                        }
-                    }
-            }
-            .padding(.bottom)
-            
-            Button {
-                foreignTextFieldFocused = false
-                baseTextFieldFocused = false
-                
-                model.foreignAmount = 0.0
-                model.baseAmount = 0.0
-            } label: {
-                HStack {
-                    Spacer()
-                    Text("clear")
-                        .font(.system(.title3, design: .rounded, weight: .medium))
-                        .frame(height: 40)
-                        .foregroundColor(.gray)
-                    Spacer()
-                }
-                .background {
-                    Color(uiColor: .secondarySystemBackground)
-                }
-                .cornerRadius(20)
-                .padding(.horizontal)
-            }
-            
-            // MARK: - Currency info
-            
-            Spacer(minLength: 60)
-            
-            HStack {
-                VStack(alignment: .leading, spacing: 12) {
-                    Text("\(String(localized: "overview_about")) \(model.currency.code)")
-                        .font(.system(.title3, design: .rounded, weight: .bold))
-                    
-                    Text(model.currency.info)
-                    .lineLimit(model.infoLineLimit)
-                    .foregroundColor(.gray)
-                    .font(.system(.body, design: .rounded))
-                    
-                    Button {
-                        if model.infoLineLimit == 8 {
-                            model.infoLineLimit = nil
-                        } else {
-                            model.infoLineLimit = 8
-                        }
-                    } label: {
-                        let isExpanded = model.infoLineLimit == nil
-                        
-                        HStack(spacing: 4) {
-                            Text(String(localized: isExpanded ? "overview_less" : "overview_more"))
-                                .font(.system(.body, design: .rounded, weight: .medium))
-                            Image(systemName: "arrow.right.circle")
-                                .animation(.easeInOut(duration: 0.2), value: isExpanded)
-                                .rotationEffect(Angle(degrees: isExpanded ? -90 : 0))
-                        }
-                    }
-                }
-                
-                Spacer()
-            }
-            .padding()
-            
         }
-        .scrollDismissesKeyboard(.interactively)
     }
 }
 
@@ -384,7 +243,7 @@ struct CurrencyOverviewView_Previews: PreviewProvider {
     static var previews: some View {
         Text("dupa")
             .sheet(isPresented: .constant(true)) {
-                CurrencyOverviewView(currency: Currency.placeholder)
+                CurrencyChartView(currency: Currency.placeholder)
             }
     }
 }
