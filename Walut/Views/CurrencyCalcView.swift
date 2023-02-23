@@ -8,6 +8,15 @@
 import SwiftUI
 
 struct CurrencyCalcView: View {
+    
+    @ObservedObject var model: CurrencyCalcViewModel
+    
+    @Environment(\.dismiss) var dismiss
+    
+    init(currency: Currency, base: Currency = SharedDataManager.shared.base) {
+        model = CurrencyCalcViewModel(currency: currency, base: base)
+    }
+    
     var body: some View {
         // MARK: - Top bar
         
@@ -19,7 +28,7 @@ struct CurrencyCalcView: View {
                 Spacer()
                 
                 Button {
-                    
+                    dismiss.callAsFunction()
                 } label: {
                     Image(systemName: "xmark")
                         .font(.title2.weight(.bold))
@@ -42,7 +51,8 @@ struct CurrencyCalcView: View {
                 Button {
                     
                 } label: {
-                    Text("🇵🇱 PLN")
+                    let top = model.topCurrency
+                    Text("\(top.flag) \(top.code)")
                         .foregroundColor(.gray)
                         .font(.system(.body, design: .rounded, weight: .medium))
                         .frame(width: 70, height: 30)
@@ -58,7 +68,8 @@ struct CurrencyCalcView: View {
                 Button {
                     
                 } label: {
-                    Text("🇺🇸 USD")
+                    let bot = model.bottomCurrency
+                    Text("\(bot.flag) \(bot.code)")
                         .foregroundColor(.gray)
                         .font(.system(.body, design: .rounded, weight: .medium))
                         .frame(width: 70, height: 30)
@@ -77,31 +88,37 @@ struct CurrencyCalcView: View {
             Spacer()
             
             VStack {
+                let top = model.topCurrency
                 HStack(alignment: .top, spacing: 0) {
-                    Text("\("PLN")")
+                    Text("\(top.code)")
                         .font(.system(.title2, design: .rounded, weight: .bold))
                         .offset(y: 16)
-                    Text("0")
+                    Text(model.amountString(.top))
                         .font(.system(size: 72, weight: .bold, design: .rounded))
-                    Text("\("PLN")")
+                        .lineLimit(1)
+                    Text("\(top.code)")
                         .font(.system(.title2, design: .rounded, weight: .bold))
                         .offset(y: 16)
                         .opacity(0)
                 }
+                .minimumScaleFactor(0.6)
                 
+                let bot = model.bottomCurrency
                 HStack {
-                    Text("\("USD")")
+                    Text("\(bot.code)")
                         .font(.system(.body, design: .rounded, weight: .bold))
-                    Text("0")
+                    Text(model.amountString(.bottom))
                         .font(.system(.largeTitle, design: .rounded, weight: .bold))
+                        .lineLimit(1)
                     Button {
-                        
+                        model.swapCurrencies()
                     } label: {
                         Image(systemName: "rectangle.2.swap")
                             .foregroundColor(.primary)
                             .bold()
                     }
                 }
+                .minimumScaleFactor(0.6)
             }
             
             Spacer()
@@ -109,7 +126,7 @@ struct CurrencyCalcView: View {
             // MARK: - Chart button + rate
             
             HStack {
-                Text("🇺🇸")
+                Text(model.currency.flag)
                     .frame(width: 45, height: 45)
                     .font(.largeTitle)
                     .background {
@@ -118,10 +135,10 @@ struct CurrencyCalcView: View {
                     }
                 
                 VStack(alignment: .leading) {
-                    Text("USD")
+                    Text(model.currency.fullName)
                         .font(.system(.title3, design: .rounded, weight: .medium))
-                    Text("4.469 zł")
-                        .font(.system(.body, design: .rounded))
+                    Text("\(String(format: "%.\(SharedDataManager.shared.decimal)f", model.currency.price)) \(model.base.symbol)")
+                        .font(.system(.body, design: .rounded, weight: .medium))
                         .foregroundColor(.gray)
                 }
                 
@@ -147,7 +164,7 @@ struct CurrencyCalcView: View {
             LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3)) {
                 ForEach(1 ..< 10, id: \.self) { num in
                     Button {
-                        
+                        model.buttonPressed(num)
                     } label: {
                         Text("\(num)")
                             .foregroundColor(.primary)
@@ -161,9 +178,9 @@ struct CurrencyCalcView: View {
             HStack {
                 Spacer()
                 Button {
-                    
+                    model.buttonPressed(",")
                 } label: {
-                    Text(".")
+                    Text(Locale.current.decimalSeparator ?? ".")
                         .foregroundColor(.primary)
                         .font(.system(.title2, design: .rounded, weight: .medium))
                         .frame(width: 60, height: 60)
@@ -171,7 +188,7 @@ struct CurrencyCalcView: View {
                 Spacer()
                 Spacer()
                 Button {
-                    
+                    model.buttonPressed("0")
                 } label: {
                     Text("0")
                         .foregroundColor(.primary)
@@ -181,7 +198,7 @@ struct CurrencyCalcView: View {
                 Spacer()
                 Spacer()
                 Button {
-                    
+                    model.buttonPressed("<")
                 } label: {
                     Image(systemName: "delete.left")
                         .foregroundColor(.primary)
@@ -195,7 +212,7 @@ struct CurrencyCalcView: View {
             // MARK: - Clear button
             
             Button {
-                
+                model.clear()
             } label: {
                 HStack {
                     Spacer()
@@ -213,6 +230,13 @@ struct CurrencyCalcView: View {
             .padding(.horizontal, 32)
             .padding(.bottom)
         }
+        .onChange(of: model.topAmount) { top in
+            if model.topCurrency == model.base {
+                model.bottomAmount = top / model.currency.price
+            } else {
+                model.bottomAmount = top / model.currency.rate
+            }
+        }
     }
 }
 
@@ -220,7 +244,7 @@ struct CurrencyCalcView_Previews: PreviewProvider {
     static var previews: some View {
         Text("dupa")
             .sheet(isPresented: .constant(true)) {
-                CurrencyCalcView()
+                CurrencyCalcView(currency: Currency(baseCode: "PLN"))
             }
     }
 }

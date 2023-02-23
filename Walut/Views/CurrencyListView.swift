@@ -143,8 +143,7 @@ struct CurrencyListView: View {
                 
             }
             .sheet(item: $model.selectedCurrency) { currency in
-                CurrencyOverviewView(currency: currency)
-                    .presentationDetents([.fraction(0.9), .large])
+                CurrencyCalcView(currency: currency)
             }
         }
     }

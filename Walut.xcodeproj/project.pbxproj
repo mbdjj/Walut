@@ -58,6 +58,7 @@
 		34A2347028F05C3B00C81292 /* BasePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A2346F28F05C3B00C81292 /* BasePickerViewModel.swift */; };
 		34A2347428F061D700C81292 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A2347328F061D700C81292 /* Currency.swift */; };
 		34BD793229A75708005E2B85 /* CurrencyCalcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BD793129A75708005E2B85 /* CurrencyCalcView.swift */; };
+		34BD793429A7D905005E2B85 /* CurrencyCalcViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BD793329A7D905005E2B85 /* CurrencyCalcViewModel.swift */; };
 		34CAB492290F11CA00D877E5 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CAB491290F11CA00D877E5 /* FavoritesView.swift */; };
 		34CAB494290F128100D877E5 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CAB493290F128100D877E5 /* FavoritesViewModel.swift */; };
 		34D4AD872997EB2900EFD2A7 /* ZAR@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D4AD392997EB2900EFD2A7 /* ZAR@3x.png */; };
@@ -225,6 +226,7 @@
 		34A2347328F061D700C81292 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		34A5A6B0292002A000613135 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		34BD793129A75708005E2B85 /* CurrencyCalcView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCalcView.swift; sourceTree = "<group>"; };
+		34BD793329A7D905005E2B85 /* CurrencyCalcViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCalcViewModel.swift; sourceTree = "<group>"; };
 		34CAB491290F11CA00D877E5 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		34CAB493290F128100D877E5 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		34D4AD392997EB2900EFD2A7 /* ZAR@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZAR@3x.png"; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 				34D5AFEA2951B6550043B72A /* SortViewModel.swift */,
 				3443E4CB2962D6C900749277 /* DatePickViewModel.swift */,
 				344A71EC292C29C10065F689 /* CalculationViewModel.swift */,
+				34BD793329A7D905005E2B85 /* CurrencyCalcViewModel.swift */,
 				34DC74BE299983250042F968 /* CurrencyOverviewViewModel.swift */,
 				3481A7F52966BB8C00370546 /* AnyCurrencyViewModel.swift */,
 				3498532928F570A2003E0FC9 /* SettingsViewModel.swift */,
@@ -774,6 +777,7 @@
 				34ED0C2328F1C24F006C4F38 /* ViewManagingView.swift in Sources */,
 				34DC74BF299983250042F968 /* CurrencyOverviewViewModel.swift in Sources */,
 				3498CC9828F4533000961C61 /* CalculationChartView.swift in Sources */,
+				34BD793429A7D905005E2B85 /* CurrencyCalcViewModel.swift in Sources */,
 				34DC74BD2998DE140042F968 /* CurrencyOverviewView.swift in Sources */,
 				34D5AFEB2951B6550043B72A /* SortViewModel.swift in Sources */,
 				34ED0C2128F17592006C4F38 /* SharedDataManager.swift in Sources */,
