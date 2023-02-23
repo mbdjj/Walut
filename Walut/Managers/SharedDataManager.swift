@@ -36,6 +36,14 @@ class SharedDataManager: ObservableObject {
     
     let defaults = UserDefaults.standard
     var formatter = DateFormatter()
+    var numFormatter: NumberFormatter {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        formatter.numberStyle = .currency
+        formatter.maximumFractionDigits = decimal
+        formatter.currencyCode = base.code
+        return formatter
+    }
     
     static let shared = SharedDataManager()
     
@@ -69,6 +77,15 @@ class SharedDataManager: ObservableObject {
     
     func customDateString() -> String {
         return formatter.string(from: customDate)
+    }
+    
+    func currencyLocaleString(value: Double) -> String {
+        return numFormatter.string(from: value as NSNumber) ?? "0"
+    }
+    func currencyLocaleString(value: Double, currencyCode: String) -> String {
+        var formatter = numFormatter
+        formatter.currencyCode = currencyCode
+        return formatter.string(from: value as NSNumber) ?? "0"
     }
     
 }

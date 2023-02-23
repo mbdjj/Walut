@@ -81,11 +81,11 @@ struct CurrencyCell: View {
                 
                 VStack(alignment: .trailing) {
                     if mode == .normal {
-                        Text("\(String(format: "%.\(decimal)f", currency.price)) \(base.symbol)")
+                        Text(shared.currencyLocaleString(value: currency.price))
                             .font(.system(size: 17))
                             .foregroundColor(.primary)
                     } else if mode == .quickConvert {
-                        Text("\(String(format: "%.\(decimal)f", currency.rate * value)) \(currency.symbol)")
+                        Text(shared.currencyLocaleString(value: currency.rate * value, currencyCode: currency.code))
                             .font(.system(size: 17))
                             .foregroundColor(.primary)
                     }
