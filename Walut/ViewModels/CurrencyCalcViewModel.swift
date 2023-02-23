@@ -58,9 +58,12 @@ class CurrencyCalcViewModel: ObservableObject {
     
     private func calcDecimal() {
         for i in 0 ... 2 {
-            var amount = topAmount
+            let amount = topAmount
             
             if amount * pow(10, Double(i)) == Double(Int(amount * pow(10, Double(i)))) { // I know it's a mess
+                decimalDigits = i
+                break
+            } else if i == 2 {
                 decimalDigits = i
                 break
             }
