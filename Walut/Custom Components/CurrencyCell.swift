@@ -81,7 +81,7 @@ struct CurrencyCell: View {
                 
                 VStack(alignment: .trailing) {
                     if mode == .normal {
-                        Text(shared.currencyLocaleString(value: currency.price))
+                        Text(shared.currencyLocaleString(value: currency.price, currencyCode: base.code))
                             .font(.system(size: 17))
                             .foregroundColor(.primary)
                     } else if mode == .quickConvert {
@@ -120,7 +120,8 @@ struct CurrencyCell: View {
 
 struct CurrencyCell_Previews: PreviewProvider {
     static var previews: some View {
-        CurrencyCell(for: Currency(baseCode: "PLN"), mode: .normal, value: 1)
-            .previewLayout(.fixed(width: 450, height: 90))
+        List {
+            CurrencyCell(for: Currency(baseCode: "PLN"), mode: .normal, value: 1)
+        }
     }
 }
