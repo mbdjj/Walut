@@ -15,6 +15,8 @@ struct CurrencyCalcView: View {
     
     @State var chartCurrency: Currency?
     
+    let shared = SharedDataManager.shared
+    
     init(currency: Currency, base: Currency = SharedDataManager.shared.base) {
         model = CurrencyCalcViewModel(currency: currency, base: base)
     }
@@ -175,7 +177,7 @@ struct CurrencyCalcView: View {
                 VStack(alignment: .leading) {
                     Text(model.currency.fullName)
                         .font(.system(.title3, design: .rounded, weight: .medium))
-                    Text("\(String(format: "%.\(SharedDataManager.shared.decimal)f", model.currency.price)) \(model.base.symbol)")
+                    Text(shared.currencyLocaleString(value: model.currency.price, currencyCode: model.base.code))
                         .font(.system(.body, design: .rounded, weight: .medium))
                         .foregroundColor(.gray)
                 }

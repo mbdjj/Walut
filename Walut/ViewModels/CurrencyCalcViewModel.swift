@@ -25,8 +25,8 @@ class CurrencyCalcViewModel: ObservableObject {
         self.currency = currency
         self.base = base
         
-        self.topCurrency = base
-        self.bottomCurrency = currency
+        self.topCurrency = currency
+        self.bottomCurrency = base
     }
     
     
@@ -41,13 +41,13 @@ class CurrencyCalcViewModel: ObservableObject {
         
         var str = formatter.string(from: amount as NSNumber) ?? "0"
         
-        if amount == Double(Int(amount)) && isDouble && type == .top {
+        if amount == floor(amount) && isDouble && type == .top {
             str += decimal
             
             for _ in 0 ..< decimalDigits {
                 str += "0"
             }
-        } else if amount * 10 == Double(Int(amount * 10)) && isDouble && type == .top {
+        } else if amount * 10 == floor(amount * 10) && isDouble && type == .top {
             if decimalDigits == 2 {
                 str += "0"
             }
@@ -60,7 +60,7 @@ class CurrencyCalcViewModel: ObservableObject {
         for i in 0 ... 2 {
             let amount = topAmount
             
-            if amount * pow(10, Double(i)) == Double(Int(amount * pow(10, Double(i)))) { // I know it's a mess
+            if amount * pow(10, Double(i)) == floor(amount * pow(10, Double(i))) {
                 decimalDigits = i
                 break
             } else if i == 2 {
@@ -70,7 +70,7 @@ class CurrencyCalcViewModel: ObservableObject {
         }
     }
     private func checkIfDouble() {
-        isDouble = topAmount != Double(Int(topAmount))
+        isDouble = topAmount != floor(topAmount)
         
         if isDouble {
             calcDecimal()
@@ -114,7 +114,7 @@ class CurrencyCalcViewModel: ObservableObject {
             
         } else if sym == "<" {
             if !isDouble {
-                topAmount = Double(Int(topAmount / 10))
+                topAmount = floor(topAmount / 10)
             } else {
                 if isDouble && decimalDigits == 0 {
                     isDouble = false
@@ -122,7 +122,7 @@ class CurrencyCalcViewModel: ObservableObject {
                     decimalDigits -= 1
                     
                     topAmount *= pow(10, Double(decimalDigits))
-                    topAmount = Double(Int(topAmount))
+                    topAmount = floor(topAmount)
                     topAmount /= pow(10, Double(decimalDigits))
                 }
             }
