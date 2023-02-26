@@ -67,7 +67,7 @@ struct AnyCurrencyView: View {
                 }
             }
             .sheet(isPresented: $showOverview) {
-                CurrencyCalcView(currency: model.toCurrency, base: model.fromCurrency)
+                CurrencyCalcView(currency: model.toCurrency, base: model.fromCurrency, shouldSwap: false)
             }
         }
     }

@@ -21,12 +21,16 @@ class CurrencyCalcViewModel: ObservableObject {
     @Published var isDouble: Bool = false
     @Published var decimalDigits = 0
     
-    init(currency: Currency, base: Currency) {
+    init(currency: Currency, base: Currency, shouldSwap: Bool) {
         self.currency = currency
         self.base = base
         
-        self.topCurrency = currency
-        self.bottomCurrency = base
+        self.topCurrency = base
+        self.bottomCurrency = currency
+        
+        if shouldSwap {
+            self.swapCurrencies()
+        }
     }
     
     

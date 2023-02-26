@@ -17,8 +17,8 @@ struct CurrencyCalcView: View {
     
     let shared = SharedDataManager.shared
     
-    init(currency: Currency, base: Currency = SharedDataManager.shared.base) {
-        model = CurrencyCalcViewModel(currency: currency, base: base)
+    init(currency: Currency, base: Currency = SharedDataManager.shared.base, shouldSwap: Bool = true) {
+        model = CurrencyCalcViewModel(currency: currency, base: base, shouldSwap: shouldSwap)
     }
     
     var body: some View {
