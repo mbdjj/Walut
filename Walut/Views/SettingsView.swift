@@ -117,15 +117,21 @@ struct SettingsView: View {
                 
                 Section {
                     NavigationLink {
+                        FeatureRoadmapView()
+                    } label: {
+                        Text("settings_roadmap")
+                    }
+                    
+                    NavigationLink {
                         SupportDevView()
                     } label: {
-                        Text(String(localized: "support"))
+                        Text("support")
                     }
 
                 }
                 
             }
-            .navigationTitle(String(localized: "settings"))
+            .navigationTitle("settings")
         }
         .onChange(of: model.selectedBase) { newValue in
             model.saveBase()

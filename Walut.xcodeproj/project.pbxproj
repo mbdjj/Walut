@@ -61,6 +61,8 @@
 		34BD793429A7D905005E2B85 /* CurrencyCalcViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34BD793329A7D905005E2B85 /* CurrencyCalcViewModel.swift */; };
 		34CAB492290F11CA00D877E5 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CAB491290F11CA00D877E5 /* FavoritesView.swift */; };
 		34CAB494290F128100D877E5 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CAB493290F128100D877E5 /* FavoritesViewModel.swift */; };
+		34D3A43B29B0956300292518 /* Roadmap in Frameworks */ = {isa = PBXBuildFile; productRef = 34D3A43A29B0956300292518 /* Roadmap */; };
+		34D3A43D29B095B200292518 /* FeatureRoadmapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D3A43C29B095B200292518 /* FeatureRoadmapView.swift */; };
 		34D4AD872997EB2900EFD2A7 /* ZAR@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D4AD392997EB2900EFD2A7 /* ZAR@3x.png */; };
 		34D4AD882997EB2900EFD2A7 /* EUR@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D4AD3A2997EB2900EFD2A7 /* EUR@3x.png */; };
 		34D4AD892997EB2900EFD2A7 /* NOK@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D4AD3B2997EB2900EFD2A7 /* NOK@2x.png */; };
@@ -229,6 +231,7 @@
 		34BD793329A7D905005E2B85 /* CurrencyCalcViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCalcViewModel.swift; sourceTree = "<group>"; };
 		34CAB491290F11CA00D877E5 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		34CAB493290F128100D877E5 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
+		34D3A43C29B095B200292518 /* FeatureRoadmapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureRoadmapView.swift; sourceTree = "<group>"; };
 		34D4AD392997EB2900EFD2A7 /* ZAR@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZAR@3x.png"; sourceTree = "<group>"; };
 		34D4AD3A2997EB2900EFD2A7 /* EUR@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EUR@3x.png"; sourceTree = "<group>"; };
 		34D4AD3B2997EB2900EFD2A7 /* NOK@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NOK@2x.png"; sourceTree = "<group>"; };
@@ -334,6 +337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				341CF6242913BCB40012FA5B /* StoreKit.framework in Frameworks */,
+				34D3A43B29B0956300292518 /* Roadmap in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +444,7 @@
 				3498532728F57029003E0FC9 /* SettingsView.swift */,
 				341CF625291430B40012FA5B /* SupportDevView.swift */,
 				34890F5B2914E6460059B5C3 /* ThanksView.swift */,
+				34D3A43C29B095B200292518 /* FeatureRoadmapView.swift */,
 				349E3F7728FEAFDE004831E2 /* ProfileView.swift */,
 				34CAB491290F11CA00D877E5 /* FavoritesView.swift */,
 			);
@@ -608,6 +613,9 @@
 				3483470129262447003710CA /* PBXTargetDependency */,
 			);
 			name = Walut;
+			packageProductDependencies = (
+				34D3A43A29B0956300292518 /* Roadmap */,
+			);
 			productName = Walut;
 			productReference = 34A2345C28F05B5C00C81292 /* Walut.app */;
 			productType = "com.apple.product-type.application";
@@ -639,6 +647,9 @@
 				pl,
 			);
 			mainGroup = 34A2345328F05B5C00C81292;
+			packageReferences = (
+				34D3A43929B0956300292518 /* XCRemoteSwiftPackageReference "Roadmap" */,
+			);
 			productRefGroup = 34A2345D28F05B5C00C81292 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -816,6 +827,7 @@
 				342A047D290A5B7B00C10652 /* OnboardingViewModel.swift in Sources */,
 				341CF628291431930012FA5B /* SupportDevViewModel.swift in Sources */,
 				34A2347028F05C3B00C81292 /* BasePickerViewModel.swift in Sources */,
+				34D3A43D29B095B200292518 /* FeatureRoadmapView.swift in Sources */,
 				3498CC9628F4504900961C61 /* TimeSeriesData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1118,6 +1130,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		34D3A43929B0956300292518 /* XCRemoteSwiftPackageReference "Roadmap" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AvdLee/Roadmap.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		34D3A43A29B0956300292518 /* Roadmap */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 34D3A43929B0956300292518 /* XCRemoteSwiftPackageReference "Roadmap" */;
+			productName = Roadmap;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 34A2345428F05B5C00C81292 /* Project object */;
 }

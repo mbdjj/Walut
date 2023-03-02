@@ -47,6 +47,7 @@
 "settings_quick_conversion" = "Quick conversion mode";
 "settings_show_percent" = "Show percent difference";
 "settings_reduce_data" = "Reduce data usage";
+"settings_roadmap" = "Feature roadmap";
 
 "base_currency" = "Base currency";
 "base_choose" = "Choose your base";
