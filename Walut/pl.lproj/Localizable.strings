@@ -47,7 +47,9 @@
 "settings_quick_conversion" = "Tryb szybkiej konwersji";
 "settings_show_percent" = "Pokaż procentową różnicę";
 "settings_reduce_data" = "Zredukuj zużycie danych";
+
 "settings_roadmap" = "Lista planowanych funkcji";
+"features" = "Funkcje";
 
 "base_currency" = "Waluta bazowa";
 "base_choose" = "Wybierz walutę bazową";
