@@ -139,9 +139,7 @@ struct CurrencyListView: View {
             .sheet(isPresented: $model.shouldShowDatePickView) {
                 DatePickView()
             }
-            .searchable(text: $queryString) {
-                
-            }
+            .searchable(text: $queryString) {}
             .sheet(item: $model.selectedCurrency) { currency in
                 CurrencyCalcView(currency: currency)
             }

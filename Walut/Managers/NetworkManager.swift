@@ -325,7 +325,7 @@ struct NetworkManager {
         let dateString = defaults.string(forKey: "lastUpdate") ?? "2022-02-23 00:00:00" // my birthday :)
         let formatter = DateFormatter()
         formatter.calendar = Calendar.current
-        formatter.dateFormat = "rrrr-MM-dd HH:mm:ss"
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
         return formatter.date(from: dateString)!
     }
