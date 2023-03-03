@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import StoreKit
 
 struct CurrencyListView: View {
     
@@ -15,6 +16,9 @@ struct CurrencyListView: View {
     @State var quickConvertValue = 1.0
     
     @State var queryString: String = ""
+    
+    @Environment(\.requestReview) var requestReview
+    @AppStorage("openCount") var openCount = 0
     
     var body: some View {
         NavigationStack {
@@ -34,7 +38,6 @@ struct CurrencyListView: View {
                         Section {
                             ForEach(results.0) { currency in
                                 Button {
-                                    //CalculationView(base: shared.base, foreign: currency, decimal: shared.decimal)
                                     model.selectedCurrency = currency
                                 } label: {
                                     CurrencyCell(for: currency, mode: shared.quickConvert ? .quickConvert : .normal, value: quickConvertValue)
@@ -51,7 +54,6 @@ struct CurrencyListView: View {
                     Section {
                         ForEach(results.1) { currency in
                             Button {
-                                //CalculationView(base: shared.base, foreign: currency, decimal: shared.decimal)
                                 model.selectedCurrency = currency
                             } label: {
                                 CurrencyCell(for: currency, mode: shared.quickConvert ? .quickConvert : .normal, value: quickConvertValue)
@@ -131,6 +133,15 @@ struct CurrencyListView: View {
             .onAppear {
                 Task {
                     await model.checkRefreshData()
+                }
+                
+                if openCount < 6 {
+                    openCount += 1
+                    print(openCount)
+                }
+                
+                if openCount == 5 {
+                    requestReview()
                 }
             }
             .sheet(isPresented: $model.shouldShowSortView) {
