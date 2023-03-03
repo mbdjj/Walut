@@ -334,7 +334,7 @@ struct NetworkManager {
         let date = Date.now
         let formatter = DateFormatter()
         formatter.calendar = Calendar.current
-        formatter.dateFormat = "rrrr-MM-dd HH:mm:ss"
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
         let dateString = formatter.string(from: date)
         defaults.set(dateString, forKey: "lastUpdate")
