@@ -16,7 +16,7 @@ struct CurrencyCell: View {
     
     let shouldShowPercent: Bool
     
-    var percent: Double { (currency.price - currency.yesterdayPrice) / currency.yesterdayPrice * 100 }
+    var percent: Double { (currency.price - currency.yesterdayPrice) / currency.yesterdayPrice }
     var percentColor: Color {
         if percent == 0 {
             return .secondary
@@ -24,6 +24,15 @@ struct CurrencyCell: View {
             return .green
         } else {
             return .red
+        }
+    }
+    var arrowDirection: String {
+        if percent == 0 {
+            return "right"
+        } else if percent > 0 {
+            return "up"
+        } else {
+            return "down"
         }
     }
     
@@ -91,10 +100,15 @@ struct CurrencyCell: View {
                     }
                     
                     if shouldShowPercent {
-                        Text(shared.percentLocaleStirng(value: percent))
+                        Label {
+                            
+                        } icon: {
+                            
+                        }
+                        Text("\(Image(systemName: "arrow.\(arrowDirection)")) \(shared.percentLocaleStirng(value: abs(percent)))")
                             .font(.caption2)
-                        .fontWeight(.semibold)
-                        .foregroundColor(percentColor)
+                            .fontWeight(.semibold)
+                            .foregroundColor(percentColor)
                     }
                 }
                 
@@ -107,7 +121,6 @@ struct CurrencyCell: View {
                         Image(systemName: "star.fill")
                             .foregroundColor(.yellow)
                             .font(.caption)
-                            //.padding()
                     }
                     Spacer()
                 }
