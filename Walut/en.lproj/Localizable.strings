@@ -109,7 +109,7 @@
 "support_enjoy_1" = "Enjoy your new ";
 "support_enjoy_2" = " title. You can equip it in your profile. You also get a verification checkmark next to your name.";
 
-"onboarding0" = "Welcome to Walut!";
+"onboarding_welcome" = "Welcome to ";
 "onboarding1" = "Check current rates!";
 "onboarding2" = "Quickly check conversion!";
 "onboarding3" = "Now with charts!";

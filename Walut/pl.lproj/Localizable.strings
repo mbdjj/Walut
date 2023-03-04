@@ -109,7 +109,7 @@
 "support_enjoy_1" = "Naciesz się swoim nowym tytułem ";
 "support_enjoy_2" = ". Możesz zacząć go używać w zakładce profil. Dostajesz również znaczek weryfikacji obok imienia.";
 
-"onboarding0" = "Witaj w Walut!";
+"onboarding_welcome" = "Witamy w aplikacji ";
 "onboarding1" = "Sprawdzaj aktualne kursy!";
 "onboarding2" = "Szybko sprawdzaj konwersje!";
 "onboarding3" = "Teraz z wykresami!";

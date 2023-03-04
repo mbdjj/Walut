@@ -37,7 +37,7 @@ struct ViewManagingView: View {
             if shared.onboardingDone {
                 BasePickerView()
             } else {
-                OnboardingView()
+                HelloView()
             }
         }
     }

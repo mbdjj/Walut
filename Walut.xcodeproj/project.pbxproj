@@ -13,9 +13,7 @@
 		341DFC0A295DAFAF00BDCBDB /* PercentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341DFC09295DAFAF00BDCBDB /* PercentView.swift */; };
 		341DFC0C295DB42100BDCBDB /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341DFC0B295DB42100BDCBDB /* MockData.swift */; };
 		341DFC0E295DB44300BDCBDB /* WidgetChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341DFC0D295DB44300BDCBDB /* WidgetChartView.swift */; };
-		342A047B290A5A7B00C10652 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342A047A290A5A7B00C10652 /* OnboardingView.swift */; };
-		342A047D290A5B7B00C10652 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342A047C290A5B7B00C10652 /* OnboardingViewModel.swift */; };
-		342A047F290A5BAF00C10652 /* OnboardingPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342A047E290A5BAF00C10652 /* OnboardingPage.swift */; };
+		342A047D290A5B7B00C10652 /* HelloViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342A047C290A5B7B00C10652 /* HelloViewModel.swift */; };
 		342D433A28F7E37F001C69AD /* CurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342D433928F7E37F001C69AD /* CurrencyCell.swift */; };
 		3441ABD828F1709F009528FD /* CurrencyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3441ABD728F1709F009528FD /* CurrencyListView.swift */; };
 		3443E4CA2962D58500749277 /* DatePickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3443E4C92962D58400749277 /* DatePickView.swift */; };
@@ -142,6 +140,8 @@
 		34D5AFEB2951B6550043B72A /* SortViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D5AFEA2951B6550043B72A /* SortViewModel.swift */; };
 		34DC74BD2998DE140042F968 /* CurrencyChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DC74BC2998DE140042F968 /* CurrencyChartView.swift */; };
 		34DC74BF299983250042F968 /* CurrencyChartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DC74BE299983250042F968 /* CurrencyChartViewModel.swift */; };
+		34DDC4CA29B28796002F76EF /* HelloView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDC4C929B28796002F76EF /* HelloView.swift */; };
+		34DDC4CC29B292BB002F76EF /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDC4CB29B292BB002F76EF /* OnboardingCell.swift */; };
 		34E0A201292CFCDB00EF3CBC /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C1A28F172A6006C4F38 /* NetworkManager.swift */; };
 		34E0A203292CFD3C00EF3CBC /* CurrencyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C1E28F1751C006C4F38 /* CurrencyData.swift */; };
 		34ED0C1B28F172A6006C4F38 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C1A28F172A6006C4F38 /* NetworkManager.swift */; };
@@ -182,9 +182,7 @@
 		341DFC09295DAFAF00BDCBDB /* PercentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentView.swift; sourceTree = "<group>"; };
 		341DFC0B295DB42100BDCBDB /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		341DFC0D295DB44300BDCBDB /* WidgetChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetChartView.swift; sourceTree = "<group>"; };
-		342A047A290A5A7B00C10652 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
-		342A047C290A5B7B00C10652 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
-		342A047E290A5BAF00C10652 /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
+		342A047C290A5B7B00C10652 /* HelloViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelloViewModel.swift; sourceTree = "<group>"; };
 		342D433928F7E37F001C69AD /* CurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCell.swift; sourceTree = "<group>"; };
 		3441ABD728F1709F009528FD /* CurrencyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListView.swift; sourceTree = "<group>"; };
 		3443E4C92962D58400749277 /* DatePickView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickView.swift; sourceTree = "<group>"; };
@@ -308,6 +306,8 @@
 		34D5AFEA2951B6550043B72A /* SortViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortViewModel.swift; sourceTree = "<group>"; };
 		34DC74BC2998DE140042F968 /* CurrencyChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyChartView.swift; sourceTree = "<group>"; };
 		34DC74BE299983250042F968 /* CurrencyChartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyChartViewModel.swift; sourceTree = "<group>"; };
+		34DDC4C929B28796002F76EF /* HelloView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelloView.swift; sourceTree = "<group>"; };
+		34DDC4CB29B292BB002F76EF /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
 		34ED0C1A28F172A6006C4F38 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		34ED0C1E28F1751C006C4F38 /* CurrencyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyData.swift; sourceTree = "<group>"; };
 		34ED0C2028F17592006C4F38 /* SharedDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedDataManager.swift; sourceTree = "<group>"; };
@@ -425,7 +425,7 @@
 			isa = PBXGroup;
 			children = (
 				34ED0C2228F1C24F006C4F38 /* ViewManagingView.swift */,
-				342A047A290A5A7B00C10652 /* OnboardingView.swift */,
+				34DDC4C929B28796002F76EF /* HelloView.swift */,
 				34A2346D28F05BAE00C81292 /* BasePickerView.swift */,
 				3441ABD728F1709F009528FD /* CurrencyListView.swift */,
 				34D5AFE82951B25C0043B72A /* SortView.swift */,
@@ -446,7 +446,7 @@
 		34A2347228F0609A00C81292 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				342A047C290A5B7B00C10652 /* OnboardingViewModel.swift */,
+				342A047C290A5B7B00C10652 /* HelloViewModel.swift */,
 				34A2346F28F05C3B00C81292 /* BasePickerViewModel.swift */,
 				344A71EA292C13200065F689 /* CurrencyListViewModel.swift */,
 				34D5AFEA2951B6550043B72A /* SortViewModel.swift */,
@@ -476,7 +476,7 @@
 		34AC47B828F7D8BD00724165 /* Custom Components */ = {
 			isa = PBXGroup;
 			children = (
-				342A047E290A5BAF00C10652 /* OnboardingPage.swift */,
+				34DDC4CB29B292BB002F76EF /* OnboardingCell.swift */,
 				342D433928F7E37F001C69AD /* CurrencyCell.swift */,
 				344E9986295ED7A200921DBC /* LoadingCell.swift */,
 				3483639D290D28D5000DA0DB /* ChartToShare.swift */,
@@ -789,8 +789,8 @@
 				3483639E290D28D5000DA0DB /* ChartToShare.swift in Sources */,
 				3481A7F62966BB8C00370546 /* AnyCurrencyViewModel.swift in Sources */,
 				3441ABD828F1709F009528FD /* CurrencyListView.swift in Sources */,
-				342A047B290A5A7B00C10652 /* OnboardingView.swift in Sources */,
 				349E3F7A28FEB108004831E2 /* ProfileViewModel.swift in Sources */,
+				34DDC4CC29B292BB002F76EF /* OnboardingCell.swift in Sources */,
 				3443E4CA2962D58500749277 /* DatePickView.swift in Sources */,
 				3498CC9428F4502200961C61 /* RatesData.swift in Sources */,
 				3481E08C295DE09100322363 /* WalutWidgetIntents.intentdefinition in Sources */,
@@ -799,7 +799,6 @@
 				3447F7E728F0BB3F00B59B25 /* AppIconManager.swift in Sources */,
 				3443E4CC2962D6C900749277 /* DatePickViewModel.swift in Sources */,
 				348CE6EF2951E32400E89078 /* SortingManager.swift in Sources */,
-				342A047F290A5BAF00C10652 /* OnboardingPage.swift in Sources */,
 				349E3F7828FEAFDE004831E2 /* ProfileView.swift in Sources */,
 				3498532828F57029003E0FC9 /* SettingsView.swift in Sources */,
 				345D49B729B1D51D00C6E1EB /* CurrencyCalcViewModel.swift in Sources */,
@@ -809,10 +808,11 @@
 				3481A7F42966BB2800370546 /* AnyCurrencyView.swift in Sources */,
 				341CF626291430B40012FA5B /* SupportDevView.swift in Sources */,
 				34D5AFE92951B25C0043B72A /* SortView.swift in Sources */,
+				34DDC4CA29B28796002F76EF /* HelloView.swift in Sources */,
 				34CAB492290F11CA00D877E5 /* FavoritesView.swift in Sources */,
 				34BD793229A75708005E2B85 /* CurrencyCalcView.swift in Sources */,
 				344A71EB292C13200065F689 /* CurrencyListViewModel.swift in Sources */,
-				342A047D290A5B7B00C10652 /* OnboardingViewModel.swift in Sources */,
+				342A047D290A5B7B00C10652 /* HelloViewModel.swift in Sources */,
 				341CF628291431930012FA5B /* SupportDevViewModel.swift in Sources */,
 				34A2347028F05C3B00C81292 /* BasePickerViewModel.swift in Sources */,
 				34D3A43D29B095B200292518 /* FeatureRoadmapView.swift in Sources */,
@@ -849,7 +849,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = CMJ553K76W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WalutWidget/Info.plist;
@@ -877,7 +877,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = CMJ553K76W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WalutWidget/Info.plist;
@@ -1022,7 +1022,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Walut/Preview Content\"";
 				DEVELOPMENT_TEAM = CMJ553K76W;
 				ENABLE_PREVIEWS = YES;
@@ -1058,7 +1058,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Walut/Preview Content\"";
 				DEVELOPMENT_TEAM = CMJ553K76W;
 				ENABLE_PREVIEWS = YES;
