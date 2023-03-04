@@ -18,7 +18,7 @@ struct PercentView: View {
         let yesterday = rates[0].value
         let today = rates[1].value
         
-        return (today - yesterday) / yesterday * 100
+        return (today - yesterday) / yesterday
     }
     var percentColor: Color {
         if differencePercent == 0 {
@@ -33,9 +33,9 @@ struct PercentView: View {
         if differencePercent == 0 {
             return Image(systemName: "arrow.right")
         } else if differencePercent > 0 {
-            return Image(systemName: "arrow.up.right")
+            return Image(systemName: "arrow.up")
         } else {
-            return Image(systemName: "arrow.down.right")
+            return Image(systemName: "arrow.down")
         }
     }
     
@@ -45,21 +45,22 @@ struct PercentView: View {
                 Spacer()
                 
                 Text("\(entryCurrency.flag) \(entryCurrency.code)")
-                    .font(.title3)
+                    .font(.system(.title3, design: .rounded))
                     .fontWeight(.bold)
                 
-                Text("\(String(format: "%.3f", rates.last?.value ?? 1.2)) \(baseCurrency.symbol)")
-                    .font(.largeTitle)
+                Text(SharedDataManager.shared.currencyLocaleString(value: rates.last?.value ?? 1.2, currencyCode: baseCode))
+                    .font(.system(.largeTitle, design: .rounded))
                     .fontWeight(.heavy)
                     .minimumScaleFactor(0.6)
                     .lineLimit(1)
                     .foregroundColor(.walut)
                 
                 Label {
-                    Text("\(String(format: "%.2f", differencePercent))%")
+                    Text(SharedDataManager.shared.percentLocaleStirng(value: abs(differencePercent)))
                 } icon: {
                     symbol
                 }
+                .fontDesign(.rounded)
                 .fontWeight(.semibold)
                 .foregroundColor(percentColor)
 

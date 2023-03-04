@@ -91,7 +91,7 @@ struct CurrencyCell: View {
                     }
                     
                     if shouldShowPercent {
-                        Text("\(String(format: "%.2f", percent))%")
+                        Text(shared.percentLocaleStirng(value: percent))
                             .font(.caption2)
                         .fontWeight(.semibold)
                         .foregroundColor(percentColor)

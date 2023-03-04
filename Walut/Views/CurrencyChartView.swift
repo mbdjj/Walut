@@ -28,12 +28,12 @@ struct CurrencyChartView: View {
                 let price = active.value
                 let start = data.first!.value
                 
-                return (price - start) / start * 100
+                return (price - start) / start
             } else {
                 let price = data.last!.value
                 let start = data.first!.value
                 
-                return (price - start) / start * 100
+                return (price - start) / start
             }
         } else {
             return 0.0
@@ -150,7 +150,7 @@ struct CurrencyChartView: View {
                             .font(.system(.title2, design: .rounded, weight: .bold))
                             .foregroundColor(percentColor)
                             .animation(.easeInOut(duration: 0.3), value: percentArrowDeg)
-                        Text("\(String(format: "%.2f", abs(percent)))%")
+                        Text(SharedDataManager.shared.percentLocaleStirng(value: abs(percent)))
                             .font(.system(.title2, design: .rounded, weight: .bold))
                             .foregroundColor(percentColor)
                             

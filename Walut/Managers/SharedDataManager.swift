@@ -84,7 +84,19 @@ class SharedDataManager: ObservableObject {
     }
     func currencyLocaleString(value: Double, currencyCode: String) -> String {
         let formatter = numFormatter
+        if decimal == 0 {
+            formatter.maximumFractionDigits = 3
+        }
         formatter.currencyCode = currencyCode
+        return formatter.string(from: value as NSNumber) ?? "0"
+    }
+    
+    func percentLocaleStirng(value: Double) -> String {
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current
+        formatter.numberStyle = .percent
+        formatter.maximumFractionDigits = 2
+        
         return formatter.string(from: value as NSNumber) ?? "0"
     }
     
