@@ -21,6 +21,11 @@ class CurrencyCalcViewModel: ObservableObject {
     @Published var isDouble: Bool = false
     @Published var decimalDigits = 0
     
+    let shared = SharedDataManager.shared
+    var textToShare: String {
+        "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(shared.currencyLocaleString(value: currency.price, currencyCode: base.code))"
+    }
+    
     init(currency: Currency, base: Currency, shouldSwap: Bool) {
         self.currency = currency
         self.base = base
@@ -58,6 +63,21 @@ class CurrencyCalcViewModel: ObservableObject {
         }
         
         return str
+    }
+    
+    func valueToShare(_ type: AmountType = .top) -> String {
+        var first = ""
+        var second = ""
+        
+        if type == .top {
+            first = shared.priceLocaleString(value: topAmount, currencyCode: topCurrency.code)
+            second = shared.priceLocaleString(value: bottomAmount, currencyCode: bottomCurrency.code)
+        } else {
+            first = shared.priceLocaleString(value: bottomAmount, currencyCode: bottomCurrency.code)
+            second = shared.priceLocaleString(value: topAmount, currencyCode: topCurrency.code)
+        }
+        
+        return "\(first) = \(second)"
     }
     
     private func calcDecimal() {

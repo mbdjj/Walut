@@ -45,15 +45,12 @@ struct CurrencyCalcView: View {
                 }
                 
                 Menu {
-                    Button {
-                        
-                    } label: {
+                    ShareLink(item: model.valueToShare()) {
                         Label("share_value", systemImage: "equal.circle")
                     }
+                    .disabled(model.topAmount == 0)
                     
-                    Button {
-                        
-                    } label: {
+                    ShareLink(item: model.textToShare) {
                         Label("share_text", systemImage: "text.bubble")
                     }
                 } label: {
@@ -142,6 +139,12 @@ struct CurrencyCalcView: View {
                         .opacity(0)
                 }
                 .minimumScaleFactor(0.6)
+                .onDrag {
+                    return NSItemProvider(object: model.valueToShare() as NSString)
+                } preview: {
+                    Text(model.valueToShare())
+                        .font(.system(.body, design: .rounded, weight: .bold))
+                }
                 
                 let bot = model.bottomCurrency
                 HStack {
@@ -159,6 +162,12 @@ struct CurrencyCalcView: View {
                     }
                 }
                 .minimumScaleFactor(0.6)
+                .onDrag {
+                    return NSItemProvider(object: model.valueToShare(.bottom) as NSString)
+                } preview: {
+                    Text(model.valueToShare(.bottom))
+                        .font(.system(.body, design: .rounded, weight: .bold))
+                }
             }
             
             Spacer()

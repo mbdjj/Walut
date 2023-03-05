@@ -100,4 +100,12 @@ class SharedDataManager: ObservableObject {
         return formatter.string(from: value as NSNumber) ?? "0"
     }
     
+    func priceLocaleString(value: Double, currencyCode: String) -> String {
+        let formatter = numFormatter
+        formatter.maximumFractionDigits = 2
+        formatter.currencyCode = currencyCode
+        
+        return formatter.string(from: value as NSNumber) ?? "0"
+    }
+    
 }
