@@ -91,7 +91,7 @@ struct ChartToShare: View {
                         .foregroundColor(.walut)
                 }
                 
-                Spacer()
+                Spacer(minLength: 80)
                 
                 VStack(alignment: .trailing) {
                     HStack {
@@ -126,11 +126,12 @@ struct ChartToShare: View {
                     .interpolationMethod(.catmullRom)
                 }
             }
-            .frame(height: 250)
+            .frame(height: 300)
             .chartYScale(domain: minValueYAxis - minValueYAxis * 0.01 ... maxValueYAxis + maxValueYAxis * 0.01)
             .chartXAxis(.hidden)
             
         }
+        .background(.background)
     }
 }
 
