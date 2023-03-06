@@ -10,76 +10,127 @@ import Charts
 
 struct ChartToShare: View {
     
-    let base: Currency
     let currency: Currency
-    let data: [RatesData]
+    let base: Currency
     
-    let shared = SharedDataManager.shared
-    var minValueYAxis: Double
-    var maxValueYAxis: Double
+    var minValueYAxis: Double {
+        let data = currency.chartData ?? []
+        return data.min { $0.value < $1.value }?.value ?? 0.0
+    }
+    var maxValueYAxis: Double {
+        let data = currency.chartData ?? []
+        return data.max { $0.value < $1.value }?.value ?? 0.0
+    }
     
-    init(currency: Currency, base: Currency, data: [RatesData]) {
-        self.currency = currency
-        self.base = base
-        self.data = data
-        
-        if !data.isEmpty {
-            self.minValueYAxis = data[0].value
-            self.maxValueYAxis = data[0].value
-        } else {
-            self.minValueYAxis = 0
-            self.maxValueYAxis = 0
-        }
-        
-        for item in data {
-            if self.minValueYAxis > item.value {
-                self.minValueYAxis = item.value
-            }
+    var percent: Double {
+        if let data = currency.chartData {
+            let price = data.last!.value
+            let start = data.first!.value
             
-            if self.maxValueYAxis < item.value {
-                self.maxValueYAxis = item.value
-            }
+            return (price - start) / start
+        } else {
+            return 0.0
+        }
+    }
+    var percentArrowDeg: Double {
+        if percent > 0 {
+            return 0
+        } else if percent < 0 {
+            return 180
+        } else {
+            return 90
+        }
+    }
+    var percentColor: Color {
+        if percent > 0 {
+            return .green
+        } else if percent < 0 {
+            return .red
+        } else {
+            return .gray
         }
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("\(currency.flag) \(currency.code) - \(base.flag) \(base.code)")
-                .font(.largeTitle)
-                .bold()
-                .padding()
+        VStack {
             
-            VStack(alignment: .leading) {
-                
-                Text(data.last!.dateFormattedString)
-                    .padding(.horizontal)
-                    .font(.system(.title2, weight: .semibold))
-                
-                Text("\(String(format: "%.\(shared.decimal)f", data.last!.value)) \(shared.base.symbol)")
-                    .padding(.horizontal)
+            // MARK: - Top bar
+            
+            HStack(alignment: .top, spacing: 8) {
+                Text(currency.flag)
+                    .frame(width: 50, height: 50)
                     .font(.largeTitle)
-                    .bold()
-                
-                Chart {
-                    ForEach(data) { rate in
-                        LineMark(
-                            x: .value("Date", rate.date),
-                            y: .value("Value", rate.value)
-                        )
-                        .foregroundStyle(Color.walut.gradient)
-                        .interpolationMethod(.catmullRom)
+                    .background {
+                        Color.walut
+                            .clipShape(Circle())
                     }
-                }
-                .chartYScale(domain: minValueYAxis*0.99...maxValueYAxis*1.01)
-                .frame(width: 360, height: 250)
+                    .shadow(color: .walut, radius: 5, x: 0, y: 4)
+                
+                Text(base.flag)
+                    .frame(width: 50, height: 50)
+                    .font(.largeTitle)
+                    .background {
+                        Color.walut
+                            .clipShape(Circle())
+                    }
+                    .shadow(color: .walut, radius: 5, x: 0, y: 4)
+                
+                Spacer()
             }
             .padding()
-            .background {
-                RoundedRectangle(cornerRadius: 20, style: .continuous)
-                    .fill(.background.shadow(.drop(radius: 2)))
+            
+            // MARK: - Chart info
+            
+            HStack(alignment: .bottom) {
+                VStack(alignment: .leading) {
+                    Text(SharedDataManager.shared.currencyLocaleString(value: currency.price, currencyCode: base.code))
+                        .font(.system(.title, design: .rounded, weight: .bold))
+                    
+                    Text(currency.fullName)
+                        .font(.system(.title3, design: .rounded, weight: .medium))
+                        .foregroundColor(.walut)
+                }
+                
+                Spacer()
+                
+                VStack(alignment: .trailing) {
+                    HStack {
+                        Image(systemName: "arrow.up")
+                            .rotationEffect(Angle(degrees: percentArrowDeg))
+                            .font(.system(.title2, design: .rounded, weight: .bold))
+                            .foregroundColor(percentColor)
+                            .animation(.easeInOut(duration: 0.3), value: percentArrowDeg)
+                        Text(SharedDataManager.shared.percentLocaleStirng(value: abs(percent)))
+                            .font(.system(.title2, design: .rounded, weight: .bold))
+                            .foregroundColor(percentColor)
+                            
+                    }
+                    
+                    Text("overview_past_month")
+                        .font(.system(.title3, design: .rounded, weight: .medium))
+                        .foregroundColor(percentColor)
+                        .lineLimit(1)
+                }
             }
+            .padding(.horizontal)
+            
+            // MARK: - Chart
+            
+            Chart {
+                ForEach(currency.chartData ?? [RatesData]()) { rate in
+                    LineMark(
+                        x: .value("Date", rate.date),
+                        y: .value("Value", rate.value)
+                    )
+                    .foregroundStyle(Color.walut.gradient.opacity(1.0))
+                    .interpolationMethod(.catmullRom)
+                }
+            }
+            .frame(height: 250)
+            .chartYScale(domain: minValueYAxis - minValueYAxis * 0.01 ... maxValueYAxis + maxValueYAxis * 0.01)
+            .chartXAxis(.hidden)
+            
         }
-        .background(Color.white)
     }
 }
 
@@ -89,14 +140,6 @@ extension Color {
 
 struct ChartToShare_Previews: PreviewProvider {
     static var previews: some View {
-        ChartToShare(currency: Currency(baseCode: "USD"), base: Currency(baseCode: "PLN"), data: [
-            RatesData(code: "USD", date: "2022/10/29", value: 2.5),
-            RatesData(code: "USD", date: "2022/10/30", value: 3),
-            RatesData(code: "USD", date: "2022/10/31", value: 2.16),
-            RatesData(code: "USD", date: "2022/11/01", value: 3),
-            RatesData(code: "USD", date: "2022/11/02", value: 3),
-            RatesData(code: "USD", date: "2022/11/03", value: 3),
-            RatesData(code: "USD", date: "2022/11/04", value: 3)
-        ])
+        ChartToShare(currency: Currency.placeholder, base: Currency(baseCode: "PLN"))
     }
 }

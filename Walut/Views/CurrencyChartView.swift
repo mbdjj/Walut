@@ -11,6 +11,7 @@ import Charts
 struct CurrencyChartView: View {
     
     @Environment(\.dismiss) var dismiss
+    @Environment(\.displayScale) var displayScale
     
     var minValueYAxis: Double {
         let data = model.currency.chartData ?? []
@@ -60,9 +61,6 @@ struct CurrencyChartView: View {
     
     @ObservedObject var model: CurrencyChartViewModel
     
-    @FocusState private var foreignTextFieldFocused: Bool
-    @FocusState private var baseTextFieldFocused: Bool
-    
     init(currency: Currency) {
         let base = SharedDataManager.shared.base
         
@@ -101,17 +99,17 @@ struct CurrencyChartView: View {
                 
                 Spacer()
                 
-                Button {
-                    
-                } label: {
-                    Image(systemName: "square.and.arrow.up")
-                        .font(.body)
-                        .frame(width: 30, height: 30)
-                        .foregroundColor(.gray)
-                        .background {
-                            Color(uiColor: .secondarySystemBackground)
-                                .clipShape(Circle())
-                        }
+                if let image = renderView() {
+                    ShareLink(item: image, preview: SharePreview("share_chart", image: image)) {
+                        Image(systemName: "square.and.arrow.up")
+                            .font(.body)
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.gray)
+                            .background {
+                                Color(uiColor: .secondarySystemBackground)
+                                    .clipShape(Circle())
+                            }
+                    }
                 }
                 
                 Button {
@@ -186,7 +184,6 @@ struct CurrencyChartView: View {
                 .frame(height: 250)
                 .chartYScale(domain: minValueYAxis - minValueYAxis * 0.01 ... maxValueYAxis + maxValueYAxis * 0.01)
                 .chartYAxis(.hidden)
-                //.chartXAxis(.hidden)
                 .chartOverlay { proxy in
                     GeometryReader { geometry in
                         Rectangle().fill(.clear).contentShape(Rectangle())
@@ -235,6 +232,18 @@ struct CurrencyChartView: View {
             
             // MARK: - todo chart length changing buttons
             
+        }
+    }
+    
+    @MainActor func renderView() -> Image? {
+        let renderer = ImageRenderer(content: ChartToShare(currency: model.currency, base: model.base))
+        
+        renderer.scale = displayScale
+        
+        if let image = renderer.uiImage {
+            return Image(uiImage: image)
+        } else {
+            return nil
         }
     }
 }
