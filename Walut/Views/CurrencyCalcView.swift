@@ -14,11 +14,14 @@ struct CurrencyCalcView: View {
     @Environment(\.dismiss) var dismiss
     
     @State var chartCurrency: Currency?
+    @State var selectedFromCode: String
     
     let shared = SharedDataManager.shared
     
     init(currency: Currency, base: Currency = SharedDataManager.shared.base, shouldSwap: Bool = true) {
-        model = CurrencyCalcViewModel(currency: currency, base: base, shouldSwap: shouldSwap)
+        let model = CurrencyCalcViewModel(currency: currency, base: base, shouldSwap: shouldSwap)
+        self.model = model
+        _selectedFromCode = State(initialValue: model.topCurrency.code)
     }
     
     var body: some View {
@@ -85,10 +88,23 @@ struct CurrencyCalcView: View {
                 Text("calc_from")
                     .font(.system(.body, design: .rounded, weight: .medium))
                 
-                Button {
-                    
+                let top = model.topCurrency
+                Menu {
+                    ForEach(shared.allCodesArray, id: \.self) { code in
+                        let currency = Currency(baseCode: code)
+                        Button {
+                            
+                        } label: {
+                            HStack {
+                                Text("\(currency.flag) \(code)")
+                                Spacer()
+                                if top.code == code {
+                                    Image(systemName: "checkmark")
+                                }
+                            }
+                        }
+                    }
                 } label: {
-                    let top = model.topCurrency
                     Text("\(top.flag) \(top.code)")
                         .foregroundColor(.gray)
                         .font(.system(.body, design: .rounded, weight: .medium))
@@ -102,10 +118,23 @@ struct CurrencyCalcView: View {
                 Text("calc_to")
                     .font(.system(.body, design: .rounded, weight: .medium))
                 
-                Button {
-                    
+                let bot = model.bottomCurrency
+                Menu {
+                    ForEach(shared.allCodesArray, id: \.self) { code in
+                        let currency = Currency(baseCode: code)
+                        Button {
+                            
+                        } label: {
+                            HStack {
+                                Text("\(currency.flag) \(code)")
+                                Spacer()
+                                if bot.code == code {
+                                    Image(systemName: "checkmark")
+                                }
+                            }
+                        }
+                    }
                 } label: {
-                    let bot = model.bottomCurrency
                     Text("\(bot.flag) \(bot.code)")
                         .foregroundColor(.gray)
                         .font(.system(.body, design: .rounded, weight: .medium))
@@ -199,7 +228,7 @@ struct CurrencyCalcView: View {
                     Text("share_chart")
                         .padding(.horizontal)
                         .padding(.vertical, 6)
-                        .foregroundColor(.gray)
+                        .foregroundColor(.walut)
                         .background {
                             Color(uiColor: .secondarySystemBackground)
                                 .clipShape(RoundedRectangle(cornerRadius: 8))
@@ -266,7 +295,7 @@ struct CurrencyCalcView: View {
                 HStack {
                     Spacer()
                     Text("clear")
-                        .foregroundColor(.gray)
+                        .foregroundColor(.walut)
                         .font(.system(.title3, design: .rounded, weight: .medium))
                         .padding(.vertical, 8)
                     Spacer()
