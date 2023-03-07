@@ -14,14 +14,12 @@ struct CurrencyCalcView: View {
     @Environment(\.dismiss) var dismiss
     
     @State var chartCurrency: Currency?
-    @State var selectedFromCode: String
     
     let shared = SharedDataManager.shared
     
     init(currency: Currency, base: Currency = SharedDataManager.shared.base, shouldSwap: Bool = true) {
         let model = CurrencyCalcViewModel(currency: currency, base: base, shouldSwap: shouldSwap)
         self.model = model
-        _selectedFromCode = State(initialValue: model.topCurrency.code)
     }
     
     var body: some View {
@@ -93,7 +91,7 @@ struct CurrencyCalcView: View {
                     ForEach(shared.allCodesArray, id: \.self) { code in
                         let currency = Currency(baseCode: code)
                         Button {
-                            
+                            model.changeCurrency(.top, to: code)
                         } label: {
                             HStack {
                                 Text("\(currency.flag) \(code)")
@@ -123,7 +121,7 @@ struct CurrencyCalcView: View {
                     ForEach(shared.allCodesArray, id: \.self) { code in
                         let currency = Currency(baseCode: code)
                         Button {
-                            
+                            model.changeCurrency(.bottom, to: code)
                         } label: {
                             HStack {
                                 Text("\(currency.flag) \(code)")
@@ -313,6 +311,13 @@ struct CurrencyCalcView: View {
                 model.bottomAmount = top / model.currency.price
             } else {
                 model.bottomAmount = top / model.currency.rate
+            }
+        }
+        .onChange(of: model.currency) { _ in
+            if model.topCurrency == model.base {
+                model.bottomAmount = model.topAmount / model.currency.price
+            } else {
+                model.bottomAmount = model.topAmount / model.currency.rate
             }
         }
         .sheet(item: $chartCurrency) { currency in

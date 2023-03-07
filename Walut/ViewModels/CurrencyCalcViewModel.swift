@@ -9,8 +9,8 @@ import SwiftUI
 
 class CurrencyCalcViewModel: ObservableObject {
     
-    let currency: Currency
-    let base: Currency
+    @Published var currency: Currency
+    var base: Currency
     
     @Published var topCurrency: Currency
     @Published var bottomCurrency: Currency
@@ -179,6 +179,51 @@ class CurrencyCalcViewModel: ObservableObject {
         }
     }
     
+    func changeCurrency(_ type: AmountType, to code: String) {
+        let currencyToSwitch = type == .top ? topCurrency : bottomCurrency
+        
+        if currencyToSwitch == base {
+            base = Currency(baseCode: code)
+            Task {
+                await getCurrency()
+            }
+            if type == .top {
+                topCurrency = base
+                bottomCurrency = currency
+            } else {
+                topCurrency = currency
+                bottomCurrency = base
+            }
+        } else {
+            currency = Currency(baseCode: code)
+            Task {
+                await self.getCurrency()
+            }
+            if type == .top {
+                topCurrency = currency
+                bottomCurrency = base
+            } else {
+                topCurrency = base
+                bottomCurrency = currency
+            }
+        }
+    }
+    
+    func getCurrency() async {
+        do {
+            let data = try await NetworkManager.shared.getData(for: currency, base: base)
+            present(data)
+        } catch {
+            print("Couldn't update currency")
+            print(error.localizedDescription)
+        }
+    }
+    
+    func present(_ data: Currency) {
+        DispatchQueue.main.async {
+            self.currency = data
+        }
+    }
 }
 
 enum AmountType {
