@@ -128,6 +128,32 @@ struct NetworkManager {
         }
     }
     
+    func getData(for currency: Currency, base: Currency, date: Date) async throws -> Currency {
+        let dateString = dateString(from: date)
+        
+        guard let url = URL(string: "https://api.exchangerate.host/\(dateString)?base=\(base.code)") else {
+            throw NetworkError.invalidURL
+        }
+        
+        let req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData)
+        let (data, response) = try await URLSession.shared.data(for: req)
+        
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+            throw NetworkError.invalidResponse
+        }
+        
+        do {
+            let results = try decoder.decode(CurrencyData.self, from: data)
+            let currency = Currency(code: currency.code, rate: results.rates.getRate(of: currency.code))
+            
+            print("Fetched currency data for \(base.code) and returned only \(currency.code)")
+            
+            return currency
+        } catch {
+            throw NetworkError.decodingError
+        }
+    }
+    
     // MARK: - Methods for fetching chart data
     func getChartData(for currency: Currency, base: Currency) async throws -> [RatesData] {
         

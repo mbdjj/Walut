@@ -22,11 +22,11 @@ struct ViewManagingView: View {
                         Label(shared.base.code, systemImage: "dollarsign.circle")
                     }
                     .tag(0)
-                AnyCurrencyView()
-                    .tabItem {
-                        Label(String(localized: "any_currency"), systemImage: "questionmark.circle")
-                    }
-                    .tag(1)
+//                AnyCurrencyView()
+//                    .tabItem {
+//                        Label(String(localized: "any_currency"), systemImage: "questionmark.circle")
+//                    }
+//                    .tag(1)
                 SettingsView()
                     .tabItem {
                         Label(String(localized: "settings"), systemImage: "gear")
