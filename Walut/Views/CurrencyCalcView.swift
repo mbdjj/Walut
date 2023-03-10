@@ -307,18 +307,10 @@ struct CurrencyCalcView: View {
             .padding(.bottom)
         }
         .onChange(of: model.topAmount) { top in
-            if model.topCurrency == model.base {
-                model.bottomAmount = top / model.currency.price
-            } else {
-                model.bottomAmount = top / model.currency.rate
-            }
+            model.calcBottom()
         }
         .onChange(of: model.currency) { _ in
-            if model.topCurrency == model.base {
-                model.bottomAmount = model.topAmount / model.currency.price
-            } else {
-                model.bottomAmount = model.topAmount / model.currency.rate
-            }
+            model.calcBottom()
         }
         .sheet(item: $chartCurrency) { currency in
             CurrencyChartView(currency: currency, base: model.base)

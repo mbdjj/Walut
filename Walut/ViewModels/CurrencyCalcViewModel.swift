@@ -22,12 +22,15 @@ class CurrencyCalcViewModel: ObservableObject {
     @Published var decimalDigits = 0
     
     let shared = SharedDataManager.shared
+    let defaults = UserDefaults.standard
     var textToShare: String {
         "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(shared.currencyLocaleString(value: currency.price, currencyCode: base.code))"
     }
     
     var isCustom: Bool { shared.isCustomDate }
     var customDate: Date { shared.customDate }
+    
+    var finishedLoading = false
     
     init(currency: Currency, base: Currency, shouldSwap: Bool) {
         self.currency = currency
@@ -39,6 +42,20 @@ class CurrencyCalcViewModel: ObservableObject {
         if shouldSwap {
             self.swapCurrencies()
         }
+        
+        let codeFromSave = defaults.string(forKey: "savedCodes")
+        if codeFromSave == "\(currency.code)\(base.code)" {
+            let topCode = defaults.string(forKey: "savedTopCode")
+            let amount = defaults.double(forKey: "savedAmount")
+            
+            if topCurrency.code != topCode {
+                self.swapCurrencies()
+            }
+            
+            topAmount = amount
+        }
+        calcBottom()
+        finishedLoading = true
     }
     
     
@@ -108,6 +125,9 @@ class CurrencyCalcViewModel: ObservableObject {
         (topAmount, bottomAmount) = (bottomAmount, topAmount)
         
         checkIfDouble()
+        if finishedLoading {
+            saveToDefaults()
+        }
     }
     
     
@@ -124,6 +144,8 @@ class CurrencyCalcViewModel: ObservableObject {
                 topAmount /= pow(10, Double(decimalDigits))
             }
         }
+        
+        saveToDefaults()
     }
     
     func buttonPressed(_ sym: String) {
@@ -154,12 +176,15 @@ class CurrencyCalcViewModel: ObservableObject {
                 }
             }
         }
+        
+        saveToDefaults()
     }
     
     func clear() {
         topAmount = 0
         isDouble = false
         decimalDigits = 0
+        saveToDefaults()
     }
     
     func handleFavorites() {
@@ -210,6 +235,8 @@ class CurrencyCalcViewModel: ObservableObject {
                 bottomCurrency = currency
             }
         }
+        
+        saveToDefaults()
     }
     
     func getCurrency() async {
@@ -230,6 +257,21 @@ class CurrencyCalcViewModel: ObservableObject {
     func present(_ data: Currency) {
         DispatchQueue.main.async {
             self.currency = data
+        }
+    }
+    
+    private func saveToDefaults() {
+        defaults.set("\(currency.code)\(base.code)", forKey: "savedCodes")
+        defaults.set(topCurrency.code, forKey: "savedTopCode")
+        defaults.set(topAmount, forKey: "savedAmount")
+        print("saved!")
+    }
+    
+    func calcBottom() {
+        if topCurrency == base {
+            bottomAmount = topAmount / currency.price
+        } else {
+            bottomAmount = topAmount / currency.rate
         }
     }
 }
