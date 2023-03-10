@@ -57,8 +57,6 @@ struct LoadingCell: View {
                         .foregroundColor(Bool.random() ? .green : .red)
                     }
                 }
-                
-                Text("a")
             }
             
         }
@@ -70,11 +68,7 @@ struct LoadingCell_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
             List {
-                NavigationLink {
-                    Text("dupa")
-                } label: {
-                    CurrencyCell(for: Currency(baseCode: "PLN"), mode: .normal, value: 1)
-                }
+                CurrencyCell(for: Currency(baseCode: "PLN"), mode: .normal, value: 1)
                 LoadingCell()
             }
         }
