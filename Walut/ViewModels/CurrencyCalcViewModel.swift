@@ -236,7 +236,9 @@ class CurrencyCalcViewModel: ObservableObject {
             }
         }
         
-        saveToDefaults()
+        if topAmount != 0 {
+            saveToDefaults()
+        }
     }
     
     func getCurrency() async {
