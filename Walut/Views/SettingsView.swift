@@ -26,7 +26,7 @@ struct SettingsView: View {
                                 .padding()
                                 .foregroundColor(.white)
                                 .background(
-                                    Color.accentColor
+                                    Color.walut
                                         .clipShape(Circle())
                                 )
                                 .padding(.vertical, 4)
@@ -39,7 +39,7 @@ struct SettingsView: View {
                                     
                                     if model.isSupporter {
                                         Image(systemName: "checkmark.seal.fill")
-                                            .foregroundColor(.walut)
+                                            .foregroundColor(model.isZona24 ? .pinkWalut : .walut)
                                             .font(.subheadline)
                                     }
                                 }

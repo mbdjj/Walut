@@ -137,6 +137,7 @@ struct ChartToShare: View {
 
 extension Color {
     static let walut = Color(red: 0, green: 0.725, blue: 0.682)
+    static let pinkWalut = Color(red: 1, green: 0.78, blue: 0.87)
 }
 
 struct ChartToShare_Previews: PreviewProvider {

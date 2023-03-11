@@ -36,6 +36,7 @@ class SettingsViewModel: ObservableObject {
             return false
         }
     }
+    var isZona24: Bool { shared.chosenTitle == shared.titleArray[9] }
     
     let defaults = UserDefaults.standard
     var shared = SharedDataManager.shared
