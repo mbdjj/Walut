@@ -55,6 +55,7 @@
 		3483639E290D28D5000DA0DB /* ChartToShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3483639D290D28D5000DA0DB /* ChartToShare.swift */; };
 		34890F5C2914E6460059B5C3 /* ThanksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34890F5B2914E6460059B5C3 /* ThanksView.swift */; };
 		348CE6EF2951E32400E89078 /* SortingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348CE6EE2951E32400E89078 /* SortingManager.swift */; };
+		3490185F29BE315A00DD1D53 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3490185E29BE315A00DD1D53 /* SettingsView.swift */; };
 		3498532828F57029003E0FC9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3498532728F57029003E0FC9 /* SettingsView.swift */; };
 		3498532A28F570A2003E0FC9 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3498532928F570A2003E0FC9 /* SettingsViewModel.swift */; };
 		3498CC9428F4502200961C61 /* RatesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3498CC9328F4502200961C61 /* RatesData.swift */; };
@@ -251,6 +252,7 @@
 		3483639D290D28D5000DA0DB /* ChartToShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartToShare.swift; sourceTree = "<group>"; };
 		34890F5B2914E6460059B5C3 /* ThanksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThanksView.swift; sourceTree = "<group>"; };
 		348CE6EE2951E32400E89078 /* SortingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortingManager.swift; sourceTree = "<group>"; };
+		3490185E29BE315A00DD1D53 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3498532728F57029003E0FC9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		3498532928F570A2003E0FC9 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		3498CC9328F4502200961C61 /* RatesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatesData.swift; sourceTree = "<group>"; };
@@ -442,6 +444,7 @@
 				346C7A2429BD19020023DE23 /* ContentView.swift */,
 				34EF3EBE29BDC3FE00CFAEDA /* BasePickerView.swift */,
 				346C7A4229BD1AEB0023DE23 /* CurrencyListView.swift */,
+				3490185E29BE315A00DD1D53 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -911,6 +914,7 @@
 				346C7A3D29BD19B50023DE23 /* CurrencyListViewModel.swift in Sources */,
 				346C7A3A29BD198E0023DE23 /* RatesData.swift in Sources */,
 				34EF3EC129BDC57D00CFAEDA /* BasePickerViewModel.swift in Sources */,
+				3490185F29BE315A00DD1D53 /* SettingsView.swift in Sources */,
 				346C7A3729BD19860023DE23 /* NetworkManager.swift in Sources */,
 				346C7A2529BD19020023DE23 /* ContentView.swift in Sources */,
 				346C7A3929BD198C0023DE23 /* CurrencyData.swift in Sources */,
@@ -1021,7 +1025,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"WalutWatch Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = CMJ553K76W;
 				ENABLE_PREVIEWS = YES;
@@ -1053,7 +1057,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"WalutWatch Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = CMJ553K76W;
 				ENABLE_PREVIEWS = YES;
@@ -1085,7 +1089,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = CMJ553K76W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WalutWidget/Info.plist;
@@ -1113,7 +1117,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = CMJ553K76W;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WalutWidget/Info.plist;
@@ -1258,7 +1262,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Walut/Preview Content\"";
 				DEVELOPMENT_TEAM = CMJ553K76W;
 				ENABLE_PREVIEWS = YES;
@@ -1294,7 +1298,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Walut/Preview Content\"";
 				DEVELOPMENT_TEAM = CMJ553K76W;
 				ENABLE_PREVIEWS = YES;

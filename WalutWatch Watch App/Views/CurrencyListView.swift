@@ -14,6 +14,22 @@ struct CurrencyListView: View {
     var body: some View {
         NavigationStack {
             List {
+                
+                Section {
+                    NavigationLink {
+                        SettingsView()
+                    } label: {
+                        Label("settings", systemImage: "gear")
+                    }
+                    .swipeActions {
+                        NavigationLink {
+                            
+                        } label: {
+                            Image(systemName: "arrow.up.arrow.down")
+                        }
+                    }
+                }
+                
                 if !model.loading {
                     ForEach(model.currencyArray) { currency in
                         CurrencyCell(currency: currency)
