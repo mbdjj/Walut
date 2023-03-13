@@ -40,7 +40,7 @@ class CurrencyListViewModel: ObservableObject {
     
     private func present(data: [Currency]) {
         
-        var currencyArray = removeBase(from: data)
+        let currencyArray = removeBase(from: data)
         
 //        currencyArray = sort(array: currencyArray)
         

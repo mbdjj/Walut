@@ -82,6 +82,7 @@
 "next" = "Dalej";
 "continue" = "Kontynuuj";
 "cancel" = "Anuluj";
+"no_data" = "Brak danych";
 
 "text_to_share0" = " ";
 "text_to_share1" = " kosztuje teraz ";

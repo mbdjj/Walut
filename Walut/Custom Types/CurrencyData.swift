@@ -25,49 +25,49 @@ struct Rates: Decodable {
     //let ANG: Double
     //let AOA: Double
     //let ARS: Double
-    let AUD: Double
+    let AUD: Double?
     //let AWG: Double
     //let AZN: Double
     //let BAM: Double
     //let BBD: Double
     //let BDT: Double
-    let BGN: Double
+    let BGN: Double?
     //let BHD: Double
     //let BIF: Double
     //let BMD: Double
     //let BND: Double
     //let BOB: Double
-    let BRL: Double
+    let BRL: Double?
     //let BSD: Double
     //let BTC: Double
     //let BTN: Double
     //let BWP: Double
     //let BYN: Double
     //let BZD: Double
-    let CAD: Double
+    let CAD: Double?
     //let CDF: Double
-    let CHF: Double
+    let CHF: Double?
     //let CLF: Double
     //let CLP: Double
     //let CNH: Double
-    let CNY: Double
+    let CNY: Double?
     //let COP: Double
     //let CRC: Double
     //let CUC: Double
     //let CUP: Double
     //let CVE: Double
-    let CZK: Double
+    let CZK: Double?
     //let DJF: Double
-    let DKK: Double
+    let DKK: Double?
     //let DOP: Double
     //let DZD: Double
     //let EGP: Double
     //let ERN: Double
     //let ETB: Double
-    let EUR: Double
+    let EUR: Double?
     //let FJD: Double
     //let FKP: Double
-    let GBP: Double
+    let GBP: Double?
     //let GEL: Double
     //let GGP: Double
     //let GHS: Double
@@ -76,28 +76,28 @@ struct Rates: Decodable {
     //let GNF: Double
     //let GTQ: Double
     //let GYD: Double
-    let HKD: Double
+    let HKD: Double?
     //let HNL: Double
-    let HRK: Double
+    let HRK: Double?
     //let HTG: Double
-    let HUF: Double
-    let IDR: Double
-    let ILS: Double
+    let HUF: Double?
+    let IDR: Double?
+    let ILS: Double?
     //let IMP: Double
-    let INR: Double
+    let INR: Double?
     //let IQD: Double
     //let IRR: Double
     //let ISK: Double
     //let JEP: Double
     //let JMD: Double
     //let JOD: Double
-    let JPY: Double
+    let JPY: Double?
     //let KES: Double
     //let KGS: Double
     //let KHR: Double
     //let KMF: Double
     //let KPW: Double
-    let KRW: Double
+    let KRW: Double?
     //let KWD: Double
     //let KYD: Double
     //let KZT: Double
@@ -119,34 +119,34 @@ struct Rates: Decodable {
     //let MUR: Double
     //let MVR: Double
     //let MWK: Double
-    let MXN: Double
-    let MYR: Double
+    let MXN: Double?
+    let MYR: Double?
     //let MZN: Double
     //let NAD: Double
     //let NGN: Double
     //let NIO: Double
-    let NOK: Double
+    let NOK: Double?
     //let NPR: Double
-    let NZD: Double
+    let NZD: Double?
     //let OMR: Double
     //let PAB: Double
     //let PEN: Double
     //let PGK: Double
-    let PHP: Double
+    let PHP: Double?
     //let PKR: Double
-    let PLN: Double
+    let PLN: Double?
     //let PYG: Double
     //let QAR: Double
-    let RON: Double
+    let RON: Double?
     //let RSD: Double
-    let RUB: Double
+    let RUB: Double?
     //let RWF: Double
     //let SAR: Double
     //let SBD: Double
     //let SCR: Double
     //let SDG: Double
-    let SEK: Double
-    let SGD: Double
+    let SEK: Double?
+    let SGD: Double?
     //let SHP: Double
     //let SLL: Double
     //let SOS: Double
@@ -157,18 +157,18 @@ struct Rates: Decodable {
     //let SVC: Double
     //let SYP: Double
     //let SZL: Double
-    let THB: Double
+    let THB: Double?
     //let TJS: Double
     //let TMT: Double
     //let TND: Double
     //let TOP: Double
-    let TRY: Double
+    let TRY: Double?
     //let TTD: Double
     //let TWD: Double
     //let TZS: Double
-    let UAH: Double
+    let UAH: Double?
     //let UGX: Double
-    let USD: Double
+    let USD: Double?
     //let UYU: Double
     //let UZS: Double
     //let VES: Double
@@ -185,11 +185,11 @@ struct Rates: Decodable {
     //let XPF: Double
     //let XPT: Double
     //let YER: Double
-    let ZAR: Double
+    let ZAR: Double?
     //let ZMW: Double
     //let ZWL: Double
     
-    var ratesDictionary: [String: Double] {
+    var ratesDictionary: [String: Double?] {
         let dict = [
             "AUD": AUD,
             "BRL": BRL,
@@ -231,7 +231,7 @@ struct Rates: Decodable {
     
     //Method to make it easier to grab rate of specific currency rate.
     func getRate(of code: String) -> Double {
-        return ratesDictionary[code]!
+        return ratesDictionary[code]! ?? 0.0
     }
     
 }

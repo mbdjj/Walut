@@ -82,6 +82,7 @@
 "next" = "Next";
 "continue" = "Continue";
 "cancel" = "Cancel";
+"no_data" = "No data";
 
 "text_to_share0" = "'s ";
 "text_to_share1" = " price is now at ";

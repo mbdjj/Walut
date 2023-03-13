@@ -90,7 +90,7 @@ struct CurrencyCell: View {
                 
                 VStack(alignment: .trailing) {
                     if mode == .normal {
-                        Text(shared.currencyLocaleString(value: currency.price, currencyCode: base.code))
+                        Text(currency.rate != 0 ? shared.currencyLocaleString(value: currency.price, currencyCode: base.code) : String(localized: "no_data"))
                             .font(.system(size: 17))
                             .foregroundColor(.primary)
                     } else if mode == .quickConvert {
@@ -99,12 +99,7 @@ struct CurrencyCell: View {
                             .foregroundColor(.primary)
                     }
                     
-                    if shouldShowPercent {
-                        Label {
-                            
-                        } icon: {
-                            
-                        }
+                    if shouldShowPercent && currency.rate != 0 {
                         Text("\(Image(systemName: "arrow.\(arrowDirection)")) \(shared.percentLocaleStirng(value: abs(percent)))")
                             .font(.caption2)
                             .fontWeight(.semibold)
