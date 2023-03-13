@@ -22,7 +22,6 @@ struct CurrencyCell: View {
                         Image(systemName: "star.fill")
                             .foregroundColor(Color.yellow)
                             .font(.system(size: 10))
-                            //.padding(4)
                         
                         Spacer()
                     }
@@ -34,7 +33,7 @@ struct CurrencyCell: View {
                 
                 Spacer()
                 
-                Text("\(String(format: "%.3f", currency.price)) \(base.symbol)")
+                Text(currency.rate != 0 ? SharedDataManager.shared.currencyLocaleString(value: currency.price) : String(localized: "no_data"))
             }
         }
         

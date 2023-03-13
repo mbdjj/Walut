@@ -27,7 +27,6 @@
 		346C7A2529BD19020023DE23 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346C7A2429BD19020023DE23 /* ContentView.swift */; };
 		346C7A2729BD19030023DE23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 346C7A2629BD19030023DE23 /* Assets.xcassets */; };
 		346C7A2A29BD19030023DE23 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 346C7A2929BD19030023DE23 /* Preview Assets.xcassets */; };
-		346C7A2E29BD19160023DE23 /* WalutWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 346C7A2029BD19020023DE23 /* WalutWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		346C7A3729BD19860023DE23 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C1A28F172A6006C4F38 /* NetworkManager.swift */; };
 		346C7A3829BD19890023DE23 /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A2347328F061D700C81292 /* Currency.swift */; };
 		346C7A3929BD198C0023DE23 /* CurrencyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C1E28F1751C006C4F38 /* CurrencyData.swift */; };
@@ -167,22 +166,23 @@
 		34EF3EBF29BDC3FE00CFAEDA /* BasePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EF3EBE29BDC3FE00CFAEDA /* BasePickerView.swift */; };
 		34EF3EC129BDC57D00CFAEDA /* BasePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EF3EC029BDC57D00CFAEDA /* BasePickerViewModel.swift */; };
 		34EF3EC229BDC7E700CFAEDA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34ED0C2A28F1C6FF006C4F38 /* Localizable.strings */; };
+		34F4A54629BF34DD009E2583 /* WalutWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 346C7A2029BD19020023DE23 /* WalutWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		346C7A2F29BD19160023DE23 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 34A2345428F05B5C00C81292 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 346C7A1F29BD19020023DE23;
-			remoteInfo = "WalutWatch Watch App";
-		};
 		3483470029262447003710CA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 34A2345428F05B5C00C81292 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 348346E6292612A3003710CA;
 			remoteInfo = WalutWidgetExtension;
+		};
+		34F4A54729BF34DD009E2583 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 34A2345428F05B5C00C81292 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 346C7A1F29BD19020023DE23;
+			remoteInfo = "WalutWatch Watch App";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -193,7 +193,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				346C7A2E29BD19160023DE23 /* WalutWatch Watch App.app in Embed Watch Content */,
+				34F4A54629BF34DD009E2583 /* WalutWatch Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -737,7 +737,7 @@
 			);
 			dependencies = (
 				3483470129262447003710CA /* PBXTargetDependency */,
-				346C7A3029BD19160023DE23 /* PBXTargetDependency */,
+				34F4A54829BF34DD009E2583 /* PBXTargetDependency */,
 			);
 			name = Walut;
 			packageProductDependencies = (
@@ -994,15 +994,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		346C7A3029BD19160023DE23 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 346C7A1F29BD19020023DE23 /* WalutWatch Watch App */;
-			targetProxy = 346C7A2F29BD19160023DE23 /* PBXContainerItemProxy */;
-		};
 		3483470129262447003710CA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 348346E6292612A3003710CA /* WalutWidgetExtension */;
 			targetProxy = 3483470029262447003710CA /* PBXContainerItemProxy */;
+		};
+		34F4A54829BF34DD009E2583 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 346C7A1F29BD19020023DE23 /* WalutWatch Watch App */;
+			targetProxy = 34F4A54729BF34DD009E2583 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
