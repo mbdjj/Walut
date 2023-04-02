@@ -134,6 +134,11 @@ struct CurrencyListView: View {
                 Task {
                     await model.checkRefreshData()
                 }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+                Task {
+                    await model.checkRefreshData()
+                }
                 
                 if openCount < 6 {
                     openCount += 1
