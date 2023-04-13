@@ -69,23 +69,21 @@ struct WalutWidgetEntryView : View {
     var entry: CurrencyEntry
 
     var body: some View {
-        ZStack {
-            Color(uiColor: .systemGray6)
-            
-            switch family {
-            case .systemSmall:
+        switch family {
+        case .systemSmall:
+            PercentView(rates: entry.rates, baseCode: entry.baseCode)
+        case .systemMedium:
+            HStack {
                 PercentView(rates: entry.rates, baseCode: entry.baseCode)
-            case .systemMedium:
-                HStack {
-                    PercentView(rates: entry.rates, baseCode: entry.baseCode)
-                    
-                    if let chartData = entry.chartData {
-                        WidgetChartView(data: chartData)
-                    }
+                
+                if let chartData = entry.chartData {
+                    WidgetChartView(data: chartData)
                 }
-            default:
-                Text(entry.date.formatted(.dateTime))
             }
+        case .accessoryRectangular:
+            RectangularView(baseCode: entry.baseCode, rates: entry.rates)
+        default:
+            EmptyView()
         }
     }
 }
@@ -99,7 +97,7 @@ struct WalutWidget: Widget {
         }
         .configurationDisplayName(String(localized: "widget_title"))
         .description(String(localized: "widget_description"))
-        .supportedFamilies([.systemSmall, .systemMedium])
+        .supportedFamilies([.systemSmall, .systemMedium, .accessoryRectangular])
     }
 }
 

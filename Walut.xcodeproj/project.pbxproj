@@ -166,6 +166,7 @@
 		34EF3EBF29BDC3FE00CFAEDA /* BasePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EF3EBE29BDC3FE00CFAEDA /* BasePickerView.swift */; };
 		34EF3EC129BDC57D00CFAEDA /* BasePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EF3EC029BDC57D00CFAEDA /* BasePickerViewModel.swift */; };
 		34EF3EC229BDC7E700CFAEDA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34ED0C2A28F1C6FF006C4F38 /* Localizable.strings */; };
+		34EFF37F29E7E5FF0053F60D /* RectangularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EFF37E29E7E5FF0053F60D /* RectangularView.swift */; };
 		34F4A54629BF34DD009E2583 /* WalutWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 346C7A2029BD19020023DE23 /* WalutWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -363,6 +364,7 @@
 		34ED0C2B28F1C705006C4F38 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		34EF3EBE29BDC3FE00CFAEDA /* BasePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePickerView.swift; sourceTree = "<group>"; };
 		34EF3EC029BDC57D00CFAEDA /* BasePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePickerViewModel.swift; sourceTree = "<group>"; };
+		34EFF37E29E7E5FF0053F60D /* RectangularView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -481,6 +483,7 @@
 				348346EF292612A3003710CA /* WalutWidget.swift */,
 				341DFC09295DAFAF00BDCBDB /* PercentView.swift */,
 				341DFC0D295DB44300BDCBDB /* WidgetChartView.swift */,
+				34EFF37E29E7E5FF0053F60D /* RectangularView.swift */,
 				341DFC0B295DB42100BDCBDB /* MockData.swift */,
 				348346F1292612A4003710CA /* Assets.xcassets */,
 				348346F3292612A4003710CA /* Info.plist */,
@@ -935,6 +938,7 @@
 				341DFC0C295DB42100BDCBDB /* MockData.swift in Sources */,
 				348346F0292612A3003710CA /* WalutWidget.swift in Sources */,
 				3481E08D295DE09100322363 /* WalutWidgetIntents.intentdefinition in Sources */,
+				34EFF37F29E7E5FF0053F60D /* RectangularView.swift in Sources */,
 				34E0A203292CFD3C00EF3CBC /* CurrencyData.swift in Sources */,
 				348346FE2926135E003710CA /* TimeSeriesData.swift in Sources */,
 				348346FD2926135B003710CA /* RatesData.swift in Sources */,
