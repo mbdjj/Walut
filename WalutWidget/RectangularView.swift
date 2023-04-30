@@ -15,16 +15,20 @@ struct RectangularView: View {
     var baseCurrency: Currency { Currency(baseCode: baseCode) }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text("\(entryCurrency.flag) \(entryCurrency.code)")
-                .font(.system(.body, design: .rounded))
-                .fontWeight(.bold)
+        HStack {
+            VStack(alignment: .leading) {
+                Text("\(entryCurrency.flag) \(entryCurrency.code)")
+                    .font(.system(.body, design: .rounded))
+                    .fontWeight(.bold)
+                
+                Text(SharedDataManager.shared.currencyLocaleString(value: rates.last?.value ?? 1.2, currencyCode: baseCode))
+                    .font(.system(.title3, design: .rounded))
+                    .fontWeight(.heavy)
+                    .minimumScaleFactor(0.6)
+                    .lineLimit(1)
+            }
             
-            Text(SharedDataManager.shared.currencyLocaleString(value: rates.last?.value ?? 1.2, currencyCode: baseCode))
-                .font(.system(.title3, design: .rounded))
-                .fontWeight(.heavy)
-                .minimumScaleFactor(0.6)
-                .lineLimit(1)
+            Spacer()
         }
     }
 }
