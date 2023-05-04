@@ -9,8 +9,7 @@ import Foundation
 
 class SharedDataManager: ObservableObject {
     
-    @Published var onboardingDone = false
-    @Published var isBaseSelected = false
+    @Published var appState: AppState
     
     @Published var name: String
     @Published var titleIDArray: [Int]
@@ -48,7 +47,7 @@ class SharedDataManager: ObservableObject {
     static let shared = SharedDataManager()
     
     init() {
-        isBaseSelected = defaults.bool(forKey: "isBaseSelected")
+        appState = defaults.bool(forKey: "isBaseSelected") ? .baseSelected : .onboarding
         
         name = defaults.string(forKey: "name") ?? "User"
         titleIDArray = defaults.array(forKey: "titleIDArray") as? [Int] ?? [0]
@@ -108,4 +107,10 @@ class SharedDataManager: ObservableObject {
         return formatter.string(from: value as NSNumber) ?? "0"
     }
     
+}
+
+enum AppState {
+    case baseSelected
+    case onboarding
+    case onboarded
 }

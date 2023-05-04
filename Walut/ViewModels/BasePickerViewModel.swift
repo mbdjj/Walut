@@ -54,7 +54,7 @@ class BasePickerViewModel: ObservableObject {
         
         DispatchQueue.main.async {
             withAnimation {
-                self.shared.isBaseSelected = true
+                self.shared.appState = .baseSelected
             }
         }
     }

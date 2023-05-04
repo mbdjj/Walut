@@ -32,9 +32,3 @@ struct RectangularView: View {
         }
     }
 }
-
-//struct RectangularView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RectangularView(code: "PLN", rates: [RatesData])
-//    }
-//}

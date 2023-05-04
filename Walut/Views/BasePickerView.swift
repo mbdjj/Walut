@@ -16,7 +16,7 @@ struct BasePickerView: View {
     var body: some View {
         NavigationView {
             Form {
-                TextField(String(localized: "your_name"), text: $model.name)
+                TextField("your_name", text: $model.name)
                     .focused($shouldNameFieldBeFocused)
                     .onSubmit {
                         shouldNameFieldBeFocused = false
@@ -24,7 +24,7 @@ struct BasePickerView: View {
                     .submitLabel(.done)
                 
                 Section {
-                    Picker(String(localized: "base_currency"), selection: $model.selected) {
+                    Picker("base_currency", selection: $model.selected) {
                         ForEach(model.currencyArray) { currency in
                             Text("\(currency.flag) \(currency.code)")
                         }
@@ -33,12 +33,14 @@ struct BasePickerView: View {
                     Stepper("\(String(localized: "settings_decimal_numbers")) (\(model.decimal))", value: $model.decimal, in: 2...7)
                 }
             }
-            .navigationTitle(model.name == "" ? "\(String(localized: "hello"))!" : "\(String(localized: "hello")) \(model.name)!")
+            .navigationTitle("\(String(localized: "hello"))\(model.name.isEmpty ? "" : " \(model.name)")!")
             .toolbar {
                 ToolbarItem {
                     Button {
                         shouldNameFieldBeFocused = false
-                        model.saveAndContinue()
+                        DispatchQueue.main.async {
+                            model.saveAndContinue()
+                        }
                     } label: {
                         Text(String(localized: "save"))
                     }

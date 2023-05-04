@@ -11,33 +11,27 @@ struct ViewManagingView: View {
     
     @State var selection = 0
     
-    let defaults = UserDefaults.standard
+    private let defaults = UserDefaults.standard
     @ObservedObject var shared = SharedDataManager.shared
     
     var body: some View {
-        if shared.isBaseSelected {
+        switch shared.appState {
+        case .onboarding:
+            HelloView()
+        case .onboarded:
+            BasePickerView()
+        case .baseSelected:
             TabView(selection: $selection) {
                 CurrencyListView()
                     .tabItem {
                         Label(shared.base.code, systemImage: "dollarsign.circle")
                     }
                     .tag(0)
-//                AnyCurrencyView()
-//                    .tabItem {
-//                        Label(String(localized: "any_currency"), systemImage: "questionmark.circle")
-//                    }
-//                    .tag(1)
                 SettingsView()
                     .tabItem {
-                        Label(String(localized: "settings"), systemImage: "gear")
+                        Label("settings", systemImage: "gear")
                     }
                     .tag(2)
-            }
-        } else {
-            if shared.onboardingDone {
-                BasePickerView()
-            } else {
-                HelloView()
             }
         }
     }

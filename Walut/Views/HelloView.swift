@@ -92,7 +92,7 @@ struct HelloView: View {
                 
                 Button {
                     withAnimation {
-                        SharedDataManager.shared.onboardingDone = true
+                        SharedDataManager.shared.appState = .onboarded
                     }
                 } label: {
                     Text("next")
