@@ -11,6 +11,8 @@ struct SettingsView: View {
     
     @ObservedObject var model = SettingsViewModel()
     
+    @Environment(\.requestReview) var requestReview
+    
     var body: some View {
         NavigationStack {
             List {
@@ -127,6 +129,18 @@ struct SettingsView: View {
                     } label: {
                         Text("support")
                     }
+                    
+                    Button {
+                        requestReview()
+                    } label: {
+                        Text("settings_rate_app")
+                            .foregroundColor(.primary)
+                    }
+                    
+                    let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+                    let build = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
+                    Text("\(String(localized: "settings_version")): \(version) (\(build))")
+                        .foregroundColor(.gray)
 
                 }
                 

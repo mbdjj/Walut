@@ -47,6 +47,8 @@
 "settings_quick_conversion" = "Quick conversion mode";
 "settings_show_percent" = "Show percent difference";
 "settings_reduce_data" = "Reduce data usage";
+"settings_rate_app" = "Rate the app";
+"settings_version" = "Version";
 
 "settings_roadmap" = "Feature roadmap";
 "features" = "Features";
