@@ -107,7 +107,7 @@ class SupportDevViewModel: ObservableObject {
         }
     }
     
-    func updateContent(for productID: String) {
+    private func updateContent(for productID: String) {
         
         var titleID = 0
         

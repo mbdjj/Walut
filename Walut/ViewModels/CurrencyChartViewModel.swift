@@ -17,7 +17,7 @@ class CurrencyChartViewModel: ObservableObject {
     var isCustom: Bool { SharedDataManager.shared.isCustomDate }
     var customDate: Date { SharedDataManager.shared.customDate }
     
-    let networkManager = NetworkManager.shared
+    private let networkManager = NetworkManager.shared
     
     init(currency: Currency, base: Currency) {
         self.currency = currency
@@ -32,22 +32,20 @@ class CurrencyChartViewModel: ObservableObject {
         do {
             if isCustom {
                 let data = try await networkManager.getChartData(for: currency, base: base, date: customDate)
-                loadData(with: data)
+                await loadData(with: data)
             } else {
                 let data = try await networkManager.getChartData(for: currency, base: base)
-                loadData(with: data)
+                await loadData(with: data)
             }
         } catch {
             
         }
     }
     
-    private func loadData(with data: [RatesData]) {
-        DispatchQueue.main.async {
-            withAnimation {
-                self.currency.chartData = data
-                self.shouldDisableChartButton = false
-            }
+    @MainActor private func loadData(with data: [RatesData]) {
+        withAnimation {
+            self.currency.chartData = data
+            self.shouldDisableChartButton = false
         }
     }
     

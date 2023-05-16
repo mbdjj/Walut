@@ -13,16 +13,16 @@ class SortViewModel: ObservableObject {
     @Published var selectedDirection: SortDirection = .ascending
     @Published var sortByFavorite: Bool = true
     
-    var initialSelectedSort: SortType = .byCode
-    var initialSelectedDirection: SortDirection = .ascending
-    var initialSortByFavorite: Bool = true
+    private var initialSelectedSort: SortType = .byCode
+    private var initialSelectedDirection: SortDirection = .ascending
+    private var initialSortByFavorite: Bool = true
     
     var changed: Bool {
         selectedSort != initialSelectedSort || selectedDirection != initialSelectedDirection || sortByFavorite != initialSortByFavorite
     }
     
-    var shared = SharedDataManager.shared
-    let defaults = UserDefaults.standard
+    private var shared = SharedDataManager.shared
+    private let defaults = UserDefaults.standard
     
     init() {
         decodeSort()
@@ -32,7 +32,7 @@ class SortViewModel: ObservableObject {
         initialSortByFavorite = sortByFavorite
     }
     
-    func decodeSort() {
+    private func decodeSort() {
         switch shared.sortIndex {
             
         // Sorting by code

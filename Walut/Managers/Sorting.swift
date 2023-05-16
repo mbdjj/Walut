@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct SortingManager {
+struct Sorting {
     
-    func byCode(_ array: [Currency], direction: SortDirection) -> [Currency] {
+    static func byCode(_ array: [Currency], direction: SortDirection) -> [Currency] {
         var array = array
         
         if direction == .ascending {
@@ -21,7 +21,7 @@ struct SortingManager {
         return array
     }
     
-    func byPrice(_ array: [Currency], direction: SortDirection) -> [Currency] {
+    static func byPrice(_ array: [Currency], direction: SortDirection) -> [Currency] {
         var array = array
         
         if direction == .ascending {
@@ -33,7 +33,7 @@ struct SortingManager {
         return array
     }
     
-    func byChange(_ array: [Currency], direction: SortDirection) -> [Currency] {
+    static func byChange(_ array: [Currency], direction: SortDirection) -> [Currency] {
         var array = array
         
         if direction == .ascending {

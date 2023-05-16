@@ -30,7 +30,6 @@ class CurrencyListViewModel: ObservableObject {
     
     let shared = SharedDataManager.shared
     let networkManager = NetworkManager.shared
-    let sorting = SortingManager()
     
     init() {
         DispatchQueue.main.async {
@@ -161,11 +160,11 @@ class CurrencyListViewModel: ObservableObject {
     
     private func sort(array: [Currency]) -> [Currency] {
         if sortIndex == 0 || sortIndex == 1 {
-            return sorting.byCode(array, direction: sortDirection)
+            return Sorting.byCode(array, direction: sortDirection)
         } else if sortIndex == 2 || sortIndex == 3 {
-            return sorting.byPrice(array, direction: sortDirection)
+            return Sorting.byPrice(array, direction: sortDirection)
         } else if sortIndex == 4 || sortIndex == 5 {
-            return sorting.byChange(array, direction: sortDirection)
+            return Sorting.byChange(array, direction: sortDirection)
         } else {
             return array
         }

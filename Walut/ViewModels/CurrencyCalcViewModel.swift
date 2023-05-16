@@ -21,8 +21,8 @@ class CurrencyCalcViewModel: ObservableObject {
     @Published var isDouble: Bool = false
     @Published var decimalDigits = 0
     
-    let shared = SharedDataManager.shared
-    let defaults = UserDefaults.standard
+    private let shared = SharedDataManager.shared
+    private let defaults = UserDefaults.standard
     var textToShare: String {
         "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(shared.currencyLocaleString(value: currency.price, currencyCode: base.code))"
     }

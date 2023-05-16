@@ -19,14 +19,12 @@ class BasePickerViewModel: ObservableObject {
     
     @Published var saveButtonDisabled = true
     
-    let defaults = UserDefaults.standard
-    let iconManager = AppIconManager()
-    var shared = SharedDataManager.shared
+    private let defaults = UserDefaults.standard
+    private let shared = SharedDataManager.shared
     
     init() {
-        for code in shared.allCodesArray {
-            currencyArray.append(Currency(baseCode: code))
-        }
+        currencyArray = shared.allCodesArray
+            .map { Currency(baseCode: $0) }
         
         self.selected = Locale.current.currency?.identifier ?? "AUD"
     }
@@ -50,7 +48,7 @@ class BasePickerViewModel: ObservableObject {
         shared.sortByFavorite = true
         shared.reduceDataUsage = true
         
-        iconManager.changeIcon(to: selected)
+        AppIcon.changeIcon(to: selected)
         
         DispatchQueue.main.async {
             withAnimation {

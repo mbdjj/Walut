@@ -12,12 +12,11 @@ class FavoritesViewModel: ObservableObject {
     @Published var favorites = [Currency]()
     var pickerData = [Currency]()
     
-    var shared = SharedDataManager.shared
+    private let shared = SharedDataManager.shared
     
     init() {
-        for favorite in shared.favorites {
-            favorites.append(Currency(baseCode: favorite))
-        }
+        favorites = shared.favorites
+            .map { Currency(baseCode: $0) }
         
         refreshPickerData()
     }
@@ -46,7 +45,7 @@ class FavoritesViewModel: ObservableObject {
         saveFavorites()
     }
     
-    func refreshPickerData() {
+    private func refreshPickerData() {
         pickerData = []
         
         for code in shared.allCodesArray {
@@ -57,7 +56,7 @@ class FavoritesViewModel: ObservableObject {
         }
     }
     
-    func saveFavorites() {
+    private func saveFavorites() {
         var codeArray = [String]()
         
         for favorite in favorites {

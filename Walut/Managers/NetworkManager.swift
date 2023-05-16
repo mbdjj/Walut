@@ -9,12 +9,12 @@ import Foundation
 
 struct NetworkManager {
     
-    static let shared = NetworkManager()
     private let decoder = JSONDecoder()
     private let allCodesArray: [String]
+    private let defaults = UserDefaults.standard
+    private let formatter = DateFormatter()
     
-    let defaults = UserDefaults.standard
-    let formatter = DateFormatter()
+    static let shared = NetworkManager()
     
     init() {
         // DateFormatter configuration

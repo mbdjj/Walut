@@ -19,7 +19,7 @@ class SettingsViewModel: ObservableObject {
     
     @Published var secretCode = ""
     @Published var shouldDisplayAlert: Bool = false
-    var shouldSaveTitle = false
+    private var shouldSaveTitle = false
     @Published var titleIDToSave = 0
     
     @Published var alertTitle = ""
@@ -38,9 +38,8 @@ class SettingsViewModel: ObservableObject {
     }
     var isZona24: Bool { shared.chosenTitle == shared.titleArray[9] }
     
-    let defaults = UserDefaults.standard
-    var shared = SharedDataManager.shared
-    let iconManager = AppIconManager()
+    private let defaults = UserDefaults.standard
+    private let shared = SharedDataManager.shared
     
     init() {
         name = shared.name
@@ -59,7 +58,7 @@ class SettingsViewModel: ObservableObject {
     func saveBase() {
         shared.base = Currency(baseCode: selectedBase)
         defaults.set(selectedBase, forKey: "base")
-        iconManager.changeIcon(to: selectedBase)
+        AppIcon.changeIcon(to: selectedBase)
     }
     
     func saveDecimal() {

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class HelloViewModel: ObservableObject {
+struct HelloViewModel {
     
     let onboardingData = [
         OnboardingData(iconName: "dollarsign", title: String(localized: "onboarding1"), description: String(localized: "onboarding_desc1")),

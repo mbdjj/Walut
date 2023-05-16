@@ -1,5 +1,5 @@
 //
-//  AppIconManager.swift
+//  AppIcon.swift
 //  Walut
 //
 //  Created by Marcin Bartminski on 07/10/2022.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct AppIconManager {
+struct AppIcon {
     
-    func changeIcon(to iconName: String) {
+    static func changeIcon(to iconName: String) {
         guard UIApplication.shared.supportsAlternateIcons else { return }
         
         

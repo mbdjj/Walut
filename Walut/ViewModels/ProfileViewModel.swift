@@ -16,10 +16,8 @@ class ProfileViewModel: ObservableObject {
     
     let titleArray: [String]
     
-    var letter: String { "\(name.first ?? "U")" }
-    
-    var shared = SharedDataManager.shared
-    let defaults = UserDefaults.standard
+    private let shared = SharedDataManager.shared
+    private let defaults = UserDefaults.standard
     
     init() {
         name = shared.name

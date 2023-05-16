@@ -46,7 +46,7 @@ struct SettingsView: View {
                                     }
                                 }
                                 
-                                Text(model.shared.chosenTitle)
+                                Text(SharedDataManager.shared.chosenTitle)
                                     .font(.system(.footnote))
                                     .foregroundColor(.secondary)
                             }

@@ -12,8 +12,8 @@ class DatePickViewModel: ObservableObject {
     @Published var pickerValue = 0
     @Published var customDate = Date()
     
-    var initialPickerValue: Int
-    var initialCustomDate: Date
+    private var initialPickerValue: Int
+    private var initialCustomDate: Date
     
     var changed: Bool {
         return pickerValue != initialPickerValue || customDate != initialCustomDate
@@ -21,17 +21,20 @@ class DatePickViewModel: ObservableObject {
     
     var range: ClosedRange<Date> { formatter.date(from: "1999-03-01")! ... .now }
     
-    var formatter = DateFormatter()
+    private var formatter = DateFormatter()
     
-    let shared = SharedDataManager.shared
-    let defaults = UserDefaults.standard
+    private let shared = SharedDataManager.shared
+    private let defaults = UserDefaults.standard
     
     init() {
-        pickerValue = shared.isCustomDate ? 1 : 0
-        customDate = shared.customDate
+        let pickerValue = shared.isCustomDate ? 1 : 0
+        let customDate = shared.customDate
         
-        initialPickerValue = shared.isCustomDate ? 1 : 0
-        initialCustomDate = shared.customDate
+        self.pickerValue = pickerValue
+        self.customDate = customDate
+        
+        self.initialPickerValue = pickerValue
+        self.initialCustomDate = customDate
         
         formatter.calendar = Calendar.current
         formatter.dateFormat = "yyyy-MM-dd"
@@ -39,7 +42,7 @@ class DatePickViewModel: ObservableObject {
     
     
     func savePickerValue() {
-        let isCustom = pickerValue == 1 ? true : false
+        let isCustom = pickerValue == 1
         
         shared.isCustomDate = isCustom
         defaults.set(isCustom, forKey: "isCustomDate")
