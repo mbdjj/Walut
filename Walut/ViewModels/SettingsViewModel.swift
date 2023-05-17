@@ -30,11 +30,7 @@ class SettingsViewModel: ObservableObject {
     var letter: String { "\(name.first!)" }
     
     var isSupporter: Bool {
-        if shared.titleIDArray.contains([3]) || shared.titleIDArray.contains([4]) {
-            return true
-        } else {
-            return false
-        }
+        return shared.titleIDArray.contains([3]) || shared.titleIDArray.contains([4])
     }
     var isZona24: Bool { shared.chosenTitle == shared.titleArray[9] }
     

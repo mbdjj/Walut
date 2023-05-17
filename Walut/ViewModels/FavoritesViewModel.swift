@@ -46,22 +46,14 @@ class FavoritesViewModel: ObservableObject {
     }
     
     private func refreshPickerData() {
-        pickerData = []
-        
-        for code in shared.allCodesArray {
-            let currency = Currency(baseCode: code)
-            if favorites.firstIndex(of: currency) == nil {
-                pickerData.append(currency)
-            }
-        }
+        pickerData = shared.allCodesArray
+            .map { Currency(baseCode: $0) }
+            .filter { !favorites.contains($0) }
     }
     
     private func saveFavorites() {
-        var codeArray = [String]()
-        
-        for favorite in favorites {
-            codeArray.append(favorite.code)
-        }
+        let codeArray = favorites
+            .map { $0.code }
         
         shared.favorites = codeArray
         shared.defaults.set(codeArray, forKey: "favorites")

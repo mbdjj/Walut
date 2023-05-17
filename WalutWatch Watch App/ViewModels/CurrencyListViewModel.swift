@@ -31,10 +31,7 @@ class CurrencyListViewModel: ObservableObject {
             let data = try await networkManager.getCurrencyData(for: shared.base)
             present(data: data)
         } catch {
-//            DispatchQueue.main.async {
-//                self.errorMessage = error.localizedDescription
-//                self.shouldDisplayErrorAlert = true
-//            }
+            print(error.localizedDescription)
         }
     }
     
@@ -42,27 +39,16 @@ class CurrencyListViewModel: ObservableObject {
         
         let currencyArray = removeBase(from: data)
         
-//        currencyArray = sort(array: currencyArray)
-        
-        DispatchQueue.main.async {
-            self.currencyArray = currencyArray
-        }
-        
         DispatchQueue.main.async {
             withAnimation {
+                self.currencyArray = currencyArray
                 self.loading = false
             }
         }
     }
     
     private func removeBase(from array: [Currency]) -> [Currency] {
-        var currencyArray = array
-        
-        if let index = currencyArray.firstIndex(of: Currency(baseCode: shared.base.code)) {
-            currencyArray.remove(at: index)
-        }
-        
-        return currencyArray
+        return array.filter { $0.code != shared.base.code }
     }
     
 }

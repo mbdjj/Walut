@@ -43,15 +43,10 @@ class CurrencyListViewModel: ObservableObject {
     
     
     func numbersForPlaceholders() -> (Int, Int) {
-        var favorites = shared.favorites
-        let baseCode = shared.base.code
-        
-        if let index = favorites.firstIndex(of: baseCode) {
-            favorites.remove(at: index)
-            
-            return (favorites.count, shared.allCodesArray.count - favorites.count)
+        if shared.favorites.contains(where: { $0 == shared.base.code }) {
+            return (shared.favorites.count - 1, shared.allCodesArray.count - shared.favorites.count)
         } else {
-            return (favorites.count, shared.allCodesArray.count - favorites.count - 1)
+            return (shared.favorites.count, shared.allCodesArray.count - shared.favorites.count - 1)
         }
     }
     
@@ -110,52 +105,24 @@ class CurrencyListViewModel: ObservableObject {
     }
     
     private func splitFavorites(from array: [Currency]) -> ([Currency], [Currency]) {
+        let favoritesArray = array
+            .map { $0 }
+            .filter { $0.isFavorite }
+            .reorder(by: shared.favorites)
         
-        var favoritesArray = [Currency]()
-        var currencyArray = [Currency]()
-        
-        for currency in array {
-            if currency.isFavorite {
-                favoritesArray.append(currency)
-            } else {
-                currencyArray.append(currency)
-            }
-        }
-        
-        for code in shared.favorites {
-            let indexFrom = favoritesArray.firstIndex { $0.code == code }!
-            let indexTo = shared.favorites.firstIndex(of: code)!
-            
-            let currency = favoritesArray.remove(at: indexFrom)
-            favoritesArray.insert(currency, at: indexTo)
-        }
+        let currencyArray = array
+            .map { $0 }
+            .filter { !$0.isFavorite }
         
         return removeBase(from: (currencyArray, favoritesArray))
     }
     
     private func removeBase(from arrays: ([Currency], [Currency])) -> ([Currency], [Currency]) {
-        var currencyArray = arrays.0
-        var favoritesArray = arrays.1
-        
-        if let index = currencyArray.firstIndex(of: Currency(baseCode: shared.base.code)) {
-            currencyArray.remove(at: index)
-        } else {
-            if let index = favoritesArray.firstIndex(of: Currency(baseCode: shared.base.code)) {
-                favoritesArray.remove(at: index)
-            }
-        }
-        
-        return (currencyArray, favoritesArray)
+        return (removeBase(from: arrays.0), removeBase(from: arrays.1))
     }
     
     private func removeBase(from array: [Currency]) -> [Currency] {
-        var currencyArray = array
-        
-        if let index = currencyArray.firstIndex(of: Currency(baseCode: shared.base.code)) {
-            currencyArray.remove(at: index)
-        }
-        
-        return currencyArray
+        return array.filter { $0.code != shared.base.code }
     }
     
     private func sort(array: [Currency]) -> [Currency] {

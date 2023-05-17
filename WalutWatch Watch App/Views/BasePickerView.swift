@@ -22,7 +22,6 @@ struct BasePickerView: View {
                     
                 }
             }
-                //.pickerStyle(.wheel)
             
             Button {
                 model.selectBase()
