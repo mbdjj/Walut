@@ -15,21 +15,19 @@ struct CurrencyCell: View {
     let decimal: Int
     
     let shouldShowPercent: Bool
-    
-    var percent: Double { (currency.price - currency.yesterdayPrice) / currency.yesterdayPrice }
     var percentColor: Color {
-        if percent == 0 {
+        if currency.percent == 0 {
             return .secondary
-        } else if percent > 0 {
+        } else if currency.percent > 0 {
             return .green
         } else {
             return .red
         }
     }
     var arrowDirection: String {
-        if percent == 0 {
+        if currency.percent == 0 {
             return "right"
-        } else if percent > 0 {
+        } else if currency.percent > 0 {
             return "up"
         } else {
             return "down"
@@ -100,7 +98,7 @@ struct CurrencyCell: View {
                     }
                     
                     if shouldShowPercent && currency.rate != 0 {
-                        Text("\(Image(systemName: "arrow.\(arrowDirection)")) \(shared.percentLocaleStirng(value: abs(percent)))")
+                        Text("\(Image(systemName: "arrow.\(arrowDirection)")) \(shared.percentLocaleStirng(value: abs(currency.percent)))")
                             .font(.caption2)
                             .fontWeight(.semibold)
                             .foregroundColor(percentColor)

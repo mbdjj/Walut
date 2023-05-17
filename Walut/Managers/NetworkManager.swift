@@ -179,11 +179,9 @@ struct NetworkManager {
             
             let timeSeriesData = results.rates.ratesArray
             let keyData = results.rates.keyArray
-            var timeSeriesArray = [RatesData]()
-            
-            for i in 0..<timeSeriesData.count {
-                timeSeriesArray.append(.init(code: results.base, date: keyData[i], value: timeSeriesData[i][base.code] ?? 0))
-            }
+            let timeSeriesArray = timeSeriesData
+                .enumerated()
+                .map { RatesData(code: results.base, date: keyData[$0.offset], value: timeSeriesData[$0.offset][base.code] ?? 0) }
             
             print("Fetched chart data for \(currency.code)")
             
@@ -216,11 +214,9 @@ struct NetworkManager {
             
             let timeSeriesData = results.rates.ratesArray
             let keyData = results.rates.keyArray
-            var timeSeriesArray = [RatesData]()
-            
-            for i in 0..<timeSeriesData.count {
-                timeSeriesArray.append(.init(code: results.base, date: keyData[i], value: timeSeriesData[i][base.code] ?? 0))
-            }
+            let timeSeriesArray = timeSeriesData
+                .enumerated()
+                .map { RatesData(code: results.base, date: keyData[$0.offset], value: timeSeriesData[$0.offset][base.code] ?? 0) }
             
             print("Fetched chart data for \(currency.code) on \(dateString(from: date))")
             
@@ -255,11 +251,9 @@ struct NetworkManager {
             
             let timeSeriesData = results.rates.ratesArray
             let keyData = results.rates.keyArray
-            var timeSeriesArray = [RatesData]()
-            
-            for i in 0..<timeSeriesData.count {
-                timeSeriesArray.append(.init(code: results.base, date: keyData[i], value: timeSeriesData[i][baseCode] ?? 0))
-            }
+            let timeSeriesArray = timeSeriesData
+                .enumerated()
+                .map { RatesData(code: results.base, date: keyData[$0.offset], value: timeSeriesData[$0.offset][baseCode] ?? 0) }
             
             print("Fetched chart data for \(currency)")
             
@@ -300,11 +294,9 @@ struct NetworkManager {
             
             let timeSeriesData = results.rates.ratesArray
             let keyData = results.rates.keyArray
-            var timeSeriesArray = [RatesData]()
-            
-            for i in 0..<timeSeriesData.count {
-                timeSeriesArray.append(.init(code: results.base, date: keyData[i], value: timeSeriesData[i][baseCode] ?? 0))
-            }
+            let timeSeriesArray = timeSeriesData
+                .enumerated()
+                .map { RatesData(code: results.base, date: keyData[$0.offset], value: timeSeriesData[$0.offset][baseCode] ?? 0) }
             
             return timeSeriesArray
             
@@ -348,7 +340,7 @@ struct NetworkManager {
     }
     
     private func getDateFromDefaults() -> Date {
-        let dateString = defaults.string(forKey: "lastUpdate") ?? "2022-02-23 00:00:00" // my birthday :)
+        let dateString = defaults.string(forKey: "lastUpdate") ?? "2004-02-23 00:00:00" // my birthday :)
         let formatter = DateFormatter()
         formatter.calendar = Calendar.current
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"

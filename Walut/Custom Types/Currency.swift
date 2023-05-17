@@ -77,6 +77,8 @@ struct Currency: Identifiable, Equatable {
     var price: Double { 1 / rate }
     var yesterdayPrice: Double { 1 / yesterdayRate }
     
+    var percent: Double { (price - yesterdayPrice) / yesterdayPrice }
+    
     var chartData: [RatesData]?
     
     var isFavorite: Bool { SharedDataManager.shared.favorites.contains(self.code) }

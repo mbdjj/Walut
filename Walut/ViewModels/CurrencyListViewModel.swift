@@ -126,13 +126,14 @@ class CurrencyListViewModel: ObservableObject {
     }
     
     private func sort(array: [Currency]) -> [Currency] {
-        if sortIndex == 0 || sortIndex == 1 {
+        switch sortIndex {
+        case 0, 1:
             return Sorting.byCode(array, direction: sortDirection)
-        } else if sortIndex == 2 || sortIndex == 3 {
+        case 2, 3:
             return Sorting.byPrice(array, direction: sortDirection)
-        } else if sortIndex == 4 || sortIndex == 5 {
+        case 4, 5:
             return Sorting.byChange(array, direction: sortDirection)
-        } else {
+        default:
             return array
         }
     }

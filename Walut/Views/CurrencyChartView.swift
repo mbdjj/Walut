@@ -230,7 +230,7 @@ struct CurrencyChartView: View {
                 }
             }
             
-            // MARK: - todo chart length changing buttons
+            // TODO: - chart length changing buttons
             
         }
     }
@@ -240,11 +240,8 @@ struct CurrencyChartView: View {
         
         renderer.scale = displayScale
         
-        if let image = renderer.uiImage {
-            return Image(uiImage: image)
-        } else {
-            return nil
-        }
+        guard let image = renderer.uiImage else { return nil }
+        return Image(uiImage: image)
     }
 }
 

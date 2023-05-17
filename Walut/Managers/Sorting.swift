@@ -10,39 +10,15 @@ import Foundation
 struct Sorting {
     
     static func byCode(_ array: [Currency], direction: SortDirection) -> [Currency] {
-        var array = array
-        
-        if direction == .ascending {
-            array = array.sorted(by: { $0.code < $1.code })
-        } else {
-            array = array.sorted(by: { $0.code > $1.code })
-        }
-        
-        return array
+        return direction == .ascending ? array.sorted(by: { $0.code < $1.code }) : array.sorted(by: { $0.code > $1.code })
     }
     
     static func byPrice(_ array: [Currency], direction: SortDirection) -> [Currency] {
-        var array = array
-        
-        if direction == .ascending {
-            array = array.sorted(by: { $0.price < $1.price })
-        } else {
-            array = array.sorted(by: { $0.price > $1.price })
-        }
-        
-        return array
+        return direction == .ascending ? array.sorted(by: { $0.price < $1.price }) : array.sorted(by: { $0.price > $1.price })
     }
     
     static func byChange(_ array: [Currency], direction: SortDirection) -> [Currency] {
-        var array = array
-        
-        if direction == .ascending {
-            array = array.sorted(by: { ($0.price - $0.yesterdayPrice) / $0.yesterdayPrice * 100 < ($1.price - $1.yesterdayPrice) / $1.yesterdayPrice * 100 })
-        } else {
-            array = array.sorted(by: { ($0.price - $0.yesterdayPrice) / $0.yesterdayPrice * 100 > ($1.price - $1.yesterdayPrice) / $1.yesterdayPrice * 100 })
-        }
-        
-        return array
+        return direction == .ascending ? array.sorted(by: { $0.percent < $1.percent }) : array.sorted(by: { $0.percent > $1.percent })
     }
     
 }
