@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CurrencyCalcView: View {
     
-    @ObservedObject var model: CurrencyCalcViewModel
+    @StateObject var model: CurrencyCalcViewModel
     
     @Environment(\.dismiss) var dismiss
     
@@ -19,7 +19,7 @@ struct CurrencyCalcView: View {
     
     init(currency: Currency, base: Currency = SharedDataManager.shared.base, shouldSwap: Bool = true) {
         let model = CurrencyCalcViewModel(currency: currency, base: base, shouldSwap: shouldSwap)
-        self.model = model
+        _model = StateObject(wrappedValue: model)
     }
     
     var body: some View {

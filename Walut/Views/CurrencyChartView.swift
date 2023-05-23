@@ -59,16 +59,16 @@ struct CurrencyChartView: View {
         }
     }
     
-    @ObservedObject var model: CurrencyChartViewModel
+    @StateObject var model: CurrencyChartViewModel
     
     init(currency: Currency) {
         let base = SharedDataManager.shared.base
         
-        self.model = CurrencyChartViewModel(currency: currency, base: base)
+        _model = StateObject(wrappedValue: CurrencyChartViewModel(currency: currency, base: base))
     }
     
     init(currency: Currency, base: Currency) {
-        self.model = CurrencyChartViewModel(currency: currency, base: base)
+        _model = StateObject(wrappedValue: CurrencyChartViewModel(currency: currency, base: base))
     }
     
     var body: some View {
