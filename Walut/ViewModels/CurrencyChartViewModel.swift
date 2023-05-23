@@ -19,6 +19,8 @@ class CurrencyChartViewModel: ObservableObject {
     var isCustom: Bool { SharedDataManager.shared.isCustomDate }
     var customDate: Date { SharedDataManager.shared.customDate }
     
+    private var chartDataArray: [ChartRange: [RatesData]] = [:]
+    
     private let networkManager = NetworkManager.shared
     
     init(currency: Currency, base: Currency) {
@@ -44,9 +46,18 @@ class CurrencyChartViewModel: ObservableObject {
         }
     }
     
+    func checkLoadData() async {
+        if let data = chartDataArray[selectedRange] {
+            await loadData(with: data)
+        } else {
+            await refreshData()
+        }
+    }
+    
     @MainActor private func loadData(with data: [RatesData]) {
         withAnimation {
             self.currency.chartData = data
+            self.chartDataArray[selectedRange] = data
             self.shouldDisableChartButton = false
         }
     }

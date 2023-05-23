@@ -236,7 +236,7 @@ struct CurrencyChartView: View {
                 .padding(.top)
                 .onChange(of: model.selectedRange) { _ in
                     Task {
-                        await model.refreshData()
+                        await model.checkLoadData()
                     }
                 }
             
