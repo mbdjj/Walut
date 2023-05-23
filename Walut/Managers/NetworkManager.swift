@@ -176,9 +176,18 @@ struct NetworkManager {
             
             let timeSeriesData = results.rates.ratesArray
             let keyData = results.rates.keyArray
-            let timeSeriesArray = timeSeriesData
+            var timeSeriesArray = timeSeriesData
                 .enumerated()
                 .map { RatesData(code: results.base, date: keyData[$0.offset], value: timeSeriesData[$0.offset][base.code] ?? 0) }
+            
+            if range != .oneMonth {
+                timeSeriesArray = timeSeriesArray
+                    .reversed()
+                    .enumerated()
+                    .filter { $0.offset % range.monthValue == 0 }
+                    .reversed()
+                    .map { $0.element }
+            }
             
             print("Fetched chart data for \(currency.code) on \(dateString(from: date))")
             

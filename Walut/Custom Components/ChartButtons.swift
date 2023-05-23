@@ -11,7 +11,7 @@ struct ChartButtons: View {
     
     @Binding var selected: ChartRange
     
-    let ranges: [ChartRange] = [.oneMonth, .threeMonths]
+    let ranges: [ChartRange] = [.oneMonth, .threeMonths, .sixMonths, .year]
     
     var body: some View {
         HStack(spacing: 20) {
@@ -26,10 +26,16 @@ struct ChartButtons: View {
         .frame(height: 50)
         .background {
             HStack {
+                if selected == .year { Spacer() }
                 if selected == .threeMonths { Spacer() }
+                if selected == .sixMonths { Spacer(); Spacer() }
+                
                 Color(uiColor: .systemGray5)
                     .frame(width: 40, height: 35)
                     .clipShape(RoundedRectangle(cornerRadius: 15))
+                
+                if selected == .threeMonths { Spacer(); Spacer() }
+                if selected == .sixMonths { Spacer() }
                 if selected == .oneMonth { Spacer() }
             }
         }

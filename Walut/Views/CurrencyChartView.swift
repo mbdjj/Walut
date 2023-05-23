@@ -137,6 +137,7 @@ struct CurrencyChartView: View {
                     Text(model.currency.fullName)
                         .font(.system(.title3, design: .rounded, weight: .medium))
                         .foregroundColor(.walut)
+                        .minimumScaleFactor(0.6)
                 }
                 
                 Spacer()
@@ -154,10 +155,11 @@ struct CurrencyChartView: View {
                             
                     }
                     
-                    Text(currentActive == nil ? String(localized: "overview_past_month") : currentActive!.dateFormattedString)
+                    Text(currentActive == nil ? model.selectedRange.lastXString : currentActive!.dateFormattedString)
                         .font(.system(.title3, design: .rounded, weight: .medium))
                         .foregroundColor(percentColor)
                         .lineLimit(1)
+                        .minimumScaleFactor(0.6)
                 }
             }
             .padding(.horizontal)
@@ -183,7 +185,6 @@ struct CurrencyChartView: View {
                 }
                 .frame(height: 250)
                 .chartYScale(domain: minValueYAxis - minValueYAxis * 0.01 ... maxValueYAxis + maxValueYAxis * 0.01)
-                .chartYAxis(.hidden)
                 .chartOverlay { proxy in
                     GeometryReader { geometry in
                         Rectangle().fill(.clear).contentShape(Rectangle())
@@ -193,15 +194,13 @@ struct CurrencyChartView: View {
                                         let location = value.location
                                         
                                         if let date: Date = proxy.value(atX: location.x) {
-                                            let formatter = DateFormatter()
-                                            formatter.calendar = Calendar.current
-                                            formatter.dateFormat = "rrrr-MM-dd"
-                                            let dateString = formatter.string(from: date)
-                                            if let currentItem = data.first(where: { item in
-                                                dateString == item.dateString
-                                            }) {
-                                                self.currentActive = currentItem
-                                            }
+                                            guard self.currentActive?.date != date else { return }
+                                            
+                                            self.currentActive = data
+                                                .sorted {
+                                                    abs($0.date.timeIntervalSince(date)) < abs($1.date.timeIntervalSince(date))
+                                                }
+                                                .first
                                         }
                                     }
                                     .onEnded({ _ in
@@ -210,6 +209,7 @@ struct CurrencyChartView: View {
                             )
                     }
                 }
+                .padding()
                 .onChange(of: currentActive) { newValue in
                     if newValue != nil {
                         let impact = UIImpactFeedbackGenerator(style: .soft)

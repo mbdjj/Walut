@@ -146,6 +146,11 @@
 "calculate" = "Oblicz";
 
 "overview_past_month" = "Ostatni miesiąc";
+"overview_past_3months" = "Ostatnie 3 miesiące";
+"overview_past_6months" = "Ostatnie 6 miesięcy";
+"overview_past_year" = "Ostatni rok";
+"overview_month_symbol" = "M";
+"overview_year_symbol" = "R";
 "overview_about" = "O";
 "overview_more" = "Przeczytaj więcej";
 "overview_less" = "Przeczytaj mniej";

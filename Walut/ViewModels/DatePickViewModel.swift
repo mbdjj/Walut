@@ -19,7 +19,7 @@ class DatePickViewModel: ObservableObject {
         return pickerValue != initialPickerValue || customDate != initialCustomDate
     }
     
-    var range: ClosedRange<Date> { formatter.date(from: "1999-05-01")! ... .now }
+    var range: ClosedRange<Date> { formatter.date(from: "2000-03-01")! ... .now }
     
     private var formatter = DateFormatter()
     

@@ -146,6 +146,11 @@
 "calculate" = "Calculate";
 
 "overview_past_month" = "Past month";
+"overview_past_3months" = "Past 3 months";
+"overview_past_6months" = "Past 6 months";
+"overview_past_year" = "Past year";
+"overview_month_symbol" = "M";
+"overview_year_symbol" = "Y";
 "overview_about" = "About";
 "overview_more" = "Read more";
 "overview_less" = "Read less";
