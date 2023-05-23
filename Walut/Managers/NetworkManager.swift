@@ -155,46 +155,8 @@ struct NetworkManager {
     }
     
     // MARK: - Methods for fetching chart data
-    func getChartData(for currency: Currency, base: Currency) async throws -> [RatesData] {
-        
-        let startDate = Calendar.current.date(byAdding: .month, value: -1, to: .now)
-        let startDateString = formatter.string(from: startDate!)
-        
-        let endDate = Date()
-        let endDateString = formatter.string(from: endDate)
-        
-        guard let url = URL(string: "https://api.exchangerate.host/timeseries?start_date=\(startDateString)&end_date=\(endDateString)&base=\(currency.code)&symbols=\(base.code)") else {
-            throw NetworkError.invalidURL
-        }
-        
-        let req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 5)
-        let (data, response) = try await URLSession.shared.data(for: req)
-        
-        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            throw NetworkError.invalidResponse
-        }
-        
-        do {
-            let results = try decoder.decode(CurrencyTimeSeriesData.self, from: data)
-            
-            let timeSeriesData = results.rates.ratesArray
-            let keyData = results.rates.keyArray
-            let timeSeriesArray = timeSeriesData
-                .enumerated()
-                .map { RatesData(code: results.base, date: keyData[$0.offset], value: timeSeriesData[$0.offset][base.code] ?? 0) }
-            
-            print("Fetched chart data for \(currency.code)")
-            
-            return timeSeriesArray
-            
-        } catch {
-            throw NetworkError.decodingError
-        }
-        
-    }
-    
-    func getChartData(for currency: Currency, base: Currency, date: Date) async throws -> [RatesData] {
-        let startDate = Calendar.current.date(byAdding: .month, value: -1, to: date)
+    func getChartData(for currency: Currency, base: Currency, date: Date = .now, range: ChartRange = .oneMonth) async throws -> [RatesData] {
+        let startDate = Calendar.current.date(byAdding: .month, value: -range.monthValue, to: date)
         let startDateString = formatter.string(from: startDate!)
         let endDateString = formatter.string(from: date)
         
@@ -228,41 +190,7 @@ struct NetworkManager {
     }
     
     func getChartData(forCode currency: String, baseCode: String) async throws -> [RatesData] {
-        
-        let startDate = Calendar.current.date(byAdding: .month, value: -1, to: .now)
-        let startDateString = formatter.string(from: startDate!)
-        
-        let endDate = Date()
-        let endDateString = formatter.string(from: endDate)
-        
-        guard let url = URL(string: "https://api.exchangerate.host/timeseries?start_date=\(startDateString)&end_date=\(endDateString)&base=\(currency)&symbols=\(baseCode)") else {
-            throw NetworkError.invalidURL
-        }
-        
-        let req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 5)
-        let (data, response) = try await URLSession.shared.data(for: req)
-        
-        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            throw NetworkError.invalidResponse
-        }
-        
-        do {
-            let results = try decoder.decode(CurrencyTimeSeriesData.self, from: data)
-            
-            let timeSeriesData = results.rates.ratesArray
-            let keyData = results.rates.keyArray
-            let timeSeriesArray = timeSeriesData
-                .enumerated()
-                .map { RatesData(code: results.base, date: keyData[$0.offset], value: timeSeriesData[$0.offset][baseCode] ?? 0) }
-            
-            print("Fetched chart data for \(currency)")
-            
-            return timeSeriesArray
-            
-        } catch {
-            throw NetworkError.decodingError
-        }
-        
+        try await getChartData(for: Currency(baseCode: currency), base: Currency(baseCode: baseCode))
     }
     
     // MARK: - Methods for fetching data for small widget

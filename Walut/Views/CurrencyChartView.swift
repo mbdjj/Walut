@@ -232,6 +232,14 @@ struct CurrencyChartView: View {
             
             // TODO: - chart length changing buttons
             
+            ChartButtons(selected: $model.selectedRange)
+                .padding(.top)
+                .onChange(of: model.selectedRange) { _ in
+                    Task {
+                        await model.refreshData()
+                    }
+                }
+            
         }
     }
     

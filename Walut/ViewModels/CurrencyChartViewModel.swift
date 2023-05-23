@@ -14,6 +14,8 @@ class CurrencyChartViewModel: ObservableObject {
     
     @Published var shouldDisableChartButton = true
     
+    @Published var selectedRange: ChartRange = .oneMonth
+    
     var isCustom: Bool { SharedDataManager.shared.isCustomDate }
     var customDate: Date { SharedDataManager.shared.customDate }
     
@@ -31,14 +33,14 @@ class CurrencyChartViewModel: ObservableObject {
     func refreshData() async {
         do {
             if isCustom {
-                let data = try await networkManager.getChartData(for: currency, base: base, date: customDate)
+                let data = try await networkManager.getChartData(for: currency, base: base, date: customDate, range: selectedRange)
                 await loadData(with: data)
             } else {
-                let data = try await networkManager.getChartData(for: currency, base: base)
+                let data = try await networkManager.getChartData(for: currency, base: base, range: selectedRange)
                 await loadData(with: data)
             }
         } catch {
-            
+            print(error.localizedDescription)
         }
     }
     
