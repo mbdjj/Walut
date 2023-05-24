@@ -214,7 +214,7 @@ class CurrencyCalcViewModel: ObservableObject {
         }
     }
     
-    func getCurrency() async {
+    private func getCurrency() async {
         do {
             if isCustom {
                 let data = try await NetworkManager.shared.getData(for: currency, base: base, date: customDate)
@@ -229,7 +229,7 @@ class CurrencyCalcViewModel: ObservableObject {
         }
     }
     
-    func present(_ data: Currency) {
+    private func present(_ data: Currency) {
         DispatchQueue.main.async {
             self.currency = data
         }

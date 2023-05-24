@@ -10,6 +10,7 @@ import SwiftUI
 struct CurrencyListView: View {
     
     @ObservedObject var model = CurrencyListViewModel()
+    let shared = SharedDataManager.shared
     
     var body: some View {
         NavigationStack {
@@ -23,7 +24,7 @@ struct CurrencyListView: View {
                     }
                     .swipeActions {
                         NavigationLink {
-                            
+                            SortView(isSheet: false)
                         } label: {
                             Image(systemName: "arrow.up.arrow.down")
                         }
@@ -31,13 +32,61 @@ struct CurrencyListView: View {
                 }
                 
                 if !model.loading {
-                    ForEach(model.currencyArray) { currency in
-                        CurrencyCell(currency: currency)
+                    if !model.favoritesArray.isEmpty {
+                        Section {
+                            ForEach(model.favoritesArray) { currency in
+                                Button {
+                                    model.selectedCurrency = currency
+                                } label: {
+                                    CurrencyCell(currency: currency)
+                                }
+                                .swipeActions {
+                                    Button {
+                                        model.handleFavorites(for: currency)
+                                    } label: {
+                                        Image(systemName: "star")
+                                            .symbolVariant(currency.isFavorite ? .slash : .fill)
+                                    }
+                                    .tint(currency.isFavorite ? .red : .yellow)
+                                }
+
+                            }
+                        }
                     }
-                } else {
-                    ForEach(0 ..< 33) { _ in
-                        CurrencyCell(currency: Currency.placeholder)
-                            .redacted(reason: .placeholder)
+                    
+                    Section {
+                        ForEach(model.currencyArray) { currency in
+                            Button {
+                                model.selectedCurrency = currency
+                            } label: {
+                                CurrencyCell(currency: currency)
+                            }
+                            .swipeActions {
+                                Button {
+                                    model.handleFavorites(for: currency)
+                                } label: {
+                                    Image(systemName: "star")
+                                        .symbolVariant(currency.isFavorite ? .slash : .fill)
+                                }
+                                .tint(currency.isFavorite ? .red : .yellow)
+                            }
+                        }
+                    }
+                } else {  // placeholder cells while loading
+                    if shared.sortByFavorite {
+                        Section {
+                            ForEach(0 ..< model.numbersForPlaceholders().0, id: \.self) { _ in
+                                CurrencyCell(currency: Currency.placeholder)
+                                    .redacted(reason: .placeholder)
+                            }
+                        }
+                    }
+                    
+                    Section {
+                        ForEach(shared.sortByFavorite ? 0 ..< model.numbersForPlaceholders().1 : 0 ..< shared.allCodesArray.count - 1, id: \.self) { _ in
+                            CurrencyCell(currency: Currency.placeholder)
+                                .redacted(reason: .placeholder)
+                        }
                     }
                 }
             }

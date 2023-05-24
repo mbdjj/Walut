@@ -54,7 +54,8 @@ class SharedDataManager: ObservableObject {
         chosenTitle = titleArray[defaults.integer(forKey: "chosenTitle")]
         
         base = Currency(baseCode: defaults.string(forKey: "base") ?? "AUD")
-        decimal = defaults.integer(forKey: "decimal")
+        let decimal = defaults.integer(forKey: "decimal")
+        self.decimal = decimal == 0 ? 3 : decimal
         quickConvert = defaults.bool(forKey: "quickConvert")
         showPercent = defaults.bool(forKey: "showPercent")
         reduceDataUsage = defaults.bool(forKey: "reduceData")

@@ -12,7 +12,7 @@ struct SettingsView: View {
         List {
             Button {
                 DispatchQueue.main.async {
-                    SharedDataManager.shared.isBaseSelected = false
+                    SharedDataManager.shared.appState = .onboarding
                 }
             } label: {
                 Text("settings_change_base")

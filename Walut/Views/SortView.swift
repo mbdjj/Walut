@@ -64,6 +64,7 @@ struct SortView: View {
             }
             .navigationTitle("sort")
             .toolbar {
+                #if !os(watchOS)
                 if isSheet {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Button {
@@ -83,6 +84,15 @@ struct SortView: View {
                             .bold()
                     }
                 }
+                #else
+                Button {
+                    model.saveSortAsIndex()
+                    model.saveByFavorite()
+                } label: {
+                    Text("save")
+                        .bold()
+                }
+                #endif
             }
         }
         .interactiveDismissDisabled(model.changed)

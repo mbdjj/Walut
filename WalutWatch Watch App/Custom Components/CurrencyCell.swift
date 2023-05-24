@@ -10,7 +10,9 @@ import SwiftUI
 struct CurrencyCell: View {
     
     let currency: Currency
-    var base: Currency { SharedDataManager.shared.base }
+    var base: Currency { shared.base }
+    
+    let shared = SharedDataManager.shared
     
     var body: some View {
         
@@ -33,7 +35,7 @@ struct CurrencyCell: View {
                 
                 Spacer()
                 
-                Text(currency.rate != 0 ? SharedDataManager.shared.currencyLocaleString(value: currency.price) : String(localized: "no_data"))
+                Text(currency.rate != 0 ? shared.currencyLocaleString(value: currency.price, currencyCode: base.code) : String(localized: "no_data"))
             }
         }
         

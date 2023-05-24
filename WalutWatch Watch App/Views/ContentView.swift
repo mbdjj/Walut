@@ -12,7 +12,7 @@ struct ContentView: View {
     @ObservedObject var shared = SharedDataManager.shared
     
     var body: some View {
-        if shared.isBaseSelected {
+        if shared.appState == .baseSelected {
             CurrencyListView()
         } else {
             BasePickerView()

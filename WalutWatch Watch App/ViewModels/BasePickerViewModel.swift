@@ -25,7 +25,7 @@ class BasePickerViewModel: ObservableObject {
         shared.base = Currency(baseCode: selectedCurrency)
         
         DispatchQueue.main.async {
-            self.shared.isBaseSelected = true
+            self.shared.appState = .baseSelected
         }
     }
     
