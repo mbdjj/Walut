@@ -54,7 +54,7 @@ struct FeatureRoadmapView: View {
         let subject = "Walut - Feature request"
         let subjectEncoded = subject.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
         
-        let url = URL(string: "mailto:marcin@bartminski.ga?subject=\(subjectEncoded)")
+        let url = URL(string: "mailto:marcin@bartminski.dev?subject=\(subjectEncoded)")
         
         if let url, UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url)
