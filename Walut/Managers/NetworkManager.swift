@@ -12,25 +12,25 @@ struct NetworkManager {
     private let decoder = JSONDecoder()
     private let allCodesArray: [String]
     private let defaults = UserDefaults.standard
-    private let formatter = DateFormatter()
+    private let formatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar.current
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
     
     static let shared = NetworkManager()
     
     init() {
-        // DateFormatter configuration
-        formatter.calendar = Calendar.current
-        formatter.dateFormat = "yyyy-MM-dd"
-        
         allCodesArray = SharedDataManager.shared.allCodesArray
     }
     
     
     // MARK: - Methods for fetching currency data
     func getCurrencyData(for base: Currency) async throws -> [Currency] {
-        guard let url = URL(string: "https://api.exchangerate.host/latest?base=\(base.code)") else {
-            throw NetworkError.invalidURL
-        }
-        guard let yesterdayUrl = URL(string: "https://api.exchangerate.host/\(yesterdayString())?base=\(base.code)") else {
+        guard let url = URL(string: "https://api.exchangerate.host/latest?base=\(base.code)"),
+              let yesterdayUrl = URL(string: "https://api.exchangerate.host/\(yesterdayString())?base=\(base.code)")
+        else {
             throw NetworkError.invalidURL
         }
         
@@ -40,10 +40,9 @@ struct NetworkManager {
         let yesterdayReq = URLRequest(url: yesterdayUrl, cachePolicy: .reloadIgnoringLocalCacheData)
         let (yesterdayData, yesterdayResponse) = try await URLSession.shared.data(for: yesterdayReq)
         
-        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            throw NetworkError.invalidResponse
-        }
-        guard let yesterdayResponse = yesterdayResponse as? HTTPURLResponse, yesterdayResponse.statusCode == 200 else {
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200,
+              let yesterdayResponse = yesterdayResponse as? HTTPURLResponse, yesterdayResponse.statusCode == 200
+        else {
             throw NetworkError.invalidResponse
         }
         
@@ -67,10 +66,9 @@ struct NetworkManager {
     func getCurrencyData(for base: Currency, date: Date) async throws -> [Currency] {
         let dateStrings = stringsForURLs(from: date)
         
-        guard let url = URL(string: "https://api.exchangerate.host/\(dateStrings.0)?base=\(base.code)") else {
-            throw NetworkError.invalidURL
-        }
-        guard let yesterdayUrl = URL(string: "https://api.exchangerate.host/\(dateStrings.1)?base=\(base.code)") else {
+        guard let url = URL(string: "https://api.exchangerate.host/\(dateStrings.0)?base=\(base.code)"),
+              let yesterdayUrl = URL(string: "https://api.exchangerate.host/\(dateStrings.1)?base=\(base.code)")
+        else {
             throw NetworkError.invalidURL
         }
         
@@ -80,10 +78,9 @@ struct NetworkManager {
         let yesterdayReq = URLRequest(url: yesterdayUrl, cachePolicy: .reloadIgnoringLocalCacheData)
         let (yesterdayData, yesterdayResponse) = try await URLSession.shared.data(for: yesterdayReq)
         
-        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            throw NetworkError.invalidResponse
-        }
-        guard let yesterdayResponse = yesterdayResponse as? HTTPURLResponse, yesterdayResponse.statusCode == 200 else {
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200,
+              let yesterdayResponse = yesterdayResponse as? HTTPURLResponse, yesterdayResponse.statusCode == 200
+        else {
             throw NetworkError.invalidResponse
         }
         
@@ -192,7 +189,6 @@ struct NetworkManager {
             print("Fetched chart data for \(currency.code) on \(dateString(from: date))")
             
             return timeSeriesArray
-            
         } catch {
             throw NetworkError.decodingError
         }
