@@ -48,6 +48,7 @@
 		348346FF29261DAF003710CA /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A2347328F061D700C81292 /* Currency.swift */; };
 		348347022926245E003710CA /* WalutWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 348346E7292612A3003710CA /* WalutWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3483639E290D28D5000DA0DB /* ChartToShare.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3483639D290D28D5000DA0DB /* ChartToShare.swift */; };
+		3486C3F42A25E0FC00ECDBAD /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3486C3F32A25E0FC00ECDBAD /* NetworkMonitor.swift */; };
 		34890F5C2914E6460059B5C3 /* ThanksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34890F5B2914E6460059B5C3 /* ThanksView.swift */; };
 		348CE6EF2951E32400E89078 /* Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348CE6EE2951E32400E89078 /* Sorting.swift */; };
 		348D08E32A1C9C400047BEFF /* ChartButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348D08E22A1C9C400047BEFF /* ChartButtons.swift */; };
@@ -252,6 +253,7 @@
 		348346F1292612A4003710CA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		348346F3292612A4003710CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3483639D290D28D5000DA0DB /* ChartToShare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartToShare.swift; sourceTree = "<group>"; };
+		3486C3F32A25E0FC00ECDBAD /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		34890F5B2914E6460059B5C3 /* ThanksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThanksView.swift; sourceTree = "<group>"; };
 		348CE6EE2951E32400E89078 /* Sorting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sorting.swift; sourceTree = "<group>"; };
 		348D08E22A1C9C400047BEFF /* ChartButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartButtons.swift; sourceTree = "<group>"; };
@@ -414,6 +416,7 @@
 			children = (
 				3447F7E628F0BB3F00B59B25 /* AppIcon.swift */,
 				34ED0C1A28F172A6006C4F38 /* NetworkManager.swift */,
+				3486C3F32A25E0FC00ECDBAD /* NetworkMonitor.swift */,
 				34ED0C2028F17592006C4F38 /* SharedDataManager.swift */,
 				348CE6EE2951E32400E89078 /* Sorting.swift */,
 			);
@@ -970,6 +973,7 @@
 				34CAB494290F128100D877E5 /* FavoritesViewModel.swift in Sources */,
 				3483639E290D28D5000DA0DB /* ChartToShare.swift in Sources */,
 				3441ABD828F1709F009528FD /* CurrencyListView.swift in Sources */,
+				3486C3F42A25E0FC00ECDBAD /* NetworkMonitor.swift in Sources */,
 				349E3F7A28FEB108004831E2 /* ProfileViewModel.swift in Sources */,
 				34DDC4CC29B292BB002F76EF /* OnboardingCell.swift in Sources */,
 				348D08E32A1C9C400047BEFF /* ChartButtons.swift in Sources */,

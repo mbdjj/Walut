@@ -61,7 +61,11 @@ class CurrencyListViewModel: ObservableObject {
             }
         } catch {
             DispatchQueue.main.async {
-                self.errorMessage = error.localizedDescription
+                if let error = error as? NetworkManager.NetworkError {
+                    self.errorMessage = error.localizedDesc
+                } else {
+                    self.errorMessage = error.localizedDescription
+                }
                 self.shouldDisplayErrorAlert = true
             }
         }

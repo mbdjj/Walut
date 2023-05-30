@@ -18,6 +18,7 @@ struct CurrencyListView: View {
     @State var queryString: String = ""
     
     @Environment(\.requestReview) var requestReview
+    @EnvironmentObject var networkMonitor: NetworkMonitor
     @AppStorage("openCount") var openCount = 0
     
     var body: some View {
@@ -133,6 +134,13 @@ struct CurrencyListView: View {
             .onAppear {
                 Task {
                     await model.checkRefreshData()
+                }
+            }
+            .onChange(of: networkMonitor.isConnected) { connected in
+                if connected {
+                    Task {
+                        await model.refreshData()
+                    }
                 }
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Network
 
 struct NetworkManager {
     
@@ -260,6 +261,17 @@ struct NetworkManager {
         case invalidURL
         case invalidResponse
         case decodingError
+        
+        var localizedDesc: String {
+            switch self {
+            case .invalidURL:
+                return String(localized: "error_invalid_url")
+            case .invalidResponse:
+                return String(localized: "error_invalid_response")
+            case .decodingError:
+                return String(localized: "error_decoding")
+            }
+        }
     }
     
     // MARK: - Date checking refresh

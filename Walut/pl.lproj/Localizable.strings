@@ -158,3 +158,7 @@
 
 "calc_from" = "Z: ";
 "calc_to" = "Na: ";
+
+"error_invalid_url" = "Problem z adresem URL";
+"error_invalid_response" = "Odpowiedź serwera nie jest prawidłowa";
+"error_decoding" = "Problem z rozszyfrowaniem danych";

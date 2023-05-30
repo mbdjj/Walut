@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct WalutApp: App {
+    @StateObject var networkMonitor = NetworkMonitor()
+    
     var body: some Scene {
         WindowGroup {
             ViewManagingView()
+                .environmentObject(networkMonitor)
         }
     }
 }
