@@ -84,16 +84,19 @@ struct SortView: View {
                             .bold()
                     }
                 }
-                #else
-                Button {
-                    model.saveSortAsIndex()
-                    model.saveByFavorite()
-                } label: {
-                    Text("save")
-                        .bold()
-                }
                 #endif
             }
+            #if os(watchOS)
+            .onChange(of: model.selectedSort) { _ in
+                model.saveSortAsIndex()
+            }
+            .onChange(of: model.selectedDirection) { _ in
+                model.saveSortAsIndex()
+            }
+            .onChange(of: model.sortByFavorite) { _ in
+                model.saveByFavorite()
+            }
+            #endif
         }
         .interactiveDismissDisabled(model.changed)
     }

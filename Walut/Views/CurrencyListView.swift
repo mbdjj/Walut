@@ -140,6 +140,7 @@ struct CurrencyListView: View {
                 if connected {
                     Task {
                         await model.refreshData()
+                        model.shouldDisplayErrorAlert = false
                     }
                 }
             }

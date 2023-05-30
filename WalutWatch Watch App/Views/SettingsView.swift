@@ -17,6 +17,13 @@ struct SettingsView: View {
             } label: {
                 Text("settings_change_base")
             }
+            
+            NavigationLink {
+                SortView(isSheet: false)
+            } label: {
+                Text("sort_nav_title")
+            }
+
         }
         .navigationTitle("settings")
     }
