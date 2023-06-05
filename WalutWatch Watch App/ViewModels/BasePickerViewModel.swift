@@ -15,13 +15,14 @@ class BasePickerViewModel: ObservableObject {
     let shared = SharedDataManager.shared
     
     init() {
-        selectedCurrency = shared.base.code
+        selectedCurrency = Locale.current.currency?.identifier ?? shared.base.code
     }
     
     
     func selectBase() {
         defaults.set(selectedCurrency, forKey: "base")
         defaults.set(true, forKey: "isBaseSelected")
+        defaults.set(true, forKey: "byFavorite")
         shared.base = Currency(baseCode: selectedCurrency)
         
         DispatchQueue.main.async {
