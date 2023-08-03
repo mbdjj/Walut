@@ -24,6 +24,7 @@ class BasePickerViewModel: ObservableObject {
         defaults.set(true, forKey: "isBaseSelected")
         defaults.set(true, forKey: "byFavorite")
         shared.base = Currency(baseCode: selectedCurrency)
+        shared.sortByFavorite = true
         
         DispatchQueue.main.async {
             self.shared.appState = .baseSelected

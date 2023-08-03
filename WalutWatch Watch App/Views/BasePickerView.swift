@@ -41,13 +41,6 @@ struct BasePickerView: View {
             
         }
         .navigationTitle(String(localized: "base_choose"))
-        
-        .onAppear {
-            let localeBase = Locale.current.currency?.identifier ?? "AUD"
-            withAnimation {
-                model.selectedCurrency = localeBase
-            }
-        }
     }
 }
 
