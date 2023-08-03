@@ -12,6 +12,7 @@ struct ChartToShare: View {
     
     let currency: Currency
     let base: Currency
+    let range: ChartRange
     
     var minValueYAxis: Double {
         let data = currency.chartData ?? []
@@ -106,10 +107,11 @@ struct ChartToShare: View {
                             
                     }
                     
-                    Text("overview_past_month")
+                    Text(range.lastXString)
                         .font(.system(.title3, design: .rounded, weight: .medium))
                         .foregroundColor(percentColor)
                         .lineLimit(1)
+                        .frame(maxWidth: .infinity)
                 }
             }
             .padding(.horizontal)
@@ -142,6 +144,6 @@ extension Color {
 
 struct ChartToShare_Previews: PreviewProvider {
     static var previews: some View {
-        ChartToShare(currency: Currency.placeholder, base: Currency(baseCode: "PLN"))
+        ChartToShare(currency: Currency.placeholder, base: Currency(baseCode: "PLN"), range: .oneMonth)
     }
 }

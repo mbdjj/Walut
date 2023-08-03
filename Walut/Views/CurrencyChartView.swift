@@ -244,7 +244,7 @@ struct CurrencyChartView: View {
     }
     
     @MainActor func renderView() -> Image? {
-        let renderer = ImageRenderer(content: ChartToShare(currency: model.currency, base: model.base))
+        let renderer = ImageRenderer(content: ChartToShare(currency: model.currency, base: model.base, range: model.selectedRange))
         
         renderer.scale = displayScale
         
