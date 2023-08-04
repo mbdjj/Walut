@@ -68,9 +68,9 @@ struct Currency: Identifiable, Equatable {
     }
     
     let code: String
-    var flag: String { getEmoji(of: code) }
-    var fullName: String { getName(of: code) }
-    var symbol: String { getSymbol(of: code) }
+    var flag: String { CurrencyDataManager.shared.getEmoji(of: code) }
+    var fullName: String { CurrencyDataManager.shared.getName(of: code) }
+    var symbol: String { CurrencyDataManager.shared.getSymbol(of: code) }
     
     let rate: Double
     let yesterdayRate: Double
@@ -84,9 +84,13 @@ struct Currency: Identifiable, Equatable {
     var isFavorite: Bool { SharedDataManager.shared.favorites.contains(self.code) }
     
     var id: String { code }
-    
-    //MARK: - Manager part
-    //Those are the methods that help to get all the info of specific currencies.
+}
+
+//MARK: - Manager part
+//Those are the methods that help to get all the info of specific currencies.
+
+struct CurrencyDataManager {
+    static let shared = CurrencyDataManager()
     
     private let emojiDictionary = [
         "AUD": "🇦🇺",
@@ -196,15 +200,15 @@ struct Currency: Identifiable, Equatable {
         "UAH": String(localized: "UAH")
     ]
     
-    private func getEmoji(of currency: String) -> String {
+    func getEmoji(of currency: String) -> String {
         return emojiDictionary[currency]!
     }
     
-    private func getSymbol(of currency: String) -> String {
+    func getSymbol(of currency: String) -> String {
         return symbolDictionary[currency]!
     }
     
-    private func getName(of currency: String) -> String {
+    func getName(of currency: String) -> String {
         return nameDictionary[currency]!
     }
 }
