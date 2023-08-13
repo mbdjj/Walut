@@ -14,6 +14,7 @@ struct CurrencyCalcView: View {
     @Environment(\.dismiss) var dismiss
     
     @State var chartCurrency: Currency?
+    @State private var numberPressed: String? = nil
     
     let shared = SharedDataManager.shared
     
@@ -239,48 +240,92 @@ struct CurrencyCalcView: View {
             
             LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3)) {
                 ForEach(1 ..< 10, id: \.self) { num in
-                    Button {
-                        model.buttonPressed(num)
-                    } label: {
-                        Text("\(num)")
-                            .foregroundColor(.primary)
-                            .font(.system(.title2, design: .rounded, weight: .medium))
-                            .frame(width: 60, height: 60)
-                    }
+                    Text("\(num)")
+                        .foregroundColor(.primary)
+                        .font(.system(.title2, design: .rounded, weight: .medium))
+                        .frame(width: 60, height: 60)
+                        .scaleEffect(numberPressed == "\(num)" ? 1.5 : 1.0)
+                        .gesture(
+                            DragGesture(minimumDistance: 0)
+                                .onChanged { _ in
+                                    withAnimation(.easeInOut(duration: 0.1)) {
+                                        numberPressed = "\(num)"
+                                    }
+                                }
+                                .onEnded({ _ in
+                                    withAnimation {
+                                        numberPressed = nil
+                                    }
+                                    model.buttonPressed(num)
+                                })
+                        )
                 }
             }
             .padding(.horizontal, 32)
             
             HStack {
                 Spacer()
-                Button {
-                    model.buttonPressed(",")
-                } label: {
-                    Text(Locale.current.decimalSeparator ?? ".")
-                        .foregroundColor(.primary)
-                        .font(.system(.title2, design: .rounded, weight: .medium))
-                        .frame(width: 60, height: 60)
-                }
+                Text(Locale.current.decimalSeparator ?? ".")
+                    .foregroundColor(.primary)
+                    .font(.system(.title2, design: .rounded, weight: .medium))
+                    .frame(width: 60, height: 60)
+                    .scaleEffect(numberPressed == "," ? 1.5 : 1.0)
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged { _ in
+                                withAnimation(.easeInOut(duration: 0.1)) {
+                                    numberPressed = ","
+                                }
+                            }
+                            .onEnded({ _ in
+                                withAnimation {
+                                    numberPressed = nil
+                                }
+                                model.buttonPressed(",")
+                            })
+                    )
                 Spacer()
                 Spacer()
-                Button {
-                    model.buttonPressed("0")
-                } label: {
-                    Text("0")
-                        .foregroundColor(.primary)
-                        .font(.system(.title2, design: .rounded, weight: .medium))
-                        .frame(width: 60, height: 60)
-                }
+                Text("0")
+                    .foregroundColor(.primary)
+                    .font(.system(.title2, design: .rounded, weight: .medium))
+                    .frame(width: 60, height: 60)
+                    .scaleEffect(numberPressed == "0" ? 1.5 : 1.0)
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged { _ in
+                                withAnimation(.easeInOut(duration: 0.1)) {
+                                    numberPressed = "0"
+                                }
+                            }
+                            .onEnded({ _ in
+                                withAnimation {
+                                    numberPressed = nil
+                                }
+                                model.buttonPressed("0")
+                            })
+                    )
                 Spacer()
                 Spacer()
-                Button {
-                    model.buttonPressed("<")
-                } label: {
-                    Image(systemName: "delete.left")
-                        .foregroundColor(.primary)
-                        .font(.system(.title2, design: .rounded, weight: .medium))
-                        .frame(width: 60, height: 60)
-                }
+                Image(systemName: "delete.left")
+                    .foregroundColor(.primary)
+                    .font(.system(.title2, design: .rounded, weight: .medium))
+                    .frame(width: 60, height: 60)
+                    .scaleEffect(numberPressed == "<" ? 1.5 : 1.0)
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged { _ in
+                                withAnimation(.easeInOut(duration: 0.1)) {
+                                    numberPressed = "<"
+                                }
+                            }
+                            .onEnded({ _ in
+                                withAnimation {
+                                    numberPressed = nil
+                                }
+                                model.buttonPressed("<")
+                            })
+                    )
                 Spacer()
             }
             .padding(.horizontal, 32)
