@@ -76,7 +76,7 @@ struct CurrencyChartView: View {
             
             // MARK: - Top bar
             
-            HStack(alignment: .top, spacing: 8) {
+            HStack(alignment: .top, spacing: 16) {
                 Text(model.currency.flag)
                     .frame(width: 50, height: 50)
                     .font(.largeTitle)
@@ -84,7 +84,6 @@ struct CurrencyChartView: View {
                         Color.walut
                             .clipShape(Circle())
                     }
-                    .shadow(color: .walut, radius: 5, x: 0, y: 4)
                 
                 if model.base.code != SharedDataManager.shared.base.code {
                     Text(model.base.flag)
@@ -94,7 +93,6 @@ struct CurrencyChartView: View {
                             Color.walut
                                 .clipShape(Circle())
                         }
-                        .shadow(color: .walut, radius: 5, x: 0, y: 4)
                 }
                 
                 Spacer()
@@ -103,12 +101,8 @@ struct CurrencyChartView: View {
                     ShareLink(item: image, preview: SharePreview("share_chart", image: image)) {
                         Image(systemName: "square.and.arrow.up")
                             .font(.body)
-                            .frame(width: 30, height: 30)
-                            .foregroundColor(.gray)
-                            .background {
-                                Color(uiColor: .secondarySystemBackground)
-                                    .clipShape(Circle())
-                            }
+                            .foregroundColor(.primary)
+                            .padding(.top, 4)
                     }
                 }
                 
@@ -116,13 +110,9 @@ struct CurrencyChartView: View {
                     dismiss.callAsFunction()
                 } label: {
                     Image(systemName: "xmark")
-                        .font(.body.weight(.bold))
-                        .frame(width: 30, height: 30)
-                        .foregroundColor(.gray)
-                        .background {
-                            Color(uiColor: .secondarySystemBackground)
-                                .clipShape(Circle())
-                        }
+                        .font(.title3.weight(.bold))
+                        .foregroundColor(.primary)
+                        .padding(.top, 4)
                 }
             }
             .padding()

@@ -27,24 +27,11 @@ struct CurrencyCalcView: View {
         // MARK: - Top bar
         
         VStack {
-            HStack {
+            HStack(spacing: 16) {
                 Text("overview_calculation")
                     .font(.system(.largeTitle, design: .rounded, weight: .bold))
                 
                 Spacer()
-                
-                Button {
-                    model.handleFavorites()
-                } label: {
-                    Image(systemName: "star\(model.currency.isFavorite ? ".fill" : "")")
-                        .font(.body)
-                        .frame(width: 30, height: 30)
-                        .foregroundColor(model.currency.isFavorite ? .yellow : .gray)
-                        .background {
-                            Color(uiColor: .secondarySystemBackground)
-                                .clipShape(Circle())
-                        }
-                }
                 
                 Menu {
                     ShareLink(item: model.valueToShare()) {
@@ -58,25 +45,24 @@ struct CurrencyCalcView: View {
                 } label: {
                     Image(systemName: "square.and.arrow.up")
                         .font(.body)
-                        .frame(width: 30, height: 30)
-                        .foregroundColor(.gray)
-                        .background {
-                            Color(uiColor: .secondarySystemBackground)
-                                .clipShape(Circle())
-                        }
+                        .foregroundColor(.primary)
+                }
+                
+                Button {
+                    model.handleFavorites()
+                } label: {
+                    Image(systemName: "star.fill")
+                        .font(.title3)
+                        .foregroundColor(model.currency.isFavorite ? .yellow : Color(uiColor: .systemGray5))
                 }
                 
                 Button {
                     dismiss.callAsFunction()
                 } label: {
                     Image(systemName: "xmark")
-                        .font(.body.weight(.bold))
-                        .frame(width: 30, height: 30)
-                        .foregroundColor(.gray)
-                        .background {
-                            Color(uiColor: .secondarySystemBackground)
-                                .clipShape(Circle())
-                        }
+                        .font(.title3.weight(.bold))
+                        .foregroundColor(.primary)
+                        
                 }
             }
             .padding()
