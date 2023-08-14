@@ -31,8 +31,8 @@ struct ChartButtons: View {
                 if selected == .sixMonths { Spacer(); Spacer() }
                 
                 Color(uiColor: .systemGray5)
-                    .frame(width: 40, height: 35)
-                    .clipShape(RoundedRectangle(cornerRadius: 15))
+                    .frame(width: 40, height: 40)
+                    .clipShape(Circle())
                 
                 if selected == .threeMonths { Spacer(); Spacer() }
                 if selected == .sixMonths { Spacer() }

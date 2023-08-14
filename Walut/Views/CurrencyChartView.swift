@@ -78,8 +78,8 @@ struct CurrencyChartView: View {
             
             HStack(alignment: .top, spacing: 16) {
                 Text(model.currency.flag)
-                    .frame(width: 50, height: 50)
-                    .font(.largeTitle)
+                    .frame(width: 60, height: 60)
+                    .font(.system(size: 44))
                     .background {
                         Color.walut
                             .clipShape(Circle())
@@ -87,8 +87,8 @@ struct CurrencyChartView: View {
                 
                 if model.base.code != SharedDataManager.shared.base.code {
                     Text(model.base.flag)
-                        .frame(width: 50, height: 50)
-                        .font(.largeTitle)
+                        .frame(width: 60, height: 60)
+                        .font(.system(size: 44))
                         .background {
                             Color.walut
                                 .clipShape(Circle())
@@ -115,19 +115,19 @@ struct CurrencyChartView: View {
                         .padding(.top, 4)
                 }
             }
-            .padding()
+            .padding(.horizontal)
+            .padding(.top)
             
             // MARK: - Chart info
             
             HStack(alignment: .bottom) {
-                VStack(alignment: .leading) {
-                    Text(SharedDataManager.shared.currencyLocaleString(value: currentActive?.value ?? model.currency.price, currencyCode: model.base.code))
-                        .font(.system(.title, design: .rounded, weight: .bold))
-                    
+                VStack(alignment: .leading, spacing: 5) {
                     Text(model.currency.fullName)
-                        .font(.system(.title3, design: .rounded, weight: .medium))
-                        .foregroundColor(.walut)
+                        .font(.system(.title2, design: .rounded, weight: .bold))
                         .minimumScaleFactor(0.6)
+                    
+                    Text(SharedDataManager.shared.currencyLocaleString(value: currentActive?.value ?? model.currency.price, currencyCode: model.base.code))
+                        .font(.system(.title2, design: .rounded, weight: .bold))
                 }
                 
                 Spacer()
@@ -136,7 +136,7 @@ struct CurrencyChartView: View {
                     HStack {
                         Image(systemName: "arrow.up")
                             .rotationEffect(Angle(degrees: percentArrowDeg))
-                            .font(.system(.title2, design: .rounded, weight: .bold))
+                            .font(.system(.title3, design: .rounded, weight: .bold))
                             .foregroundColor(percentColor)
                             .animation(.easeInOut(duration: 0.3), value: percentArrowDeg)
                         Text(SharedDataManager.shared.percentLocaleStirng(value: abs(percent)))
@@ -144,12 +144,6 @@ struct CurrencyChartView: View {
                             .foregroundColor(percentColor)
                             
                     }
-                    
-                    Text(currentActive == nil ? model.selectedRange.lastXString : currentActive!.dateFormattedString)
-                        .font(.system(.title3, design: .rounded, weight: .medium))
-                        .foregroundColor(percentColor)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.6)
                 }
             }
             .padding(.horizontal)
@@ -165,6 +159,7 @@ struct CurrencyChartView: View {
                         )
                         .foregroundStyle(Color.walut.gradient.opacity(currentActive == nil ? 1 : 0.6))
                         .interpolationMethod(.catmullRom)
+                        .lineStyle(StrokeStyle(lineWidth: 3))
                         
                         if let currentActive, currentActive.id == rate.id {
                             RuleMark(x: .value("Date", currentActive.date))
@@ -175,6 +170,8 @@ struct CurrencyChartView: View {
                 }
                 .frame(height: 250)
                 .chartYScale(domain: minValueYAxis - minValueYAxis * 0.01 ... maxValueYAxis + maxValueYAxis * 0.01)
+                .chartYAxis(.hidden)
+                .chartXAxis(.hidden)
                 .chartOverlay { proxy in
                     GeometryReader { geometry in
                         Rectangle().fill(.clear).contentShape(Rectangle())
@@ -199,7 +196,6 @@ struct CurrencyChartView: View {
                             )
                     }
                 }
-                .padding()
                 .onChange(of: currentActive) { newValue in
                     if newValue != nil {
                         let impact = UIImpactFeedbackGenerator(style: .soft)
@@ -220,10 +216,9 @@ struct CurrencyChartView: View {
                 }
             }
             
-            // TODO: - chart length changing buttons
+            // MARK: - chart length changing buttons
             
             ChartButtons(selected: $model.selectedRange)
-                .padding(.top)
                 .onChange(of: model.selectedRange) { _ in
                     Task {
                         await model.checkLoadData()
