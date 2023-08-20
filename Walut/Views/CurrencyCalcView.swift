@@ -147,6 +147,7 @@ struct CurrencyCalcView: View {
                     Text(model.amountString(.top))
                         .font(.system(size: 72, weight: .bold, design: .rounded))
                         .lineLimit(1)
+                        .contentTransition(.numericText())
                     Text("\(top.code)")
                         .font(.system(.title2, design: .rounded, weight: .bold))
                         .offset(y: 16)
@@ -167,6 +168,7 @@ struct CurrencyCalcView: View {
                     Text(model.amountString(.bottom))
                         .font(.system(.largeTitle, design: .rounded, weight: .bold))
                         .lineLimit(1)
+                        .contentTransition(.numericText())
                     Button {
                         model.swapCurrencies()
                     } label: {
@@ -241,8 +243,8 @@ struct CurrencyCalcView: View {
                                 .onEnded({ _ in
                                     withAnimation {
                                         numberPressed = nil
+                                        model.buttonPressed(num)
                                     }
-                                    model.buttonPressed(num)
                                 })
                         )
                 }
@@ -266,8 +268,8 @@ struct CurrencyCalcView: View {
                             .onEnded({ _ in
                                 withAnimation {
                                     numberPressed = nil
+                                    model.buttonPressed(",")
                                 }
-                                model.buttonPressed(",")
                             })
                     )
                 Spacer()
@@ -287,8 +289,8 @@ struct CurrencyCalcView: View {
                             .onEnded({ _ in
                                 withAnimation {
                                     numberPressed = nil
+                                    model.buttonPressed("0")
                                 }
-                                model.buttonPressed("0")
                             })
                     )
                 Spacer()
@@ -308,8 +310,8 @@ struct CurrencyCalcView: View {
                             .onEnded({ _ in
                                 withAnimation {
                                     numberPressed = nil
+                                    model.buttonPressed("<")
                                 }
-                                model.buttonPressed("<")
                             })
                     )
                 Spacer()
@@ -338,10 +340,14 @@ struct CurrencyCalcView: View {
             .padding(.bottom)
         }
         .onChange(of: model.topAmount) { top in
-            model.calcBottom()
+            withAnimation {
+                model.calcBottom()
+            }
         }
         .onChange(of: model.currency) { _ in
-            model.calcBottom()
+            withAnimation {
+                model.calcBottom()
+            }
         }
         .sheet(item: $chartCurrency) { currency in
             CurrencyChartView(currency: currency, base: model.base)
