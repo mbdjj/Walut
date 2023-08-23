@@ -232,11 +232,11 @@ struct CurrencyCalcView: View {
                         .foregroundColor(.primary)
                         .font(.system(.title2, design: .rounded, weight: .medium))
                         .frame(width: 60, height: 60)
-                        .scaleEffect(numberPressed == "\(num)" ? 1.5 : 1.0)
+                        .scaleEffect(numberPressed == "\(num)" ? 2.0 : 1.0)
                         .gesture(
                             DragGesture(minimumDistance: 0)
                                 .onChanged { _ in
-                                    withAnimation(.easeInOut(duration: 0.1)) {
+                                    withAnimation(.spring(duration: 0.07)) {
                                         numberPressed = "\(num)"
                                     }
                                 }
@@ -257,11 +257,11 @@ struct CurrencyCalcView: View {
                     .foregroundColor(.primary)
                     .font(.system(.title2, design: .rounded, weight: .medium))
                     .frame(width: 60, height: 60)
-                    .scaleEffect(numberPressed == "," ? 1.5 : 1.0)
+                    .scaleEffect(numberPressed == "," ? 2.0 : 1.0)
                     .gesture(
                         DragGesture(minimumDistance: 0)
                             .onChanged { _ in
-                                withAnimation(.easeInOut(duration: 0.1)) {
+                                withAnimation(.spring(duration: 0.07)) {
                                     numberPressed = ","
                                 }
                             }
@@ -278,11 +278,11 @@ struct CurrencyCalcView: View {
                     .foregroundColor(.primary)
                     .font(.system(.title2, design: .rounded, weight: .medium))
                     .frame(width: 60, height: 60)
-                    .scaleEffect(numberPressed == "0" ? 1.5 : 1.0)
+                    .scaleEffect(numberPressed == "0" ? 2.0 : 1.0)
                     .gesture(
                         DragGesture(minimumDistance: 0)
                             .onChanged { _ in
-                                withAnimation(.easeInOut(duration: 0.1)) {
+                                withAnimation(.spring(duration: 0.07)) {
                                     numberPressed = "0"
                                 }
                             }
@@ -299,11 +299,11 @@ struct CurrencyCalcView: View {
                     .foregroundColor(.primary)
                     .font(.system(.title2, design: .rounded, weight: .medium))
                     .frame(width: 60, height: 60)
-                    .scaleEffect(numberPressed == "<" ? 1.5 : 1.0)
+                    .scaleEffect(numberPressed == "<" ? 2.0 : 1.0)
                     .gesture(
                         DragGesture(minimumDistance: 0)
                             .onChanged { _ in
-                                withAnimation(.easeInOut(duration: 0.1)) {
+                                withAnimation(.easeInOut(duration: 0.07)) {
                                     numberPressed = "<"
                                 }
                             }
