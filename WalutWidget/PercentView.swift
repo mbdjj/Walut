@@ -68,7 +68,6 @@ struct PercentView: View {
                 Spacer()
                 Spacer()
             }
-            .padding()
             
             Spacer()
         }

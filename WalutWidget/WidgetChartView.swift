@@ -51,6 +51,5 @@ struct WidgetChartView: View {
         .chartYScale(domain: minValueYAxis - minValueYAxis * 0.01 ... maxValueYAxis + maxValueYAxis * 0.01)
         .chartYAxis(.hidden)
         .chartXAxis(.hidden)
-        .padding()
     }
 }
