@@ -97,7 +97,7 @@ struct WalutWidget: Widget {
         }
         .configurationDisplayName(String(localized: "widget_title"))
         .description(String(localized: "widget_description"))
-        .supportedFamilies([.systemSmall, .systemMedium, .accessoryRectangular])
+        .supportedFamilies([.systemSmall, .accessoryRectangular])
     }
 }
 
