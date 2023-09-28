@@ -24,6 +24,7 @@ struct DatePickView: View {
                             .tag(0)
                         Text("date_custom")
                             .tag(1)
+                            .disabled(true)
                     }
                     .pickerStyle(.segmented)
                     

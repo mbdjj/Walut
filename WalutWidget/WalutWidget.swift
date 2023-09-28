@@ -12,11 +12,11 @@ import Charts
 struct Provider: IntentTimelineProvider {
     
     func placeholder(in context: Context) -> CurrencyEntry {
-        CurrencyEntry(date: Date(), rates: MockData.rates, baseCode: "USD", chartData: MockData.chartData)
+        CurrencyEntry(date: Date(), currency: Currency.placeholder, baseCode: "USD", chartData: MockData.chartData)
     }
     
     func getSnapshot(for configuration: ChangeCurrenciesIntent, in context: Context, completion: @escaping (CurrencyEntry) -> Void) {
-        let entry = CurrencyEntry(date: Date(), rates: MockData.rates, baseCode: "USD", chartData: MockData.chartData)
+        let entry = CurrencyEntry(date: Date(), currency: Currency.placeholder, baseCode: "USD", chartData: MockData.chartData)
         completion(entry)
     }
     
@@ -27,14 +27,14 @@ struct Provider: IntentTimelineProvider {
             let (foreignCode, baseCode) = getCodes(from: configuration)
             
             do {
-                let rates = try await NetworkManager.shared.getSmallWidgetData(for: foreignCode, baseCode: baseCode)
+                let currency = try await NetworkManager.shared.getSmallWidgetData(for: foreignCode, baseCode: baseCode)
                 
-                var chartData: [RatesData]?
-                if context.family == .systemMedium {
-                    chartData = try await NetworkManager.shared.getChartData(forCode: foreignCode, baseCode: baseCode)
-                }
+                //var chartData: [RatesData]?
+//                if context.family == .systemMedium {
+//                    chartData = try await NetworkManager.shared.getChartData(forCode: foreignCode, baseCode: baseCode)
+//                }
                 
-                let entry = CurrencyEntry(date: .now, rates: rates, baseCode: baseCode, chartData: chartData)
+                let entry = CurrencyEntry(date: .now, currency: currency, baseCode: baseCode, chartData: nil)
                 
                 let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
                 completion(timeline)
@@ -57,7 +57,7 @@ struct Provider: IntentTimelineProvider {
 
 struct CurrencyEntry: TimelineEntry {
     let date: Date
-    let rates: [RatesData]
+    let currency: Currency
     
     let baseCode: String
     
@@ -71,17 +71,17 @@ struct WalutWidgetEntryView : View {
     var body: some View {
         switch family {
         case .systemSmall:
-            PercentView(rates: entry.rates, baseCode: entry.baseCode)
-        case .systemMedium:
-            HStack {
-                PercentView(rates: entry.rates, baseCode: entry.baseCode)
-                
-                if let chartData = entry.chartData {
-                    WidgetChartView(data: chartData)
-                }
-            }
+            PercentView(currency: entry.currency, baseCode: entry.baseCode)
+//        case .systemMedium:
+//            HStack {
+//                PercentView(rates: entry.rates, baseCode: entry.baseCode)
+//                
+//                if let chartData = entry.chartData {
+//                    WidgetChartView(data: chartData)
+//                }
+//            }
         case .accessoryRectangular:
-            RectangularView(baseCode: entry.baseCode, rates: entry.rates)
+            RectangularView(baseCode: entry.baseCode, currency: entry.currency)
         default:
             EmptyView()
         }
@@ -103,11 +103,7 @@ struct WalutWidget: Widget {
 
 struct WalutWidget_Previews: PreviewProvider {
     static var previews: some View {
-        WalutWidgetEntryView(entry: CurrencyEntry(date: Date(), rates: MockData.rates, baseCode: "USD", chartData: MockData.chartData))
+        WalutWidgetEntryView(entry: CurrencyEntry(date: Date(), currency: Currency.placeholder, baseCode: "USD", chartData: MockData.chartData))
             .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
-}
-
-extension Color {
-    static let walut = Color(red: 0, green: 0.725, blue: 0.682)
 }

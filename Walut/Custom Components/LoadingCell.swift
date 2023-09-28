@@ -17,7 +17,7 @@ struct LoadingCell: View {
     }
     
     init() {
-        showPercent = SharedDataManager.shared.showPercent
+        showPercent = false //SharedDataManager.shared.showPercent
     }
     
     init(showPercent: Bool) {

@@ -9,19 +9,18 @@ import SwiftUI
 
 struct RectangularView: View {
     let baseCode: String
-    let rates: [RatesData]
+    let currency: Currency
     
-    var entryCurrency: Currency { Currency(baseCode: rates[0].currencyString) }
     var baseCurrency: Currency { Currency(baseCode: baseCode) }
     
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
-                Text("\(entryCurrency.flag) \(entryCurrency.code)")
+                Text("\(currency.flag) \(currency.code)")
                     .font(.system(.body, design: .rounded))
                     .fontWeight(.bold)
                 
-                Text(SharedDataManager.shared.currencyLocaleString(value: rates.last?.value ?? 1.2, currencyCode: baseCode))
+                Text(SharedDataManager.shared.currencyLocaleString(value: currency.price, currencyCode: baseCode))
                     .font(.system(.title3, design: .rounded))
                     .fontWeight(.heavy)
                     .minimumScaleFactor(0.6)

@@ -90,6 +90,7 @@ struct SettingsView: View {
                         .onChange(of: model.showPercent) { _ in
                             model.saveShowPercent()
                         }
+                        .disabled(true)
                     
                     Toggle(String(localized: "settings_reduce_data"), isOn: $model.reduceDataUsage)
                         .onChange(of: model.reduceDataUsage) { _ in

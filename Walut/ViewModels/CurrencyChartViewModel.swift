@@ -27,39 +27,39 @@ class CurrencyChartViewModel: ObservableObject {
         self.currency = currency
         self.base = base
         
-        Task {
-            await refreshData()
-        }
+//        Task {
+//            await refreshData()
+//        }
     }
     
     func refreshData() async {
-        do {
-            if isCustom {
-                let data = try await networkManager.getChartData(for: currency, base: base, date: customDate, range: selectedRange)
-                await loadData(with: data)
-            } else {
-                let data = try await networkManager.getChartData(for: currency, base: base, range: selectedRange)
-                await loadData(with: data)
-            }
-        } catch {
-            print(error.localizedDescription)
-        }
+//        do {
+//            if isCustom {
+//                let data = try await networkManager.getChartData(for: currency, base: base, date: customDate, range: selectedRange)
+//                await loadData(with: data)
+//            } else {
+//                let data = try await networkManager.getChartData(for: currency, base: base, range: selectedRange)
+//                await loadData(with: data)
+//            }
+//        } catch {
+//            print(error.localizedDescription)
+//        }
     }
     
-    func checkLoadData() async {
-        if let data = chartDataArray[selectedRange] {
-            await loadData(with: data)
-        } else {
-            await refreshData()
-        }
-    }
+//    func checkLoadData() async {
+//        if let data = chartDataArray[selectedRange] {
+//            await loadData(with: data)
+//        } else {
+//            await refreshData()
+//        }
+//    }
     
-    @MainActor private func loadData(with data: [RatesData]) {
-        withAnimation {
-            self.currency.chartData = data
-            self.chartDataArray[selectedRange] = data
-            self.shouldDisableChartButton = false
-        }
-    }
+//    @MainActor private func loadData(with data: [RatesData]) {
+//        withAnimation {
+//            self.currency.chartData = data
+//            self.chartDataArray[selectedRange] = data
+//            self.shouldDisableChartButton = false
+//        }
+//    }
     
 }

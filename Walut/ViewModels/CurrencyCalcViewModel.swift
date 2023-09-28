@@ -216,13 +216,8 @@ class CurrencyCalcViewModel: ObservableObject {
     
     private func getCurrency() async {
         do {
-            if isCustom {
-                let data = try await NetworkManager.shared.getData(for: currency, base: base, date: customDate)
-                present(data)
-            } else {
-                let data = try await NetworkManager.shared.getData(for: currency, base: base)
-                present(data)
-            }
+            let data = try await NetworkManager.shared.getData(for: currency, base: base)
+            present(data)
         } catch {
             print("Couldn't update currency")
             print(error.localizedDescription)
