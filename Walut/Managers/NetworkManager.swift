@@ -29,8 +29,8 @@ struct NetworkManager {
     
     // MARK: - Methods for fetching currency data
     func getCurrencyData(for base: Currency) async throws -> [Currency] {
-        guard let url = URL(string: "https://api.exchangerate.host/latest?base=\(base.code)"),
-              let yesterdayUrl = URL(string: "https://api.exchangerate.host/\(yesterdayString())?base=\(base.code)")
+        guard let url = URL(string: "https://api.freecurrencyapi.com/v1/latest?apikey=\(APIKey.key)&base_currency=\(base.code)")//,
+              //let yesterdayUrl = URL(string: "https://api.exchangerate.host/\(yesterdayString())?base=\(base.code)")
         else {
             throw NetworkError.invalidURL
         }
@@ -38,21 +38,21 @@ struct NetworkManager {
         let req = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData)
         let (data, response) = try await URLSession.shared.data(for: req)
         
-        let yesterdayReq = URLRequest(url: yesterdayUrl, cachePolicy: .reloadIgnoringLocalCacheData)
-        let (yesterdayData, yesterdayResponse) = try await URLSession.shared.data(for: yesterdayReq)
+        //let yesterdayReq = URLRequest(url: yesterdayUrl, cachePolicy: .reloadIgnoringLocalCacheData)
+        //let (yesterdayData, yesterdayResponse) = try await URLSession.shared.data(for: yesterdayReq)
         
-        guard let response = response as? HTTPURLResponse, response.statusCode == 200,
-              let yesterdayResponse = yesterdayResponse as? HTTPURLResponse, yesterdayResponse.statusCode == 200
+        guard let response = response as? HTTPURLResponse, response.statusCode == 200//,
+              //let yesterdayResponse = yesterdayResponse as? HTTPURLResponse, yesterdayResponse.statusCode == 200
         else {
             throw NetworkError.invalidResponse
         }
         
         do {
             let results = try decoder.decode(CurrencyData.self, from: data)
-            let yesterdayResults = try decoder.decode(CurrencyData.self, from: yesterdayData)
+            //let yesterdayResults = try decoder.decode(CurrencyData.self, from: yesterdayData)
             
             let currencyArray = self.allCodesArray.map {
-                Currency(code: $0, rate: results.rates.getRate(of: $0), yesterday: yesterdayResults.rates.getRate(of: $0))
+                Currency(code: $0, rate: results.data.getRate(of: $0)/*, yesterday: yesterdayResults.data.getRate(of: $0)*/)
             }
             
             print("Fetched currency data for \(base.code)")
@@ -90,7 +90,7 @@ struct NetworkManager {
             let yesterdayResults = try decoder.decode(CurrencyData.self, from: yesterdayData)
             
             let currencyArray = self.allCodesArray.map {
-                Currency(code: $0, rate: results.rates.getRate(of: $0), yesterday: yesterdayResults.rates.getRate(of: $0))
+                Currency(code: $0, rate: results.data.getRate(of: $0), yesterday: yesterdayResults.data.getRate(of: $0))
             }
             
             print("Fetched currency data for \(base.code) on \(dateString(from: date))")
@@ -116,7 +116,7 @@ struct NetworkManager {
         
         do {
             let results = try decoder.decode(CurrencyData.self, from: data)
-            let currency = Currency(code: currency.code, rate: results.rates.getRate(of: currency.code))
+            let currency = Currency(code: currency.code, rate: results.data.getRate(of: currency.code))
             
             print("Fetched currency data for \(base.code) and returned only \(currency.code)")
             
@@ -142,7 +142,7 @@ struct NetworkManager {
         
         do {
             let results = try decoder.decode(CurrencyData.self, from: data)
-            let currency = Currency(code: currency.code, rate: results.rates.getRate(of: currency.code))
+            let currency = Currency(code: currency.code, rate: results.data.getRate(of: currency.code))
             
             print("Fetched currency data for \(base.code) and returned only \(currency.code)")
             

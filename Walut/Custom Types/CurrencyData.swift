@@ -9,9 +9,9 @@ import Foundation
 
 struct CurrencyData: Decodable {
     
-    let base: String
-    let date: String
-    let rates: Rates
+    //let base: String
+    //let date: String
+    let data: Rates
     
 }
 
