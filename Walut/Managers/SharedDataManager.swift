@@ -57,7 +57,7 @@ class SharedDataManager: ObservableObject {
         let decimal = defaults.integer(forKey: "decimal")
         self.decimal = decimal == 0 ? 3 : decimal
         quickConvert = defaults.bool(forKey: "quickConvert")
-        showPercent = defaults.bool(forKey: "showPercent")
+        showPercent =  false //defaults.bool(forKey: "showPercent")
         reduceDataUsage = defaults.bool(forKey: "reduceData")
         
         sortIndex = defaults.integer(forKey: "sort")
@@ -67,7 +67,7 @@ class SharedDataManager: ObservableObject {
         
         formatter.calendar = Calendar.current
         formatter.dateFormat = "yyyy-MM-dd"
-        isCustomDate = defaults.bool(forKey: "isCustomDate")
+        isCustomDate = false //defaults.bool(forKey: "isCustomDate")
         customDate = customDate(from: defaults.string(forKey: "customDate") ?? "")
     }
     

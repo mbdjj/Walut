@@ -107,6 +107,7 @@ struct CurrencyListView: View {
                             Image(systemName: "calendar")
                         }
                     }
+                    .disabled(true)
                     
                     Button {
                         model.shouldShowSortView = true
@@ -167,6 +168,9 @@ struct CurrencyListView: View {
             .searchable(text: $queryString) {}
             .sheet(item: $model.selectedCurrency) { currency in
                 CurrencyCalcView(currency: currency)
+            }
+            .sheet(isPresented: $model.shouldShowNotWorkingView) {
+                NotWorkingView()
             }
         }
     }

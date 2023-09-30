@@ -162,3 +162,7 @@
 "error_invalid_url" = "There was a problem with URL";
 "error_invalid_response" = "Response received from the server was invalid";
 "error_decoding" = "Couldn't decode received data";
+
+"walut_not_working_title" = "Unfortunately some Walut features aren't working right now!";
+"walut_not_working_desc" = "I'm very sorry to inform you, that some features won't be working for a while. This includes charts, difference percetage, historical rates, and Ukrainian hryvnia rates. I'm working on fixing the issues but for now please be patient. I apologize for the inconvenience.";
+"dont_show_again" = "Don't show again";

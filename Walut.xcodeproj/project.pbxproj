@@ -41,6 +41,7 @@
 		346C7A4129BD1A9F0023DE23 /* CurrencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346C7A4029BD1A9F0023DE23 /* CurrencyCell.swift */; };
 		346C7A4329BD1AEB0023DE23 /* CurrencyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346C7A4229BD1AEB0023DE23 /* CurrencyListView.swift */; };
 		347514982919A55A0092864A /* Configuration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 347514972919A55A0092864A /* Configuration.storekit */; };
+		347D44B82AC8B5C30099C473 /* NotWorkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 347D44B72AC8B5C30099C473 /* NotWorkingView.swift */; };
 		3481E081295DBFEB00322363 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34ED0C2A28F1C6FF006C4F38 /* Localizable.strings */; };
 		3481E08C295DE09100322363 /* WalutWidgetIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3481E08B295DE09100322363 /* WalutWidgetIntents.intentdefinition */; };
 		3481E08D295DE09100322363 /* WalutWidgetIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3481E08B295DE09100322363 /* WalutWidgetIntents.intentdefinition */; };
@@ -251,6 +252,7 @@
 		346C7A4229BD1AEB0023DE23 /* CurrencyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListView.swift; sourceTree = "<group>"; };
 		346C7A4429BD1DE30023DE23 /* WalutWatch-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "WalutWatch-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		347514972919A55A0092864A /* Configuration.storekit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
+		347D44B72AC8B5C30099C473 /* NotWorkingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotWorkingView.swift; sourceTree = "<group>"; };
 		3481E08B295DE09100322363 /* WalutWidgetIntents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = WalutWidgetIntents.intentdefinition; sourceTree = "<group>"; };
 		348346E7292612A3003710CA /* WalutWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WalutWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		348346E8292612A3003710CA /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -569,6 +571,7 @@
 				34D3A43C29B095B200292518 /* FeatureRoadmapView.swift */,
 				349E3F7728FEAFDE004831E2 /* ProfileView.swift */,
 				34CAB491290F11CA00D877E5 /* FavoritesView.swift */,
+				347D44B72AC8B5C30099C473 /* NotWorkingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -971,6 +974,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				347D44B82AC8B5C30099C473 /* NotWorkingView.swift in Sources */,
 				34ED0C2328F1C24F006C4F38 /* ViewManagingView.swift in Sources */,
 				34DC74BF299983250042F968 /* CurrencyChartViewModel.swift in Sources */,
 				34DC74BD2998DE140042F968 /* CurrencyChartView.swift in Sources */,

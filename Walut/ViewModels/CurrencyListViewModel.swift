@@ -22,6 +22,10 @@ class CurrencyListViewModel: ObservableObject {
     @Published var shouldShowSortView = false
     @Published var shouldShowDatePickView = false
     
+    @Published var shouldShowNotWorkingView = false
+    
+    @AppStorage("whyNotWorkingShown") var whyNotWorkingShown: Bool = false
+    
     var sortIndex: Int { shared.sortIndex }
     var sortDirection: SortDirection { shared.sortIndex % 2 == 0 ? .ascending : .descending }
     var byFavorite: Bool { shared.sortByFavorite }
@@ -34,6 +38,10 @@ class CurrencyListViewModel: ObservableObject {
     init() {
         DispatchQueue.main.async {
             self.loading = true
+            
+            if !self.whyNotWorkingShown {
+                self.shouldShowNotWorkingView = true
+            }
         }
         
         Task {

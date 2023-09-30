@@ -162,3 +162,7 @@
 "error_invalid_url" = "Problem z adresem URL";
 "error_invalid_response" = "Odpowiedź serwera nie jest prawidłowa";
 "error_decoding" = "Problem z rozszyfrowaniem danych";
+
+"walut_not_working_title" = "Niestety część funkcji Waluta na razie nie działa!";
+"walut_not_working_desc" = "Jest mi bardzo przykro, ale niektóre funkcje nie będą działać przez jakiś czas. Są to między innymi wykresy, różnica procentowa, historyczne kursy oraz kurs Hrywny ukraińskiej. Pracuję nad naprawieniem funkcji, dlatego proszę o cierpliwość. Przepraszam za utrudnienia.";
+"dont_show_again" = "Nie pokazuj ponownie";

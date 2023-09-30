@@ -38,6 +38,7 @@ struct SortView: View {
                         Text("sort_by_change")
                             .fontWeight(model.selectedSort == .byChange ? .bold : .regular)
                     }
+                    .disabled(true)
                 }
                 
                 Section {
