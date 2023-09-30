@@ -72,6 +72,7 @@ struct WalutWidgetEntryView : View {
         switch family {
         case .systemSmall:
             PercentView(currency: entry.currency, baseCode: entry.baseCode)
+                .containerBackground(.background, for: .widget)
 //        case .systemMedium:
 //            HStack {
 //                PercentView(rates: entry.rates, baseCode: entry.baseCode)
@@ -82,6 +83,7 @@ struct WalutWidgetEntryView : View {
 //            }
         case .accessoryRectangular:
             RectangularView(baseCode: entry.baseCode, currency: entry.currency)
+                .containerBackground(.clear, for: .widget)
         default:
             EmptyView()
         }
