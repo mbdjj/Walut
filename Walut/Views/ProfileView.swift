@@ -18,13 +18,20 @@ struct ProfileView: View {
             Section {
                 TextField(String(localized: "your_name"), text: $model.name)
                 
+            } header: {
+                Text("change_data")
+            }
+            
+            Section {
                 Picker(String(localized: "title"), selection: $model.selectedTitle) {
                     ForEach($model.titlePickerData, id: \.self) { titleID in
                         Text("\(model.titleArray[titleID.wrappedValue])" as String)
                     }
                 }
+                .pickerStyle(.inline)
+                .labelsHidden()
             } header: {
-                Text(String(localized: "change_data"))
+                Text("title")
             }
         }
         .navigationTitle(String(localized: "profile"))

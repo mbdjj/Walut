@@ -42,6 +42,7 @@ struct NotWorkingView: View {
             
             Button {
                 whyNotWorkingShown = true
+                dismiss.callAsFunction()
             } label: {
                 HStack {
                     Spacer()
