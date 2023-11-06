@@ -17,7 +17,6 @@ struct ProfileView: View {
         List {
             Section {
                 TextField(String(localized: "your_name"), text: $model.name)
-                
             } header: {
                 Text("change_data")
             }
