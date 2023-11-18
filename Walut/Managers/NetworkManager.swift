@@ -10,7 +10,11 @@ import SwiftUI
 
 struct NetworkManager {
     
-    private let decoder = JSONDecoder()
+    private let decoder: JSONDecoder = {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        return decoder
+    }()
     private let allCodesArray: [String]
     private let defaults = UserDefaults.standard
     private let formatter: DateFormatter = {
@@ -49,7 +53,8 @@ struct NetworkManager {
             }
             
             print("Fetched currency data for \(base.code)")
-            self.saveDate()
+            let nextUpdate = Date(timeIntervalSince1970: Double(results.timeNextUpdateUnix))
+            self.saveDate(nextUpdate)
             
             return currencyArray
         } catch {
@@ -147,12 +152,13 @@ struct NetworkManager {
         let date = getDateFromDefaults()
         let now = Date.now
         
-        let difference = now.timeIntervalSinceReferenceDate - date.timeIntervalSinceReferenceDate
-        return difference > 60 * 15 // 15 minutes
+        let result = date < now
+        print("shouldRefresh() returned \(result)")
+        return result
     }
     
     private func getDateFromDefaults() -> Date {
-        let dateString = defaults.string(forKey: "lastUpdate") ?? "2004-02-23 00:00:00" // my birthday :)
+        let dateString = defaults.string(forKey: "nextUpdate") ?? "2004-02-23 00:00:00" // my birthday :)
         let formatter = DateFormatter()
         formatter.calendar = Calendar.current
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -160,14 +166,14 @@ struct NetworkManager {
         return formatter.date(from: dateString)!
     }
     
-    private func saveDate() {
-        let date = Date.now
+    private func saveDate(_ date: Date) {
         let formatter = DateFormatter()
         formatter.calendar = Calendar.current
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
         let dateString = formatter.string(from: date)
-        defaults.set(dateString, forKey: "lastUpdate")
+        print("Saved next update date \(dateString)")
+        defaults.set(dateString, forKey: "nextUpdate")
     }
     
 }
