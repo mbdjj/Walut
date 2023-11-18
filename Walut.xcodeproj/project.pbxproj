@@ -13,9 +13,6 @@
 		341DFC0A295DAFAF00BDCBDB /* PercentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341DFC09295DAFAF00BDCBDB /* PercentView.swift */; };
 		341DFC0C295DB42100BDCBDB /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341DFC0B295DB42100BDCBDB /* MockData.swift */; };
 		341DFC0E295DB44300BDCBDB /* WidgetChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341DFC0D295DB44300BDCBDB /* WidgetChartView.swift */; };
-		3420F49B2AC557010059E40E /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3420F49A2AC557010059E40E /* APIKey.swift */; };
-		3420F49C2AC557010059E40E /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3420F49A2AC557010059E40E /* APIKey.swift */; };
-		3420F49D2AC557010059E40E /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3420F49A2AC557010059E40E /* APIKey.swift */; };
 		3420F49F2AC557770059E40E /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3420F49E2AC557770059E40E /* NetworkMonitor.swift */; };
 		3420F4A02AC557770059E40E /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3420F49E2AC557770059E40E /* NetworkMonitor.swift */; };
 		3420F4A12AC557770059E40E /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3420F49E2AC557770059E40E /* NetworkMonitor.swift */; };
@@ -231,7 +228,6 @@
 		341DFC09295DAFAF00BDCBDB /* PercentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PercentView.swift; sourceTree = "<group>"; };
 		341DFC0B295DB42100BDCBDB /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		341DFC0D295DB44300BDCBDB /* WidgetChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetChartView.swift; sourceTree = "<group>"; };
-		3420F49A2AC557010059E40E /* APIKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		3420F49E2AC557770059E40E /* NetworkMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		342A047C290A5B7B00C10652 /* HelloViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelloViewModel.swift; sourceTree = "<group>"; };
 		342D433928F7E37F001C69AD /* CurrencyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCell.swift; sourceTree = "<group>"; };
@@ -531,7 +527,6 @@
 			children = (
 				34A2345F28F05B5C00C81292 /* WalutApp.swift */,
 				347514972919A55A0092864A /* Configuration.storekit */,
-				3420F49A2AC557010059E40E /* APIKey.swift */,
 				3447F7E828F0BC2E00B59B25 /* Managers */,
 				34A2347528F061DC00C81292 /* Custom Types */,
 				34A2347228F0609A00C81292 /* ViewModels */,
@@ -925,7 +920,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				34C85A6A2A1E247100FB7B03 /* SharedDataManager.swift in Sources */,
-				3420F49D2AC557010059E40E /* APIKey.swift in Sources */,
 				346C7A4129BD1A9F0023DE23 /* CurrencyCell.swift in Sources */,
 				346C7A3829BD19890023DE23 /* Currency.swift in Sources */,
 				34EF3EBF29BDC3FE00CFAEDA /* BasePickerView.swift in Sources */,
@@ -956,7 +950,6 @@
 				34E0A201292CFCDB00EF3CBC /* NetworkManager.swift in Sources */,
 				348346FF29261DAF003710CA /* Currency.swift in Sources */,
 				348346EE292612A3003710CA /* WalutWidgetBundle.swift in Sources */,
-				3420F49C2AC557010059E40E /* APIKey.swift in Sources */,
 				348D08E82A1CA7D00047BEFF /* ChartRange.swift in Sources */,
 				341DFC0C295DB42100BDCBDB /* MockData.swift in Sources */,
 				348346F0292612A3003710CA /* WalutWidget.swift in Sources */,
@@ -978,7 +971,6 @@
 				34ED0C2328F1C24F006C4F38 /* ViewManagingView.swift in Sources */,
 				34DC74BF299983250042F968 /* CurrencyChartViewModel.swift in Sources */,
 				34DC74BD2998DE140042F968 /* CurrencyChartView.swift in Sources */,
-				3420F49B2AC557010059E40E /* APIKey.swift in Sources */,
 				34D5AFEB2951B6550043B72A /* SortViewModel.swift in Sources */,
 				34ED0C2128F17592006C4F38 /* SharedDataManager.swift in Sources */,
 				344E9987295ED7A200921DBC /* LoadingCell.swift in Sources */,

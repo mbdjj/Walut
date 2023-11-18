@@ -11,7 +11,7 @@ struct CurrencyData: Decodable {
     
     //let base: String
     //let date: String
-    let data: Rates
+    let rates: Rates
     
 }
 
