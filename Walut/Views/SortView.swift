@@ -88,13 +88,13 @@ struct SortView: View {
                 #endif
             }
             #if os(watchOS)
-            .onChange(of: model.selectedSort) { _ in
+            .onChange(of: model.selectedSort) { _, _ in
                 model.saveSortAsIndex()
             }
-            .onChange(of: model.selectedDirection) { _ in
+            .onChange(of: model.selectedDirection) { _, _ in
                 model.saveSortAsIndex()
             }
-            .onChange(of: model.sortByFavorite) { _ in
+            .onChange(of: model.sortByFavorite) { _, _ in
                 model.saveByFavorite()
             }
             #endif

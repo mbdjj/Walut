@@ -46,7 +46,7 @@ struct BasePickerView: View {
                     }
                     .bold()
                     .disabled(model.saveButtonDisabled)
-                    .onChange(of: model.name) { newValue in
+                    .onChange(of: model.name) { _, newValue in
                         if newValue == "" {
                             model.saveButtonDisabled = true
                         } else {

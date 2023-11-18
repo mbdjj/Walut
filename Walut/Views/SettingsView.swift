@@ -82,18 +82,18 @@ struct SettingsView: View {
                 Section {
                     
                     Toggle(String(localized: "settings_quick_conversion"), isOn: $model.quickConvertOn)
-                        .onChange(of: model.quickConvertOn) { _ in
+                        .onChange(of: model.quickConvertOn) { _, _ in
                             model.saveConvertMode()
                         }
                     
                     Toggle(String(localized: "settings_show_percent"), isOn: $model.showPercent)
-                        .onChange(of: model.showPercent) { _ in
+                        .onChange(of: model.showPercent) { _, _ in
                             model.saveShowPercent()
                         }
                         .disabled(true)
                     
                     Toggle(String(localized: "settings_reduce_data"), isOn: $model.reduceDataUsage)
-                        .onChange(of: model.reduceDataUsage) { _ in
+                        .onChange(of: model.reduceDataUsage) { _, _ in
                             model.saveReduceDataUsage()
                         }
 
@@ -148,10 +148,10 @@ struct SettingsView: View {
             }
             .navigationTitle("settings")
         }
-        .onChange(of: model.selectedBase) { newValue in
+        .onChange(of: model.selectedBase) { _, _ in
             model.saveBase()
         }
-        .onChange(of: model.decimal) { newValue in
+        .onChange(of: model.decimal) { _, _ in
             model.saveDecimal()
         }
     }

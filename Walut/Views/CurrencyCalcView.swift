@@ -339,12 +339,12 @@ struct CurrencyCalcView: View {
             .padding(.horizontal, 32)
             .padding(.bottom)
         }
-        .onChange(of: model.topAmount) { top in
+        .onChange(of: model.topAmount) { _, top in
             withAnimation {
                 model.calcBottom()
             }
         }
-        .onChange(of: model.currency) { _ in
+        .onChange(of: model.currency) { _, _ in
             withAnimation {
                 model.calcBottom()
             }

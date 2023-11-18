@@ -137,7 +137,7 @@ struct CurrencyListView: View {
                     await model.checkRefreshData()
                 }
             }
-            .onChange(of: networkMonitor.isConnected) { connected in
+            .onChange(of: networkMonitor.isConnected) { _, connected in
                 if connected {
                     Task {
                         await model.refreshData()

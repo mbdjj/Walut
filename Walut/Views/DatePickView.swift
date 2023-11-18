@@ -64,7 +64,7 @@ struct DatePickView: View {
                     shouldShowDatePicker = model.pickerValue == 1
                 }
             }
-            .onChange(of: model.pickerValue) { value in
+            .onChange(of: model.pickerValue) { _, value in
                 withAnimation {
                     shouldShowDatePicker = value == 1
                 }
