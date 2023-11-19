@@ -14,6 +14,14 @@ class ProfileViewModel: ObservableObject {
     @Published var titlePickerData: [Int]
     @Published var selectedTitle: Int
     
+    @Published var secretCode = ""
+    @Published var shouldDisplayAlert: Bool = false
+    private var shouldSaveTitle = false
+    @Published var titleIDToSave = 0
+    
+    @Published var alertTitle = ""
+    @Published var alertMessage = ""
+    
     let titleArray: [String]
     
     private let shared = SharedDataManager.shared
@@ -34,6 +42,36 @@ class ProfileViewModel: ObservableObject {
         
         defaults.set(name, forKey: "name")
         defaults.set(selectedTitle, forKey: "chosenTitle")
+    }
+    
+    @MainActor func saveTitles() {
+        if shouldSaveTitle {
+            shared.titleIDArray.append(titleIDToSave)
+            shared.defaults.set(shared.titleIDArray, forKey: "titleIDArray")
+            titlePickerData = shared.titleIDArray
+            secretCode = ""
+        }
+    }
+    
+    @MainActor func checkCode() {
+        shouldSaveTitle = false
+        
+        if let secretID = shared.secretDictionary[secretCode] {
+            if shared.titleIDArray.firstIndex(of: secretID) == nil {
+                titleIDToSave = secretID
+                shouldSaveTitle = true
+                
+                let t = shared.titleArray[secretID]
+                alertTitle = String(localized: "alert_positive_title")
+                alertMessage = "\(String(localized: "alert_positive_message_1")) \(t)\(String(localized: "alert_positive_message_2"))"
+            } else {
+                alertTitle = String(localized: "alert_repeated_title")
+                alertMessage = String(localized: "alert_repeated_message")
+            }
+        } else {
+            alertTitle = String(localized: "alert_invalid_title")
+            alertMessage = String(localized: "alert_invalid_message")
+        }
     }
     
 }

@@ -16,14 +16,6 @@ class SettingsViewModel: ObservableObject {
     @Published var quickConvertOn: Bool
     @Published var showPercent: Bool
     
-    @Published var secretCode = ""
-    @Published var shouldDisplayAlert: Bool = false
-    private var shouldSaveTitle = false
-    @Published var titleIDToSave = 0
-    
-    @Published var alertTitle = ""
-    @Published var alertMessage = ""
-    
     @Published var pickerData = [Currency]()
     
     var letter: String { "\(name.first!)" }
@@ -60,13 +52,6 @@ class SettingsViewModel: ObservableObject {
         defaults.set(decimal, forKey: "decimal")
     }
     
-    func saveTitles() {
-        if shouldSaveTitle {
-            shared.titleIDArray.append(titleIDToSave)
-            shared.defaults.set(shared.titleIDArray, forKey: "titleIDArray")
-        }
-    }
-    
     func saveConvertMode() {
         shared.quickConvert = quickConvertOn
         shared.defaults.set(quickConvertOn, forKey: "quickConvert")
@@ -75,29 +60,6 @@ class SettingsViewModel: ObservableObject {
     func saveShowPercent() {
         shared.showPercent = showPercent
         shared.defaults.set(showPercent, forKey: "showPercent")
-    }
-    
-    func checkCode() {
-        shouldSaveTitle = false
-        
-        if let secretID = shared.secretDictionary[secretCode] {
-            if shared.titleIDArray.firstIndex(of: secretID) == nil {
-                titleIDToSave = secretID
-                shouldSaveTitle = true
-                
-                let t = shared.titleArray[secretID]
-                alertTitle = String(localized: "alert_positive_title")
-                alertMessage = "\(String(localized: "alert_positive_message_1")) \(t)\(String(localized: "alert_positive_message_2"))"
-            } else {
-                alertTitle = String(localized: "alert_repeated_title")
-                alertMessage = String(localized: "alert_repeated_message")
-            }
-        } else {
-            alertTitle = String(localized: "alert_invalid_title")
-            alertMessage = String(localized: "alert_invalid_message")
-        }
-        
-        secretCode = ""
     }
     
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @ObservedObject var model = ProfileViewModel()
+    @StateObject var model = ProfileViewModel()
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -19,6 +19,24 @@ struct ProfileView: View {
                 TextField(String(localized: "your_name"), text: $model.name)
             } header: {
                 Text("change_data")
+            }
+            
+            Section {
+                TextField(String(localized: "settings_enter_code"), text: $model.secretCode)
+                    .onSubmit {
+                        model.checkCode()
+                        model.shouldDisplayAlert = true
+                    }
+                    .submitLabel(.done)
+                    .alert(model.alertTitle, isPresented: $model.shouldDisplayAlert) {
+                        Button {
+                            model.saveTitles()
+                        } label: {
+                            Text("OK")
+                        }
+                    } message: {
+                        Text(model.alertMessage)
+                    }
             }
             
             Section {

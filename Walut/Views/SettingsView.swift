@@ -95,25 +95,6 @@ struct SettingsView: View {
                 }
                 
                 Section {
-                    TextField(String(localized: "settings_enter_code"), text: $model.secretCode)
-                        .onSubmit {
-                            model.checkCode()
-                            model.shouldDisplayAlert = true
-                        }
-                        .submitLabel(.done)
-                        .alert(model.alertTitle, isPresented: $model.shouldDisplayAlert) {
-                            Button {
-                                model.saveTitles()
-                            } label: {
-                                Text("OK")
-                            }
-                        } message: {
-                            Text(model.alertMessage)
-                        }
-
-                }
-                
-                Section {
                     NavigationLink {
                         FeatureRoadmapView()
                     } label: {
