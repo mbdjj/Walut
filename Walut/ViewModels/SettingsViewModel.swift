@@ -15,7 +15,6 @@ class SettingsViewModel: ObservableObject {
     @Published var decimal: Int
     @Published var quickConvertOn: Bool
     @Published var showPercent: Bool
-    @Published var reduceDataUsage: Bool
     
     @Published var secretCode = ""
     @Published var shouldDisplayAlert: Bool = false
@@ -44,7 +43,6 @@ class SettingsViewModel: ObservableObject {
         decimal = shared.decimal
         quickConvertOn = shared.quickConvert
         showPercent = shared.showPercent
-        reduceDataUsage = shared.reduceDataUsage
         
         for code in shared.allCodesArray {
             self.pickerData.append(Currency(baseCode: code))
@@ -77,11 +75,6 @@ class SettingsViewModel: ObservableObject {
     func saveShowPercent() {
         shared.showPercent = showPercent
         shared.defaults.set(showPercent, forKey: "showPercent")
-    }
-    
-    func saveReduceDataUsage() {
-        shared.reduceDataUsage = reduceDataUsage
-        shared.defaults.set(reduceDataUsage, forKey: "reduceData")
     }
     
     func checkCode() {
