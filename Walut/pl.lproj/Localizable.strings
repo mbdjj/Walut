@@ -168,10 +168,12 @@
 "walut_not_working_desc" = "Jest mi bardzo przykro, ale niektóre funkcje nie będą działać przez jakiś czas. Są to między innymi wykresy, różnica procentowa, historyczne kursy oraz kurs Hrywny ukraińskiej. Pracuję nad naprawieniem funkcji, dlatego proszę o cierpliwość. Przepraszam za utrudnienia.";
 "dont_show_again" = "Nie pokazuj ponownie";
 
-"storage_1d" = "Jeden dzień";
+"storage_2d" = "Dwa dni";
 "storage_1w" = "Jeden tydzień";
 "storage_1m" = "Jeden miesiąc";
 "storage_3m" = "Trzy miesiące";
 "storage_6m" = "Sześć miesięcy";
 "storage_1y" = "Jeden rok";
 "storage_footer" = "Dane będą przechowywane na urządzeniu, aby używać wykresów i różnicy procentowej. Możesz dostosować ilość przechowywanych danych tutaj.";
+"storage_alert_title" = "Jesteś pewien?";
+"storage_alert_message" = "Wszystkie dane walut przekraczające w czasie nową opcję, zostaną usunięte.";

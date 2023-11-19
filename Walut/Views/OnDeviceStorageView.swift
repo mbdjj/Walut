@@ -9,7 +9,13 @@ import SwiftUI
 
 struct OnDeviceStorageView: View {
     
-    @State var selected: StorageSavingOptions = .oneMonth
+    @State var selected: StorageSavingOptions
+    @State var showAlert: Bool = false
+    let shared = SharedDataManager.shared
+    
+    init() {
+        _selected = State(initialValue: shared.storageOption)
+    }
     
     var body: some View {
         List {
@@ -21,29 +27,42 @@ struct OnDeviceStorageView: View {
                 }
                 .labelsHidden()
                 .pickerStyle(.inline)
+                .alert("storage_alert_title", isPresented: $showAlert) {
+                    Button("cancel", role: .cancel) {
+                        showAlert = false
+                    }
+                    
+                    Button("continue", role: .destructive) {
+                        shared.storageOption = selected
+                        UserDefaults.standard.set(selected.rawValue, forKey: "storageOptions")
+                    }
+                } message: {
+                    Text("storage_alert_message")
+                }
+
             } footer: {
                 Text("storage_footer")
             }
 
         }
         .navigationTitle("settings_save_data")
+        .toolbar {
+            Button {
+                showAlert = true
+            } label: {
+                Text("save")
+                    .bold()
+            }
+            .disabled(selected == shared.storageOption)
+        }
     }
-}
-
-enum StorageSavingOptions: CaseIterable {
-    case oneDay
-    case oneWeek
-    case oneMonth
-    case threeMonths
-    case sixMonths
-    case oneYear
 }
 
 extension StorageSavingOptions {
     var title: String {
         switch self {
-        case .oneDay:
-            String(localized: "storage_1d")
+        case .twoDays:
+            String(localized: "storage_2d")
         case .oneWeek:
             String(localized: "storage_1w")
         case .oneMonth:

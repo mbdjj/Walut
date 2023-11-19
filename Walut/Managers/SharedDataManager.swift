@@ -28,6 +28,8 @@ class SharedDataManager: ObservableObject {
     
     @Published var favorites: [String]
     
+    @Published var storageOption: StorageSavingOptions
+    
     let allCodesArray = ["AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HRK", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SEK", "SGD", "THB", "TRY", "UAH", "USD", "ZAR"]
     let titleArray = [String(localized: "title0"), String(localized: "title1"), String(localized: "title2"), String(localized: "supporter_title"), String(localized: "supporter_big_title"), String(localized: "title5"), String(localized: "title6"), String(localized: "title7"), String(localized: "title8"), String(localized: "title9")]
     let secretDictionary = ["marcinBartminski": 1, "earlyAccess": 2, "crypto": 5, "appUnite": 6, "gold": 7, "reddit": 8, "zona24": 9]
@@ -62,6 +64,9 @@ class SharedDataManager: ObservableObject {
         sortByFavorite = defaults.bool(forKey: "byFavorite")
         
         favorites = defaults.stringArray(forKey: "favorites") ?? []
+        
+        let option = defaults.integer(forKey: "storageOptions")
+        storageOption = StorageSavingOptions(rawValue: option) ?? .oneMonth
         
         formatter.calendar = Calendar.current
         formatter.dateFormat = "yyyy-MM-dd"
@@ -112,4 +117,13 @@ enum AppState {
     case baseSelected
     case onboarding
     case onboarded
+}
+
+enum StorageSavingOptions: Int, CaseIterable {
+    case twoDays = 1
+    case oneWeek = 2
+    case oneMonth = 3
+    case threeMonths = 4
+    case sixMonths = 5
+    case oneYear = 6
 }

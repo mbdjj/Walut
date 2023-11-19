@@ -168,10 +168,12 @@
 "walut_not_working_desc" = "I'm very sorry to inform you, that some features won't be working for a while. This includes charts, difference percetage, historical rates, and Ukrainian hryvnia rates. I'm working on fixing the issues but for now please be patient. I apologize for the inconvenience.";
 "dont_show_again" = "Don't show again";
 
-"storage_1d" = "One day";
+"storage_2d" = "Two days";
 "storage_1w" = "One week";
 "storage_1m" = "One month";
 "storage_3m" = "Three months";
 "storage_6m" = "Six months";
 "storage_1y" = "One year";
 "storage_footer" = "Data will be stored on your device to provide you with charts and rate difference. You can adjust its size here.";
+"storage_alert_title" = "Are you sure?";
+"storage_alert_message" = "All currency data exceeding your new option will be deleted.";
