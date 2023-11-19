@@ -202,7 +202,11 @@ struct CurrencyListView: View {
         saveCurrencies(data: model.currencyArray)
         if savedCurrencies.contains(where: { $0.base == shared.base.code && $0.nextRefresh == nextUpdate }) {
             populateCurrenciesFromMemory()
+        } else {
+            print("Couldn't populate data from storage. Refreshing...")
+            await model.refreshData()
         }
+        cleanDataFromStorage()
     }
     
     private func saveCurrencies(data: [Currency]) {
@@ -229,7 +233,22 @@ struct CurrencyListView: View {
     }
     
     private func cleanDataFromStorage() {
-        
+        do {
+            let minInterval = model.decodeStorageOptionInterval()
+            try modelContext.delete(model: SavedCurrency.self, where: #Predicate {
+                $0.nextRefresh < minInterval
+            })
+            
+            print("Old data successfully deleted")
+//            var str = ""
+//            savedCurrencies.forEach {
+//                str += "\($0.base)+\($0.code)+\($0.nextRefresh) "
+//            }
+//            print("SwiftData storage")
+//            print(str)
+        } catch {
+            print("Couldn't delete old data")
+        }
     }
 }
 

@@ -76,9 +76,7 @@ class CurrencyListViewModel: ObservableObject {
     }
     
     func checkRefreshData() async {
-        let shouldRefresh = networkManager.shouldRefresh()
-        
-        if shouldRefresh {
+        if networkManager.shouldRefresh() {
             await self.refreshData()
         } else {
             return
@@ -110,6 +108,25 @@ class CurrencyListViewModel: ObservableObject {
                 self.loading = false
             }
         }
+    }
+    
+    func decodeStorageOptionInterval() -> Int {
+        var timestamp = Date().timeIntervalSince1970
+        switch shared.storageOption {
+        case .twoDays:
+            timestamp -= 86400 * 2
+        case .oneWeek:
+            timestamp -= 86400 * 7
+        case .oneMonth:
+            timestamp -= 86400 * 30
+        case .threeMonths:
+            timestamp -= 86400 * 90
+        case .sixMonths:
+            timestamp -= 86400 * 180
+        case .oneYear:
+            timestamp -= 86400 * 365
+        }
+        return Int(timestamp)
     }
     
     private func splitFavorites(from array: [Currency]) -> ([Currency], [Currency]) {
