@@ -192,6 +192,12 @@ struct CurrencyListView: View {
     }
     
     private func refreshData() async {
+        var str = ""
+        savedCurrencies.forEach {
+            str += "\($0.base)+\($0.code)+\($0.nextRefresh) "
+        }
+        print("SwiftData storage")
+        print(str)
         await model.checkRefreshData()
         saveCurrencies(data: model.currencyArray)
         if savedCurrencies.contains(where: { $0.base == shared.base.code && $0.nextRefresh == nextUpdate }) {
@@ -220,6 +226,10 @@ struct CurrencyListView: View {
         
         model.present(data: currencies)
         print("Populated data from memory")
+    }
+    
+    private func cleanDataFromStorage() {
+        
     }
 }
 

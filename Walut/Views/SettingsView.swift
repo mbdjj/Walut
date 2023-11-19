@@ -57,7 +57,7 @@ struct SettingsView: View {
                 }
                 
                 Section {
-                    Picker(String(localized: "base_currency"), selection: $model.selectedBase) {
+                    Picker("base_currency", selection: $model.selectedBase) {
                         ForEach(model.pickerData) { currency in
                             Text("\(currency.flag) \(currency.code)")
                         }
@@ -68,13 +68,19 @@ struct SettingsView: View {
                     NavigationLink {
                         FavoritesView()
                     } label: {
-                        Text(String(localized: "favorite_currencies"))
+                        Text("favorite_currencies")
                     }
                     
                     NavigationLink {
                         SortView(isSheet: false)
                     } label: {
-                        Text(String(localized: "sort_nav_title"))
+                        Text("sort_nav_title")
+                    }
+                    
+                    NavigationLink {
+                        OnDeviceStorageView()
+                    } label: {
+                        Text("settings_save_data")
                     }
                     
                 }

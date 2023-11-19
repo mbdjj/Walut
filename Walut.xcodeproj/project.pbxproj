@@ -178,6 +178,7 @@
 		34EFF37F29E7E5FF0053F60D /* RectangularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EFF37E29E7E5FF0053F60D /* RectangularView.swift */; };
 		34F4A54629BF34DD009E2583 /* WalutWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 346C7A2029BD19020023DE23 /* WalutWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		34F748312B0A246A006ACDCD /* SavedCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F748302B0A246A006ACDCD /* SavedCurrency.swift */; };
+		34F748332B0A4934006ACDCD /* OnDeviceStorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F748322B0A4934006ACDCD /* OnDeviceStorageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -376,6 +377,7 @@
 		34EF3EC029BDC57D00CFAEDA /* BasePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePickerViewModel.swift; sourceTree = "<group>"; };
 		34EFF37E29E7E5FF0053F60D /* RectangularView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectangularView.swift; sourceTree = "<group>"; };
 		34F748302B0A246A006ACDCD /* SavedCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCurrency.swift; sourceTree = "<group>"; };
+		34F748322B0A4934006ACDCD /* OnDeviceStorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnDeviceStorageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -570,6 +572,7 @@
 				349E3F7728FEAFDE004831E2 /* ProfileView.swift */,
 				34CAB491290F11CA00D877E5 /* FavoritesView.swift */,
 				347D44B72AC8B5C30099C473 /* NotWorkingView.swift */,
+				34F748322B0A4934006ACDCD /* OnDeviceStorageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -983,6 +986,7 @@
 				34DC74BF299983250042F968 /* CurrencyChartViewModel.swift in Sources */,
 				34DC74BD2998DE140042F968 /* CurrencyChartView.swift in Sources */,
 				34F748312B0A246A006ACDCD /* SavedCurrency.swift in Sources */,
+				34F748332B0A4934006ACDCD /* OnDeviceStorageView.swift in Sources */,
 				34D5AFEB2951B6550043B72A /* SortViewModel.swift in Sources */,
 				34ED0C2128F17592006C4F38 /* SharedDataManager.swift in Sources */,
 				344E9987295ED7A200921DBC /* LoadingCell.swift in Sources */,
