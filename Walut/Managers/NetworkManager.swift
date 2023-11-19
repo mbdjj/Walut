@@ -54,7 +54,7 @@ struct NetworkManager {
             
             print("Fetched currency data for \(base.code)")
             let nextUpdate = Date(timeIntervalSince1970: Double(results.timeNextUpdateUnix))
-            self.saveDate(nextUpdate)
+            self.saveData(date: nextUpdate, base: base.code)
             
             return currencyArray
         } catch {
@@ -149,31 +149,32 @@ struct NetworkManager {
     // MARK: - Date checking refresh
     
     func shouldRefresh() -> Bool {
-        let date = getDateFromDefaults()
+        let data = getDataFromDefaults()
         let now = Date.now
         
-        let result = date < now
+        let result = data.date < now || data.base != SharedDataManager.shared.base.code
         print("shouldRefresh() returned \(result)")
         return result
     }
     
-    private func getDateFromDefaults() -> Date {
-        let dateString = defaults.string(forKey: "nextUpdate") ?? "2004-02-23 00:00:00" // my birthday :)
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar.current
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    private func getDataFromDefaults() -> (date: Date, base: String) {
+        let interval = defaults.integer(forKey: "nextUpdate")
+        let baseCode = defaults.string(forKey: "nextUpdateBase") ?? ""
+        let date = Date(timeIntervalSince1970: Double(interval))
         
-        return formatter.date(from: dateString)!
+        return (date: date, base: baseCode)
     }
     
-    private func saveDate(_ date: Date) {
+    private func saveData(date: Date, base: String) {
         let formatter = DateFormatter()
         formatter.calendar = Calendar.current
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
         let dateString = formatter.string(from: date)
         print("Saved next update date \(dateString)")
-        defaults.set(dateString, forKey: "nextUpdate")
+        let interval = Int(date.timeIntervalSince1970)
+        defaults.set(interval, forKey: "nextUpdate")
+        defaults.set(base, forKey: "nextUpdateBase")
     }
     
 }

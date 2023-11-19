@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct WalutApp: App {
@@ -15,6 +16,7 @@ struct WalutApp: App {
         WindowGroup {
             ViewManagingView()
                 .environmentObject(networkMonitor)
+                .modelContainer(for: SavedCurrency.self)
         }
     }
 }

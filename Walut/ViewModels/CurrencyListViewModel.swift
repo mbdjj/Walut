@@ -25,6 +25,7 @@ class CurrencyListViewModel: ObservableObject {
     @Published var shouldShowNotWorkingView = false
     
     @AppStorage("whyNotWorkingShown") var whyNotWorkingShown: Bool = false
+    @AppStorage("nextUpdate") var nextUpdate: Int = 0
     
     var sortIndex: Int { shared.sortIndex }
     var sortDirection: SortDirection { shared.sortIndex % 2 == 0 ? .ascending : .descending }
@@ -45,7 +46,7 @@ class CurrencyListViewModel: ObservableObject {
         }
         
         Task {
-            await refreshData()
+            //await refreshData()
         }
     }
     
@@ -84,7 +85,7 @@ class CurrencyListViewModel: ObservableObject {
         }
     }
     
-    private func present(data: [Currency]) {
+    func present(data: [Currency]) {
         if byFavorite {
             var (currencyArray, favoritesArray) = splitFavorites(from: data)
             

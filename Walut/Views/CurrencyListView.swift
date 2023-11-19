@@ -7,6 +7,7 @@
 
 import SwiftUI
 import StoreKit
+import SwiftData
 
 struct CurrencyListView: View {
     
@@ -20,6 +21,10 @@ struct CurrencyListView: View {
     @Environment(\.requestReview) var requestReview
     @EnvironmentObject var networkMonitor: NetworkMonitor
     @AppStorage("openCount") var openCount = 0
+    @AppStorage("nextUpdate") var nextUpdate = 0
+    
+    @Environment(\.modelContext) var modelContext
+    @Query var savedCurrencies: [SavedCurrency]
     
     var body: some View {
         NavigationStack {
@@ -134,7 +139,7 @@ struct CurrencyListView: View {
             .scrollDismissesKeyboard(.immediately)
             .onAppear {
                 Task {
-                    await model.checkRefreshData()
+                    await refreshData()
                 }
             }
             .onChange(of: networkMonitor.isConnected) { _, connected in
@@ -147,7 +152,7 @@ struct CurrencyListView: View {
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                 Task {
-                    await model.checkRefreshData()
+                    await refreshData()
                 }
                 
                 if openCount < 6 {
@@ -184,6 +189,37 @@ struct CurrencyListView: View {
             
             return (filteredFav, filteredCur)
         }
+    }
+    
+    private func refreshData() async {
+        await model.checkRefreshData()
+        saveCurrencies(data: model.currencyArray)
+        if savedCurrencies.contains(where: { $0.base == shared.base.code && $0.nextRefresh == nextUpdate }) {
+            populateCurrenciesFromMemory()
+        }
+    }
+    
+    private func saveCurrencies(data: [Currency]) {
+        data.forEach { item in
+            if !savedCurrencies.contains(where: { $0.code == item.code && $0.base == shared.base.code && $0.nextRefresh == nextUpdate }) {
+                let newSaved = SavedCurrency(code: item.code, base: shared.base.code, rate: item.rate, nextRefresh: nextUpdate)
+                modelContext.insert(newSaved)
+                print("Saved \(item.code) to SwiftData")
+            }
+        }
+    }
+    
+    private func populateCurrenciesFromMemory() {
+        let currencies = savedCurrencies
+            .filter {
+                $0.nextRefresh == nextUpdate && $0.base == shared.base.code
+            }
+            .map {
+                Currency(code: $0.code, rate: $0.rate)
+            }
+        
+        model.present(data: currencies)
+        print("Populated data from memory")
     }
 }
 
