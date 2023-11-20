@@ -12,7 +12,7 @@ import SwiftData
 struct CurrencyListView: View {
     
     @ObservedObject var model = CurrencyListViewModel()
-    @ObservedObject var shared = SharedDataManager.shared
+    @StateObject var shared = SharedDataManager.shared
     
     @State var quickConvertValue = 1.0
     
@@ -192,14 +192,8 @@ struct CurrencyListView: View {
     }
     
     private func refreshData() async {
-        var str = ""
-        savedCurrencies.forEach {
-            str += "\($0.base)+\($0.code)+\($0.nextRefresh) "
-        }
-        print("SwiftData storage")
-        print(str)
         await model.checkRefreshData()
-        saveCurrencies(data: model.currencyArray)
+        saveCurrencies(data: model.currencyArray + model.favoritesArray)
         if savedCurrencies.contains(where: { $0.base == shared.base.code && $0.nextRefresh == nextUpdate }) {
             populateCurrenciesFromMemory()
         } else {
@@ -240,12 +234,6 @@ struct CurrencyListView: View {
             })
             
             print("Old data successfully deleted")
-//            var str = ""
-//            savedCurrencies.forEach {
-//                str += "\($0.base)+\($0.code)+\($0.nextRefresh) "
-//            }
-//            print("SwiftData storage")
-//            print(str)
         } catch {
             print("Couldn't delete old data")
         }
