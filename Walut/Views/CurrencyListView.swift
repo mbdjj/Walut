@@ -35,7 +35,7 @@ struct CurrencyListView: View {
                         TextField("Value", value: $quickConvertValue, format: .currency(code: shared.base.code))
                             .keyboardType(.decimalPad)
                     } header: {
-                        Text(String(localized: "quick_convert"))
+                        Text("quick_convert")
                     }
                 }
                 
@@ -124,9 +124,10 @@ struct CurrencyListView: View {
             .refreshable {
                 Task {
                     await model.refreshData()
+                    saveCurrencies(data: model.currencyArray + model.favoritesArray)
                 }
             }
-            .alert(String(localized: "error"), isPresented: $model.shouldDisplayErrorAlert) {
+            .alert("error", isPresented: $model.shouldDisplayErrorAlert) {
                 Button {
                     model.shouldDisplayErrorAlert = false
                     model.errorMessage = ""
@@ -201,6 +202,7 @@ struct CurrencyListView: View {
             await model.refreshData()
         }
         cleanDataFromStorage()
+        //printSwiftData()
     }
     
     private func saveCurrencies(data: [Currency]) {
@@ -230,13 +232,21 @@ struct CurrencyListView: View {
         do {
             let minInterval = model.decodeStorageOptionInterval()
             try modelContext.delete(model: SavedCurrency.self, where: #Predicate {
-                $0.nextRefresh < minInterval
+                $0.nextRefresh < minInterval || $0.nextRefresh > nextUpdate - (12 * 3600) && $0.nextRefresh < nextUpdate
             })
             
             print("Old data successfully deleted")
         } catch {
             print("Couldn't delete old data")
         }
+    }
+    
+    private func printSwiftData() {
+        var str = ""
+        for saved in savedCurrencies {
+            str += "\(saved.base)+\(saved.code)+\(saved.nextRefresh) "
+        }
+        print(str)
     }
 }
 
