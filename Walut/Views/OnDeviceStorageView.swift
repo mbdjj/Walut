@@ -11,7 +11,10 @@ struct OnDeviceStorageView: View {
     
     @State var selected: StorageSavingOptions
     @State var showAlert: Bool = false
+    @State var showAlertAll: Bool = false
     let shared = SharedDataManager.shared
+    
+    @Environment(\.modelContext) var modelContext
     
     init() {
         _selected = State(initialValue: shared.storageOption)
@@ -42,6 +45,28 @@ struct OnDeviceStorageView: View {
 
             } footer: {
                 Text("storage_footer")
+            }
+            
+            Section {
+                Button(role: .destructive) {
+                    showAlertAll = true
+                } label: {
+                    Label("storage_delete_all_data", systemImage: "exclamationmark.triangle.fill")
+                        .foregroundStyle(.red)
+                }
+                .alert("storage_alert_title", isPresented: $showAlertAll) {
+                    Button("cancel", role: .cancel) {
+                        showAlertAll = false
+                    }
+                    
+                    Button("continue", role: .destructive) {
+                        try? modelContext.delete(model: SavedCurrency.self, where: #Predicate {
+                            $0.nextRefresh > 0
+                        })
+                    }
+                } message: {
+                    Text("storage_alert_message_all")
+                }
             }
 
         }

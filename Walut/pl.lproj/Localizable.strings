@@ -175,5 +175,7 @@
 "storage_6m" = "Sześć miesięcy";
 "storage_1y" = "Jeden rok";
 "storage_footer" = "Dane będą przechowywane na urządzeniu, aby używać wykresów i różnicy procentowej. Możesz dostosować ilość przechowywanych danych tutaj.";
+"storage_delete_all_data" = "Usuń wszystkie dane";
 "storage_alert_title" = "Jesteś pewien?";
 "storage_alert_message" = "Wszystkie dane walut przekraczające w czasie nową opcję, zostaną usunięte.";
+"storage_alert_message_all" = "Wszystkie dane o walutach zostaną usunięte.";

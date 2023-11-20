@@ -175,5 +175,7 @@
 "storage_6m" = "Six months";
 "storage_1y" = "One year";
 "storage_footer" = "Data will be stored on your device to provide you with charts and rate difference. You can adjust its size here.";
+"storage_delete_all_data" = "Delete all saved data";
 "storage_alert_title" = "Are you sure?";
 "storage_alert_message" = "All currency data exceeding your new option will be deleted.";
+"storage_alert_message_all" = "All currency data will be deleted.";

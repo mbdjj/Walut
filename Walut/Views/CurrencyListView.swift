@@ -194,15 +194,18 @@ struct CurrencyListView: View {
     
     private func refreshData() async {
         await model.checkRefreshData()
-        saveCurrencies(data: model.currencyArray + model.favoritesArray)
+        
         if savedCurrencies.contains(where: { $0.base == shared.base.code && $0.nextRefresh == nextUpdate }) {
             populateCurrenciesFromMemory()
         } else {
             print("Couldn't populate data from storage. Refreshing...")
             await model.refreshData()
+            saveCurrencies(data: model.currencyArray + model.favoritesArray)
         }
+        
         cleanDataFromStorage()
-        //printSwiftData()
+        
+        printSwiftData()
     }
     
     private func saveCurrencies(data: [Currency]) {
