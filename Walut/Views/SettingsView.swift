@@ -86,7 +86,6 @@ struct SettingsView: View {
                 }
                 
                 Section {
-                    
                     Toggle(String(localized: "settings_quick_conversion"), isOn: $model.quickConvertOn)
                         .onChange(of: model.quickConvertOn) { _, _ in
                             model.saveConvertMode()
@@ -96,8 +95,6 @@ struct SettingsView: View {
                         .onChange(of: model.showPercent) { _, _ in
                             model.saveShowPercent()
                         }
-                        .disabled(true)
-
                 }
                 
                 Section {

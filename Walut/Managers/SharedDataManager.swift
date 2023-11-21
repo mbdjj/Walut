@@ -58,7 +58,7 @@ class SharedDataManager: ObservableObject {
         let decimal = defaults.integer(forKey: "decimal")
         self.decimal = decimal == 0 ? 3 : decimal
         quickConvert = defaults.bool(forKey: "quickConvert")
-        showPercent =  false //defaults.bool(forKey: "showPercent")
+        showPercent = defaults.bool(forKey: "showPercent")
         
         sortIndex = defaults.integer(forKey: "sort")
         sortByFavorite = defaults.bool(forKey: "byFavorite")

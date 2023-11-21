@@ -6,33 +6,38 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct CurrencyCell: View {
+    
+    @Environment(\.modelContext) var modelContext
+    @Query var savedCurrencies: [SavedCurrency]
     
     let currency: Currency
     let base: Currency
     
     let decimal: Int
     
-    let shouldShowPercent: Bool = false
-//    var percentColor: Color {
-//        if currency.percent == 0 {
-//            return .secondary
-//        } else if currency.percent > 0 {
-//            return .green
-//        } else {
-//            return .red
-//        }
-//    }
-//    var arrowDirection: String {
-//        if currency.percent == 0 {
-//            return "right"
-//        } else if currency.percent > 0 {
-//            return "up"
-//        } else {
-//            return "down"
-//        }
-//    }
+    let shouldShowPercent: Bool
+    @State var percent: Double = 0
+    var percentColor: Color {
+        if percent == 0 {
+            return .secondary
+        } else if percent > 0 {
+            return .green
+        } else {
+            return .red
+        }
+    }
+    var arrowDirection: String {
+        if percent == 0 {
+            return "right"
+        } else if percent > 0 {
+            return "up"
+        } else {
+            return "down"
+        }
+    }
     
     let shared = SharedDataManager.shared
     
@@ -45,16 +50,7 @@ struct CurrencyCell: View {
         self.decimal = shared.decimal
         self.mode = mode
         self.value = value
-        //self.shouldShowPercent = shared.showPercent
-    }
-    
-    init(for currency: Currency, base: Currency) {
-        self.currency = currency
-        self.base = base
-        self.decimal = shared.decimal
-        self.mode = .normal
-        self.value = 0
-        //self.shouldShowPercent = false
+        self.shouldShowPercent = shared.showPercent
     }
     
     enum CellMode {
@@ -97,12 +93,12 @@ struct CurrencyCell: View {
                             .foregroundColor(.primary)
                     }
                     
-//                    if shouldShowPercent && currency.rate != 0 {
-//                        Text("\(Image(systemName: "arrow.\(arrowDirection)")) \(shared.percentLocaleStirng(value: abs(currency.percent)))")
-//                            .font(.caption2)
-//                            .fontWeight(.semibold)
-//                            .foregroundColor(percentColor)
-//                    }
+                    if shouldShowPercent && currency.rate != 0 {
+                        Text("\(Image(systemName: "arrow.\(arrowDirection)")) \(shared.percentLocaleStirng(value: abs(percent)))")
+                            .font(.caption2)
+                            .fontWeight(.semibold)
+                            .foregroundColor(percentColor)
+                    }
                 }
                 
             }
@@ -116,6 +112,21 @@ struct CurrencyCell: View {
                             .font(.caption)
                     }
                     Spacer()
+                }
+            }
+        }
+        .onAppear {
+            let lastRate = savedCurrencies
+                .filter { $0.code == currency.code && $0.base == base.code }
+                .sorted { $0.nextRefresh > $1.nextRefresh }
+                .dropFirst()
+                .first?
+                .rate
+            
+            if let lastRate {
+                withAnimation {
+                    let lastPrice = 1 / lastRate
+                    percent = (currency.price - lastPrice) / lastPrice
                 }
             }
         }

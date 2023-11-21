@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 	<key>CFBundleIcons</key>
 	<dict>
 		<key>CFBundleAlternateIcons</key>
@@ -176,18 +174,18 @@
 					<string>TRY</string>
 				</array>
 			</dict>
-			<key>ZAR</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>ZAR</string>
-				</array>
-			</dict>
 			<key>UAH</key>
 			<dict>
 				<key>CFBundleIconFiles</key>
 				<array>
 					<string>UAH</string>
+				</array>
+			</dict>
+			<key>ZAR</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>ZAR</string>
 				</array>
 			</dict>
 		</dict>
@@ -203,6 +201,8 @@
 			<false/>
 		</dict>
 	</dict>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>ChangeCurrenciesIntent</string>
