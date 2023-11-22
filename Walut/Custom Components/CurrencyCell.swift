@@ -116,22 +116,28 @@ struct CurrencyCell: View {
             }
         }
         .onAppear {
-            let lastRate = savedCurrencies
-                .filter { $0.code == currency.code && $0.base == base.code }
-                .sorted { $0.nextRefresh > $1.nextRefresh }
-                .dropFirst()
-                .first?
-                .rate
-            
-            if let lastRate {
-                withAnimation {
-                    let lastPrice = 1 / lastRate
-                    percent = (currency.price - lastPrice) / lastPrice
-                }
-            }
+            updatePercent()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+            updatePercent()
         }
     }
     
+    func updatePercent() {
+        let lastRate = savedCurrencies
+            .filter { $0.code == currency.code && $0.base == base.code }
+            .sorted { $0.nextRefresh > $1.nextRefresh }
+            .dropFirst()
+            .first?
+            .rate
+        
+        if let lastRate {
+            withAnimation {
+                let lastPrice = 1 / lastRate
+                percent = (currency.price - lastPrice) / lastPrice
+            }
+        }
+    }
     
 }
 

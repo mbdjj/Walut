@@ -41,4 +41,15 @@ struct RatesData: Identifiable, Equatable {
         self.value = value
     }
     
+    init(code: String, date: Date, value: Double) {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar.current
+        formatter.dateFormat = "rrrr-MM-dd"
+        let dateString = formatter.string(from: date)
+        
+        self.currencyString = code
+        self.dateString = dateString
+        self.value = value
+    }
+    
 }

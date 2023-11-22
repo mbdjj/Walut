@@ -209,18 +209,18 @@ struct CurrencyCalcView: View {
                 
                 Spacer()
                 
-//                Button {
-//                    chartCurrency = model.currency
-//                } label: {
-//                    Text("share_chart")
-//                        .padding(.horizontal)
-//                        .padding(.vertical, 6)
-//                        .foregroundColor(.walut)
-//                        .background {
-//                            Color(uiColor: .secondarySystemBackground)
-//                                .clipShape(RoundedRectangle(cornerRadius: 8))
-//                        }
-//                }
+                Button {
+                    chartCurrency = model.currency
+                } label: {
+                    Text("share_chart")
+                        .padding(.horizontal)
+                        .padding(.vertical, 6)
+                        .foregroundColor(.walut)
+                        .background {
+                            Color(uiColor: .secondarySystemBackground)
+                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                        }
+                }
             }
             .padding(.horizontal, 32)
             
@@ -349,9 +349,9 @@ struct CurrencyCalcView: View {
                 model.calcBottom()
             }
         }
-//        .sheet(item: $chartCurrency) { currency in
-//            CurrencyChartView(currency: currency, base: model.base)
-//        }
+        .sheet(item: $chartCurrency) { currency in
+            CurrencyChartView(currency: currency, base: model.base)
+        }
     }
 }
 
