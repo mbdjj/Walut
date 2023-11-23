@@ -19,19 +19,11 @@ class CurrencyListViewModel: ObservableObject {
     @Published var errorMessage = ""
     @Published var shouldDisplayErrorAlert = false
     
-    @Published var shouldShowSortView = false
-    @Published var shouldShowDatePickView = false
-    
-    @Published var shouldShowNotWorkingView = false
-    
-    @AppStorage("whyNotWorkingShown") var whyNotWorkingShown: Bool = false
     @AppStorage("nextUpdate") var nextUpdate: Int = 0
     
     var sortIndex: Int { shared.sortIndex }
     var sortDirection: SortDirection { shared.sortIndex % 2 == 0 ? .ascending : .descending }
     var byFavorite: Bool { shared.sortByFavorite }
-    var isCustomDate: Bool { false /*shared.isCustomDate*/ }
-    var customDate: Date { shared.customDate }
     
     let shared = SharedDataManager.shared
     let networkManager = NetworkManager.shared
@@ -39,14 +31,6 @@ class CurrencyListViewModel: ObservableObject {
     init() {
         DispatchQueue.main.async {
             self.loading = true
-            
-            if !self.whyNotWorkingShown {
-                self.shouldShowNotWorkingView = true
-            }
-        }
-        
-        Task {
-            //await refreshData()
         }
     }
     

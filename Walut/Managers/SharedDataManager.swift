@@ -23,9 +23,6 @@ class SharedDataManager: ObservableObject {
     @Published var sortIndex: Int
     @Published var sortByFavorite: Bool
     
-    @Published var isCustomDate: Bool
-    @Published var customDate: Date = .now
-    
     @Published var favorites: [String]
     
     @Published var storageOption: StorageSavingOptions
@@ -70,16 +67,10 @@ class SharedDataManager: ObservableObject {
         
         formatter.calendar = Calendar.current
         formatter.dateFormat = "yyyy-MM-dd"
-        isCustomDate = false //defaults.bool(forKey: "isCustomDate")
-        customDate = customDate(from: defaults.string(forKey: "customDate") ?? "")
     }
     
     func customDate(from text: String) -> Date {
         return formatter.date(from: text) ?? .now
-    }
-    
-    func customDateString() -> String {
-        return formatter.string(from: customDate)
     }
     
     func currencyLocaleString(value: Double) -> String {

@@ -27,9 +27,6 @@ class CurrencyCalcViewModel: ObservableObject {
         "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(shared.currencyLocaleString(value: currency.price, currencyCode: base.code))"
     }
     
-    var isCustom: Bool { shared.isCustomDate }
-    var customDate: Date { shared.customDate }
-    
     init(currency: Currency, base: Currency, shouldSwap: Bool) {
         self.currency = currency
         self.base = base

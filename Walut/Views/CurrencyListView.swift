@@ -97,25 +97,8 @@ struct CurrencyListView: View {
 //                }
                 
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Button {
-                        model.shouldShowDatePickView = true
-                    } label: {
-                        if shared.isCustomDate {
-                            Image(systemName: "calendar")
-                                .foregroundColor(Color(uiColor: .systemBackground))
-                                .frame(width: 35, height: 35)
-                                .background {
-                                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                        .foregroundColor(.walut)
-                                }
-                        } else {
-                            Image(systemName: "calendar")
-                        }
-                    }
-                    .disabled(true)
-                    
-                    Button {
-                        model.shouldShowSortView = true
+                    NavigationLink {
+                        SortView(isSheet: false)
                     } label: {
                         Image(systemName: "arrow.up.arrow.down")
                     }
@@ -165,18 +148,9 @@ struct CurrencyListView: View {
                     requestReview()
                 }
             }
-            .sheet(isPresented: $model.shouldShowSortView) {
-                SortView(isSheet: true)
-            }
-            .sheet(isPresented: $model.shouldShowDatePickView) {
-                DatePickView()
-            }
             .searchable(text: $queryString) {}
             .sheet(item: $model.selectedCurrency) { currency in
                 CurrencyCalcView(currency: currency)
-            }
-            .sheet(isPresented: $model.shouldShowNotWorkingView) {
-                NotWorkingView()
             }
         }
     }
