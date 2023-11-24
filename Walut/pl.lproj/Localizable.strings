@@ -179,3 +179,5 @@
 "storage_alert_title" = "Jesteś pewien?";
 "storage_alert_message" = "Wszystkie dane walut przekraczające w czasie nową opcję, zostaną usunięte.";
 "storage_alert_message_all" = "Wszystkie dane o walutach zostaną usunięte.";
+
+"exchagerate-api" = "Dane walutowe zapewniane przez otwarte API exchangerate-api.com";

@@ -179,3 +179,5 @@
 "storage_alert_title" = "Are you sure?";
 "storage_alert_message" = "All currency data exceeding your new option will be deleted.";
 "storage_alert_message_all" = "All currency data will be deleted.";
+
+"exchagerate-api" = "Currency data provided by exchangerate-api.com's Open API";

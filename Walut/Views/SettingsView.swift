@@ -122,6 +122,8 @@ struct SettingsView: View {
                     Text("\(String(localized: "settings_version")): \(version) (\(build))")
                         .foregroundColor(.gray)
 
+                } footer: {
+                    Text("exchagerate-api")
                 }
                 
             }
