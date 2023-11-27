@@ -169,6 +169,7 @@
 		34ED0C2128F17592006C4F38 /* SharedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C2028F17592006C4F38 /* SharedDataManager.swift */; };
 		34ED0C2328F1C24F006C4F38 /* ViewManagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C2228F1C24F006C4F38 /* ViewManagingView.swift */; };
 		34ED0C2828F1C6FF006C4F38 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34ED0C2A28F1C6FF006C4F38 /* Localizable.strings */; };
+		34EE18EE2B15289C000A5EBC /* SavedCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F748302B0A246A006ACDCD /* SavedCurrency.swift */; };
 		34EF3EBF29BDC3FE00CFAEDA /* BasePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EF3EBE29BDC3FE00CFAEDA /* BasePickerView.swift */; };
 		34EF3EC129BDC57D00CFAEDA /* BasePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EF3EC029BDC57D00CFAEDA /* BasePickerViewModel.swift */; };
 		34EF3EC229BDC7E700CFAEDA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34ED0C2A28F1C6FF006C4F38 /* Localizable.strings */; };
@@ -245,6 +246,8 @@
 		346C7A4229BD1AEB0023DE23 /* CurrencyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListView.swift; sourceTree = "<group>"; };
 		346C7A4429BD1DE30023DE23 /* WalutWatch-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "WalutWatch-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		347514972919A55A0092864A /* Configuration.storekit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Configuration.storekit; sourceTree = "<group>"; };
+		34804EEE2B14779100099087 /* Walut.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Walut.entitlements; sourceTree = "<group>"; };
+		34804EEF2B1477B500099087 /* WalutWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WalutWidgetExtension.entitlements; sourceTree = "<group>"; };
 		3481E08B295DE09100322363 /* WalutWidgetIntents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = WalutWidgetIntents.intentdefinition; sourceTree = "<group>"; };
 		348346E7292612A3003710CA /* WalutWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WalutWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		348346E8292612A3003710CA /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -501,6 +504,7 @@
 		34A2345328F05B5C00C81292 = {
 			isa = PBXGroup;
 			children = (
+				34804EEF2B1477B500099087 /* WalutWidgetExtension.entitlements */,
 				34A5A6B0292002A000613135 /* README.md */,
 				34A2345E28F05B5C00C81292 /* Walut */,
 				348346EC292612A3003710CA /* WalutWidget */,
@@ -523,6 +527,7 @@
 		34A2345E28F05B5C00C81292 /* Walut */ = {
 			isa = PBXGroup;
 			children = (
+				34804EEE2B14779100099087 /* Walut.entitlements */,
 				34A2345F28F05B5C00C81292 /* WalutApp.swift */,
 				347514972919A55A0092864A /* Configuration.storekit */,
 				34F7482F2B0A23C4006ACDCD /* Model */,
@@ -962,6 +967,7 @@
 				34EFF37F29E7E5FF0053F60D /* RectangularView.swift in Sources */,
 				34E0A203292CFD3C00EF3CBC /* CurrencyData.swift in Sources */,
 				348346FE2926135E003710CA /* TimeSeriesData.swift in Sources */,
+				34EE18EE2B15289C000A5EBC /* SavedCurrency.swift in Sources */,
 				348346FD2926135B003710CA /* RatesData.swift in Sources */,
 				34671B0A296A03AC0023D88C /* SharedDataManager.swift in Sources */,
 				341DFC0E295DB44300BDCBDB /* WidgetChartView.swift in Sources */,
@@ -1114,6 +1120,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = WalutWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = CMJ553K76W;
@@ -1142,6 +1149,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = WalutWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = CMJ553K76W;
@@ -1291,6 +1299,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Walut/Walut.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Walut/Preview Content\"";
@@ -1328,6 +1337,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Walut/Walut.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"Walut/Preview Content\"";

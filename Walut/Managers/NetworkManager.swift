@@ -17,6 +17,7 @@ struct NetworkManager {
     }()
     private let allCodesArray: [String]
     private let defaults = UserDefaults.standard
+    private let sharedDefaults = UserDefaults(suiteName: "group.dev.bartminski.Walut")!
     private let formatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.calendar = Calendar.current
@@ -158,23 +159,18 @@ struct NetworkManager {
     }
     
     private func getDataFromDefaults() -> (date: Date, base: String) {
-        let interval = defaults.integer(forKey: "nextUpdate")
-        let baseCode = defaults.string(forKey: "nextUpdateBase") ?? ""
+        let interval = sharedDefaults.integer(forKey: "nextUpdate")
+        let baseCode = sharedDefaults.string(forKey: "nextUpdateBase") ?? ""
         let date = Date(timeIntervalSince1970: Double(interval))
         
         return (date: date, base: baseCode)
     }
     
     private func saveData(date: Date, base: String) {
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar.current
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        
-        let dateString = formatter.string(from: date)
-        print("Saved next update date \(dateString)")
+        print("Saved next update date \(date.formatted(date: .numeric, time: .standard))")
         let interval = Int(date.timeIntervalSince1970)
-        defaults.set(interval, forKey: "nextUpdate")
-        defaults.set(base, forKey: "nextUpdateBase")
+        sharedDefaults.set(interval, forKey: "nextUpdate")
+        sharedDefaults.set(base, forKey: "nextUpdateBase")
     }
     
 }

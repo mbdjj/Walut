@@ -7,9 +7,20 @@
 
 import WidgetKit
 import SwiftUI
-import Charts
+import SwiftData
 
 struct Provider: IntentTimelineProvider {
+    
+    private let modelContainer: ModelContainer
+    private let defaults = UserDefaults(suiteName: "group.dev.bartminski.Walut")
+    
+    init() {
+        do {
+            modelContainer = try ModelContainer(for: SavedCurrency.self)
+        } catch {
+            fatalError("Failed to create the model container: \(error)")
+        }
+    }
     
     func placeholder(in context: Context) -> CurrencyEntry {
         CurrencyEntry(date: Date(), currency: Currency.placeholder, baseCode: "USD", chartData: MockData.chartData)
