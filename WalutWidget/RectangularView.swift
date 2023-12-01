@@ -25,6 +25,7 @@ struct RectangularView: View {
                     .fontWeight(.heavy)
                     .minimumScaleFactor(0.6)
                     .lineLimit(1)
+                    .contentTransition(.numericText())
             }
             
             Spacer()

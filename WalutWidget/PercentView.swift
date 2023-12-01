@@ -54,6 +54,7 @@ struct PercentView: View {
                     .minimumScaleFactor(0.6)
                     .lineLimit(1)
                     .foregroundColor(.walut)
+                    .contentTransition(.numericText())
                 
 //                Label {
 //                    Text(SharedDataManager.shared.percentLocaleStirng(value: abs(differencePercent)))

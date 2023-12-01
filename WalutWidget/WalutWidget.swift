@@ -12,7 +12,7 @@ import SwiftData
 struct Provider: IntentTimelineProvider {
     
     private let modelContainer: ModelContainer
-    private let defaults = UserDefaults(suiteName: "group.dev.bartminski.Walut")
+    private let defaults = UserDefaults(suiteName: "group.dev.bartminski.Walut")!
     
     init() {
         do {
@@ -37,21 +37,39 @@ struct Provider: IntentTimelineProvider {
             
             let (foreignCode, baseCode) = getCodes(from: configuration)
             
-            do {
-                let currency = try await NetworkManager.shared.getSmallWidgetData(for: foreignCode, baseCode: baseCode)
-                
-                //var chartData: [RatesData]?
-//                if context.family == .systemMedium {
-//                    chartData = try await NetworkManager.shared.getChartData(forCode: foreignCode, baseCode: baseCode)
-//                }
-                
-                let entry = CurrencyEntry(date: .now, currency: currency, baseCode: baseCode, chartData: nil)
-                
-                let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
-                completion(timeline)
-                
-            } catch {
-                print("Error: \(error.localizedDescription)")
+            if NetworkManager.shared.shouldRefresh() {
+                do {
+                    let currencies = try await NetworkManager.shared.getCurrencyData(for: Currency(baseCode: baseCode))
+                    
+                    await saveCurrency(data: currencies, base: baseCode)
+                    
+                    let currency = currencies.filter { $0.code == foreignCode }.first!
+                    
+                    let entry = CurrencyEntry(date: .now, currency: currency, baseCode: baseCode, chartData: nil)
+                    
+                    let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
+                    completion(timeline)
+                } catch {
+                    print("Error: \(error.localizedDescription)")
+                }
+            } else {
+                if let currency = await getSavedData(for: foreignCode, base: baseCode) {
+                    let entry = CurrencyEntry(date: .now, currency: currency, baseCode: baseCode, chartData: nil)
+                    
+                    let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
+                    completion(timeline)
+                } else {
+                    do {
+                        let currency = try await NetworkManager.shared.getSmallWidgetData(for: foreignCode, baseCode: baseCode)
+                        
+                        let entry = CurrencyEntry(date: .now, currency: currency, baseCode: baseCode, chartData: nil)
+                        
+                        let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
+                        completion(timeline)
+                    } catch {
+                        print("Error: \(error.localizedDescription)")
+                    }
+                }
             }
         }
     }
@@ -63,6 +81,38 @@ struct Provider: IntentTimelineProvider {
         let baseCode = allCodesArray[configuration.baseCurrency.rawValue]
         
         return (foreignCode, baseCode)
+    }
+    
+    @MainActor
+    private func getSavedData(for code: String, base: String) -> Currency? {
+        let descriptor = FetchDescriptor<SavedCurrency>()
+        let saved = try? modelContainer.mainContext.fetch(descriptor)
+        let nextUpdate = defaults.integer(forKey: "nextUpdate")
+        let currency = saved?
+            .filter {
+                $0.nextRefresh == nextUpdate && $0.base == base
+            }
+            .map {
+                Currency(code: $0.code, rate: $0.rate)
+            }
+            .filter { $0.code == code }
+            .first
+        
+        return currency
+    }
+    
+    @MainActor
+    private func saveCurrency(data: [Currency], base: String) {
+        let nextUpdate = defaults.integer(forKey: "nextUpdate")
+        let descriptor = FetchDescriptor<SavedCurrency>()
+        let savedCurrencies = try? modelContainer.mainContext.fetch(descriptor)
+        data.forEach { item in
+            if !(savedCurrencies?.contains(where: { $0.code == item.code && $0.base == base && $0.nextRefresh == nextUpdate }) ?? true) {
+                let newSaved = SavedCurrency(code: item.code, base: base, rate: item.rate, nextRefresh: nextUpdate)
+                modelContainer.mainContext.insert(newSaved)
+                print("Saved \(item.code) to SwiftData")
+            }
+        }
     }
 }
 
