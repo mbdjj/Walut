@@ -88,13 +88,13 @@ struct CurrencyListView: View {
             }
             .navigationTitle("\(shared.base.flag) \(shared.base.code)")
             .toolbar {
-//                if shared.isCustomDate {
-//                    ToolbarItem(placement: .navigationBarLeading) {
-//                        Text(shared.customDateString())
-//                            .foregroundColor(.gray)
-//                            .fontWeight(.medium)
-//                    }
-//                }
+                if nextUpdate < Int(Date().timeIntervalSince1970) && !model.loading {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Image(systemName: "wifi.slash")
+                            .foregroundColor(.gray)
+                            .fontWeight(.medium)
+                    }
+                }
                 
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     NavigationLink {
