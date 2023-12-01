@@ -9,10 +9,7 @@ import SwiftUI
 
 struct SortView: View {
     
-    @State var isSheet: Bool
-    
     @ObservedObject var model = SortViewModel()
-    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         NavigationStack {
@@ -64,30 +61,6 @@ struct SortView: View {
                 }
             }
             .navigationTitle("sort")
-            .toolbar {
-                #if !os(watchOS)
-                if isSheet {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button {
-                            dismiss.callAsFunction()
-                        } label: {
-                            Text("cancel")
-                        }
-                    }
-                }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        model.saveSortAsIndex()
-                        model.saveByFavorite()
-                    } label: {
-                        Text("save")
-                            .bold()
-                    }
-                }
-                #endif
-            }
-            #if os(watchOS)
             .onChange(of: model.selectedSort) { _, _ in
                 model.saveSortAsIndex()
             }
@@ -97,14 +70,12 @@ struct SortView: View {
             .onChange(of: model.sortByFavorite) { _, _ in
                 model.saveByFavorite()
             }
-            #endif
         }
-        .interactiveDismissDisabled(model.changed)
     }
 }
 
 struct SortView_Previews: PreviewProvider {
     static var previews: some View {
-        SortView(isSheet: true)
+        SortView()
     }
 }

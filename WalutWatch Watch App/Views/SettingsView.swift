@@ -19,7 +19,7 @@ struct SettingsView: View {
             }
             
             NavigationLink {
-                SortView(isSheet: false)
+                SortView()
             } label: {
                 Text("sort_nav_title")
             }

@@ -21,7 +21,7 @@ struct CurrencyListView: View {
     @Environment(\.requestReview) var requestReview
     @EnvironmentObject var networkMonitor: NetworkMonitor
     @AppStorage("openCount") var openCount = 0
-    @AppStorage("nextUpdate") var nextUpdate = 0
+    @AppStorage("nextUpdate", store: UserDefaults(suiteName: "group.dev.bartminski.Walut")) var nextUpdate = 0
     
     @Environment(\.modelContext) var modelContext
     @Query var savedCurrencies: [SavedCurrency]
@@ -98,10 +98,12 @@ struct CurrencyListView: View {
                 
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     NavigationLink {
-                        SortView(isSheet: false)
+                        SortView()
                     } label: {
                         Image(systemName: "arrow.up.arrow.down")
                     }
+                    .buttonStyle(.bordered)
+                    .buttonBorderShape(.circle)
                 }
             }
             .refreshable {
@@ -223,6 +225,7 @@ struct CurrencyListView: View {
         for saved in savedCurrencies {
             str += "\(saved.base)+\(saved.code)+\(saved.nextRefresh) "
         }
+        print(nextUpdate)
         print(str)
     }
 }

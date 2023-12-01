@@ -13,23 +13,11 @@ class SortViewModel: ObservableObject {
     @Published var selectedDirection: SortDirection = .ascending
     @Published var sortByFavorite: Bool = true
     
-    private var initialSelectedSort: SortType = .byCode
-    private var initialSelectedDirection: SortDirection = .ascending
-    private var initialSortByFavorite: Bool = true
-    
-    var changed: Bool {
-        selectedSort != initialSelectedSort || selectedDirection != initialSelectedDirection || sortByFavorite != initialSortByFavorite
-    }
-    
     private var shared = SharedDataManager.shared
     private let defaults = UserDefaults.standard
     
     init() {
         decodeSort()
-        
-        initialSelectedSort = selectedSort
-        initialSelectedDirection = selectedDirection
-        initialSortByFavorite = sortByFavorite
     }
     
     private func decodeSort() {

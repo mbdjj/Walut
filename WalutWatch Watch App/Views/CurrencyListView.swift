@@ -24,7 +24,7 @@ struct CurrencyListView: View {
                     }
                     .swipeActions {
                         NavigationLink {
-                            SortView(isSheet: false)
+                            SortView()
                         } label: {
                             Image(systemName: "arrow.up.arrow.down")
                         }
