@@ -197,7 +197,7 @@ struct CurrencyChartView: View {
                 data = savedCurrencies
                     .filter { $0.code == model.currency.code && $0.base == model.base.code }
                     .sorted { $0.nextRefresh < $1.nextRefresh }
-                    .map { RatesData(code: $0.code, date: $0.dateSaved, value: (1 / $0.rate)) }
+                    .map { RatesData(from: $0) }
                 print(data)
             }
             .onChange(of: currentActive) { _, newValue in

@@ -52,4 +52,8 @@ struct RatesData: Identifiable, Equatable {
         self.value = value
     }
     
+    init(from saved: SavedCurrency) {
+        self.init(code: saved.code, date: saved.dateSaved, value: (1 / saved.rate))
+    }
+    
 }

@@ -19,6 +19,11 @@ struct Currency: Identifiable, Equatable {
         self.rate = 1.0
     }
     
+    init(from saved: SavedCurrency) {
+        self.code = saved.code
+        self.rate = saved.rate
+    }
+    
     static var placeholder: Currency {
         let currency = Currency(code: "USD", rate: 4.464)
         return currency

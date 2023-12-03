@@ -9,6 +9,8 @@ import Foundation
 import SwiftData
 
 @Model final class SavedCurrency {
+    @Attribute(.unique) var id: String
+    
     let code: String
     let base: String
     let rate: Double
@@ -22,5 +24,7 @@ import SwiftData
         self.rate = rate
         self.nextRefresh = nextRefresh
         self.dateSaved = dateSaved
+        
+        self.id = "\(base)+\(code)+\(nextRefresh)"
     }
 }

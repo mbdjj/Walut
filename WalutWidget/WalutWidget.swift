@@ -89,12 +89,8 @@ struct Provider: IntentTimelineProvider {
         let saved = try? modelContainer.mainContext.fetch(descriptor)
         let nextUpdate = defaults.integer(forKey: "nextUpdate")
         let currency = saved?
-            .filter {
-                $0.nextRefresh == nextUpdate && $0.base == base
-            }
-            .map {
-                Currency(code: $0.code, rate: $0.rate)
-            }
+            .filter { $0.nextRefresh == nextUpdate && $0.base == base }
+            .map { Currency(from: $0) }
             .filter { $0.code == code }
             .first
         

@@ -196,12 +196,8 @@ struct CurrencyListView: View {
     
     private func populateCurrenciesFromMemory() {
         let currencies = savedCurrencies
-            .filter {
-                $0.nextRefresh == nextUpdate && $0.base == shared.base.code
-            }
-            .map {
-                Currency(code: $0.code, rate: $0.rate)
-            }
+            .filter { $0.nextRefresh == nextUpdate && $0.base == shared.base.code }
+            .map { Currency(from: $0) }
         
         model.present(data: currencies)
         print("Populated data from memory")
