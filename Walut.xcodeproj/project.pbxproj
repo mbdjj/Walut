@@ -174,6 +174,7 @@
 		34EF3EC129BDC57D00CFAEDA /* BasePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EF3EC029BDC57D00CFAEDA /* BasePickerViewModel.swift */; };
 		34EF3EC229BDC7E700CFAEDA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 34ED0C2A28F1C6FF006C4F38 /* Localizable.strings */; };
 		34EFF37F29E7E5FF0053F60D /* RectangularView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34EFF37E29E7E5FF0053F60D /* RectangularView.swift */; };
+		34F080502B1CE076004CA419 /* SavedCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F748302B0A246A006ACDCD /* SavedCurrency.swift */; };
 		34F4A54629BF34DD009E2583 /* WalutWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 346C7A2029BD19020023DE23 /* WalutWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		34F748312B0A246A006ACDCD /* SavedCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F748302B0A246A006ACDCD /* SavedCurrency.swift */; };
 		34F748332B0A4934006ACDCD /* OnDeviceStorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34F748322B0A4934006ACDCD /* OnDeviceStorageView.swift */; };
@@ -929,6 +930,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34F080502B1CE076004CA419 /* SavedCurrency.swift in Sources */,
 				34C85A6A2A1E247100FB7B03 /* SharedDataManager.swift in Sources */,
 				346C7A4129BD1A9F0023DE23 /* CurrencyCell.swift in Sources */,
 				346C7A3829BD19890023DE23 /* Currency.swift in Sources */,

@@ -210,6 +210,19 @@ struct CurrencyListView: View {
                 $0.nextRefresh < minInterval || $0.nextRefresh > nextUpdate - (12 * 3600) && $0.nextRefresh < nextUpdate
             })
             
+            let crossReference = Dictionary(grouping: savedCurrencies, by: \.idString)
+            let duplicates = crossReference
+                .filter { $1.count > 1 }
+                .flatMap { $0.1 }
+            
+            try duplicates.forEach { duplicate in
+                let dupeString = duplicate.idString
+                try modelContext.delete(model: SavedCurrency.self, where: #Predicate {
+                    $0.idString == dupeString
+                })
+                modelContext.insert(duplicate)
+            }
+            
             print("Old data successfully deleted")
         } catch {
             print("Couldn't delete old data")
@@ -219,7 +232,7 @@ struct CurrencyListView: View {
     private func printSwiftData() {
         var str = ""
         for saved in savedCurrencies {
-            str += "\(saved.base)+\(saved.code)+\(saved.nextRefresh) "
+            str += saved.idString + " "
         }
         print(nextUpdate)
         print(str)
