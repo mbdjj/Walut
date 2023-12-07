@@ -15,43 +15,21 @@ struct SortView: View {
         NavigationStack {
             List {
                 Section {
-                    Button {
-                        model.selectedSort = .byCode
-                    } label: {
-                        Text("sort_by_code")
-                            .fontWeight(model.selectedSort == .byCode ? .bold : .regular)
+                    Picker("", selection: $model.selectedSort) {
+                        Text("sort_by_code").tag(SortType.byCode)
+                        Text("sort_by_price").tag(SortType.byPrice)
                     }
-                    
-                    Button {
-                        model.selectedSort = .byPrice
-                    } label: {
-                        Text("sort_by_price")
-                            .fontWeight(model.selectedSort == .byPrice ? .bold : .regular)
-                    }
-                    
-                    Button {
-                        model.selectedSort = .byChange
-                    } label: {
-                        Text("sort_by_change")
-                            .fontWeight(model.selectedSort == .byChange ? .bold : .regular)
-                    }
-                    .disabled(true)
+                    .labelsHidden()
+                    .pickerStyle(.inline)
                 }
                 
                 Section {
-                    Button {
-                        model.selectedDirection = .ascending
-                    } label: {
-                        Text("sort_ascending")
-                            .fontWeight(model.selectedDirection == .ascending ? .bold : .regular)
+                    Picker("", selection: $model.selectedDirection) {
+                        Text("sort_ascending").tag(SortDirection.ascending)
+                        Text("sort_descending").tag(SortDirection.descending)
                     }
-                    
-                    Button {
-                        model.selectedDirection = .descending
-                    } label: {
-                        Text("sort_descending")
-                            .fontWeight(model.selectedDirection == .descending ? .bold : .regular)
-                    }
+                    .labelsHidden()
+                    .pickerStyle(.inline)
                 }
                 
                 Section {
