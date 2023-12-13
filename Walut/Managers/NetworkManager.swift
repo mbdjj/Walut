@@ -18,12 +18,6 @@ struct NetworkManager {
     private let allCodesArray: [String]
     private let defaults = UserDefaults.standard
     private let sharedDefaults = UserDefaults(suiteName: "group.dev.bartminski.Walut")!
-    private let formatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar.current
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter
-    }()
     
     static let shared = NetworkManager()
     
@@ -114,18 +108,15 @@ struct NetworkManager {
     }
     
     // MARK: - Methods for making string from date
-    func dateString(from date: Date) -> String {
-        return formatter.string(from: date)
-    }
     
     func yesterdayString() -> String {
         let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: .now)
-        return dateString(from: yesterday!)
+        return SharedDataManager.shared.customString(from: yesterday!)
     }
     
     func stringsForURLs(from date: Date) -> (String, String) {
         let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: date)
-        return (dateString(from: date), dateString(from: yesterday!))
+        return (SharedDataManager.shared.customString(from: date), SharedDataManager.shared.customString(from: yesterday!))
     }
     
     // MARK: - NetworkErrors

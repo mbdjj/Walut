@@ -178,13 +178,12 @@ struct CurrencyChartView: View {
                                     let location = value.location
                                     
                                     if let date: Date = proxy.value(atX: location.x) {
-                                        guard self.currentActive?.date != date else { return }
-                                        
-                                        self.currentActive = data
-                                            .sorted {
-                                                abs($0.date.timeIntervalSince(date)) < abs($1.date.timeIntervalSince(date))
-                                            }
-                                            .first
+                                        let dateString = SharedDataManager.shared.customString(from: date)
+                                        if let currentItem = data.first(where: { item in
+                                            dateString == item.dateString
+                                        }) {
+                                            self.currentActive = currentItem
+                                        }
                                     }
                                 }
                                 .onEnded({ _ in

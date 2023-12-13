@@ -73,6 +73,10 @@ class SharedDataManager: ObservableObject {
         return formatter.date(from: text) ?? .now
     }
     
+    func customString(from date: Date) -> String {
+        return formatter.string(from: date)
+    }
+    
     func currencyLocaleString(value: Double) -> String {
         return numFormatter.string(from: value as NSNumber) ?? "0"
     }
