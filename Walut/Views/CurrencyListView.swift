@@ -177,11 +177,10 @@ struct CurrencyListView: View {
             print("Couldn't populate data from storage. Refreshing...")
             await model.refreshData()
             saveCurrencies(data: model.currencyArray + model.favoritesArray)
+            populateCurrenciesFromMemory()
         }
         
         cleanDataFromStorage()
-        
-        printSwiftData()
     }
     
     private func saveCurrencies(data: [Currency]) {
@@ -198,6 +197,22 @@ struct CurrencyListView: View {
         let currencies = savedCurrencies
             .filter { $0.nextRefresh == nextUpdate && $0.base == shared.base.code }
             .map { Currency(from: $0) }
+            .map { currency in
+                let lastRate = savedCurrencies
+                    .filter { $0.code == currency.code && $0.base == shared.base.code }
+                    .sorted { $0.nextRefresh > $1.nextRefresh }
+                    .dropFirst()
+                    .first?
+                    .rate
+                
+                if let lastRate {
+                    var newCurrency = currency
+                    newCurrency.lastRate = lastRate
+                    return newCurrency
+                } else {
+                    return currency
+                }
+            }
         
         model.present(data: currencies)
         print("Populated data from memory")

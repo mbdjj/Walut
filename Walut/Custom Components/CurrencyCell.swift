@@ -19,20 +19,19 @@ struct CurrencyCell: View {
     let decimal: Int
     
     let shouldShowPercent: Bool
-    @State var percent: Double = 0
     var percentColor: Color {
-        if percent == 0 {
+        if currency.percent == 0 {
             return .secondary
-        } else if percent > 0 {
+        } else if currency.percent > 0 {
             return .green
         } else {
             return .red
         }
     }
     var arrowDirection: String {
-        if percent == 0 {
+        if currency.percent == 0 {
             return "right"
-        } else if percent > 0 {
+        } else if currency.percent > 0 {
             return "up"
         } else {
             return "down"
@@ -94,7 +93,7 @@ struct CurrencyCell: View {
                     }
                     
                     if shouldShowPercent && currency.rate != 0 {
-                        Text("\(Image(systemName: "arrow.\(arrowDirection)")) \(shared.percentLocaleStirng(value: abs(percent)))")
+                        Text("\(Image(systemName: "arrow.\(arrowDirection)")) \(shared.percentLocaleStirng(value: abs(currency.percent)))")
                             .font(.caption2)
                             .fontWeight(.semibold)
                             .foregroundColor(percentColor)
@@ -115,30 +114,7 @@ struct CurrencyCell: View {
                 }
             }
         }
-        .onAppear {
-            updatePercent()
-        }
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
-            updatePercent()
-        }
     }
-    
-    func updatePercent() {
-        let lastRate = savedCurrencies
-            .filter { $0.code == currency.code && $0.base == base.code }
-            .sorted { $0.nextRefresh > $1.nextRefresh }
-            .dropFirst()
-            .first?
-            .rate
-        
-        if let lastRate {
-            withAnimation {
-                let lastPrice = 1 / lastRate
-                percent = (currency.price - lastPrice) / lastPrice
-            }
-        }
-    }
-    
 }
 
 struct CurrencyCell_Previews: PreviewProvider {

@@ -37,6 +37,23 @@ struct Currency: Identifiable, Equatable {
     let rate: Double
     var price: Double { 1 / rate }
     
+    var lastRate: Double?
+    var lastPrice: Double? {
+        if let lastRate {
+            return 1 / lastRate
+        } else {
+            return nil
+        }
+    }
+    
+    var percent: Double {
+        if let lastPrice {
+            return (price - lastPrice) / lastPrice
+        } else {
+            return 0
+        }
+    }
+    
     var isFavorite: Bool { SharedDataManager.shared.favorites.contains(self.code) }
     
     var id: String { code }
