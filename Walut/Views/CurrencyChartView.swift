@@ -170,7 +170,7 @@ struct CurrencyChartView: View {
             .chartYAxis(.hidden)
             .chartXAxis(.hidden)
             .chartOverlay { proxy in
-                GeometryReader { geometry in
+                GeometryReader { _ in
                     Rectangle().fill(.clear).contentShape(Rectangle())
                         .gesture(
                             DragGesture(minimumDistance: 0)
@@ -178,12 +178,11 @@ struct CurrencyChartView: View {
                                     let location = value.location
                                     
                                     if let date: Date = proxy.value(atX: location.x) {
-                                        let dateString = SharedDataManager.shared.customString(from: date)
-                                        if let currentItem = data.first(where: { item in
-                                            dateString == item.dateString
-                                        }) {
-                                            self.currentActive = currentItem
+                                        var index = calculateClosestIndex(of: date)
+                                        if index == data.count {
+                                            index -= 1
                                         }
+                                        self.currentActive = self.data[index]
                                     }
                                 }
                                 .onEnded({ _ in
@@ -197,6 +196,7 @@ struct CurrencyChartView: View {
                     .filter { $0.code == model.currency.code && $0.base == model.base.code }
                     .sorted { $0.nextRefresh < $1.nextRefresh }
                     .map { RatesData(from: $0) }
+                    .uniqued()
                 print(data)
             }
             .onChange(of: currentActive) { _, newValue in
@@ -230,6 +230,19 @@ struct CurrencyChartView: View {
 //        guard let image = renderer.uiImage else { return nil }
 //        return Image(uiImage: image)
 //    }
+    
+    private func calculateClosestIndex(of date: Date) -> Int {
+        let firstInterval = data.first!.date.timeIntervalSince1970
+        let lastInterval = data.last!.date.timeIntervalSince1970
+        let chosenInterval = date.timeIntervalSince1970
+        
+        let approximate = (chosenInterval - firstInterval) / (lastInterval - firstInterval)
+        let index = round(approximate * Double(data.count - 1))
+        
+        print("\(approximate) - \(index)")
+        
+        return Int(index)
+    }
 }
 
 struct CurrencyOverviewView_Previews: PreviewProvider {
@@ -238,5 +251,12 @@ struct CurrencyOverviewView_Previews: PreviewProvider {
             .sheet(isPresented: .constant(true)) {
                 CurrencyChartView(currency: Currency.placeholder)
             }
+    }
+}
+
+public extension Array where Element: Hashable {
+    func uniqued() -> [Element] {
+        var seen = Set<Element>()
+        return filter { seen.insert($0).inserted }
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RatesData: Identifiable, Equatable {
+struct RatesData: Identifiable, Equatable, Hashable {
     
     let currencyString: String
     
