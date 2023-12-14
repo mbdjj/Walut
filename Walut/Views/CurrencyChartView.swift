@@ -196,7 +196,7 @@ struct CurrencyChartView: View {
                     .filter { $0.code == model.currency.code && $0.base == model.base.code }
                     .sorted { $0.nextRefresh < $1.nextRefresh }
                     .map { RatesData(from: $0) }
-                    .uniqued()
+                    //.uniqued()
                 print(data)
             }
             .onChange(of: currentActive) { _, newValue in
@@ -232,16 +232,20 @@ struct CurrencyChartView: View {
 //    }
     
     private func calculateClosestIndex(of date: Date) -> Int {
-        let firstInterval = data.first!.date.timeIntervalSince1970
-        let lastInterval = data.last!.date.timeIntervalSince1970
-        let chosenInterval = date.timeIntervalSince1970
-        
-        let approximate = (chosenInterval - firstInterval) / (lastInterval - firstInterval)
-        let index = round(approximate * Double(data.count - 1))
-        
-        print("\(approximate) - \(index)")
-        
-        return Int(index)
+        if data.count > 1 {
+            let firstInterval = data.first!.date.timeIntervalSince1970
+            let lastInterval = data.last!.date.timeIntervalSince1970
+            let chosenInterval = date.timeIntervalSince1970
+            
+            let approximate = (chosenInterval - firstInterval) / (lastInterval - firstInterval)
+            let index = round(approximate * Double(data.count - 1))
+            
+            print("\(approximate) - \(index)")
+            
+            return Int(index)
+        } else {
+            return 0
+        }
     }
 }
 

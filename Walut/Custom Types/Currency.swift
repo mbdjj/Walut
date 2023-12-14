@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Currency: Identifiable, Equatable {
+struct Currency: Identifiable, Equatable, Hashable {
     
     init(code: String, rate: Double) {
         self.code = code

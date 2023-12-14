@@ -214,7 +214,9 @@ struct CurrencyListView: View {
                 }
             }
         
-        model.present(data: currencies)
+        withAnimation {
+            model.present(data: currencies)
+        }
         print("Populated data from memory")
     }
     
@@ -234,7 +236,7 @@ struct CurrencyListView: View {
     private func printSwiftData() {
         var str = ""
         for saved in savedCurrencies {
-            str += saved.idString + " "
+            str += saved.dataIdentity + " "
         }
         print(nextUpdate)
         print(str)

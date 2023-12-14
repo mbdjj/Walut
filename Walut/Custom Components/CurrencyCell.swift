@@ -97,6 +97,7 @@ struct CurrencyCell: View {
                             .font(.caption2)
                             .fontWeight(.semibold)
                             .foregroundColor(percentColor)
+                            .contentTransition(.numericText())
                     }
                 }
                 
