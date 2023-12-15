@@ -32,6 +32,12 @@ class CurrencyListViewModel: ObservableObject {
         DispatchQueue.main.async {
             self.loading = true
         }
+        
+        #if os(watchOS)
+        Task {
+            await refreshData()
+        }
+        #endif
     }
     
     
