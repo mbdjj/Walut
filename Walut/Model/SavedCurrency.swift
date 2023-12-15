@@ -82,13 +82,6 @@ enum SavedCurrencyMigrationPlan: SchemaMigrationPlan {
             
             for currency in saved {
                 context.delete(currency)
-//                context.insert(SavedCurrency(
-//                    code: currency.code,
-//                    base: currency.base,
-//                    rate: currency.rate,
-//                    nextRefresh: currency.nextRefresh,
-//                    dateSaved: currency.dateSaved
-//                ))
             }
             
             try context.save()

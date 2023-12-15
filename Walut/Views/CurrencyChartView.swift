@@ -90,15 +90,6 @@ struct CurrencyChartView: View {
                 
                 Spacer()
                 
-//                if let image = renderView() {
-//                    ShareLink(item: image, preview: SharePreview("share_chart", image: image)) {
-//                        Image(systemName: "square.and.arrow.up")
-//                            .font(.body)
-//                            .foregroundColor(.primary)
-//                            .padding(.top, 4)
-//                    }
-//                }
-                
                 Button {
                     dismiss.callAsFunction()
                 } label: {
@@ -196,7 +187,7 @@ struct CurrencyChartView: View {
                     .filter { $0.code == model.currency.code && $0.base == model.base.code }
                     .sorted { $0.nextRefresh < $1.nextRefresh }
                     .map { RatesData(from: $0) }
-                    //.uniqued()
+                    .uniqued()
                 print(data)
             }
             .onChange(of: currentActive) { _, newValue in
@@ -209,27 +200,8 @@ struct CurrencyChartView: View {
                 let impact = UIImpactFeedbackGenerator(style: .heavy)
                 impact.impactOccurred()
             }
-            
-            // MARK: - chart length changing buttons
-            
-//            ChartButtons(selected: $model.selectedRange)
-//                .onChange(of: model.selectedRange) { _, _ in
-//                    Task {
-//                        //await model.checkLoadData()
-//                    }
-//                }
-            
         }
     }
-    
-//    @MainActor func renderView() -> Image? {
-//        let renderer = ImageRenderer(content: ChartToShare(currency: model.currency, base: model.base, range: model.selectedRange))
-//        
-//        renderer.scale = displayScale
-//        
-//        guard let image = renderer.uiImage else { return nil }
-//        return Image(uiImage: image)
-//    }
     
     private func calculateClosestIndex(of date: Date) -> Int {
         if data.count > 1 {
