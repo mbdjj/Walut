@@ -42,6 +42,7 @@ struct Provider: IntentTimelineProvider {
                     let currencies = try await NetworkManager.shared.getCurrencyData(for: Currency(baseCode: baseCode))
                     
                     await saveCurrency(data: currencies, base: baseCode)
+                    await cleanDataFromStorage()
                     
                     let currency = currencies.filter { $0.code == foreignCode }.first!
                     
@@ -108,6 +109,20 @@ struct Provider: IntentTimelineProvider {
                 modelContainer.mainContext.insert(newSaved)
                 print("Saved \(item.code) to SwiftData")
             }
+        }
+    }
+    
+    @MainActor
+    private func cleanDataFromStorage() {
+        do {
+            let nextUpdate = defaults.integer(forKey: "nextUpdate")
+            try modelContainer.mainContext.delete(model: SavedCurrency.self, where: #Predicate {
+                $0.nextRefresh > nextUpdate - (12 * 3600) && $0.nextRefresh < nextUpdate
+            })
+            
+            print("Additional data deleted")
+        } catch {
+            print("Couldn't delete old data")
         }
     }
 }
