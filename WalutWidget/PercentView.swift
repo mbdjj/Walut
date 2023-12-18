@@ -12,32 +12,26 @@ struct PercentView: View {
     let currency: Currency
     let baseCode: String
     
-    //var entryCurrency: Currency { Currency(baseCode: rates[0].currencyString) }
     var baseCurrency: Currency { Currency(baseCode: baseCode) }
-//    var differencePercent: Double {
-//        let yesterday = rates[0].value
-//        let today = rates[1].value
-//        
-//        return (today - yesterday) / yesterday
-//    }
-//    var percentColor: Color {
-//        if differencePercent == 0 {
-//            return .secondary
-//        } else if differencePercent > 0 {
-//            return .green
-//        } else {
-//            return .red
-//        }
-//    }
-//    var symbol: Image {
-//        if differencePercent == 0 {
-//            return Image(systemName: "arrow.right")
-//        } else if differencePercent > 0 {
-//            return Image(systemName: "arrow.up")
-//        } else {
-//            return Image(systemName: "arrow.down")
-//        }
-//    }
+    var differencePercent: Double { currency.percent }
+    var percentColor: Color {
+        if differencePercent == 0 {
+            return .secondary
+        } else if differencePercent > 0 {
+            return .green
+        } else {
+            return .red
+        }
+    }
+    var symbol: Image {
+        if differencePercent == 0 {
+            return Image(systemName: "arrow.right")
+        } else if differencePercent > 0 {
+            return Image(systemName: "arrow.up")
+        } else {
+            return Image(systemName: "arrow.down")
+        }
+    }
     
     var body: some View {
         HStack {
@@ -56,14 +50,16 @@ struct PercentView: View {
                     .foregroundColor(.walut)
                     .contentTransition(.numericText())
                 
-//                Label {
-//                    Text(SharedDataManager.shared.percentLocaleStirng(value: abs(differencePercent)))
-//                } icon: {
-//                    symbol
-//                }
-//                .fontDesign(.rounded)
-//                .fontWeight(.semibold)
-//                .foregroundColor(percentColor)
+                if currency.lastRate != nil {
+                    Label {
+                        Text(SharedDataManager.shared.percentLocaleStirng(value: abs(differencePercent)))
+                    } icon: {
+                        symbol
+                    }
+                    .fontDesign(.rounded)
+                    .fontWeight(.semibold)
+                    .foregroundColor(percentColor)
+                }
 
                 
                 Spacer()

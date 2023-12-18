@@ -37,6 +37,9 @@ struct Provider: IntentTimelineProvider {
             
             let (foreignCode, baseCode) = getCodes(from: configuration)
             
+            let descriptor = FetchDescriptor<SavedCurrency>()
+            let savedCurrencies = try? await modelContainer.mainContext.fetch(descriptor)
+            
             if NetworkManager.shared.shouldRefresh() {
                 do {
                     let currencies = try await NetworkManager.shared.getCurrencyData(for: Currency(baseCode: baseCode))
@@ -44,7 +47,18 @@ struct Provider: IntentTimelineProvider {
                     await saveCurrency(data: currencies, base: baseCode)
                     await cleanDataFromStorage()
                     
-                    let currency = currencies.filter { $0.code == foreignCode }.first!
+                    let lastRate = savedCurrencies?
+                        .filter { $0.code == foreignCode && $0.base == baseCode }
+                        .sorted { $0.nextRefresh > $1.nextRefresh }
+                        .dropFirst()
+                        .first?
+                        .rate
+                    
+                    var currency = currencies.filter { $0.code == foreignCode }.first!
+                    
+                    if let lastRate {
+                        currency.lastRate = lastRate
+                    }
                     
                     let entry = CurrencyEntry(date: .now, currency: currency, baseCode: baseCode, chartData: nil)
                     
@@ -54,14 +68,36 @@ struct Provider: IntentTimelineProvider {
                     print("Error: \(error.localizedDescription)")
                 }
             } else {
-                if let currency = await getSavedData(for: foreignCode, base: baseCode) {
+                if var currency = await getSavedData(for: foreignCode, base: baseCode) {
+                    let lastRate = savedCurrencies?
+                        .filter { $0.code == foreignCode && $0.base == baseCode }
+                        .sorted { $0.nextRefresh > $1.nextRefresh }
+                        .dropFirst()
+                        .first?
+                        .rate
+                    
+                    if let lastRate {
+                        currency.lastRate = lastRate
+                    }
+                    
                     let entry = CurrencyEntry(date: .now, currency: currency, baseCode: baseCode, chartData: nil)
                     
                     let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
                     completion(timeline)
                 } else {
                     do {
-                        let currency = try await NetworkManager.shared.getSmallWidgetData(for: foreignCode, baseCode: baseCode)
+                        let lastRate = savedCurrencies?
+                            .filter { $0.code == foreignCode && $0.base == baseCode }
+                            .sorted { $0.nextRefresh > $1.nextRefresh }
+                            .dropFirst()
+                            .first?
+                            .rate
+                        
+                        var currency = try await NetworkManager.shared.getSmallWidgetData(for: foreignCode, baseCode: baseCode)
+                        
+                        if let lastRate {
+                            currency.lastRate = lastRate
+                        }
                         
                         let entry = CurrencyEntry(date: .now, currency: currency, baseCode: baseCode, chartData: nil)
                         
