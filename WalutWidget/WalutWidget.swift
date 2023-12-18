@@ -60,7 +60,13 @@ struct Provider: IntentTimelineProvider {
                         currency.lastRate = lastRate
                     }
                     
-                    let entry = CurrencyEntry(date: .now, currency: currency, baseCode: baseCode, chartData: nil)
+                    let chartData = savedCurrencies?
+                        .filter { $0.code == foreignCode && $0.base == baseCode }
+                        .sorted { $0.nextRefresh > $1.nextRefresh }
+                        .map { RatesData(from: $0) }
+                        .uniqued()
+                    
+                    let entry = CurrencyEntry(date: .now, currency: currency, baseCode: baseCode, chartData: chartData)
                     
                     let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
                     completion(timeline)
@@ -80,7 +86,13 @@ struct Provider: IntentTimelineProvider {
                         currency.lastRate = lastRate
                     }
                     
-                    let entry = CurrencyEntry(date: .now, currency: currency, baseCode: baseCode, chartData: nil)
+                    let chartData = savedCurrencies?
+                        .filter { $0.code == foreignCode && $0.base == baseCode }
+                        .sorted { $0.nextRefresh > $1.nextRefresh }
+                        .map { RatesData(from: $0) }
+                        .uniqued()
+                    
+                    let entry = CurrencyEntry(date: .now, currency: currency, baseCode: baseCode, chartData: chartData)
                     
                     let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
                     completion(timeline)
@@ -99,7 +111,13 @@ struct Provider: IntentTimelineProvider {
                             currency.lastRate = lastRate
                         }
                         
-                        let entry = CurrencyEntry(date: .now, currency: currency, baseCode: baseCode, chartData: nil)
+                        let chartData = savedCurrencies?
+                            .filter { $0.code == foreignCode && $0.base == baseCode }
+                            .sorted { $0.nextRefresh > $1.nextRefresh }
+                            .map { RatesData(from: $0) }
+                            .uniqued()
+                        
+                        let entry = CurrencyEntry(date: .now, currency: currency, baseCode: baseCode, chartData: chartData)
                         
                         let timeline = Timeline(entries: [entry], policy: .after(nextUpdate))
                         completion(timeline)
@@ -181,14 +199,15 @@ struct WalutWidgetEntryView : View {
         case .systemSmall:
             PercentView(currency: entry.currency, baseCode: entry.baseCode)
                 .containerBackground(.background, for: .widget)
-//        case .systemMedium:
-//            HStack {
-//                PercentView(rates: entry.rates, baseCode: entry.baseCode)
-//                
-//                if let chartData = entry.chartData {
-//                    WidgetChartView(data: chartData)
-//                }
-//            }
+        case .systemMedium:
+            HStack {
+                PercentView(currency: entry.currency, baseCode: entry.baseCode)
+                
+                if let chartData = entry.chartData {
+                    WidgetChartView(data: chartData)
+                }
+            }
+            .containerBackground(.background, for: .widget)
         case .accessoryRectangular:
             RectangularView(baseCode: entry.baseCode, currency: entry.currency)
                 .containerBackground(.clear, for: .widget)
@@ -207,7 +226,7 @@ struct WalutWidget: Widget {
         }
         .configurationDisplayName(String(localized: "widget_title"))
         .description(String(localized: "widget_description"))
-        .supportedFamilies([.systemSmall, .accessoryRectangular])
+        .supportedFamilies([.systemSmall, .systemMedium, .accessoryRectangular])
     }
 }
 
