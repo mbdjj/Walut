@@ -18,6 +18,7 @@ struct SortView: View {
                     Picker("", selection: $model.selectedSort) {
                         Text("sort_by_code").tag(SortType.byCode)
                         Text("sort_by_price").tag(SortType.byPrice)
+                        Text("sort_by_change").tag(SortType.byChange)
                     }
                     .labelsHidden()
                     .pickerStyle(.inline)

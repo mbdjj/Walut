@@ -17,8 +17,8 @@ struct Sorting {
         return direction == .ascending ? array.sorted(by: { $0.price < $1.price }) : array.sorted(by: { $0.price > $1.price })
     }
     
-//    static func byChange(_ array: [Currency], direction: SortDirection) -> [Currency] {
-//        return direction == .ascending ? array.sorted(by: { $0.percent < $1.percent }) : array.sorted(by: { $0.percent > $1.percent })
-//    }
+    static func byChange(_ array: [Currency], direction: SortDirection) -> [Currency] {
+        return direction == .ascending ? array.sorted { $0.percent < $1.percent } : array.sorted { $0.percent > $1.percent }
+    }
     
 }

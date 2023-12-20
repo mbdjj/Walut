@@ -127,8 +127,8 @@ class CurrencyListViewModel: ObservableObject {
             return Sorting.byCode(array, direction: sortDirection)
         case 2, 3:
             return Sorting.byPrice(array, direction: sortDirection)
-        //case 4, 5:
-            //return Sorting.byChange(array, direction: sortDirection)
+        case 4, 5:
+            return Sorting.byChange(array, direction: sortDirection)
         default:
             return array
         }
