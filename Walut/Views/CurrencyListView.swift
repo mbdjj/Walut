@@ -109,7 +109,7 @@ struct CurrencyListView: View {
             .refreshable {
                 Task {
                     await model.refreshData()
-                    saveCurrencies(data: model.currencyArray + model.favoritesArray)
+                    SwiftDataManager.saveCurrencies(data: model.currencyArray + model.favoritesArray, to: modelContext)
                 }
             }
             .alert("error", isPresented: $model.shouldDisplayErrorAlert) {
@@ -174,61 +174,20 @@ struct CurrencyListView: View {
         if !savedCurrencies.contains(where: { $0.base == shared.base.code && $0.nextRefresh == nextUpdate }) {
             print("Couldn't populate data from storage. Refreshing...")
             await model.refreshData()
-            saveCurrencies(data: model.currencyArray + model.favoritesArray)
+            SwiftDataManager.saveCurrencies(data: model.currencyArray + model.favoritesArray, to: modelContext)
         }
         
-        cleanDataFromStorage()
+        SwiftDataManager.cleanData(from: modelContext, useInterval: true)
         populateCurrenciesFromMemory()
     }
     
-    private func saveCurrencies(data: [Currency]) {
-        data.forEach { item in
-            if !savedCurrencies.contains(where: { $0.code == item.code && $0.base == shared.base.code && $0.nextRefresh == nextUpdate }) {
-                let newSaved = SavedCurrency(code: item.code, base: shared.base.code, rate: item.rate, nextRefresh: nextUpdate)
-                modelContext.insert(newSaved)
-                print("Saved \(item.code) to SwiftData")
-            }
-        }
-    }
-    
     private func populateCurrenciesFromMemory() {
-        let currencies = savedCurrencies
-            .filter { $0.nextRefresh == nextUpdate && $0.base == shared.base.code }
-            .map { Currency(from: $0) }
-            .map { currency in
-                let lastRate = savedCurrencies
-                    .filter { $0.code == currency.code && $0.base == shared.base.code }
-                    .sorted { $0.nextRefresh > $1.nextRefresh }
-                    .dropFirst()
-                    .first?
-                    .rate
-                
-                if let lastRate {
-                    var newCurrency = currency
-                    newCurrency.lastRate = lastRate
-                    return newCurrency
-                } else {
-                    return currency
-                }
-            }
+        let currencies = SwiftDataManager.getCurrencies(from: modelContext)
         
         withAnimation {
             model.present(data: currencies)
         }
         print("Populated data from memory")
-    }
-    
-    private func cleanDataFromStorage() {
-        do {
-            let minInterval = model.decodeStorageOptionInterval()
-            try modelContext.delete(model: SavedCurrency.self, where: #Predicate {
-                $0.nextRefresh < minInterval || $0.nextRefresh > nextUpdate - (12 * 3600) && $0.nextRefresh < nextUpdate
-            })
-            
-            print("Old data successfully deleted")
-        } catch {
-            print("Couldn't delete old data")
-        }
     }
     
     private func printSwiftData() {

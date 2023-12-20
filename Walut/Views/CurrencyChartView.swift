@@ -183,11 +183,7 @@ struct CurrencyChartView: View {
                 }
             }
             .onAppear {
-                data = savedCurrencies
-                    .filter { $0.code == model.currency.code && $0.base == model.base.code }
-                    .sorted { $0.nextRefresh < $1.nextRefresh }
-                    .map { RatesData(from: $0) }
-                    .uniqued()
+                data = SwiftDataManager.getChartData(for: model.currency.code, base: model.base.code, from: savedCurrencies)
                 print(data)
             }
             .onChange(of: currentActive) { _, newValue in
