@@ -53,7 +53,9 @@ struct RatesData: Identifiable, Equatable, Hashable {
     }
     
     init(from saved: SavedCurrency) {
-        self.init(code: saved.code, date: saved.dateSaved, value: (1 / saved.rate))
+        var date = Date(timeIntervalSince1970: Double(saved.nextRefresh))
+        date = Calendar.current.date(byAdding: .day, value: -1, to: date)!
+        self.init(code: saved.code, date: date, value: (1 / saved.rate))
     }
     
 }
