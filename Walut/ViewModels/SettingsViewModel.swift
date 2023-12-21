@@ -62,4 +62,17 @@ class SettingsViewModel: ObservableObject {
         shared.defaults.set(showPercent, forKey: "showPercent")
     }
     
+    func sendEmail() {
+        let subject = String(localized: "settings_email_subject")
+        let subjectEncoded = subject.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        
+        let url = URL(string: "mailto:marcin@bartminski.dev?subject=\(subjectEncoded)")
+        
+        if let url, UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        } else {
+            print("D:")
+        }
+    }
+    
 }

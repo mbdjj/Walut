@@ -50,6 +50,8 @@
 "settings_rate_app" = "Rate the app";
 "settings_version" = "Version";
 "settings_save_data" = "On device data";
+"settings_email" = "Mail us";
+"settings_email_subject" = "Walut - Message";
 
 "settings_roadmap" = "Feature roadmap";
 "features" = "Features";

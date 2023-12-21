@@ -50,6 +50,8 @@
 "settings_rate_app" = "Oceń aplikację";
 "settings_version" = "Wersja";
 "settings_save_data" = "Dane w pamięci";
+"settings_email" = "Napisz do nas";
+"settings_email_subject" = "Walut - Wiadomość";
 
 "settings_roadmap" = "Lista planowanych funkcji";
 "features" = "Funkcje";

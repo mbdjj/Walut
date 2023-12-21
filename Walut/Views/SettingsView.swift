@@ -98,11 +98,12 @@ struct SettingsView: View {
                 }
                 
                 Section {
-                    NavigationLink {
-                        FeatureRoadmapView()
+                    Button {
+                        model.sendEmail()
                     } label: {
-                        Text("settings_roadmap")
+                        Text("settings_email")
                     }
+                    .foregroundStyle(.primary)
                     
                     NavigationLink {
                         SupportDevView()
@@ -114,8 +115,8 @@ struct SettingsView: View {
                         requestReview()
                     } label: {
                         Text("settings_rate_app")
-                            .foregroundColor(.primary)
                     }
+                    .foregroundStyle(.primary)
                     
                     let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
                     let build = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
