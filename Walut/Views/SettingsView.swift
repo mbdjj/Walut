@@ -57,70 +57,86 @@ struct SettingsView: View {
                 }
                 
                 Section {
-                    Picker("base_currency", selection: $model.selectedBase) {
+                    Picker(selection: $model.selectedBase) {
                         ForEach(model.pickerData) { currency in
                             Text("\(currency.flag) \(currency.code)")
                         }
+                    } label: {
+                        Label("base_currency", systemImage: "house")
                     }
+                    .foregroundStyle(.primary)
                     
-                    Stepper("\(String(localized: "settings_decimal_numbers")) (\(model.decimal))", value: $model.decimal, in: 2...7)
+                    Stepper(value: $model.decimal, in: 0...7) {
+                        Label("settings_decimal_numbers", systemImage: "\(model.decimal).square")
+                    }
+                    .foregroundStyle(.primary)
                     
                     NavigationLink {
                         FavoritesView()
                     } label: {
-                        Text("favorite_currencies")
+                        Label("favorite_currencies", systemImage: "star")
                     }
+                    .foregroundStyle(.primary)
                     
                     NavigationLink {
                         SortView()
                     } label: {
-                        Text("sort_nav_title")
+                        Label("sort_nav_title", systemImage: "arrow.up.arrow.down")
                     }
+                    .foregroundStyle(.primary)
                     
                     NavigationLink {
                         OnDeviceStorageView()
                     } label: {
-                        Text("settings_save_data")
+                        Label("settings_save_data", systemImage: "square.and.arrow.down")
                     }
+                    .foregroundStyle(.primary)
                     
                 }
                 
                 Section {
-                    Toggle(String(localized: "settings_quick_conversion"), isOn: $model.quickConvertOn)
-                        .onChange(of: model.quickConvertOn) { _, _ in
-                            model.saveConvertMode()
-                        }
+                    Toggle(isOn: $model.quickConvertOn) {
+                        Label("settings_quick_conversion", systemImage: "bolt.fill")
+                    }
+                    .foregroundStyle(.primary)
+                    .onChange(of: model.quickConvertOn) { _, _ in
+                        model.saveConvertMode()
+                    }
                     
-                    Toggle(String(localized: "settings_show_percent"), isOn: $model.showPercent)
-                        .onChange(of: model.showPercent) { _, _ in
-                            model.saveShowPercent()
-                        }
+                    Toggle(isOn: $model.showPercent) {
+                        Label("settings_show_percent", systemImage: "percent")
+                    }
+                    .foregroundStyle(.primary)
+                    .onChange(of: model.showPercent) { _, _ in
+                        model.saveShowPercent()
+                    }
                 }
                 
                 Section {
                     Button {
                         model.sendEmail()
                     } label: {
-                        Text("settings_email")
+                        Label("settings_email", systemImage: "envelope")
                     }
                     .foregroundStyle(.primary)
                     
                     NavigationLink {
                         SupportDevView()
                     } label: {
-                        Text("support")
+                        Label("support", systemImage: "hands.and.sparkles")
                     }
+                    .foregroundStyle(.primary)
                     
                     Button {
                         requestReview()
                     } label: {
-                        Text("settings_rate_app")
+                        Label("settings_rate_app", systemImage: "star.square")
                     }
                     .foregroundStyle(.primary)
                     
                     let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
                     let build = Bundle.main.infoDictionary?["CFBundleVersion"] as! String
-                    Text("\(String(localized: "settings_version")): \(version) (\(build))")
+                    Label("\(String(localized: "settings_version")): \(version) (\(build))", systemImage: "gear")
                         .foregroundColor(.gray)
 
                 } footer: {

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 class SettingsViewModel: ObservableObject {
     
@@ -26,6 +27,7 @@ class SettingsViewModel: ObservableObject {
     var isZona24: Bool { shared.chosenTitle == shared.titleArray[9] }
     
     private let defaults = UserDefaults.standard
+    private let sharedDefaults = UserDefaults(suiteName: "group.dev.bartminski.Walut")!
     private let shared = SharedDataManager.shared
     
     init() {
@@ -49,7 +51,8 @@ class SettingsViewModel: ObservableObject {
     
     func saveDecimal() {
         shared.decimal = decimal
-        defaults.set(decimal, forKey: "decimal")
+        sharedDefaults.set(decimal, forKey: "decimal")
+        WidgetCenter.shared.reloadTimelines(ofKind: "WalutWidget")
     }
     
     func saveConvertMode() {

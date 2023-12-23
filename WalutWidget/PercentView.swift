@@ -33,6 +33,8 @@ struct PercentView: View {
         }
     }
     
+    private let defaults = UserDefaults(suiteName: "group.dev.bartminski.Walut")!
+    
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
@@ -42,7 +44,7 @@ struct PercentView: View {
                     .font(.system(.title3, design: .rounded))
                     .fontWeight(.bold)
                 
-                Text(SharedDataManager.shared.currencyLocaleString(value: currency.price, currencyCode: baseCode))
+                Text(SharedDataManager.shared.currencyLocaleString(value: currency.price, currencyCode: baseCode, decimal: defaults.integer(forKey: "decimal")))
                     .font(.system(.largeTitle, design: .rounded))
                     .fontWeight(.heavy)
                     .minimumScaleFactor(0.6)

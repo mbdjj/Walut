@@ -32,6 +32,7 @@ class SharedDataManager: ObservableObject {
     let secretDictionary = ["marcinBartminski": 1, "earlyAccess": 2, "crypto": 5, "appUnite": 6, "gold": 7, "reddit": 8, "zona24": 9]
     
     let defaults = UserDefaults.standard
+    let sharedDefaults = UserDefaults(suiteName: "group.dev.bartminski.Walut")!
     var formatter = DateFormatter()
     var numFormatter: NumberFormatter {
         let formatter = NumberFormatter()
@@ -53,7 +54,14 @@ class SharedDataManager: ObservableObject {
         
         base = Currency(baseCode: defaults.string(forKey: "base") ?? "AUD")
         let decimal = defaults.integer(forKey: "decimal")
-        self.decimal = decimal == 0 ? 3 : decimal
+        let sharedDecimal = sharedDefaults.integer(forKey: "decimal")
+        if decimal == -1 {
+            self.decimal = sharedDecimal
+        } else {
+            self.decimal = decimal == 0 ? 3 : decimal
+            sharedDefaults.set(decimal, forKey: "decimal")
+            defaults.set(-1, forKey: "decimal")
+        }
         quickConvert = defaults.bool(forKey: "quickConvert")
         showPercent = defaults.bool(forKey: "showPercent")
         
@@ -80,12 +88,12 @@ class SharedDataManager: ObservableObject {
     func currencyLocaleString(value: Double) -> String {
         return numFormatter.string(from: value as NSNumber) ?? "0"
     }
-    func currencyLocaleString(value: Double, currencyCode: String) -> String {
+    func currencyLocaleString(value: Double, currencyCode: String, decimal: Int? = nil) -> String {
         let formatter = numFormatter
-        if decimal == 0 {
-            formatter.maximumFractionDigits = 3
-        }
         formatter.currencyCode = currencyCode
+        if let decimal {
+            formatter.maximumFractionDigits = decimal
+        }
         return formatter.string(from: value as NSNumber) ?? "0"
     }
     
