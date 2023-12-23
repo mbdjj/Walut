@@ -209,18 +209,11 @@ struct CurrencyCalcView: View {
                 
                 Spacer()
                 
-                Button {
+                Button("share_chart") {
                     chartCurrency = model.currency
-                } label: {
-                    Text("share_chart")
-                        .padding(.horizontal)
-                        .padding(.vertical, 6)
-                        .foregroundColor(.walut)
-                        .background {
-                            Color(uiColor: .secondarySystemBackground)
-                                .clipShape(RoundedRectangle(cornerRadius: 8))
-                        }
                 }
+                .buttonStyle(.bordered)
+                .buttonBorderShape(.capsule)
             }
             .padding(.horizontal, 32)
             
@@ -328,14 +321,11 @@ struct CurrencyCalcView: View {
                     Text("clear")
                         .foregroundColor(.walut)
                         .font(.system(.title3, design: .rounded, weight: .medium))
-                        .padding(.vertical, 8)
                     Spacer()
                 }
-                .background {
-                    Color(uiColor: .secondarySystemBackground)
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-                }
             }
+            .buttonStyle(.bordered)
+            .buttonBorderShape(.capsule)
             .padding(.horizontal, 32)
             .padding(.bottom)
         }
