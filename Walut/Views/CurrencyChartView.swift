@@ -112,6 +112,7 @@ struct CurrencyChartView: View {
                     
                     Text(SharedDataManager.shared.currencyLocaleString(value: currentActive?.value ?? model.currency.price, currencyCode: model.base.code))
                         .font(.system(.title2, design: .rounded, weight: .bold))
+                        .contentTransition(.numericText(value: currentActive?.value ?? model.currency.price))
                 }
                 
                 Spacer()
@@ -120,6 +121,7 @@ struct CurrencyChartView: View {
                     if let currentActive {
                         Text(currentActive.date.formatted(date: .abbreviated, time: .omitted))
                             .font(.system(.title3, design: .rounded, weight: .bold))
+                            .contentTransition(.numericText(value: currentActive.date.timeIntervalSince1970))
                     }
                     
                     HStack {
@@ -131,6 +133,7 @@ struct CurrencyChartView: View {
                         Text(SharedDataManager.shared.percentLocaleStirng(value: abs(percent)))
                             .font(.system(.title2, design: .rounded, weight: .bold))
                             .foregroundColor(percentColor)
+                            .contentTransition(.numericText(value: abs(percent)))
                             
                     }
                 }
@@ -173,11 +176,15 @@ struct CurrencyChartView: View {
                                         if index == data.count {
                                             index -= 1
                                         }
-                                        self.currentActive = self.data[index]
+                                        withAnimation {
+                                            self.currentActive = self.data[index]
+                                        }
                                     }
                                 }
                                 .onEnded({ _ in
-                                    self.currentActive = nil
+                                    withAnimation {
+                                        self.currentActive = nil
+                                    }
                                 })
                         )
                 }

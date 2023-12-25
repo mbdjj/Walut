@@ -50,11 +50,12 @@ struct PercentView: View {
                     .minimumScaleFactor(0.6)
                     .lineLimit(1)
                     .foregroundColor(.walut)
-                    .contentTransition(.numericText())
+                    .contentTransition(.numericText(value: currency.price))
                 
                 if currency.lastRate != nil {
                     Label {
                         Text(SharedDataManager.shared.percentLocaleStirng(value: abs(differencePercent)))
+                            .contentTransition(.numericText(value: abs(differencePercent)))
                     } icon: {
                         symbol
                     }

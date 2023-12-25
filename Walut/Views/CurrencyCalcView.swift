@@ -147,7 +147,7 @@ struct CurrencyCalcView: View {
                     Text(model.amountString(.top))
                         .font(.system(size: 72, weight: .bold, design: .rounded))
                         .lineLimit(1)
-                        .contentTransition(.numericText())
+                        .contentTransition(.numericText(value: model.topAmount))
                     Text("\(top.code)")
                         .font(.system(.title2, design: .rounded, weight: .bold))
                         .offset(y: 16)
@@ -168,7 +168,7 @@ struct CurrencyCalcView: View {
                     Text(model.amountString(.bottom))
                         .font(.system(.largeTitle, design: .rounded, weight: .bold))
                         .lineLimit(1)
-                        .contentTransition(.numericText())
+                        .contentTransition(.numericText(value: model.bottomAmount))
                     Button {
                         model.swapCurrencies()
                     } label: {
