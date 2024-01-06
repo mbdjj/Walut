@@ -160,6 +160,7 @@ struct CurrencyChartView: View {
                 }
             }
             .frame(height: 250)
+            .animation(.snappy(duration: 0), value: currentActive)
             .chartYScale(domain: minValueYAxis - minValueYAxis * 0.01 ... maxValueYAxis + maxValueYAxis * 0.01)
             .chartYAxis(.hidden)
             .chartXAxis(.hidden)
