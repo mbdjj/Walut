@@ -26,18 +26,7 @@ struct ViewManagingView: View {
             BasePickerView()
         case .baseSelected:
             if UIDevice.current.userInterfaceIdiom == .phone {
-                TabView(selection: $selection) {
-                    CurrencyListView()
-                        .tabItem {
-                            Label(shared.base.code, systemImage: "dollarsign.circle")
-                        }
-                        .tag(0)
-                    SettingsView()
-                        .tabItem {
-                            Label("settings", systemImage: "gear")
-                        }
-                        .tag(2)
-                }
+                CurrencyListView()
             } else {
                 CurrencyListiPadView()
             }

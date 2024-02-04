@@ -24,49 +24,7 @@ struct CurrencyCalcView: View {
     }
     
     var body: some View {
-        // MARK: - Top bar
-        
         VStack {
-            HStack(spacing: 16) {
-                Text("overview_calculation")
-                    .font(.system(.largeTitle, design: .rounded, weight: .bold))
-                
-                Spacer()
-                
-                Menu {
-                    ShareLink(item: model.valueToShare()) {
-                        Label("share_value", systemImage: "equal.circle")
-                    }
-                    .disabled(model.topAmount == 0)
-                    
-                    ShareLink(item: model.textToShare) {
-                        Label("share_text", systemImage: "text.bubble")
-                    }
-                } label: {
-                    Image(systemName: "square.and.arrow.up")
-                        .font(.body)
-                        .foregroundColor(.primary)
-                }
-                
-                Button {
-                    model.handleFavorites()
-                } label: {
-                    Image(systemName: "star.fill")
-                        .font(.title3)
-                        .foregroundColor(model.currency.isFavorite ? .yellow : Color(uiColor: .systemGray5))
-                }
-                
-                Button {
-                    dismiss.callAsFunction()
-                } label: {
-                    Image(systemName: "xmark")
-                        .font(.title3.weight(.bold))
-                        .foregroundColor(.primary)
-                        
-                }
-            }
-            .padding()
-            
             // MARK: - From and To currency
             
             HStack {
@@ -329,6 +287,34 @@ struct CurrencyCalcView: View {
             .padding(.horizontal, 32)
             .padding(.bottom)
         }
+        .navigationTitle("overview_calculation")
+        .toolbar {
+            Menu {
+                ShareLink(item: model.valueToShare()) {
+                    Label("share_value", systemImage: "equal.circle")
+                }
+                .disabled(model.topAmount == 0)
+                
+                ShareLink(item: model.textToShare) {
+                    Label("share_text", systemImage: "text.bubble")
+                }
+            } label: {
+                Image(systemName: "square.and.arrow.up")
+            }
+            .menuStyle(.button)
+            .buttonStyle(.bordered)
+            .buttonBorderShape(.circle)
+            
+            
+            Button {
+                model.handleFavorites()
+            } label: {
+                Image(systemName: model.showFavorite ? "star.fill" : "star")
+                    .foregroundStyle(.yellow)
+            }
+            .buttonStyle(.bordered)
+            .buttonBorderShape(.circle)
+        }
         .onChange(of: model.topAmount) { _, top in
             withAnimation {
                 model.calcBottom()
@@ -342,14 +328,14 @@ struct CurrencyCalcView: View {
         .sheet(item: $chartCurrency) { currency in
             CurrencyChartView(currency: currency, base: model.base)
         }
+        
     }
 }
 
 struct CurrencyCalcView_Previews: PreviewProvider {
     static var previews: some View {
-        Text("dupa")
-            .sheet(isPresented: .constant(true)) {
-                CurrencyCalcView(currency: Currency(baseCode: "PLN"))
-            }
+        NavigationStack {
+            CurrencyCalcView(currency: Currency(baseCode: "PLN"))
+        }
     }
 }

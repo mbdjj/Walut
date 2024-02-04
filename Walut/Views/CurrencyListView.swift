@@ -28,7 +28,7 @@ struct CurrencyListView: View {
     
     var body: some View {
         NavigationStack {
-            List {
+            List(selection: $model.selectedCurrency) {
                 
                 if shared.quickConvert {
                     Section {
@@ -43,25 +43,20 @@ struct CurrencyListView: View {
                     if !model.favoritesArray.isEmpty {
                         Section {
                             ForEach(results.0) { currency in
-                                Button {
-                                    model.selectedCurrency = currency
-                                } label: {
+                                NavigationLink(value: currency) {
                                     CurrencyCell(for: currency, mode: shared.quickConvert ? .quickConvert : .normal, value: quickConvertValue)
                                         .onDrag {
                                             let textToShare = "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(shared.decimal)f", currency.price)) \(shared.base.symbol)"
                                             return NSItemProvider(object: textToShare as NSString)
                                         }
                                 }
-
                             }
                         }
                     }
                     
                     Section {
                         ForEach(results.1) { currency in
-                            Button {
-                                model.selectedCurrency = currency
-                            } label: {
+                            NavigationLink(value: currency) {
                                 CurrencyCell(for: currency, mode: shared.quickConvert ? .quickConvert : .normal, value: quickConvertValue)
                                     .onDrag {
                                         let textToShare = "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(shared.decimal)f", currency.price)) \(shared.base.symbol)"
@@ -151,7 +146,7 @@ struct CurrencyListView: View {
                 }
             }
             .searchable(text: $queryString) {}
-            .sheet(item: $model.selectedCurrency) { currency in
+            .navigationDestination(item: $model.selectedCurrency) { currency in
                 CurrencyCalcView(currency: currency)
             }
         }

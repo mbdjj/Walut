@@ -88,15 +88,15 @@ struct CurrencyListiPadView: View {
                     }
                 }
                 
-//                ToolbarItemGroup(placement: .navigationBarTrailing) {
-//                    NavigationLink {
-//                        SortView()
-//                    } label: {
-//                        Image(systemName: "arrow.up.arrow.down")
-//                    }
-//                    .buttonStyle(.bordered)
-//                    .buttonBorderShape(.circle)
-//                }
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    NavigationLink {
+                        SortView()
+                    } label: {
+                        Image(systemName: "arrow.up.arrow.down")
+                    }
+                    .buttonStyle(.bordered)
+                    .buttonBorderShape(.circle)
+                }
             }
             .refreshable {
                 Task {
@@ -145,11 +145,8 @@ struct CurrencyListiPadView: View {
             .searchable(text: $queryString) {}
         } detail: {
             if let selectedCurrency = model.selectedCurrency {
-                //Text("Selected: \(selectedCurrency.fullName)")
                 CurrencyCalcView(currency: selectedCurrency)
                     .id(selectedCurrency.code)
-            } else {
-                Text("Choose a currency")
             }
         }
     }

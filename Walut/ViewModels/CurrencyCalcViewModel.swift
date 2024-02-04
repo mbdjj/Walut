@@ -21,6 +21,8 @@ class CurrencyCalcViewModel: ObservableObject {
     @Published var isDouble: Bool = false
     @Published var decimalDigits = 0
     
+    @Published var showFavorite: Bool = false
+    
     private let shared = SharedDataManager.shared
     private let defaults = UserDefaults.standard
     var textToShare: String {
@@ -33,6 +35,8 @@ class CurrencyCalcViewModel: ObservableObject {
         
         self.topCurrency = base
         self.bottomCurrency = currency
+        
+        self.showFavorite = currency.isFavorite
         
         if shouldSwap {
             self.swapCurrencies()
@@ -173,11 +177,13 @@ class CurrencyCalcViewModel: ObservableObject {
     
     private func favorite(currency: Currency) {
         SharedDataManager.shared.favorites.append(currency.code)
+        showFavorite = true
     }
     
     private func unfavorite(currency: Currency) {
         if let i = SharedDataManager.shared.favorites.firstIndex(where: { currency.code == $0 }) {
             SharedDataManager.shared.favorites.remove(at: i)
+            showFavorite = false
         }
     }
     
