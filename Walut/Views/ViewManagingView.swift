@@ -17,7 +17,11 @@ struct ViewManagingView: View {
     var body: some View {
         switch shared.appState {
         case .onboarding:
-            HelloView()
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                HelloView()
+            } else {
+                HelloiPadView()
+            }
         case .onboarded:
             BasePickerView()
         case .baseSelected:

@@ -76,6 +76,7 @@
 		34C85A692A1E241500FB7B03 /* SortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D5AFE82951B25C0043B72A /* SortView.swift */; };
 		34C85A6A2A1E247100FB7B03 /* SharedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C2028F17592006C4F38 /* SharedDataManager.swift */; };
 		34C85A6B2A1E263A00FB7B03 /* CurrencyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344A71EA292C13200065F689 /* CurrencyListViewModel.swift */; };
+		34C8ECB42B6FBD6000588CE5 /* HelloiPadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C8ECB32B6FBD6000588CE5 /* HelloiPadView.swift */; };
 		34CAB492290F11CA00D877E5 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CAB491290F11CA00D877E5 /* FavoritesView.swift */; };
 		34CAB494290F128100D877E5 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CAB493290F128100D877E5 /* FavoritesViewModel.swift */; };
 		34D4AD872997EB2900EFD2A7 /* ZAR@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D4AD392997EB2900EFD2A7 /* ZAR@3x.png */; };
@@ -279,6 +280,7 @@
 		34A4959E2B32BAA8007F7683 /* SwiftDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataManager.swift; sourceTree = "<group>"; };
 		34A5A6B0292002A000613135 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		34BD793129A75708005E2B85 /* CurrencyCalcView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyCalcView.swift; sourceTree = "<group>"; };
+		34C8ECB32B6FBD6000588CE5 /* HelloiPadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelloiPadView.swift; sourceTree = "<group>"; };
 		34CAB491290F11CA00D877E5 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		34CAB493290F128100D877E5 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		34D4AD392997EB2900EFD2A7 /* ZAR@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ZAR@3x.png"; sourceTree = "<group>"; };
@@ -536,6 +538,7 @@
 				34A2347528F061DC00C81292 /* Custom Types */,
 				34A2347228F0609A00C81292 /* ViewModels */,
 				34A2347128F0608700C81292 /* Views */,
+				34C8ECB22B6FBC0E00588CE5 /* Views-iPad */,
 				34AC47B828F7D8BD00724165 /* Custom Components */,
 				34ED0C2A28F1C6FF006C4F38 /* Localizable.strings */,
 				34A2346328F05B5D00C81292 /* Assets.xcassets */,
@@ -613,6 +616,14 @@
 				348D08E22A1C9C400047BEFF /* ChartButtons.swift */,
 			);
 			path = "Custom Components";
+			sourceTree = "<group>";
+		};
+		34C8ECB22B6FBC0E00588CE5 /* Views-iPad */ = {
+			isa = PBXGroup;
+			children = (
+				34C8ECB32B6FBD6000588CE5 /* HelloiPadView.swift */,
+			);
+			path = "Views-iPad";
 			sourceTree = "<group>";
 		};
 		34D4AD382997EB2900EFD2A7 /* AppIcons */ = {
@@ -776,7 +787,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					346C7A1F29BD19020023DE23 = {
 						CreatedOnToolsVersion = 14.2;
@@ -990,6 +1001,7 @@
 				342D433A28F7E37F001C69AD /* CurrencyCell.swift in Sources */,
 				34A4959F2B32BAA8007F7683 /* SwiftDataManager.swift in Sources */,
 				34ED0C1F28F1751C006C4F38 /* CurrencyData.swift in Sources */,
+				34C8ECB42B6FBD6000588CE5 /* HelloiPadView.swift in Sources */,
 				348D08E72A1CA7D00047BEFF /* ChartRange.swift in Sources */,
 				34CAB494290F128100D877E5 /* FavoritesViewModel.swift in Sources */,
 				3483639E290D28D5000DA0DB /* ChartToShare.swift in Sources */,
@@ -1177,6 +1189,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1240,6 +1253,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1327,7 +1341,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1365,7 +1379,7 @@
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
