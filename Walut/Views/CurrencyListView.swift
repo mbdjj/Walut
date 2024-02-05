@@ -148,6 +148,7 @@ struct CurrencyListView: View {
             .searchable(text: $queryString) {}
             .navigationDestination(item: $model.selectedCurrency) { currency in
                 CurrencyCalcView(currency: currency)
+                    .toolbar(.hidden, for: .tabBar)
             }
         }
     }

@@ -14,7 +14,6 @@ struct CurrencyCalcView: View {
     @Environment(\.dismiss) var dismiss
     
     @State var chartCurrency: Currency?
-    @State private var numberPressed: String? = nil
     
     let shared = SharedDataManager.shared
     
@@ -179,100 +178,60 @@ struct CurrencyCalcView: View {
             
             LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3)) {
                 ForEach(1 ..< 10, id: \.self) { num in
-                    Text("\(num)")
-                        .foregroundColor(.primary)
-                        .font(.system(.title2, design: .rounded, weight: .medium))
-                        .frame(width: 60, height: 60)
-                        .scaleEffect(numberPressed == "\(num)" ? 2.0 : 1.0)
-                        .gesture(
-                            DragGesture(minimumDistance: 0)
-                                .onChanged { _ in
-                                    withAnimation(.spring(duration: 0.07)) {
-                                        numberPressed = "\(num)"
-                                    }
-                                }
-                                .onEnded({ _ in
-                                    withAnimation {
-                                        numberPressed = nil
-                                        model.buttonPressed(num)
-                                    }
-                                })
-                        )
+                    Button {
+                        withAnimation {
+                            model.buttonPressed(num)
+                        }
+                    } label: {
+                        Text("\(num)")
+                            .font(.system(.title2, design: .rounded, weight: .medium))
+                    }
+                    .foregroundStyle(.primary)
+                    .frame(width: 36, height: 36)
                 }
+                
+                Button {
+                    withAnimation {
+                        model.buttonPressed(",")
+                    }
+                } label: {
+                    Text(Locale.current.decimalSeparator ?? ".")
+                        .font(.system(.title2, design: .rounded, weight: .medium))
+                        .frame(width: 36, height: 36)
+                }
+                .foregroundStyle(.primary)
+                
+                Button {
+                    withAnimation {
+                        model.buttonPressed("0")
+                    }
+                } label: {
+                    Text("0")
+                        .font(.system(.title2, design: .rounded, weight: .medium))
+                        .frame(width: 36, height: 36)
+                }
+                .foregroundStyle(.primary)
+                
+                Button {
+                    withAnimation {
+                        model.buttonPressed("<")
+                    }
+                } label: {
+                    Image(systemName: "delete.left")
+                        .font(.system(.title2, design: .rounded, weight: .medium))
+                        .frame(width: 36, height: 36)
+                }
+                .foregroundStyle(.primary)
             }
-            .padding(.horizontal, 32)
-            
-            HStack {
-                Spacer()
-                Text(Locale.current.decimalSeparator ?? ".")
-                    .foregroundColor(.primary)
-                    .font(.system(.title2, design: .rounded, weight: .medium))
-                    .frame(width: 60, height: 60)
-                    .scaleEffect(numberPressed == "," ? 2.0 : 1.0)
-                    .gesture(
-                        DragGesture(minimumDistance: 0)
-                            .onChanged { _ in
-                                withAnimation(.spring(duration: 0.07)) {
-                                    numberPressed = ","
-                                }
-                            }
-                            .onEnded({ _ in
-                                withAnimation {
-                                    numberPressed = nil
-                                    model.buttonPressed(",")
-                                }
-                            })
-                    )
-                Spacer()
-                Spacer()
-                Text("0")
-                    .foregroundColor(.primary)
-                    .font(.system(.title2, design: .rounded, weight: .medium))
-                    .frame(width: 60, height: 60)
-                    .scaleEffect(numberPressed == "0" ? 2.0 : 1.0)
-                    .gesture(
-                        DragGesture(minimumDistance: 0)
-                            .onChanged { _ in
-                                withAnimation(.spring(duration: 0.07)) {
-                                    numberPressed = "0"
-                                }
-                            }
-                            .onEnded({ _ in
-                                withAnimation {
-                                    numberPressed = nil
-                                    model.buttonPressed("0")
-                                }
-                            })
-                    )
-                Spacer()
-                Spacer()
-                Image(systemName: "delete.left")
-                    .foregroundColor(.primary)
-                    .font(.system(.title2, design: .rounded, weight: .medium))
-                    .frame(width: 60, height: 60)
-                    .scaleEffect(numberPressed == "<" ? 2.0 : 1.0)
-                    .gesture(
-                        DragGesture(minimumDistance: 0)
-                            .onChanged { _ in
-                                withAnimation(.easeInOut(duration: 0.07)) {
-                                    numberPressed = "<"
-                                }
-                            }
-                            .onEnded({ _ in
-                                withAnimation {
-                                    numberPressed = nil
-                                    model.buttonPressed("<")
-                                }
-                            })
-                    )
-                Spacer()
-            }
+            .frame(maxWidth: 400)
             .padding(.horizontal, 32)
             
             // MARK: - Clear button
             
             Button {
-                model.clear()
+                withAnimation {
+                    model.clear()
+                }
             } label: {
                 HStack {
                     Spacer()
