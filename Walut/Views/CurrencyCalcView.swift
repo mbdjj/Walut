@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import GameController
 
 struct CurrencyCalcView: View {
     
@@ -14,7 +15,9 @@ struct CurrencyCalcView: View {
     @Environment(\.dismiss) var dismiss
     
     @State var chartCurrency: Currency?
+    @FocusState var focused: Bool
     
+    let keyboardConnected = GCKeyboard.coalesced != nil
     let shared = SharedDataManager.shared
     
     init(currency: Currency, base: Currency = SharedDataManager.shared.base, shouldSwap: Bool = true) {
@@ -176,55 +179,57 @@ struct CurrencyCalcView: View {
             
             // MARK: - Keypad
             
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3)) {
-                ForEach(1 ..< 10, id: \.self) { num in
+            if !keyboardConnected {
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3)) {
+                    ForEach(1 ..< 10, id: \.self) { num in
+                        Button {
+                            withAnimation {
+                                model.buttonPressed(num)
+                            }
+                        } label: {
+                            Text("\(num)")
+                                .font(.system(.title2, design: .rounded, weight: .medium))
+                        }
+                        .foregroundStyle(.primary)
+                        .frame(width: 36, height: 36)
+                    }
+                    
                     Button {
                         withAnimation {
-                            model.buttonPressed(num)
+                            model.buttonPressed(",")
                         }
                     } label: {
-                        Text("\(num)")
+                        Text(Locale.current.decimalSeparator ?? ".")
                             .font(.system(.title2, design: .rounded, weight: .medium))
+                            .frame(width: 36, height: 36)
                     }
                     .foregroundStyle(.primary)
-                    .frame(width: 36, height: 36)
-                }
-                
-                Button {
-                    withAnimation {
-                        model.buttonPressed(",")
+                    
+                    Button {
+                        withAnimation {
+                            model.buttonPressed("0")
+                        }
+                    } label: {
+                        Text("0")
+                            .font(.system(.title2, design: .rounded, weight: .medium))
+                            .frame(width: 36, height: 36)
                     }
-                } label: {
-                    Text(Locale.current.decimalSeparator ?? ".")
-                        .font(.system(.title2, design: .rounded, weight: .medium))
-                        .frame(width: 36, height: 36)
-                }
-                .foregroundStyle(.primary)
-                
-                Button {
-                    withAnimation {
-                        model.buttonPressed("0")
+                    .foregroundStyle(.primary)
+                    
+                    Button {
+                        withAnimation {
+                            model.buttonPressed("<")
+                        }
+                    } label: {
+                        Image(systemName: "delete.left")
+                            .font(.system(.title2, design: .rounded, weight: .medium))
+                            .frame(width: 36, height: 36)
                     }
-                } label: {
-                    Text("0")
-                        .font(.system(.title2, design: .rounded, weight: .medium))
-                        .frame(width: 36, height: 36)
+                    .foregroundStyle(.primary)
                 }
-                .foregroundStyle(.primary)
-                
-                Button {
-                    withAnimation {
-                        model.buttonPressed("<")
-                    }
-                } label: {
-                    Image(systemName: "delete.left")
-                        .font(.system(.title2, design: .rounded, weight: .medium))
-                        .frame(width: 36, height: 36)
-                }
-                .foregroundStyle(.primary)
+                .frame(maxWidth: 400)
+                .padding(.horizontal, 32)
             }
-            .frame(maxWidth: 400)
-            .padding(.horizontal, 32)
             
             // MARK: - Clear button
             
@@ -284,10 +289,44 @@ struct CurrencyCalcView: View {
                 model.calcBottom()
             }
         }
-        .sheet(item: $chartCurrency) { currency in
+        .navigationDestination(item: $chartCurrency) { currency in
             CurrencyChartView(currency: currency, base: model.base)
         }
-        
+        .focusable()
+        .focused($focused)
+        .onAppear {
+            focused = true
+        }
+        .onKeyPress(keys: [.delete, ".", ",", .space]) { press in
+            DispatchQueue.main.async {
+                switch press.key {
+                case .delete:
+                    withAnimation {
+                        model.buttonPressed("<")
+                    }
+                case .space:
+                    withAnimation {
+                        model.clear()
+                    }
+                case ".", ",":
+                    withAnimation {
+                        model.buttonPressed(",")
+                    }
+                default:
+                    print("")
+                }
+            }
+            return .handled
+        }
+        .onNumPressed { num in
+            withAnimation {
+                if num != 0 {
+                    model.buttonPressed(num)
+                } else {
+                    model.buttonPressed("0")
+                }
+            }
+        }
     }
 }
 
@@ -296,5 +335,17 @@ struct CurrencyCalcView_Previews: PreviewProvider {
         NavigationStack {
             CurrencyCalcView(currency: Currency(baseCode: "PLN"))
         }
+    }
+}
+
+extension View {
+    func onNumPressed(pressed: @escaping (_ num: Int) -> ()) -> some View {
+        self
+            .onKeyPress(characters: .decimalDigits) { press in
+                DispatchQueue.main.async {
+                    pressed(Int("\(press.key.character)")!)
+                }
+                return .handled
+            }
     }
 }
