@@ -14,7 +14,7 @@ struct BasePickerView: View {
     @FocusState var shouldNameFieldBeFocused: Bool
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             Form {
                 TextField("your_name", text: $model.name)
                     .focused($shouldNameFieldBeFocused)
@@ -24,19 +24,10 @@ struct BasePickerView: View {
                     .submitLabel(.done)
                 
                 Section {
-                    if UIDevice.current.userInterfaceIdiom == .phone {
-                        Picker("base_currency", selection: $model.selected) {
-                            ForEach(model.currencyArray) { currency in
-                                Text("\(currency.flag) \(currency.code)")
-                            }
+                    Picker("base_currency", selection: $model.selected) {
+                        ForEach(model.currencyArray) { currency in
+                            Text("\(currency.flag) \(currency.code)")
                         }
-                    } else {
-                        Picker("base_currency", selection: $model.selected) {
-                            ForEach(model.currencyArray) { currency in
-                                Text("\(currency.flag) (\(currency.code)) \(currency.fullName)")
-                            }
-                        }
-                        .pickerStyle(.navigationLink)
                     }
                     
                     Stepper("\(String(localized: "settings_decimal_numbers")) (\(model.decimal))", value: $model.decimal, in: 2...7)

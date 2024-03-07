@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import GameController
 
 struct CurrencyCalcView: View {
     
@@ -15,9 +14,8 @@ struct CurrencyCalcView: View {
     @Environment(\.dismiss) var dismiss
     
     @State var chartCurrency: Currency?
-    @FocusState var focused: Bool
+    @State private var numberPressed: String? = nil
     
-    let keyboardConnected = GCKeyboard.coalesced != nil
     let shared = SharedDataManager.shared
     
     init(currency: Currency, base: Currency = SharedDataManager.shared.base, shouldSwap: Bool = true) {
@@ -26,7 +24,49 @@ struct CurrencyCalcView: View {
     }
     
     var body: some View {
+        // MARK: - Top bar
+        
         VStack {
+            HStack(spacing: 16) {
+                Text("overview_calculation")
+                    .font(.system(.largeTitle, design: .rounded, weight: .bold))
+                
+                Spacer()
+                
+                Menu {
+                    ShareLink(item: model.valueToShare()) {
+                        Label("share_value", systemImage: "equal.circle")
+                    }
+                    .disabled(model.topAmount == 0)
+                    
+                    ShareLink(item: model.textToShare) {
+                        Label("share_text", systemImage: "text.bubble")
+                    }
+                } label: {
+                    Image(systemName: "square.and.arrow.up")
+                        .font(.body)
+                        .foregroundColor(.primary)
+                }
+                
+                Button {
+                    model.handleFavorites()
+                } label: {
+                    Image(systemName: "star.fill")
+                        .font(.title3)
+                        .foregroundColor(model.currency.isFavorite ? .yellow : Color(uiColor: .systemGray5))
+                }
+                
+                Button {
+                    dismiss.callAsFunction()
+                } label: {
+                    Image(systemName: "xmark")
+                        .font(.title3.weight(.bold))
+                        .foregroundColor(.primary)
+                        
+                }
+            }
+            .padding()
+            
             // MARK: - From and To currency
             
             HStack {
@@ -179,64 +219,102 @@ struct CurrencyCalcView: View {
             
             // MARK: - Keypad
             
-            if !keyboardConnected {
-                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3)) {
-                    ForEach(1 ..< 10, id: \.self) { num in
-                        Button {
-                            withAnimation {
-                                model.buttonPressed(num)
-                            }
-                        } label: {
-                            Text("\(num)")
-                                .font(.system(.title2, design: .rounded, weight: .medium))
-                        }
-                        .foregroundStyle(.primary)
-                        .frame(width: 36, height: 36)
-                    }
-                    
-                    Button {
-                        withAnimation {
-                            model.buttonPressed(",")
-                        }
-                    } label: {
-                        Text(Locale.current.decimalSeparator ?? ".")
-                            .font(.system(.title2, design: .rounded, weight: .medium))
-                            .frame(width: 36, height: 36)
-                    }
-                    .foregroundStyle(.primary)
-                    
-                    Button {
-                        withAnimation {
-                            model.buttonPressed("0")
-                        }
-                    } label: {
-                        Text("0")
-                            .font(.system(.title2, design: .rounded, weight: .medium))
-                            .frame(width: 36, height: 36)
-                    }
-                    .foregroundStyle(.primary)
-                    
-                    Button {
-                        withAnimation {
-                            model.buttonPressed("<")
-                        }
-                    } label: {
-                        Image(systemName: "delete.left")
-                            .font(.system(.title2, design: .rounded, weight: .medium))
-                            .frame(width: 36, height: 36)
-                    }
-                    .foregroundStyle(.primary)
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3)) {
+                ForEach(1 ..< 10, id: \.self) { num in
+                    Text("\(num)")
+                        .foregroundColor(.primary)
+                        .font(.system(.title2, design: .rounded, weight: .medium))
+                        .frame(width: 60, height: 60)
+                        .scaleEffect(numberPressed == "\(num)" ? 2.0 : 1.0)
+                        .gesture(
+                            DragGesture(minimumDistance: 0)
+                                .onChanged { _ in
+                                    withAnimation(.spring(duration: 0.07)) {
+                                        numberPressed = "\(num)"
+                                    }
+                                }
+                                .onEnded({ _ in
+                                    withAnimation {
+                                        numberPressed = nil
+                                        model.buttonPressed(num)
+                                    }
+                                })
+                        )
                 }
-                .frame(maxWidth: 400)
-                .padding(.horizontal, 32)
             }
+            .padding(.horizontal, 32)
+            
+            HStack {
+                Spacer()
+                Text(Locale.current.decimalSeparator ?? ".")
+                    .foregroundColor(.primary)
+                    .font(.system(.title2, design: .rounded, weight: .medium))
+                    .frame(width: 60, height: 60)
+                    .scaleEffect(numberPressed == "," ? 2.0 : 1.0)
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged { _ in
+                                withAnimation(.spring(duration: 0.07)) {
+                                    numberPressed = ","
+                                }
+                            }
+                            .onEnded({ _ in
+                                withAnimation {
+                                    numberPressed = nil
+                                    model.buttonPressed(",")
+                                }
+                            })
+                    )
+                Spacer()
+                Spacer()
+                Text("0")
+                    .foregroundColor(.primary)
+                    .font(.system(.title2, design: .rounded, weight: .medium))
+                    .frame(width: 60, height: 60)
+                    .scaleEffect(numberPressed == "0" ? 2.0 : 1.0)
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged { _ in
+                                withAnimation(.spring(duration: 0.07)) {
+                                    numberPressed = "0"
+                                }
+                            }
+                            .onEnded({ _ in
+                                withAnimation {
+                                    numberPressed = nil
+                                    model.buttonPressed("0")
+                                }
+                            })
+                    )
+                Spacer()
+                Spacer()
+                Image(systemName: "delete.left")
+                    .foregroundColor(.primary)
+                    .font(.system(.title2, design: .rounded, weight: .medium))
+                    .frame(width: 60, height: 60)
+                    .scaleEffect(numberPressed == "<" ? 2.0 : 1.0)
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged { _ in
+                                withAnimation(.easeInOut(duration: 0.07)) {
+                                    numberPressed = "<"
+                                }
+                            }
+                            .onEnded({ _ in
+                                withAnimation {
+                                    numberPressed = nil
+                                    model.buttonPressed("<")
+                                }
+                            })
+                    )
+                Spacer()
+            }
+            .padding(.horizontal, 32)
             
             // MARK: - Clear button
             
             Button {
-                withAnimation {
-                    model.clear()
-                }
+                model.clear()
             } label: {
                 HStack {
                     Spacer()
@@ -251,34 +329,6 @@ struct CurrencyCalcView: View {
             .padding(.horizontal, 32)
             .padding(.bottom)
         }
-        .navigationTitle("overview_calculation")
-        .toolbar {
-            Menu {
-                ShareLink(item: model.valueToShare()) {
-                    Label("share_value", systemImage: "equal.circle")
-                }
-                .disabled(model.topAmount == 0)
-                
-                ShareLink(item: model.textToShare) {
-                    Label("share_text", systemImage: "text.bubble")
-                }
-            } label: {
-                Image(systemName: "square.and.arrow.up")
-            }
-            .menuStyle(.button)
-            .buttonStyle(.bordered)
-            .buttonBorderShape(.circle)
-            
-            
-            Button {
-                model.handleFavorites()
-            } label: {
-                Image(systemName: model.showFavorite ? "star.fill" : "star")
-                    .foregroundStyle(.yellow)
-            }
-            .buttonStyle(.bordered)
-            .buttonBorderShape(.circle)
-        }
         .onChange(of: model.topAmount) { _, top in
             withAnimation {
                 model.calcBottom()
@@ -289,63 +339,17 @@ struct CurrencyCalcView: View {
                 model.calcBottom()
             }
         }
-        .navigationDestination(item: $chartCurrency) { currency in
+        .sheet(item: $chartCurrency) { currency in
             CurrencyChartView(currency: currency, base: model.base)
-        }
-        .focusable()
-        .focused($focused)
-        .onAppear {
-            focused = true
-        }
-        .onKeyPress(keys: [.delete, ".", ",", .space]) { press in
-            DispatchQueue.main.async {
-                switch press.key {
-                case .delete:
-                    withAnimation {
-                        model.buttonPressed("<")
-                    }
-                case .space:
-                    withAnimation {
-                        model.clear()
-                    }
-                case ".", ",":
-                    withAnimation {
-                        model.buttonPressed(",")
-                    }
-                default:
-                    print("")
-                }
-            }
-            return .handled
-        }
-        .onNumPressed { num in
-            withAnimation {
-                if num != 0 {
-                    model.buttonPressed(num)
-                } else {
-                    model.buttonPressed("0")
-                }
-            }
         }
     }
 }
 
 struct CurrencyCalcView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationStack {
-            CurrencyCalcView(currency: Currency(baseCode: "PLN"))
-        }
-    }
-}
-
-extension View {
-    func onNumPressed(pressed: @escaping (_ num: Int) -> ()) -> some View {
-        self
-            .onKeyPress(characters: .decimalDigits) { press in
-                DispatchQueue.main.async {
-                    pressed(Int("\(press.key.character)")!)
-                }
-                return .handled
+        Text("dupa")
+            .sheet(isPresented: .constant(true)) {
+                CurrencyCalcView(currency: Currency(baseCode: "PLN"))
             }
     }
 }

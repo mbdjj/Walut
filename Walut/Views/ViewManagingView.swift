@@ -17,29 +17,21 @@ struct ViewManagingView: View {
     var body: some View {
         switch shared.appState {
         case .onboarding:
-            if UIDevice.current.userInterfaceIdiom == .phone {
-                HelloView()
-            } else {
-                HelloiPadView()
-            }
+            HelloView()
         case .onboarded:
             BasePickerView()
         case .baseSelected:
-            if UIDevice.current.userInterfaceIdiom == .phone {
-                TabView(selection: $selection) {
-                    CurrencyListView()
-                        .tabItem {
-                            Label(shared.base.code, systemImage: "dollarsign.circle")
-                        }
-                        .tag(0)
-                    SettingsView()
-                        .tabItem {
-                            Label("settings", systemImage: "gear")
-                        }
-                        .tag(2)
-                }
-            } else {
-                CurrencyListiPadView()
+            TabView(selection: $selection) {
+                CurrencyListView()
+                    .tabItem {
+                        Label(shared.base.code, systemImage: "dollarsign.circle")
+                    }
+                    .tag(0)
+                SettingsView()
+                    .tabItem {
+                        Label("settings", systemImage: "gear")
+                    }
+                    .tag(2)
             }
         }
     }
