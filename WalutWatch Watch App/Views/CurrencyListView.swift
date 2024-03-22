@@ -15,22 +15,6 @@ struct CurrencyListView: View {
     var body: some View {
         NavigationStack {
             List {
-                
-//                Section {
-//                    NavigationLink {
-//                        SettingsView()
-//                    } label: {
-//                        Label("settings", systemImage: "gear")
-//                    }
-//                    .swipeActions {
-//                        NavigationLink {
-//                            SortView()
-//                        } label: {
-//                            Image(systemName: "arrow.up.arrow.down")
-//                        }
-//                    }
-//                }
-                
                 if !model.loading {
                     if !model.favoritesArray.isEmpty {
                         Section {
@@ -100,6 +84,9 @@ struct CurrencyListView: View {
                         Label("settings", systemImage: "gear")
                     }
                 }
+            }
+            .navigationDestination(item: $model.selectedCurrency) { currency in
+                CurrencyView(currency: currency)
             }
         }
     }

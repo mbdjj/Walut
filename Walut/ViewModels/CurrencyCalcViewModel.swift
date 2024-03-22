@@ -37,6 +37,9 @@ class CurrencyCalcViewModel: ObservableObject {
         if shouldSwap {
             self.swapCurrencies()
         }
+        #if os(watchOS)
+        topAmount = 1
+        #endif
         calcBottom()
     }
     
