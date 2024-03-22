@@ -16,20 +16,20 @@ struct CurrencyListView: View {
         NavigationStack {
             List {
                 
-                Section {
-                    NavigationLink {
-                        SettingsView()
-                    } label: {
-                        Label("settings", systemImage: "gear")
-                    }
-                    .swipeActions {
-                        NavigationLink {
-                            SortView()
-                        } label: {
-                            Image(systemName: "arrow.up.arrow.down")
-                        }
-                    }
-                }
+//                Section {
+//                    NavigationLink {
+//                        SettingsView()
+//                    } label: {
+//                        Label("settings", systemImage: "gear")
+//                    }
+//                    .swipeActions {
+//                        NavigationLink {
+//                            SortView()
+//                        } label: {
+//                            Image(systemName: "arrow.up.arrow.down")
+//                        }
+//                    }
+//                }
                 
                 if !model.loading {
                     if !model.favoritesArray.isEmpty {
@@ -91,6 +91,15 @@ struct CurrencyListView: View {
                 }
             }
             .navigationTitle("\(SharedDataManager.shared.base.flag) \(SharedDataManager.shared.base.code)")
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink {
+                        SettingsView()
+                    } label: {
+                        Label("settings", systemImage: "gear")
+                    }
+                }
+            }
         }
     }
 }

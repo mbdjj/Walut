@@ -35,7 +35,7 @@ struct CurrencyCell: View {
                 
                 Spacer()
                 
-                Text(currency.rate != 0 ? shared.currencyLocaleString(value: currency.price, currencyCode: base.code) : String(localized: "no_data"))
+                Text(currency.rate != 0 ? shared.currencyLocaleString(value: currency.price, currencyCode: base.code, decimal: 3) : String(localized: "no_data"))
             }
         }
         
