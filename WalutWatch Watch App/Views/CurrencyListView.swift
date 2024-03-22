@@ -90,6 +90,7 @@ struct CurrencyListView: View {
                     }
                 }
             }
+            .containerBackground(Color.walut.gradient, for: .navigation)
             .navigationTitle("\(SharedDataManager.shared.base.flag) \(SharedDataManager.shared.base.code)")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
