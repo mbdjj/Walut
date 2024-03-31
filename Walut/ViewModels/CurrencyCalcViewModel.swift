@@ -7,19 +7,19 @@
 
 import SwiftUI
 
-class CurrencyCalcViewModel: ObservableObject {
+@Observable class CurrencyCalcViewModel {
     
-    @Published var currency: Currency
+    var currency: Currency
     var base: Currency
     
-    @Published var topCurrency: Currency
-    @Published var bottomCurrency: Currency
+    var topCurrency: Currency
+    var bottomCurrency: Currency
     
-    @Published var topAmount: Double = 0
-    @Published var bottomAmount: Double = 0
+    var topAmount: Double = 0
+    var bottomAmount: Double = 0
     
-    @Published var isDouble: Bool = false
-    @Published var decimalDigits = 0
+    var isDouble: Bool = false
+    var decimalDigits = 0
     
     private let shared = SharedDataManager.shared
     private let defaults = UserDefaults.standard

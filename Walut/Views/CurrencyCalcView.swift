@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CurrencyCalcView: View {
     
-    @StateObject var model: CurrencyCalcViewModel
+    @State var model: CurrencyCalcViewModel
     
     @Environment(\.dismiss) var dismiss
     
@@ -20,7 +20,7 @@ struct CurrencyCalcView: View {
     
     init(currency: Currency, base: Currency = SharedDataManager.shared.base, shouldSwap: Bool = true) {
         let model = CurrencyCalcViewModel(currency: currency, base: base, shouldSwap: shouldSwap)
-        _model = StateObject(wrappedValue: model)
+        _model = State(initialValue: model)
     }
     
     var body: some View {
@@ -314,7 +314,9 @@ struct CurrencyCalcView: View {
             // MARK: - Clear button
             
             Button {
-                model.clear()
+                withAnimation {
+                    model.clear()
+                }
             } label: {
                 HStack {
                     Spacer()

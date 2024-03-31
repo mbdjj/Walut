@@ -9,12 +9,12 @@ import SwiftUI
 
 struct CurrencyView: View {
     
-    @StateObject var model: CurrencyCalcViewModel
+    @State var model: CurrencyCalcViewModel
     let shared = SharedDataManager.shared
     
     init(currency: Currency, base: Currency = SharedDataManager.shared.base, shouldSwap: Bool = true) {
         let model = CurrencyCalcViewModel(currency: currency, base: base, shouldSwap: shouldSwap)
-        _model = StateObject(wrappedValue: model)
+        _model = State(initialValue: model)
     }
     
     var body: some View {
