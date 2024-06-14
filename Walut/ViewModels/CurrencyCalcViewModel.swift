@@ -183,6 +183,7 @@ import SwiftUI
     
     func clear() {
         topAmount = 0
+        bottomAmount = 0
         isDouble = false
         decimalDigits = 0
     }

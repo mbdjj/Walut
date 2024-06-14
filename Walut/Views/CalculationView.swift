@@ -118,13 +118,14 @@ struct CalculationView: View {
                 } label: {
                     Label("share", systemImage: "square.and.arrow.up")
                 }
+                .tint(.primary)
                 
                 Button {
                     model.handleFavorites()
                 } label: {
-                    Label("favorite", systemImage: "star")
+                    Label("favorite", systemImage: model.currency.isFavorite ? "star.fill" : "star")
                 }
-                .foregroundStyle(.yellow)
+                .tint(model.currency.isFavorite ? .yellow : .primary)
             }
         }
         .onChange(of: model.topAmount) { _, _ in
