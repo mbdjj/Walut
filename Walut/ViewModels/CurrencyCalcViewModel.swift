@@ -12,14 +12,13 @@ import SwiftUI
     var currency: Currency
     var base: Currency
     
-    var topCurrency: Currency
-    var bottomCurrency: Currency
-    
     var topAmount: Double = 0
     var bottomAmount: Double = 0
     
     var isDouble: Bool = false
     var decimalDigits = 0
+    
+    var isTopOpen = true
     
     private let shared = SharedDataManager.shared
     private let defaults = UserDefaults.standard
@@ -31,21 +30,15 @@ import SwiftUI
         self.currency = currency
         self.base = base
         
-        self.topCurrency = base
-        self.bottomCurrency = currency
-        
-        if shouldSwap {
-            self.swapCurrencies()
-        }
         #if os(watchOS)
         topAmount = 1
         #endif
-        calcBottom()
+        calcPassive()
     }
     
     
     func amountString(_ type: AmountType) -> String {
-        let amount = type == .top ? topAmount : bottomAmount
+        let amount = isTopOpen == (type == .active) ? topAmount : bottomAmount
         
         let formatter = NumberFormatter()
         formatter.maximumFractionDigits = 2
@@ -55,13 +48,13 @@ import SwiftUI
         
         var str = formatter.string(from: amount as NSNumber) ?? "0"
         
-        if amount == floor(amount) && isDouble && type == .top {
+        if amount == floor(amount) && isDouble && type == .active {
             str += decimal
             
             for _ in 0 ..< decimalDigits {
                 str += "0"
             }
-        } else if amount * 10 == floor(amount * 10) && isDouble && type == .top {
+        } else if amount * 10 == floor(amount * 10) && isDouble && type == .active {
             if decimalDigits == 2 {
                 str += "0"
             }
@@ -70,24 +63,25 @@ import SwiftUI
         return str
     }
     
-    func valueToShare(_ type: AmountType = .top) -> String {
+    func valueToShare(_ type: AmountType = .active) -> String {
         var first = ""
         var second = ""
         
-        if type == .top {
-            first = shared.priceLocaleString(value: topAmount, currencyCode: topCurrency.code)
-            second = shared.priceLocaleString(value: bottomAmount, currencyCode: bottomCurrency.code)
+        if isTopOpen == (type == .active) {
+            first = shared.priceLocaleString(value: topAmount, currencyCode: currency.code)
+            second = shared.priceLocaleString(value: bottomAmount, currencyCode: base.code)
         } else {
-            first = shared.priceLocaleString(value: bottomAmount, currencyCode: bottomCurrency.code)
-            second = shared.priceLocaleString(value: topAmount, currencyCode: topCurrency.code)
+            first = shared.priceLocaleString(value: bottomAmount, currencyCode: base.code)
+            second = shared.priceLocaleString(value: topAmount, currencyCode: currency.code)
         }
         
         return "\(first) = \(second)"
     }
     
     private func calcDecimal() {
+        let activeAmount = isTopOpen ? topAmount : bottomAmount
         for i in 0 ... 2 {
-            let amount = topAmount
+            let amount = activeAmount
             
             if amount * pow(10, Double(i)) == floor(amount * pow(10, Double(i))) {
                 decimalDigits = i
@@ -99,31 +93,44 @@ import SwiftUI
         }
     }
     private func checkIfDouble() {
-        isDouble = topAmount != floor(topAmount)
+        let activeAmount = isTopOpen ? topAmount : bottomAmount
+        isDouble = activeAmount != floor(activeAmount)
         
         if isDouble {
             calcDecimal()
         }
     }
-    func swapCurrencies() {
-        (topCurrency, bottomCurrency) = (bottomCurrency, topCurrency)
-        (topAmount, bottomAmount) = (bottomAmount, topAmount)
-        
+    func swapActive() {
         checkIfDouble()
     }
     
     
     func buttonPressed(_ num: Int) {
-        if !isDouble {
-            topAmount *= 10
-            topAmount += Double(num)
-        } else {
-            if decimalDigits < 2 {
-                decimalDigits += 1
-                
-                topAmount *= pow(10, Double(decimalDigits))
+        if isTopOpen {
+            if !isDouble {
+                topAmount *= 10
                 topAmount += Double(num)
-                topAmount /= pow(10, Double(decimalDigits))
+            } else {
+                if decimalDigits < 2 {
+                    decimalDigits += 1
+                    
+                    topAmount *= pow(10, Double(decimalDigits))
+                    topAmount += Double(num)
+                    topAmount /= pow(10, Double(decimalDigits))
+                }
+            }
+        } else {
+            if !isDouble {
+                bottomAmount *= 10
+                bottomAmount += Double(num)
+            } else {
+                if decimalDigits < 2 {
+                    decimalDigits += 1
+                    
+                    bottomAmount *= pow(10, Double(decimalDigits))
+                    bottomAmount += Double(num)
+                    bottomAmount /= pow(10, Double(decimalDigits))
+                }
             }
         }
     }
@@ -142,17 +149,33 @@ import SwiftUI
             }
             
         } else if sym == "<" {
-            if !isDouble {
-                topAmount = floor(topAmount / 10)
-            } else {
-                if isDouble && decimalDigits == 0 {
-                    isDouble = false
+            if isTopOpen {
+                if !isDouble {
+                    topAmount = floor(topAmount / 10)
                 } else {
-                    decimalDigits -= 1
-                    
-                    topAmount *= pow(10, Double(decimalDigits))
-                    topAmount = floor(topAmount)
-                    topAmount /= pow(10, Double(decimalDigits))
+                    if isDouble && decimalDigits == 0 {
+                        isDouble = false
+                    } else {
+                        decimalDigits -= 1
+                        
+                        topAmount *= pow(10, Double(decimalDigits))
+                        topAmount = floor(topAmount)
+                        topAmount /= pow(10, Double(decimalDigits))
+                    }
+                }
+            } else {
+                if !isDouble {
+                    bottomAmount = floor(bottomAmount / 10)
+                } else {
+                    if isDouble && decimalDigits == 0 {
+                        isDouble = false
+                    } else {
+                        decimalDigits -= 1
+                        
+                        bottomAmount *= pow(10, Double(decimalDigits))
+                        bottomAmount = floor(bottomAmount)
+                        bottomAmount /= pow(10, Double(decimalDigits))
+                    }
                 }
             }
         }
@@ -185,31 +208,17 @@ import SwiftUI
     }
     
     func changeCurrency(_ type: AmountType, to code: String) {
-        let currencyToSwitch = type == .top ? topCurrency : bottomCurrency
+        let currencyToSwitch = isTopOpen == (type == .active) ? currency : base
         
         if currencyToSwitch == base {
             base = Currency(baseCode: code)
             Task {
                 await getCurrency()
             }
-            if type == .top {
-                topCurrency = base
-                bottomCurrency = currency
-            } else {
-                topCurrency = currency
-                bottomCurrency = base
-            }
         } else {
             currency = Currency(baseCode: code)
             Task {
                 await self.getCurrency()
-            }
-            if type == .top {
-                topCurrency = currency
-                bottomCurrency = base
-            } else {
-                topCurrency = base
-                bottomCurrency = currency
             }
         }
     }
@@ -230,16 +239,16 @@ import SwiftUI
         }
     }
     
-    func calcBottom() {
-        if topCurrency == base {
-            bottomAmount = topAmount / currency.price
+    func calcPassive() {
+        if isTopOpen {
+            bottomAmount = topAmount * currency.price
         } else {
-            bottomAmount = topAmount / currency.rate
+            topAmount = bottomAmount * currency.rate
         }
     }
 }
 
 enum AmountType {
-    case top
-    case bottom
+    case active
+    case passive
 }
