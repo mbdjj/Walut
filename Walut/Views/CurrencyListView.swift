@@ -151,9 +151,12 @@ struct CurrencyListView: View {
                 }
             }
             .searchable(text: $queryString) {}
-            .sheet(item: $model.selectedCurrency) { currency in
-                CurrencyCalcView(currency: currency)
+            .navigationDestination(item: $model.selectedCurrency) { currency in
+                <#code#>
             }
+//            .sheet(item: $model.selectedCurrency) { currency in
+//                CurrencyCalcView(currency: currency)
+//            }
         }
     }
     
