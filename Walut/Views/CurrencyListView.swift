@@ -152,7 +152,7 @@ struct CurrencyListView: View {
             }
             .searchable(text: $queryString) {}
             .navigationDestination(item: $model.selectedCurrency) { currency in
-                <#code#>
+                CalculationView(currency: currency)
             }
 //            .sheet(item: $model.selectedCurrency) { currency in
 //                CurrencyCalcView(currency: currency)

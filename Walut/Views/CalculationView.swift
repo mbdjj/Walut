@@ -16,10 +16,99 @@ struct CalculationView: View {
     }
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            // MARK: - Number views
+            
+            Spacer()
+            
+            // MARK: - Keypad
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 0) {
+                ForEach(0 ... 2, id: \.self) { row in
+                    GridRow {
+                        ForEach(1 ... 3, id: \.self) { col in
+                            let num = row * 3 + col
+                            Button {
+                                
+                            } label: {
+                                Text("\(num)")
+                                    .frame(width: 60, height: 60)
+                            }
+                            .foregroundStyle(.primary)
+                            .font(.system(.title2, design: .rounded, weight: .medium))
+                        }
+                    }
+                    .padding(.bottom, 4)
+                }
+                GridRow {
+                    Button {
+                        
+                    } label: {
+                        Text(Locale.current.decimalSeparator ?? ".")
+                            .frame(width: 60, height: 60)
+                    }
+                    .foregroundStyle(.primary)
+                    .font(.system(.title2, design: .rounded, weight: .medium))
+                    
+                    Button {
+                        
+                    } label: {
+                        Text("0")
+                            .frame(width: 60, height: 60)
+                    }
+                    .foregroundStyle(.primary)
+                    .font(.system(.title2, design: .rounded, weight: .medium))
+                    
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "delete.left")
+                            .frame(width: 60, height: 60)
+                    }
+                    .foregroundStyle(.primary)
+                    .font(.system(.title2, design: .rounded, weight: .medium))
+                }
+            }
+            .padding(.bottom)
+            
+            Button {
+                withAnimation {
+                    model.clear()
+                }
+            } label: {
+                HStack {
+                    Spacer()
+                    Text("share_chart")
+                        .foregroundColor(.walut)
+                        .font(.system(.title3, design: .rounded, weight: .medium))
+                    Spacer()
+                }
+            }
+            .buttonStyle(.bordered)
+            .buttonBorderShape(.capsule)
+            .padding(.horizontal, 32)
+            .padding(.bottom)
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItemGroup(placement: .topBarTrailing) {
+                Button {
+                    
+                } label: {
+                    Label("share", systemImage: "square.and.arrow.up")
+                }
+                
+                Button {
+                    
+                } label: {
+                    Label("favorite", systemImage: "star.circle")
+                }
+            }
+        }
     }
 }
 
 #Preview {
-    CalculationView(currency: Currency(baseCode: "USD"))
+    NavigationStack {
+        CalculationView(currency: Currency(baseCode: "USD"))
+    }
 }

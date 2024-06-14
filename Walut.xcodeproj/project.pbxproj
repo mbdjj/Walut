@@ -40,6 +40,7 @@
 		3481E08C295DE09100322363 /* WalutWidgetIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3481E08B295DE09100322363 /* WalutWidgetIntents.intentdefinition */; };
 		3481E08D295DE09100322363 /* WalutWidgetIntents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 3481E08B295DE09100322363 /* WalutWidgetIntents.intentdefinition */; };
 		3482D9412C1C5C6700CECB1F /* CalculationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3482D9402C1C5C6700CECB1F /* CalculationView.swift */; };
+		3482D9432C1C717600CECB1F /* CalculationCurrencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3482D9422C1C717600CECB1F /* CalculationCurrencyView.swift */; };
 		348346E9292612A3003710CA /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 348346E8292612A3003710CA /* WidgetKit.framework */; };
 		348346EB292612A3003710CA /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 348346EA292612A3003710CA /* SwiftUI.framework */; };
 		348346EE292612A3003710CA /* WalutWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348346ED292612A3003710CA /* WalutWidgetBundle.swift */; };
@@ -254,6 +255,7 @@
 		34804EEF2B1477B500099087 /* WalutWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WalutWidgetExtension.entitlements; sourceTree = "<group>"; };
 		3481E08B295DE09100322363 /* WalutWidgetIntents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = WalutWidgetIntents.intentdefinition; sourceTree = "<group>"; };
 		3482D9402C1C5C6700CECB1F /* CalculationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationView.swift; sourceTree = "<group>"; };
+		3482D9422C1C717600CECB1F /* CalculationCurrencyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculationCurrencyView.swift; sourceTree = "<group>"; };
 		348346E7292612A3003710CA /* WalutWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WalutWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		348346E8292612A3003710CA /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		348346EA292612A3003710CA /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -618,6 +620,7 @@
 				344E9986295ED7A200921DBC /* LoadingCell.swift */,
 				3483639D290D28D5000DA0DB /* ChartToShare.swift */,
 				348D08E22A1C9C400047BEFF /* ChartButtons.swift */,
+				3482D9422C1C717600CECB1F /* CalculationCurrencyView.swift */,
 			);
 			path = "Custom Components";
 			sourceTree = "<group>";
@@ -1020,6 +1023,7 @@
 				34A2346028F05B5C00C81292 /* WalutApp.swift in Sources */,
 				3420F49F2AC557770059E40E /* NetworkMonitor.swift in Sources */,
 				34A2346E28F05BAE00C81292 /* BasePickerView.swift in Sources */,
+				3482D9432C1C717600CECB1F /* CalculationCurrencyView.swift in Sources */,
 				341CF626291430B40012FA5B /* SupportDevView.swift in Sources */,
 				34D5AFE92951B25C0043B72A /* SortView.swift in Sources */,
 				34DDC4CA29B28796002F76EF /* HelloView.swift in Sources */,
