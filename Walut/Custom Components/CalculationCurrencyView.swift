@@ -18,6 +18,12 @@ struct CalculationCurrencyView: View {
     @Binding var isTopOpen: Bool
     let isTop: Bool
     let textFunc: (AmountType) -> String
+    let changeCurrency: (Currency, AmountType) -> ()
+    
+    @State var showCurrencyPicker: Bool = false
+    let pickerData: [Currency] = {
+        SharedDataManager.shared.allCodesArray.map { Currency(baseCode: $0) }
+    }()
     
     var isOpen: Bool { isTop ? isTopOpen : !isTopOpen }
     
@@ -77,16 +83,21 @@ struct CalculationCurrencyView: View {
                         .font(.system(.title3, design: .rounded, weight: .bold))
                         .foregroundColor(.primary)
                         .contentTransition(.numericText(value: isTop ? topValue : botValue))
-                        .onTapGesture {
-                            withAnimation(.spring) {
-                                isTopOpen.toggle()
-                            }
-                        }
                         .matchedGeometryEffect(id: "amount", in: animation)
                     }
                 }
             }
+            .background(Color(uiColor: .secondarySystemBackground))
             .padding()
+            .onTapGesture {
+                if isOpen {
+                    showCurrencyPicker = true
+                } else {
+                    withAnimation(.spring) {
+                        isTopOpen.toggle()
+                    }
+                }
+            }
             
             // MARK: - Bottom bar
             
@@ -116,6 +127,21 @@ struct CalculationCurrencyView: View {
         }
         .background(Color(uiColor: .secondarySystemBackground))
         .clipShape(RoundedRectangle(cornerRadius: 25))
+        .popover(isPresented: $showCurrencyPicker) {
+            NavigationStack {
+                List {
+                    ForEach(pickerData) { currency in
+                        Button {
+                            changeCurrency(currency, isOpen ? .active : .passive)
+                            showCurrencyPicker = false
+                        } label: {
+                            CurrencyCell(for: currency, mode: .picker, value: 1)
+                        }
+                    }
+                }
+                .navigationTitle("Change")
+            }
+        }
     }
 }
 
@@ -123,9 +149,9 @@ struct CalculationCurrencyView: View {
     VStack {
         CalculationCurrencyView(currency: .constant(Currency(baseCode: "USD")), base: .constant(Currency(baseCode: "PLN")), topValue: .constant(1.5), botValue: .constant(4), isTopOpen: .constant(false), isTop: true) { type in
             return "0"
-        }
+        } changeCurrency: { _, _ in }
         CalculationCurrencyView(currency: .constant(Currency(baseCode: "USD")), base: .constant(Currency(baseCode: "PLN")), topValue: .constant(1), botValue: .constant(4), isTopOpen: .constant(false), isTop: false) { type in
             return "0"
-        }
+        } changeCurrency: { _, _ in }
     }
 }

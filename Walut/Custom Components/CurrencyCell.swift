@@ -55,6 +55,7 @@ struct CurrencyCell: View {
     enum CellMode {
         case normal
         case quickConvert
+        case picker
     }
     
     var body: some View {
@@ -65,7 +66,6 @@ struct CurrencyCell: View {
                     .font(.system(size: 50))
                 
                 VStack(alignment: .leading) {
-                    
                     Text(currency.fullName)
                         .font(.system(size: 19))
                         .fontWeight(.medium)
@@ -74,9 +74,6 @@ struct CurrencyCell: View {
                     Text(currency.code)
                         .font(.system(size: 17))
                         .foregroundColor(.primary)
-                    
-                    Spacer()
-                    
                 }
                 
                 Spacer()
@@ -84,15 +81,13 @@ struct CurrencyCell: View {
                 VStack(alignment: .trailing) {
                     if mode == .normal {
                         Text(currency.rate != 0 ? shared.currencyLocaleString(value: currency.price, currencyCode: base.code) : String(localized: "no_data"))
-                            .font(.system(size: 17))
                             .foregroundColor(.primary)
                     } else if mode == .quickConvert {
                         Text(shared.currencyLocaleString(value: currency.rate * value, currencyCode: currency.code))
-                            .font(.system(size: 17))
                             .foregroundColor(.primary)
                     }
                     
-                    if shouldShowPercent && currency.rate != 0 {
+                    if shouldShowPercent && currency.rate != 0 && mode != .picker {
                         Text("\(Image(systemName: "arrow.\(arrowDirection)")) \(shared.percentLocaleStirng(value: abs(currency.percent)))")
                             .font(.caption2)
                             .fontWeight(.semibold)
@@ -103,7 +98,7 @@ struct CurrencyCell: View {
                 
             }
             
-            if currency.isFavorite {
+            if currency.isFavorite && mode != .picker {
                 VStack {
                     HStack {
                         Spacer()
@@ -121,7 +116,7 @@ struct CurrencyCell: View {
 struct CurrencyCell_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            CurrencyCell(for: Currency(baseCode: "PLN"), mode: .normal, value: 1)
+            CurrencyCell(for: Currency(baseCode: "PLN"), mode: .picker, value: 1)
         }
     }
 }
