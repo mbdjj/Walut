@@ -10,6 +10,8 @@ import SwiftUI
 struct CalculationView: View {
     @State var model: CurrencyCalcViewModel
     
+    @State var chartCurrency: Currency?
+    
     init(currency: Currency, base: Currency = SharedDataManager.shared.base, shouldSwap: Bool = true) {
         let model = CurrencyCalcViewModel(currency: currency, base: base, shouldSwap: shouldSwap)
         _model = State(initialValue: model)
@@ -98,7 +100,7 @@ struct CalculationView: View {
             .padding(.bottom)
             
             Button {
-                
+                chartCurrency = model.currency
             } label: {
                 HStack {
                     Spacer()
@@ -148,6 +150,9 @@ struct CalculationView: View {
         }
         .onChange(of: model.isTopOpen) { _, _ in
             model.swapActive()
+        }
+        .navigationDestination(item: $chartCurrency) { currency in
+            CurrencyChartView(currency: currency, base: model.base)
         }
     }
 }

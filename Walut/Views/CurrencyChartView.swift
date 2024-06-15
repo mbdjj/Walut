@@ -11,8 +11,6 @@ import SwiftData
 
 struct CurrencyChartView: View {
     
-    @Environment(\.dismiss) var dismiss
-    @Environment(\.displayScale) var displayScale
     @Environment(\.modelContext) var modelContext
     @Query var savedCurrencies: [SavedCurrency]
     
@@ -89,15 +87,6 @@ struct CurrencyChartView: View {
                 }
                 
                 Spacer()
-                
-                Button {
-                    dismiss.callAsFunction()
-                } label: {
-                    Image(systemName: "xmark")
-                        .font(.title3.weight(.bold))
-                        .foregroundColor(.primary)
-                        .padding(.top, 4)
-                }
             }
             .padding(.horizontal)
             .padding(.top)
