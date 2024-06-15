@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		341750C72C1D92AE00B85B02 /* GlobalCurrencyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341750C62C1D92AE00B85B02 /* GlobalCurrencyData.swift */; };
+		341750C92C1D980C00B85B02 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341750C82C1D980C00B85B02 /* User.swift */; };
+		341750CB2C1D9C1200B85B02 /* StaticData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341750CA2C1D9C1200B85B02 /* StaticData.swift */; };
+		341750CD2C1D9E5600B85B02 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341750CC2C1D9E5600B85B02 /* Formatter.swift */; };
+		341750CF2C1DA2A500B85B02 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341750CE2C1DA2A500B85B02 /* API.swift */; };
 		341CF6242913BCB40012FA5B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 341CF6232913BCB40012FA5B /* StoreKit.framework */; };
 		341CF626291430B40012FA5B /* SupportDevView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341CF625291430B40012FA5B /* SupportDevView.swift */; };
 		341CF628291431930012FA5B /* SupportDevViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341CF627291431930012FA5B /* SupportDevViewModel.swift */; };
@@ -226,6 +231,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		341750C62C1D92AE00B85B02 /* GlobalCurrencyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalCurrencyData.swift; sourceTree = "<group>"; };
+		341750C82C1D980C00B85B02 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		341750CA2C1D9C1200B85B02 /* StaticData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticData.swift; sourceTree = "<group>"; };
+		341750CC2C1D9E5600B85B02 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		341750CE2C1DA2A500B85B02 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		341CF6232913BCB40012FA5B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		341CF625291430B40012FA5B /* SupportDevView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportDevView.swift; sourceTree = "<group>"; };
 		341CF627291431930012FA5B /* SupportDevViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportDevViewModel.swift; sourceTree = "<group>"; };
@@ -711,6 +721,11 @@
 			isa = PBXGroup;
 			children = (
 				34F748302B0A246A006ACDCD /* SavedCurrency.swift */,
+				341750C62C1D92AE00B85B02 /* GlobalCurrencyData.swift */,
+				341750C82C1D980C00B85B02 /* User.swift */,
+				341750CA2C1D9C1200B85B02 /* StaticData.swift */,
+				341750CC2C1D9E5600B85B02 /* Formatter.swift */,
+				341750CE2C1DA2A500B85B02 /* API.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -992,6 +1007,7 @@
 				34DC74BD2998DE140042F968 /* CurrencyChartView.swift in Sources */,
 				34F748312B0A246A006ACDCD /* SavedCurrency.swift in Sources */,
 				34F748332B0A4934006ACDCD /* OnDeviceStorageView.swift in Sources */,
+				341750C72C1D92AE00B85B02 /* GlobalCurrencyData.swift in Sources */,
 				3482D9412C1C5C6700CECB1F /* CalculationView.swift in Sources */,
 				34D5AFEB2951B6550043B72A /* SortViewModel.swift in Sources */,
 				34ED0C2128F17592006C4F38 /* SharedDataManager.swift in Sources */,
@@ -1008,12 +1024,15 @@
 				34DDC4CC29B292BB002F76EF /* OnboardingCell.swift in Sources */,
 				348D08E32A1C9C400047BEFF /* ChartButtons.swift in Sources */,
 				3498CC9428F4502200961C61 /* RatesData.swift in Sources */,
+				341750CD2C1D9E5600B85B02 /* Formatter.swift in Sources */,
 				3481E08C295DE09100322363 /* WalutWidgetIntents.intentdefinition in Sources */,
+				341750C92C1D980C00B85B02 /* User.swift in Sources */,
 				34A2347428F061D700C81292 /* Currency.swift in Sources */,
 				3498532A28F570A2003E0FC9 /* SettingsViewModel.swift in Sources */,
 				3447F7E728F0BB3F00B59B25 /* AppIcon.swift in Sources */,
 				348CE6EF2951E32400E89078 /* Sorting.swift in Sources */,
 				349E3F7828FEAFDE004831E2 /* ProfileView.swift in Sources */,
+				341750CB2C1D9C1200B85B02 /* StaticData.swift in Sources */,
 				3498532828F57029003E0FC9 /* SettingsView.swift in Sources */,
 				345D49B729B1D51D00C6E1EB /* CurrencyCalcViewModel.swift in Sources */,
 				34ED0C1B28F172A6006C4F38 /* NetworkManager.swift in Sources */,
@@ -1029,6 +1048,7 @@
 				342A047D290A5B7B00C10652 /* HelloViewModel.swift in Sources */,
 				341CF628291431930012FA5B /* SupportDevViewModel.swift in Sources */,
 				34A2347028F05C3B00C81292 /* BasePickerViewModel.swift in Sources */,
+				341750CF2C1DA2A500B85B02 /* API.swift in Sources */,
 				3498CC9628F4504900961C61 /* TimeSeriesData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
