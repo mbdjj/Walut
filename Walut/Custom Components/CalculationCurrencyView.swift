@@ -47,7 +47,7 @@ struct CalculationCurrencyView: View {
             // MARK: - Top bar
             HStack {
                 Text(isTop ? currency.flag : base.flag)
-                    .font(.system(size: 50))
+                    .font(.system(size: 52))
                 
                 VStack(alignment: .leading) {
                     Text(isTop ? currency.fullName : base.fullName)
@@ -60,12 +60,18 @@ struct CalculationCurrencyView: View {
                 Spacer()
                 VStack(alignment: .trailing) {
                     if isOpen {
-                        Text(shared.currencyLocaleString(value: currency.price, currencyCode: base.code))
-                            .foregroundColor(.primary)
-                        Text("\(Image(systemName: "arrow.\(arrowDirection)")) \(shared.percentLocaleStirng(value: abs(currency.percent)))")
-                            .foregroundStyle(percentColor)
-                            .font(.caption2)
-                            .fontWeight(.semibold)
+                        Text(shared.currencyLocaleString(
+                            value: isTop ? currency.price : currency.rate,
+                            currencyCode: isTop ? base.code : currency.code
+                        ))
+                        .foregroundColor(.primary)
+                        
+                        if isTop && isOpen && currency.percent != 0 {
+                            Text("\(Image(systemName: "arrow.\(arrowDirection)")) \(shared.percentLocaleStirng(value: abs(currency.percent)))")
+                                .foregroundStyle(percentColor)
+                                .font(.caption2)
+                                .fontWeight(.semibold)
+                        }
                     } else {
                         Text(textFunc(.passive))
                         .font(.system(.title3, design: .rounded, weight: .bold))
@@ -115,10 +121,10 @@ struct CalculationCurrencyView: View {
 
 #Preview {
     VStack {
-        CalculationCurrencyView(currency: .constant(Currency(baseCode: "USD")), base: .constant(Currency(baseCode: "PLN")), topValue: .constant(1.5), botValue: .constant(4), isTopOpen: .constant(true), isTop: true) { type in
+        CalculationCurrencyView(currency: .constant(Currency(baseCode: "USD")), base: .constant(Currency(baseCode: "PLN")), topValue: .constant(1.5), botValue: .constant(4), isTopOpen: .constant(false), isTop: true) { type in
             return "0"
         }
-        CalculationCurrencyView(currency: .constant(Currency(baseCode: "USD")), base: .constant(Currency(baseCode: "PLN")), topValue: .constant(1), botValue: .constant(4000000000000), isTopOpen: .constant(true), isTop: false) { type in
+        CalculationCurrencyView(currency: .constant(Currency(baseCode: "USD")), base: .constant(Currency(baseCode: "PLN")), topValue: .constant(1), botValue: .constant(4), isTopOpen: .constant(false), isTop: false) { type in
             return "0"
         }
     }
