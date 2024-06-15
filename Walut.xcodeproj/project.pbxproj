@@ -12,6 +12,11 @@
 		341750CB2C1D9C1200B85B02 /* StaticData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341750CA2C1D9C1200B85B02 /* StaticData.swift */; };
 		341750CD2C1D9E5600B85B02 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341750CC2C1D9E5600B85B02 /* Formatter.swift */; };
 		341750CF2C1DA2A500B85B02 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341750CE2C1DA2A500B85B02 /* API.swift */; };
+		341750D02C1DB01F00B85B02 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341750CE2C1DA2A500B85B02 /* API.swift */; };
+		341750D12C1DB02000B85B02 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341750CE2C1DA2A500B85B02 /* API.swift */; };
+		341750D22C1DB22900B85B02 /* StaticData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341750CA2C1D9C1200B85B02 /* StaticData.swift */; };
+		341750D52C1DB26100B85B02 /* WalutWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348346EF292612A3003710CA /* WalutWidget.swift */; };
+		341750D62C1DB26C00B85B02 /* StaticData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341750CA2C1D9C1200B85B02 /* StaticData.swift */; };
 		341CF6242913BCB40012FA5B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 341CF6232913BCB40012FA5B /* StoreKit.framework */; };
 		341CF626291430B40012FA5B /* SupportDevView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341CF625291430B40012FA5B /* SupportDevView.swift */; };
 		341CF628291431930012FA5B /* SupportDevViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341CF627291431930012FA5B /* SupportDevViewModel.swift */; };
@@ -49,7 +54,6 @@
 		348346E9292612A3003710CA /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 348346E8292612A3003710CA /* WidgetKit.framework */; };
 		348346EB292612A3003710CA /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 348346EA292612A3003710CA /* SwiftUI.framework */; };
 		348346EE292612A3003710CA /* WalutWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348346ED292612A3003710CA /* WalutWidgetBundle.swift */; };
-		348346F0292612A3003710CA /* WalutWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348346EF292612A3003710CA /* WalutWidget.swift */; };
 		348346F2292612A4003710CA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 348346F1292612A4003710CA /* Assets.xcassets */; };
 		348346FD2926135B003710CA /* RatesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3498CC9328F4502200961C61 /* RatesData.swift */; };
 		348346FE2926135E003710CA /* TimeSeriesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3498CC9528F4504900961C61 /* TimeSeriesData.swift */; };
@@ -954,6 +958,7 @@
 				346C7A4129BD1A9F0023DE23 /* CurrencyCell.swift in Sources */,
 				346C7A3829BD19890023DE23 /* Currency.swift in Sources */,
 				34D20AE12BAD8057009770D0 /* CurrencyView.swift in Sources */,
+				341750D62C1DB26C00B85B02 /* StaticData.swift in Sources */,
 				34EF3EBF29BDC3FE00CFAEDA /* BasePickerView.swift in Sources */,
 				34D0EA032BADED5F00093D80 /* CurrencyCalcViewModel.swift in Sources */,
 				346C7A3A29BD198E0023DE23 /* RatesData.swift in Sources */,
@@ -964,6 +969,7 @@
 				346C7A3729BD19860023DE23 /* NetworkManager.swift in Sources */,
 				34C85A6B2A1E263A00FB7B03 /* CurrencyListViewModel.swift in Sources */,
 				348D08E92A1CA7D00047BEFF /* ChartRange.swift in Sources */,
+				341750D12C1DB02000B85B02 /* API.swift in Sources */,
 				346C7A2529BD19020023DE23 /* ContentView.swift in Sources */,
 				346C7A3929BD198C0023DE23 /* CurrencyData.swift in Sources */,
 				346C7A2329BD19020023DE23 /* WalutWatchApp.swift in Sources */,
@@ -986,14 +992,16 @@
 				34A495A02B32BAA8007F7683 /* SwiftDataManager.swift in Sources */,
 				348D08E82A1CA7D00047BEFF /* ChartRange.swift in Sources */,
 				341DFC0C295DB42100BDCBDB /* MockData.swift in Sources */,
-				348346F0292612A3003710CA /* WalutWidget.swift in Sources */,
 				3481E08D295DE09100322363 /* WalutWidgetIntents.intentdefinition in Sources */,
 				34EFF37F29E7E5FF0053F60D /* RectangularView.swift in Sources */,
 				34E0A203292CFD3C00EF3CBC /* CurrencyData.swift in Sources */,
 				348346FE2926135E003710CA /* TimeSeriesData.swift in Sources */,
 				34EE18EE2B15289C000A5EBC /* SavedCurrency.swift in Sources */,
+				341750D52C1DB26100B85B02 /* WalutWidget.swift in Sources */,
 				348346FD2926135B003710CA /* RatesData.swift in Sources */,
 				34671B0A296A03AC0023D88C /* SharedDataManager.swift in Sources */,
+				341750D02C1DB01F00B85B02 /* API.swift in Sources */,
+				341750D22C1DB22900B85B02 /* StaticData.swift in Sources */,
 				341DFC0E295DB44300BDCBDB /* WidgetChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

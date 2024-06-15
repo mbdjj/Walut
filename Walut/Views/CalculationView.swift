@@ -151,6 +151,11 @@ struct CalculationView: View {
         .onChange(of: model.isTopOpen) { _, _ in
             model.swapActive()
         }
+        .onChange(of: "\(model.currency.rate)\(model.base.rate)") { _, _ in
+            withAnimation {
+                model.calcPassive()
+            }
+        }
         .navigationDestination(item: $chartCurrency) { currency in
             CurrencyChartView(currency: currency, base: model.base)
         }

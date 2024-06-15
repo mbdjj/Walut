@@ -26,7 +26,6 @@ class CurrencyListViewModel: ObservableObject {
     var byFavorite: Bool { shared.sortByFavorite }
     
     let shared = SharedDataManager.shared
-    let networkManager = NetworkManager.shared
     
     init() {
         DispatchQueue.main.async {
@@ -51,11 +50,11 @@ class CurrencyListViewModel: ObservableObject {
     
     func refreshData() async {
         do {
-            let data = try await networkManager.getCurrencyData(for: shared.base)
+            let data = try await API.fetchCurrencyRates(for: shared.base)
             present(data: data)
         } catch {
             DispatchQueue.main.async {
-                if let error = error as? NetworkManager.NetworkError {
+                if let error = error as? API.APIError {
                     self.errorMessage = error.localizedDesc
                 } else {
                     self.errorMessage = error.localizedDescription
@@ -66,7 +65,7 @@ class CurrencyListViewModel: ObservableObject {
     }
     
     func checkRefreshData() async {
-        if networkManager.shouldRefresh() {
+        if API.shouldRefresh() {
             await self.refreshData()
         } else {
             return

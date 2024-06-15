@@ -40,9 +40,9 @@ struct Provider: IntentTimelineProvider {
             let descriptor = FetchDescriptor<SavedCurrency>()
             let savedCurrencies = try? await modelContainer.mainContext.fetch(descriptor)
             
-            if NetworkManager.shared.shouldRefresh() {
+            if API.shouldRefresh() {
                 do {
-                    let currencies = try await NetworkManager.shared.getCurrencyData(for: Currency(baseCode: baseCode))
+                    let currencies = try await API.fetchCurrencyRates(for: Currency(baseCode: baseCode))
                     
                     await SwiftDataManager.saveCurrencies(data: currencies, base: baseCode, to: modelContainer.mainContext)
                     await SwiftDataManager.cleanData(from: modelContainer.mainContext)
@@ -81,7 +81,7 @@ struct Provider: IntentTimelineProvider {
                     do {
                         let lastRate = SwiftDataManager.getLastRate(for: foreignCode, base: baseCode, from: savedCurrencies)
                         
-                        var currency = try await NetworkManager.shared.getSmallWidgetData(for: foreignCode, baseCode: baseCode)
+                        var currency = try await API.fetchRate(of: foreignCode, baseCode: baseCode)
                         
                         if let lastRate {
                             currency.lastRate = lastRate

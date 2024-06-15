@@ -8,12 +8,14 @@
 import Foundation
 
 struct API {
-    static let decoder: JSONDecoder = {
+    static private let decoder: JSONDecoder = {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }()
-    static let urlBase = "https://open.er-api.com/v6/latest/"
+    static private let urlBase = "https://open.er-api.com/v6/latest/"
+    
+    // MARK: - Networking methods
     
     static func fetchCurrencyRates(for base: Currency, shouldSaveNextUpdate: Bool = true) async throws -> [Currency] {
         guard let url = URL(string: urlBase + base.code)
@@ -54,8 +56,28 @@ struct API {
         }
         return data
     }
+    static func fetchRate(of currencyCode: String, baseCode: String) async throws -> Currency {
+        return try await fetchRate(of: Currency(baseCode: currencyCode), base: Currency(baseCode: baseCode))
+    }
     
     // MARK: - Helper methods
+
+    static func shouldRefresh() -> Bool {
+        let data = getDataFromDefaults()
+        let now = Date.now
+
+        let result = data.date < now || data.base != SharedDataManager.shared.base.code
+        print("Should\(result ? "" : "n't") refresh")
+        return result
+    }
+
+    static private func getDataFromDefaults() -> (date: Date, base: String) {
+        let interval = StaticData.sharedDefaults.integer(forKey: "nextUpdate")
+        let baseCode = StaticData.sharedDefaults.string(forKey: "nextUpdateBase") ?? ""
+        let date = Date(timeIntervalSince1970: Double(interval))
+
+        return (date: date, base: baseCode)
+    }
     
     static private func saveNextUpdate(date: Date, base: String) {
         print("Saved next update date \(date.formatted(date: .numeric, time: .standard))")

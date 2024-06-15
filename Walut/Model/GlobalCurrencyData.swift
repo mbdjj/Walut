@@ -13,6 +13,7 @@ import SwiftUI
     var user: User?
     
     var baseCurrency: Currency?
+    var currencyDataLoading: Bool
     var baseCurrencyData: [Currency]
     
     let defaults = UserDefaults.standard
@@ -28,5 +29,6 @@ import SwiftUI
         
         baseCurrency = if let baseCode { Currency(baseCode: baseCode) } else { nil }
         baseCurrencyData = []
+        currencyDataLoading = true
     }
 }

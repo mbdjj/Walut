@@ -226,7 +226,7 @@ import SwiftUI
     
     private func getCurrency() async {
         do {
-            let data = try await NetworkManager.shared.getData(for: currency, base: base)
+            let data = try await API.fetchRate(of: currency, base: base)
             present(data)
         } catch {
             print("Couldn't update currency")

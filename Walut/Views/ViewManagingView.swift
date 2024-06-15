@@ -9,22 +9,16 @@ import SwiftUI
 
 struct ViewManagingView: View {
     
+    @Environment(GlobalCurrencyData.self) var currencyData
     @State var selection = 0
     
-    private let defaults = UserDefaults.standard
-    @ObservedObject var shared = SharedDataManager.shared
-    
     var body: some View {
-        switch shared.appState {
-        case .onboarding:
-            HelloView()
-        case .onboarded:
-            BasePickerView()
+        switch currencyData.appstate {
         case .baseSelected:
             TabView(selection: $selection) {
                 CurrencyListView()
                     .tabItem {
-                        Label(shared.base.code, systemImage: "dollarsign.circle")
+                        Label(currencyData.baseCurrency?.code ?? "All", systemImage: "dollarsign.circle")
                     }
                     .tag(0)
                 SettingsView()
@@ -33,6 +27,10 @@ struct ViewManagingView: View {
                     }
                     .tag(2)
             }
+        case .onboarding:
+            HelloView()
+        case .onboarded:
+            BasePickerView()
         }
     }
 }
