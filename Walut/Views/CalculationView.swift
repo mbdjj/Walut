@@ -12,7 +12,7 @@ struct CalculationView: View {
     
     @State var chartCurrency: Currency?
     
-    init(currency: Currency, base: Currency = SharedDataManager.shared.base, shouldSwap: Bool = true) {
+    init(currency: Currency, base: Currency, shouldSwap: Bool = true) {
         let model = CurrencyCalcViewModel(currency: currency, base: base, shouldSwap: shouldSwap)
         _model = State(initialValue: model)
     }
@@ -23,13 +23,13 @@ struct CalculationView: View {
             
             VStack {
                 CalculationCurrencyView(currency: $model.currency, base: $model.base, topValue: $model.topAmount, botValue: $model.bottomAmount, isTopOpen: $model.isTopOpen, isTop: true) { type in
-                    return model.amountString(type)
+                    model.amountString(type)
                 } changeCurrency: { currency, type in
                     model.changeCurrency(type, to: currency.code)
                 }
                 
                 CalculationCurrencyView(currency: $model.currency, base: $model.base, topValue: $model.topAmount, botValue: $model.bottomAmount, isTopOpen: $model.isTopOpen, isTop: false) { type in
-                    return model.amountString(type)
+                    model.amountString(type)
                 } changeCurrency: { currency, type in
                     model.changeCurrency(type, to: currency.code)
                 }
@@ -164,6 +164,6 @@ struct CalculationView: View {
 
 #Preview {
     NavigationStack {
-        CalculationView(currency: Currency(baseCode: "USD"))
+        CalculationView(currency: Currency(baseCode: "USD"), base: Currency(baseCode: "PLN"))
     }
 }

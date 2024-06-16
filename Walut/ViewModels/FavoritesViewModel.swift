@@ -7,18 +7,24 @@
 
 import SwiftUI
 
-class FavoritesViewModel: ObservableObject {
+@Observable class FavoritesViewModel {
     
-    @Published var favorites = [Currency]()
-    var pickerData = [Currency]()
+    var favorites: [Currency]
+    var pickerData: [Currency]
     
-    private let shared = SharedDataManager.shared
+    let updateFavorites: ([String]) -> ()
     
-    init() {
-        favorites = shared.favorites
+    init(settings: AppSettings, updateFavorites: @escaping ([String]) -> ()) {
+        let favorites = settings.favorites
             .map { Currency(baseCode: $0) }
         
-        refreshPickerData()
+        self.favorites = favorites
+        
+        pickerData = StaticData.currencyCodes
+            .map { Currency(baseCode: $0) }
+            .filter { !favorites.contains($0) }
+        
+        self.updateFavorites = updateFavorites
     }
     
     func addToFavorites(currency: Currency) {
@@ -46,7 +52,7 @@ class FavoritesViewModel: ObservableObject {
     }
     
     private func refreshPickerData() {
-        pickerData = shared.allCodesArray
+        pickerData = StaticData.currencyCodes
             .map { Currency(baseCode: $0) }
             .filter { !favorites.contains($0) }
     }
@@ -54,9 +60,7 @@ class FavoritesViewModel: ObservableObject {
     private func saveFavorites() {
         let codeArray = favorites
             .map { $0.code }
-        
-        shared.favorites = codeArray
-        shared.defaults.set(codeArray, forKey: "favorites")
+        updateFavorites(codeArray)
     }
     
 }

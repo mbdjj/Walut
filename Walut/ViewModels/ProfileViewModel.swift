@@ -7,61 +7,44 @@
 
 import SwiftUI
 
-class ProfileViewModel: ObservableObject {
+@Observable class ProfileViewModel {
     
-    @Published var name: String
+    var name: String
     
-    @Published var titlePickerData: [Int]
-    @Published var selectedTitle: Int
+    var titlePickerData: [Int]
+    var selectedTitle: Int
     
-    @Published var secretCode = ""
-    @Published var shouldDisplayAlert: Bool = false
-    private var shouldSaveTitle = false
-    @Published var titleIDToSave = 0
+    var secretCode = ""
+    var shouldDisplayAlert: Bool = false
+    var shouldSaveTitle = false
+    var titleIDToSave = 0
     
-    @Published var alertTitle = ""
-    @Published var alertMessage = ""
+    var alertTitle = ""
+    var alertMessage = ""
     
     let titleArray: [String]
     
-    private let shared = SharedDataManager.shared
     private let defaults = UserDefaults.standard
     
-    init() {
-        name = shared.name
+    init(settings: AppSettings) {
+        name = settings.user!.name
         
-        titlePickerData = shared.titleIDArray
-        selectedTitle = shared.defaults.integer(forKey: "chosenTitle")
+        titlePickerData = settings.user!.unlockedTitlesArray
+        selectedTitle = settings.user!.selectedTitleIndex
         
-        titleArray = shared.titleArray
+        titleArray = StaticData.localizedTitles
     }
     
-    func save() {
-        shared.name = name
-        shared.chosenTitle = titleArray[selectedTitle]
-        
-        defaults.set(name, forKey: "name")
-        defaults.set(selectedTitle, forKey: "chosenTitle")
-    }
-    
-    @MainActor func saveTitles() {
-        if shouldSaveTitle {
-            shared.titleIDArray.append(titleIDToSave)
-            shared.defaults.set(shared.titleIDArray, forKey: "titleIDArray")
-            titlePickerData = shared.titleIDArray
-            secretCode = ""
-        }
-    }
-    
-    @MainActor func checkCode() {
+    @MainActor 
+    func checkCode() {
         shouldSaveTitle = false
         
-        if let secretID = shared.secretDictionary[secretCode] {
-            if shared.titleIDArray.firstIndex(of: secretID) == nil {
+        if let secretID = StaticData.secretCodes[secretCode] {
+            if titlePickerData.firstIndex(of: secretID) == nil {
                 titleIDToSave = secretID
                 shouldSaveTitle = true
                 
-                let t = shared.titleArray[secretID]
+                let t = StaticData.localizedTitles[secretID]
                 alertTitle = String(localized: "alert_positive_title")
                 alertMessage = "\(String(localized: "alert_positive_message_1")) \(t)\(String(localized: "alert_positive_message_2"))"
             } else {

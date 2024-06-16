@@ -8,21 +8,20 @@
 import SwiftUI
 import StoreKit
 
-class SupportDevViewModel: ObservableObject {
+@Observable class SupportDevViewModel {
     
-    @Published var products = [Product]()
-    @Published var shouldShowThanks = false
-    @Published var shouldDisableButtons = false
+    var products = [Product]()
+    var shouldShowThanks = false
+    var shouldDisableButtons = false
     var titleToPresent = ""
     var arrayToSave = [Int]()
     
-    let shared = SharedDataManager.shared
     let defaults = UserDefaults.standard
     
     var taskHandle: Task<Void, Error>?
     
-    init() {
-        
+    init(userUnlockedTitles: [Int]) {
+        arrayToSave = userUnlockedTitles
         taskHandle = listenForTransactions()
         
         Task.init {
@@ -117,15 +116,12 @@ class SupportDevViewModel: ObservableObject {
             titleID = 4
         }
         
-        titleToPresent = shared.titleArray[titleID]
-        var titleIDArray = shared.titleIDArray
+        titleToPresent = StaticData.localizedTitles[titleID]
         
-        if titleIDArray.firstIndex(of: titleID) == nil {
-            titleIDArray.append(titleID)
-            defaults.set(titleIDArray, forKey: "titleIDArray")
+        if arrayToSave.firstIndex(of: titleID) == nil {
+            arrayToSave.append(titleID)
+            defaults.set(arrayToSave, forKey: "titleIDArray")
         }
-        
-        arrayToSave = titleIDArray
         
         DispatchQueue.main.async {
             self.shouldShowThanks = true

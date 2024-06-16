@@ -9,7 +9,16 @@ import SwiftUI
 
 struct FavoritesView: View {
     
-    @ObservedObject var model = FavoritesViewModel()
+    //@Environment(AppSettings.self) var settings
+    @State var model: FavoritesViewModel
+    
+    init(settings: AppSettings) {
+        model = FavoritesViewModel(settings: settings) { array in
+            Task {
+                await settings.updateFavorites(to: array)
+            }
+        }
+    }
     
     var body: some View {
         List {
@@ -56,7 +65,7 @@ struct FavoritesView: View {
 struct FavoritesView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            FavoritesView()
+            FavoritesView(settings: AppSettings())
         }
     }
 }

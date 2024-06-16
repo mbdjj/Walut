@@ -12,12 +12,12 @@ import SwiftData
 struct CurrencyListView: View {
     
     @ObservedObject var model = CurrencyListViewModel()
-    @StateObject var shared = SharedDataManager.shared
     
     @State var quickConvertValue = 1.0
     
     @State var queryString: String = ""
     
+    @Environment(AppSettings.self) var settings
     @Environment(\.requestReview) var requestReview
     @EnvironmentObject var networkMonitor: NetworkMonitor
     @AppStorage("openCount") var openCount = 0
@@ -30,9 +30,9 @@ struct CurrencyListView: View {
         NavigationStack {
             List {
                 
-                if shared.quickConvert {
+                if settings.quickConvert {
                     Section {
-                        TextField("Value", value: $quickConvertValue, format: .currency(code: shared.base.code))
+                        TextField("Value", value: $quickConvertValue, format: .currency(code: settings.baseCurrency!.code))
                             .keyboardType(.decimalPad)
                     } header: {
                         Text("quick_convert")
@@ -46,9 +46,9 @@ struct CurrencyListView: View {
                                 Button {
                                     model.selectedCurrency = currency
                                 } label: {
-                                    CurrencyCell(for: currency, mode: shared.quickConvert ? .quickConvert : .normal, value: quickConvertValue)
+                                    CurrencyCell(for: currency, mode: settings.quickConvert ? .quickConvert : .normal, value: quickConvertValue)
                                         .onDrag {
-                                            let textToShare = "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(shared.decimal)f", currency.price)) \(shared.base.symbol)"
+                                            let textToShare = "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(settings.decimal)f", currency.price)) \(settings.baseCurrency!.symbol)"
                                             return NSItemProvider(object: textToShare as NSString)
                                         }
                                 }
@@ -62,16 +62,16 @@ struct CurrencyListView: View {
                             Button {
                                 model.selectedCurrency = currency
                             } label: {
-                                CurrencyCell(for: currency, mode: shared.quickConvert ? .quickConvert : .normal, value: quickConvertValue)
+                                CurrencyCell(for: currency, mode: settings.quickConvert ? .quickConvert : .normal, value: quickConvertValue)
                                     .onDrag {
-                                        let textToShare = "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(shared.decimal)f", currency.price)) \(shared.base.symbol)"
+                                        let textToShare = "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(settings.decimal)f", currency.price)) \(settings.baseCurrency!.symbol)"
                                         return NSItemProvider(object: textToShare as NSString)
                                     }
                             }
                         }
                     }
                 } else {  // placeholder cells while loading
-                    if shared.sortByFavorite {
+                    if settings.sortByFavorite {
                         Section {
                             ForEach(0 ..< model.numbersForPlaceholders().0, id: \.self) { _ in
                                 LoadingCell()
@@ -80,13 +80,13 @@ struct CurrencyListView: View {
                     }
                     
                     Section {
-                        ForEach(shared.sortByFavorite ? 0 ..< model.numbersForPlaceholders().1 : 0 ..< shared.allCodesArray.count - 1, id: \.self) { _ in
+                        ForEach(settings.sortByFavorite ? 0 ..< model.numbersForPlaceholders().1 : 0 ..< StaticData.currencyCodes.count - 1, id: \.self) { _ in
                             LoadingCell()
                         }
                     }
                 }
             }
-            .navigationTitle("\(shared.base.flag) \(shared.base.code)")
+            .navigationTitle("\(settings.baseCurrency!.flag) \(settings.baseCurrency!.code)")
             .toolbar {
                 if nextUpdate < Int(Date().timeIntervalSince1970) && !model.loading {
                     ToolbarItem(placement: .navigationBarLeading) {
@@ -98,7 +98,7 @@ struct CurrencyListView: View {
                 
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     NavigationLink {
-                        SortView()
+                        SortView(settings: settings)
                     } label: {
                         Image(systemName: "arrow.up.arrow.down")
                     }
@@ -152,11 +152,8 @@ struct CurrencyListView: View {
             }
             .searchable(text: $queryString) {}
             .navigationDestination(item: $model.selectedCurrency) { currency in
-                CalculationView(currency: currency)
+                CalculationView(currency: currency, base: settings.baseCurrency!)
             }
-//            .sheet(item: $model.selectedCurrency) { currency in
-//                CurrencyCalcView(currency: currency)
-//            }
         }
     }
     
@@ -174,7 +171,7 @@ struct CurrencyListView: View {
     private func refreshData() async {
         await model.checkRefreshData()
         
-        if !savedCurrencies.contains(where: { $0.base == shared.base.code && $0.nextRefresh == nextUpdate }) {
+        if !savedCurrencies.contains(where: { $0.base == settings.baseCurrency!.code && $0.nextRefresh == nextUpdate }) {
             print("Couldn't populate data from storage. Refreshing...")
             await model.refreshData()
             SwiftDataManager.saveCurrencies(data: model.currencyArray + model.favoritesArray, to: modelContext)

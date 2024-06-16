@@ -9,15 +9,16 @@ import SwiftUI
 
 struct OnDeviceStorageView: View {
     
+    @Environment(AppSettings.self) var settings
+    
     @State var selected: StorageSavingOptions
     @State var showAlert: Bool = false
     @State var showAlertAll: Bool = false
-    let shared = SharedDataManager.shared
     
     @Environment(\.modelContext) var modelContext
     
-    init() {
-        _selected = State(initialValue: shared.storageOption)
+    init(settings: AppSettings) {
+        selected = settings.storageOption
     }
     
     var body: some View {
@@ -36,8 +37,7 @@ struct OnDeviceStorageView: View {
                     }
                     
                     Button("continue", role: .destructive) {
-                        shared.storageOption = selected
-                        UserDefaults.standard.set(selected.rawValue, forKey: "storageOptions")
+                        settings.updateStorageOption(to: selected)
                     }
                 } message: {
                     Text("storage_alert_message")
@@ -78,7 +78,7 @@ struct OnDeviceStorageView: View {
                 Text("save")
                     .bold()
             }
-            .disabled(selected == shared.storageOption)
+            .disabled(selected == settings.storageOption)
         }
     }
 }
@@ -103,5 +103,5 @@ extension StorageSavingOptions {
 }
 
 #Preview {
-    OnDeviceStorageView()
+    OnDeviceStorageView(settings: AppSettings())
 }

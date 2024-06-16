@@ -9,20 +9,26 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @ObservedObject var model = SettingsViewModel()
-    
+    @Environment(AppSettings.self) var settings
     @Environment(\.requestReview) var requestReview
+    
+    @State var selectedBaseCode = UserDefaults.standard.string(forKey: "base") ?? "AUD"
+    
+    var isSupporter: Bool {
+        settings.user!.unlockedTitlesArray.contains([3]) || settings.user!.unlockedTitlesArray.contains([4])
+    }
+    var isZona24: Bool { settings.user!.selectedTitleIndex == 9 }
     
     var body: some View {
         NavigationStack {
             List {
-                
+                @Bindable var settings = settings
                 Section {
                     NavigationLink {
-                        ProfileView()
+                        ProfileView(settings: settings)
                     } label: {
                         HStack {
-                            Text(model.letter)
+                            Text(settings.user!.pfpLetter)
                                 .font(.system(.title, design: .rounded))
                                 .bold()
                                 .padding()
@@ -35,18 +41,18 @@ struct SettingsView: View {
                             
                             VStack(alignment: .leading) {
                                 HStack {
-                                    Text(model.name)
+                                    Text(settings.user!.name)
                                         .font(.system(.title3))
                                         .fontWeight(.medium)
                                     
-                                    if model.isSupporter {
+                                    if isSupporter {
                                         Image(systemName: "checkmark.seal.fill")
-                                            .foregroundColor(model.isZona24 ? .pinkWalut : .walut)
+                                            .foregroundColor(isZona24 ? .pinkWalut : .walut)
                                             .font(.subheadline)
                                     }
                                 }
                                 
-                                Text(SharedDataManager.shared.chosenTitle)
+                                Text(settings.user!.selectedTitleLocalized)
                                     .font(.system(.footnote))
                                     .foregroundColor(.secondary)
                             }
@@ -57,36 +63,42 @@ struct SettingsView: View {
                 }
                 
                 Section {
-                    Picker(selection: $model.selectedBase) {
-                        ForEach(model.pickerData) { currency in
+                    Picker(selection: $selectedBaseCode) {
+                        ForEach(StaticData.currencyCodes.map({ Currency(baseCode: $0) })) { currency in
                             Text("\(currency.flag) \(currency.code)")
                         }
                     } label: {
                         Label("base_currency", systemImage: "house")
                     }
                     .foregroundStyle(.primary)
+                    .onChange(of: selectedBaseCode) { _, code in
+                        settings.baseCurrency = Currency(baseCode: code)
+                    }
                     
-                    Stepper(value: $model.decimal, in: 0...7) {
-                        Label("settings_decimal_numbers", systemImage: "\(model.decimal).square")
+                    Stepper(value: $settings.decimal, in: 0...7) {
+                        Label("settings_decimal_numbers", systemImage: "\(settings.decimal).square")
                     }
                     .foregroundStyle(.primary)
+                    .onChange(of: settings.decimal) { _, _ in
+                        settings.saveDecimal()
+                    }
                     
                     NavigationLink {
-                        FavoritesView()
+                        FavoritesView(settings: settings)
                     } label: {
                         Label("favorite_currencies", systemImage: "star")
                     }
                     .foregroundStyle(.primary)
                     
                     NavigationLink {
-                        SortView()
+                        SortView(settings: settings)
                     } label: {
                         Label("sort_nav_title", systemImage: "arrow.up.arrow.down")
                     }
                     .foregroundStyle(.primary)
                     
                     NavigationLink {
-                        OnDeviceStorageView()
+                        OnDeviceStorageView(settings: settings)
                     } label: {
                         Label("settings_save_data", systemImage: "square.and.arrow.down")
                     }
@@ -95,33 +107,33 @@ struct SettingsView: View {
                 }
                 
                 Section {
-                    Toggle(isOn: $model.quickConvertOn) {
+                    Toggle(isOn: $settings.quickConvert) {
                         Label("settings_quick_conversion", systemImage: "bolt.fill")
                     }
                     .foregroundStyle(.primary)
-                    .onChange(of: model.quickConvertOn) { _, _ in
-                        model.saveConvertMode()
+                    .onChange(of: settings.quickConvert) { _, _ in
+                        settings.saveConvertMode()
                     }
                     
-                    Toggle(isOn: $model.showPercent) {
+                    Toggle(isOn: $settings.showPercent) {
                         Label("settings_show_percent", systemImage: "percent")
                     }
                     .foregroundStyle(.primary)
-                    .onChange(of: model.showPercent) { _, _ in
-                        model.saveShowPercent()
+                    .onChange(of: settings.showPercent) { _, _ in
+                        settings.saveShowPercent()
                     }
                 }
                 
                 Section {
                     Button {
-                        model.sendEmail()
+                        sendEmail()
                     } label: {
                         Label("settings_email", systemImage: "envelope")
                     }
                     .foregroundStyle(.primary)
                     
                     NavigationLink {
-                        SupportDevView()
+                        SupportDevView(user: settings.user!)
                     } label: {
                         Label("support", systemImage: "hands.and.sparkles")
                     }
@@ -146,11 +158,18 @@ struct SettingsView: View {
             }
             .navigationTitle("settings")
         }
-        .onChange(of: model.selectedBase) { _, _ in
-            model.saveBase()
-        }
-        .onChange(of: model.decimal) { _, _ in
-            model.saveDecimal()
+    }
+    
+    func sendEmail() {
+        let subject = String(localized: "settings_email_subject")
+        let subjectEncoded = subject.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+        
+        let url = URL(string: "mailto:marcin@bartminski.dev?subject=\(subjectEncoded)")
+        
+        if let url, UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url)
+        } else {
+            print("D:")
         }
     }
 }

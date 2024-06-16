@@ -9,16 +9,16 @@ import SwiftUI
 
 struct ViewManagingView: View {
     
-    @Environment(GlobalCurrencyData.self) var currencyData
+    @Environment(AppSettings.self) var settings
     @State var selection = 0
     
     var body: some View {
-        switch currencyData.appstate {
+        switch settings.appstate {
         case .baseSelected:
             TabView(selection: $selection) {
                 CurrencyListView()
                     .tabItem {
-                        Label(currencyData.baseCurrency?.code ?? "All", systemImage: "dollarsign.circle")
+                        Label(settings.baseCurrency?.code ?? "All", systemImage: "dollarsign.circle")
                     }
                     .tag(0)
                 SettingsView()
@@ -38,5 +38,6 @@ struct ViewManagingView: View {
 struct ViewManagingView_Previews: PreviewProvider {
     static var previews: some View {
         ViewManagingView()
+            .environment(AppSettings())
     }
 }

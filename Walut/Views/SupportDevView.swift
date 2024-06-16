@@ -9,7 +9,11 @@ import SwiftUI
 
 struct SupportDevView: View {
     
-    @ObservedObject var model = SupportDevViewModel()
+    @State var model: SupportDevViewModel
+    
+    init(user: User) {
+        model = SupportDevViewModel(userUnlockedTitles: user.unlockedTitlesArray)
+    }
     
     var body: some View {
         List {
@@ -55,6 +59,6 @@ struct SupportDevView: View {
 
 struct SupportDevView_Previews: PreviewProvider {
     static var previews: some View {
-        SupportDevView()
+        SupportDevView(user: User(name: "User", selectedTitleIndex: 0, unlockedTitlesArray: [0, 1], selectedTitleLocalized: "Essa"))
     }
 }

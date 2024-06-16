@@ -11,6 +11,8 @@ struct HelloView: View {
     
     @Namespace var animation
     
+    @Environment(AppSettings.self) var settings
+    
     @State var animateStart = false
     @State var changeToOnboarding = false
     @State var animateNext = false
@@ -92,7 +94,7 @@ struct HelloView: View {
                 
                 Button {
                     withAnimation {
-                        SharedDataManager.shared.appState = .onboarded
+                        settings.appstate = .onboarded
                     }
                 } label: {
                     Text("next")
@@ -119,5 +121,6 @@ struct HelloView: View {
 struct HelloView_Previews: PreviewProvider {
     static var previews: some View {
         HelloView()
+            .environment(AppSettings())
     }
 }

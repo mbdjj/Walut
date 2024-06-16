@@ -20,17 +20,17 @@ class BasePickerViewModel: ObservableObject {
     @Published var saveButtonDisabled = true
     
     private let defaults = UserDefaults.standard
-    private let shared = SharedDataManager.shared
+    //private let shared = SharedDataManager.shared
     
     init() {
-        currencyArray = shared.allCodesArray
+        currencyArray = StaticData.currencyCodes
             .map { Currency(baseCode: $0) }
         
         self.selected = Locale.current.currency?.identifier ?? "AUD"
     }
     
     
-    func saveAndContinue() {
+    func saveUserData() {
         defaults.set(name, forKey: "name")
         defaults.set([0], forKey: "titleIDArray")
         defaults.set(0, forKey: "chosenTitle")
@@ -40,19 +40,7 @@ class BasePickerViewModel: ObservableObject {
         defaults.set(true, forKey: "showPercent")
         defaults.set(true, forKey: "byFavorite")
         
-        shared.name = name
-        shared.base = Currency(baseCode: selected)
-        shared.decimal = decimal
-        shared.showPercent = true
-        shared.sortByFavorite = true
-        
         AppIcon.changeIcon(to: selected)
-        
-        DispatchQueue.main.async {
-            withAnimation {
-                self.shared.appState = .baseSelected
-            }
-        }
     }
     
 }

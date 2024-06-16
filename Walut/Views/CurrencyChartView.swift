@@ -11,6 +11,7 @@ import SwiftData
 
 struct CurrencyChartView: View {
     
+    @Environment(AppSettings.self) var settings
     @Environment(\.modelContext) var modelContext
     @Query var savedCurrencies: [SavedCurrency]
     
@@ -58,7 +59,7 @@ struct CurrencyChartView: View {
     
     @StateObject var model: CurrencyChartViewModel
     
-    init(currency: Currency, base: Currency = SharedDataManager.shared.base) {
+    init(currency: Currency, base: Currency) {
         _model = StateObject(wrappedValue: CurrencyChartViewModel(currency: currency, base: base))
     }
     
@@ -76,7 +77,7 @@ struct CurrencyChartView: View {
                             .clipShape(Circle())
                     }
                 
-                if model.base.code != SharedDataManager.shared.base.code {
+                if model.base.code != settings.baseCurrency!.code {
                     Text(model.base.flag)
                         .frame(width: 60, height: 60)
                         .font(.system(size: 44))
@@ -99,7 +100,7 @@ struct CurrencyChartView: View {
                         .font(.system(.title2, design: .rounded, weight: .bold))
                         .minimumScaleFactor(0.6)
                     
-                    Text(SharedDataManager.shared.currencyLocaleString(value: currentActive?.value ?? model.currency.price, currencyCode: model.base.code))
+                    Text(Formatter.currency(value: currentActive?.value ?? model.currency.price, currencyCode: model.base.code, decimal: settings.decimal))
                         .font(.system(.title2, design: .rounded, weight: .bold))
                         .contentTransition(.numericText(value: currentActive?.value ?? model.currency.price))
                 }
@@ -119,7 +120,7 @@ struct CurrencyChartView: View {
                             .font(.system(.title3, design: .rounded, weight: .bold))
                             .foregroundColor(percentColor)
                             .animation(.easeInOut(duration: 0.3), value: percentArrowDeg)
-                        Text(SharedDataManager.shared.percentLocaleStirng(value: abs(percent)))
+                        Text(Formatter.percent(value: abs(percent)))
                             .font(.system(.title2, design: .rounded, weight: .bold))
                             .foregroundColor(percentColor)
                             .contentTransition(.numericText(value: abs(percent)))
@@ -218,7 +219,7 @@ struct CurrencyOverviewView_Previews: PreviewProvider {
     static var previews: some View {
         Text("dupa")
             .sheet(isPresented: .constant(true)) {
-                CurrencyChartView(currency: Currency.placeholder)
+                CurrencyChartView(currency: Currency.placeholder, base: Currency(baseCode: "PLN"))
             }
     }
 }

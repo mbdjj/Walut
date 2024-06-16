@@ -9,10 +9,10 @@ import SwiftUI
 
 struct ThanksView: View {
     
+    @Environment(AppSettings.self) var settings
+    
     let title: String
     let arrayToSave: [Int]
-    
-    var shared = SharedDataManager.shared
     
     var body: some View {
         ZStack {
@@ -40,7 +40,7 @@ struct ThanksView: View {
                     .multilineTextAlignment(.center)
                 
                 Button {
-                    shared.titleIDArray = arrayToSave
+                    settings.user!.unlockedTitlesArray = arrayToSave
                 } label: {
                     ZStack {
                         Color.white

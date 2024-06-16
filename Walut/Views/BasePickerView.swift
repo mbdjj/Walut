@@ -9,7 +9,8 @@ import SwiftUI
 
 struct BasePickerView: View {
     
-    @ObservedObject var model = BasePickerViewModel()
+    @Environment(AppSettings.self) var settings
+    @StateObject var model = BasePickerViewModel()
     
     @FocusState var shouldNameFieldBeFocused: Bool
     
@@ -30,7 +31,7 @@ struct BasePickerView: View {
                         }
                     }
                     
-                    Stepper("\(String(localized: "settings_decimal_numbers")) (\(model.decimal))", value: $model.decimal, in: 2...7)
+                    Stepper("\(String(localized: "settings_decimal_numbers")) (\(model.decimal))", value: $model.decimal, in: 0...7)
                 }
             }
             .navigationTitle("\(String(localized: "hello"))\(model.name.isEmpty ? "" : " \(model.name)")!")
@@ -39,7 +40,15 @@ struct BasePickerView: View {
                     Button {
                         shouldNameFieldBeFocused = false
                         DispatchQueue.main.async {
-                            model.saveAndContinue()
+                            model.saveUserData()
+                            
+                            settings.user = User.loadUser()
+                            settings.decimal = model.decimal
+                            settings.baseCurrency = Currency(baseCode: model.selected)
+                            settings.showPercent = true
+                            settings.sortByFavorite = true
+                            
+                            settings.appstate = .baseSelected
                         }
                     } label: {
                         Text(String(localized: "save"))

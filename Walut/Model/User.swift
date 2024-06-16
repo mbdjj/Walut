@@ -14,6 +14,8 @@ import Foundation
     var unlockedTitlesArray: [Int]
     var selectedTitleLocalized: String
     
+    var pfpLetter: String { "\(name.first!)" }
+    
     var id: String { name }
     let defaults = UserDefaults.standard
     
@@ -59,7 +61,7 @@ import Foundation
     }
     
     @MainActor
-    func unlockTitle(with index: Int) {
+    func unlockTitle(at index: Int) {
         if unlockedTitlesArray.firstIndex(of: index) == nil {
             unlockedTitlesArray.append(index)
             defaults.set(unlockedTitlesArray, forKey: "titleIDArray")

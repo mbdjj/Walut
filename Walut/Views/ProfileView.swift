@@ -9,9 +9,14 @@ import SwiftUI
 
 struct ProfileView: View {
     
-    @StateObject var model = ProfileViewModel()
+    @State var model: ProfileViewModel
     
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(AppSettings.self) var settings
+    @Environment(\.dismiss) var dismiss
+    
+    init(settings: AppSettings) {
+        model = ProfileViewModel(settings: settings)
+    }
     
     var body: some View {
         List {
@@ -30,7 +35,11 @@ struct ProfileView: View {
                     .submitLabel(.done)
                     .alert(model.alertTitle, isPresented: $model.shouldDisplayAlert) {
                         Button {
-                            model.saveTitles()
+                            if model.shouldSaveTitle {
+                                settings.unlockUserTitle(at: model.titleIDToSave)
+                                model.titlePickerData = settings.user!.unlockedTitlesArray
+                                model.secretCode = ""
+                            }
                         } label: {
                             Text("OK")
                         }
@@ -55,8 +64,9 @@ struct ProfileView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             Button {
-                model.save()
-                presentationMode.wrappedValue.dismiss()
+                settings.updateUserName(to: model.name)
+                settings.changeUserTitle(to: model.selectedTitle)
+                dismiss()
             } label: {
                 Text(String(localized: "save"))
                     .bold()
@@ -68,7 +78,7 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            ProfileView()
+            ProfileView(settings: AppSettings())
         }
     }
 }

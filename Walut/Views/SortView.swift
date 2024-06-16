@@ -9,7 +9,13 @@ import SwiftUI
 
 struct SortView: View {
     
-    @ObservedObject var model = SortViewModel()
+    @Environment(AppSettings.self) var settings
+    @StateObject var model: SortViewModel
+    
+    init(settings: AppSettings) {
+        let model = SortViewModel(index: settings.sortIndex, byFavorite: settings.sortByFavorite)
+        _model = StateObject(wrappedValue: model)
+    }
     
     var body: some View {
         NavigationStack {
@@ -41,13 +47,13 @@ struct SortView: View {
             }
             .navigationTitle("sort")
             .onChange(of: model.selectedSort) { _, _ in
-                model.saveSortAsIndex()
+                settings.updateSort(to: model.codeSortIndex())
             }
             .onChange(of: model.selectedDirection) { _, _ in
-                model.saveSortAsIndex()
+                settings.updateSort(to: model.codeSortIndex())
             }
             .onChange(of: model.sortByFavorite) { _, _ in
-                model.saveByFavorite()
+                settings.updateByFavorite(model.sortByFavorite)
             }
         }
     }
@@ -55,6 +61,6 @@ struct SortView: View {
 
 struct SortView_Previews: PreviewProvider {
     static var previews: some View {
-        SortView()
+        SortView(settings: AppSettings())
     }
 }

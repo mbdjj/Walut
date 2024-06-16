@@ -10,7 +10,7 @@ import SwiftData
 
 @main
 struct WalutApp: App {
-    @State var globalCurrencyData = GlobalCurrencyData()
+    @State var appSettings = AppSettings()
     @StateObject var networkMonitor = NetworkMonitor()
     
     let container: ModelContainer
@@ -29,7 +29,7 @@ struct WalutApp: App {
     var body: some Scene {
         WindowGroup {
             ViewManagingView()
-                .environment(globalCurrencyData)
+                .environment(appSettings)
                 .environmentObject(networkMonitor)
                 .modelContainer(container)
         }

@@ -19,7 +19,8 @@ struct SettingsView: View {
             }
             
             NavigationLink {
-                SortView()
+                //SortView()
+                EmptyView()
             } label: {
                 Text("sort_nav_title")
             }
