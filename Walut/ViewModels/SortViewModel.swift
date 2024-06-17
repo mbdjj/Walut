@@ -13,8 +13,6 @@ class SortViewModel: ObservableObject {
     @Published var selectedDirection: SortDirection = .ascending
     @Published var sortByFavorite: Bool = true
     
-    private let defaults = UserDefaults.standard
-    
     init(index: Int, byFavorite: Bool) {
         decodeSort(from: index, byFavorite: byFavorite)
     }

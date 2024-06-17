@@ -31,14 +31,11 @@ class BasePickerViewModel: ObservableObject {
     
     
     func saveUserData() {
-        defaults.set(name, forKey: "name")
-        defaults.set([0], forKey: "titleIDArray")
-        defaults.set(0, forKey: "chosenTitle")
-        defaults.set(decimal, forKey: "decimal")
-        defaults.set(selected, forKey: "base")
-        defaults.set(true, forKey: "isBaseSelected")
-        defaults.set(true, forKey: "showPercent")
-        defaults.set(true, forKey: "byFavorite")
+        Defaults.saveUserName(name)
+        Defaults.saveDecimal(decimal)
+        Defaults.saveBaseCode(selected)
+        Defaults.saveShowPercent(true)
+        Defaults.saveByFavorite(true)
         
         AppIcon.changeIcon(to: selected)
     }

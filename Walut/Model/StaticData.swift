@@ -8,8 +8,6 @@
 import Foundation
 
 struct StaticData {
-    static let sharedDefaults = UserDefaults(suiteName: "group.dev.bartminski.Walut")!
-    
     static let currencyCodes = [
         "AUD",
         "BGN",

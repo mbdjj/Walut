@@ -25,7 +25,7 @@ struct Currency: Identifiable, Equatable, Hashable {
     }
     
     static var placeholder: Currency {
-        let currency = Currency(code: "USD", rate: 4.464)
+        let currency = Currency(code: "EUR", rate: 1.234)
         return currency
     }
     
@@ -54,7 +54,7 @@ struct Currency: Identifiable, Equatable, Hashable {
         }
     }
     
-    var isFavorite: Bool { SharedDataManager.shared.favorites.contains(self.code) }
+    var isFavorite: Bool { Defaults.favorites().contains(self.code) }
     
     var id: String { code }
 }

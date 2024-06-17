@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct CalculationView: View {
+    @Environment(AppSettings.self) var settings
     @State var model: CurrencyCalcViewModel
-    
     @State var chartCurrency: Currency?
     
     init(currency: Currency, base: Currency, shouldSwap: Bool = true) {
@@ -124,14 +124,13 @@ struct CalculationView: View {
                 } label: {
                     Label("share", systemImage: "square.and.arrow.up")
                 }
-                .tint(.primary)
                 
                 Button {
-                    model.handleFavorites()
+                    settings.handleFavoriteFlip(of: model.currency)
                 } label: {
                     Label("favorite", systemImage: model.currency.isFavorite ? "star.fill" : "star")
                 }
-                .tint(model.currency.isFavorite ? .yellow : .primary)
+                .tint(model.currency.isFavorite ? .yellow : .walut)
             }
         }
         .onChange(of: model.topAmount) { _, _ in
@@ -165,5 +164,6 @@ struct CalculationView: View {
 #Preview {
     NavigationStack {
         CalculationView(currency: Currency(baseCode: "USD"), base: Currency(baseCode: "PLN"))
+            .environment(AppSettings.preview)
     }
 }

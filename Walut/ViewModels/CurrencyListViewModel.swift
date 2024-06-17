@@ -6,52 +6,57 @@
 //
 
 import SwiftUI
+import SwiftData
 
-class CurrencyListViewModel: ObservableObject {
+@Observable class CurrencyListViewModel {
     
-    @Published var favoritesArray = [Currency]()
-    @Published var currencyArray = [Currency]()
+    var favoritesArray = [Currency]()
+    var currencyArray = [Currency]()
     
-    @Published var selectedCurrency: Currency?
+    var selectedCurrency: Currency?
     
-    @Published var loading: Bool = false
+    var loading: Bool = false
     
-    @Published var errorMessage = ""
-    @Published var shouldDisplayErrorAlert = false
+    var errorMessage = ""
+    var shouldDisplayErrorAlert = false
     
-    @AppStorage("nextUpdate") var nextUpdate: Int = 0
+    let modelContext: ModelContext
     
-    var sortIndex: Int { shared.sortIndex }
-    var sortDirection: SortDirection { shared.sortIndex % 2 == 0 ? .ascending : .descending }
-    var byFavorite: Bool { shared.sortByFavorite }
+    init(modelContext: ModelContext) {
+        self.modelContext = modelContext
+        currencyArray = StaticData.currencyCodes.map { Currency(baseCode: $0) }
+    }
     
-    let shared = SharedDataManager.shared
-    
-    init() {
-        DispatchQueue.main.async {
-            self.loading = true
+    func loadData(for baseCode: String, sortIndex: Int, storageOption: StorageSavingOptions) async {
+        loading = true
+        let hasToRefresh = API.shouldRefresh()
+        
+        if hasToRefresh {
+            let data = await fetchCurrencyData(for: baseCode)
+            guard !data.isEmpty else {
+                let savedData = await SwiftDataManager.getCurrencies(from: modelContext, baseCode: baseCode)
+                present(data: savedData, baseCode: baseCode, sortIndex: sortIndex)
+                await SwiftDataManager.cleanData(from: modelContext, useInterval: true, storageOption: storageOption)
+                return
+            }
+            await SwiftDataManager.saveCurrencies(data: data, base: baseCode, to: modelContext)
         }
         
-        #if os(watchOS)
-        Task {
-            await refreshData()
+        await SwiftDataManager.cleanData(from: modelContext, useInterval: true, storageOption: storageOption)
+        let currencies = await SwiftDataManager.getCurrencies(from: modelContext, baseCode: baseCode)
+        guard !currencies.isEmpty else {
+            let data = await fetchCurrencyData(for: baseCode)
+            await SwiftDataManager.saveCurrencies(data: data, base: baseCode, to: modelContext)
+            present(data: data, baseCode: baseCode, sortIndex: sortIndex)
+            return
         }
-        #endif
+        present(data: currencies, baseCode: baseCode, sortIndex: sortIndex)
     }
     
-    
-    func numbersForPlaceholders() -> (Int, Int) {
-        if shared.favorites.contains(where: { $0 == shared.base.code }) {
-            return (shared.favorites.count - 1, shared.allCodesArray.count - shared.favorites.count)
-        } else {
-            return (shared.favorites.count, shared.allCodesArray.count - shared.favorites.count - 1)
-        }
-    }
-    
-    func refreshData() async {
+    func fetchCurrencyData(for baseCode: String) async -> [Currency] {
         do {
-            let data = try await API.fetchCurrencyRates(for: shared.base)
-            present(data: data)
+            let data = try await API.fetchCurrencyRates(for: Currency(baseCode: baseCode))
+            return data
         } catch {
             DispatchQueue.main.async {
                 if let error = error as? API.APIError {
@@ -61,36 +66,28 @@ class CurrencyListViewModel: ObservableObject {
                 }
                 self.shouldDisplayErrorAlert = true
             }
+            return []
         }
     }
     
-    func checkRefreshData() async {
-        if API.shouldRefresh() {
-            await self.refreshData()
-        } else {
-            return
-        }
-    }
-    
-    func present(data: [Currency]) {
-        if byFavorite {
-            var (currencyArray, favoritesArray) = splitFavorites(from: data)
-            
-            currencyArray = sort(array: currencyArray)
-            
-            DispatchQueue.main.async {
-                self.favoritesArray = favoritesArray
-                self.currencyArray = currencyArray
-            }
-        } else {
-            var currencyArray = removeBase(from: data)
-            
-            currencyArray = sort(array: currencyArray)
+    func present(data: [Currency], baseCode: String, sortIndex: Int) {
+//        if byFavorite {
+//            var (currencyArray, favoritesArray) = splitFavorites(from: data)
+//            
+//            currencyArray = sort(array: currencyArray)
+//            
+//            DispatchQueue.main.async {
+//                self.favoritesArray = favoritesArray
+//                self.currencyArray = currencyArray
+//            }
+//        } else {
+            var currencyArray = removeBase(from: data, baseCode: baseCode)
+            currencyArray = sort(array: currencyArray, to: sortIndex)
             
             DispatchQueue.main.async {
                 self.currencyArray = currencyArray
             }
-        }
+//        }
         
         DispatchQueue.main.async {
             withAnimation {
@@ -99,34 +96,35 @@ class CurrencyListViewModel: ObservableObject {
         }
     }
     
-    private func splitFavorites(from array: [Currency]) -> ([Currency], [Currency]) {
+    private func splitFavorites(from array: [Currency], baseCode: String, favoritesOrder: [String]) -> ([Currency], [Currency]) {
         let favoritesArray = array
             .map { $0 }
             .filter { $0.isFavorite }
-            .reorder(by: shared.favorites)
+            .reorder(by: favoritesOrder)
         
         let currencyArray = array
             .map { $0 }
             .filter { !$0.isFavorite }
         
-        return removeBase(from: (currencyArray, favoritesArray))
+        return removeBase(from: (currencyArray, favoritesArray), baseCode: baseCode)
     }
     
-    private func removeBase(from arrays: ([Currency], [Currency])) -> ([Currency], [Currency]) {
-        return (removeBase(from: arrays.0), removeBase(from: arrays.1))
+    private func removeBase(from arrays: ([Currency], [Currency]), baseCode: String) -> ([Currency], [Currency]) {
+        return (removeBase(from: arrays.0, baseCode: baseCode), removeBase(from: arrays.1, baseCode: baseCode))
     }
     
-    private func removeBase(from array: [Currency]) -> [Currency] {
-        return array.filter { $0.code != shared.base.code }
+    private func removeBase(from array: [Currency], baseCode: String) -> [Currency] {
+        return array.filter { $0.code != baseCode }
     }
     
-    private func sort(array: [Currency]) -> [Currency] {
-        switch sortIndex {
-        case 0, 1:
+    private func sort(array: [Currency], to sortIndex: Int) -> [Currency] {
+        let (sortType, sortDirection) = Sorting.decodeSort(from: sortIndex)
+        switch sortType {
+        case .byCode:
             return Sorting.byCode(array, direction: sortDirection)
-        case 2, 3:
+        case .byPrice:
             return Sorting.byPrice(array, direction: sortDirection)
-        case 4, 5:
+        case .byChange:
             return Sorting.byChange(array, direction: sortDirection)
         default:
             return array
@@ -141,7 +139,7 @@ class CurrencyListViewModel: ObservableObject {
             unfavorite(currency: currency)
         }
         
-        UserDefaults.standard.set(SharedDataManager.shared.favorites, forKey: "favorites")
+        Defaults.saveFavorites(SharedDataManager.shared.favorites)
     }
     
     private func favorite(currency: Currency) {

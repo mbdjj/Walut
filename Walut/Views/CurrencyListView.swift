@@ -11,20 +11,23 @@ import SwiftData
 
 struct CurrencyListView: View {
     
-    @ObservedObject var model = CurrencyListViewModel()
-    
+    @State var model: CurrencyListViewModel
     @State var quickConvertValue = 1.0
-    
     @State var queryString: String = ""
     
     @Environment(AppSettings.self) var settings
     @Environment(\.requestReview) var requestReview
     @EnvironmentObject var networkMonitor: NetworkMonitor
+    
     @AppStorage("openCount") var openCount = 0
     @AppStorage("nextUpdate", store: UserDefaults(suiteName: "group.dev.bartminski.Walut")) var nextUpdate = 0
     
     @Environment(\.modelContext) var modelContext
     @Query var savedCurrencies: [SavedCurrency]
+    
+    init(modelContext: ModelContext) {
+        model = CurrencyListViewModel(modelContext: modelContext)
+    }
     
     var body: some View {
         NavigationStack {
@@ -39,10 +42,10 @@ struct CurrencyListView: View {
                     }
                 }
                 
-                if !model.loading {
+//                if !model.loading {
                     if !model.favoritesArray.isEmpty {
                         Section {
-                            ForEach(results.0) { currency in
+                            ForEach(model.favoritesArray) { currency in
                                 Button {
                                     model.selectedCurrency = currency
                                 } label: {
@@ -58,7 +61,7 @@ struct CurrencyListView: View {
                     }
                     
                     Section {
-                        ForEach(results.1) { currency in
+                        ForEach(model.currencyArray) { currency in
                             Button {
                                 model.selectedCurrency = currency
                             } label: {
@@ -70,21 +73,21 @@ struct CurrencyListView: View {
                             }
                         }
                     }
-                } else {  // placeholder cells while loading
-                    if settings.sortByFavorite {
-                        Section {
-                            ForEach(0 ..< model.numbersForPlaceholders().0, id: \.self) { _ in
-                                LoadingCell()
-                            }
-                        }
-                    }
-                    
-                    Section {
-                        ForEach(settings.sortByFavorite ? 0 ..< model.numbersForPlaceholders().1 : 0 ..< StaticData.currencyCodes.count - 1, id: \.self) { _ in
-                            LoadingCell()
-                        }
-                    }
-                }
+//                } else {  // placeholder cells while loading
+//                    if settings.sortByFavorite {
+//                        Section {
+//                            ForEach(0 ..< model.numbersForPlaceholders().0, id: \.self) { _ in
+//                                LoadingCell()
+//                            }
+//                        }
+//                    }
+//                    
+//                    Section {
+//                        ForEach(settings.sortByFavorite ? 0 ..< model.numbersForPlaceholders().1 : 0 ..< StaticData.currencyCodes.count - 1, id: \.self) { _ in
+//                            LoadingCell()
+//                        }
+//                    }
+//                }
             }
             .navigationTitle("\(settings.baseCurrency!.flag) \(settings.baseCurrency!.code)")
             .toolbar {
@@ -107,10 +110,10 @@ struct CurrencyListView: View {
                 }
             }
             .refreshable {
-                Task {
-                    await model.refreshData()
-                    SwiftDataManager.saveCurrencies(data: model.currencyArray + model.favoritesArray, to: modelContext)
-                }
+//                Task {
+//                    await model.refreshData(for: settings.baseCurrency!.code, sortIndex: settings.sortIndex)
+//                    SwiftDataManager.saveCurrencies(data: model.currencyArray + model.favoritesArray, to: modelContext)
+//                }
             }
             .alert("error", isPresented: $model.shouldDisplayErrorAlert) {
                 Button {
@@ -125,20 +128,20 @@ struct CurrencyListView: View {
             .scrollDismissesKeyboard(.immediately)
             .onAppear {
                 Task {
-                    await refreshData()
+                    await loadData()
                 }
             }
             .onChange(of: networkMonitor.isConnected) { _, connected in
                 if connected {
                     Task {
-                        await model.refreshData()
                         model.shouldDisplayErrorAlert = false
+                        await loadData()
                     }
                 }
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                 Task {
-                    await refreshData()
+                    await loadData()
                 }
                 
                 if openCount < 6 {
@@ -150,44 +153,14 @@ struct CurrencyListView: View {
                     requestReview()
                 }
             }
-            .searchable(text: $queryString) {}
             .navigationDestination(item: $model.selectedCurrency) { currency in
                 CalculationView(currency: currency, base: settings.baseCurrency!)
             }
         }
     }
     
-    var results: ([Currency], [Currency]) {
-        if queryString.isEmpty {
-            return (model.favoritesArray, model.currencyArray)
-        } else {
-            let filteredFav = model.favoritesArray.filter { $0.code.lowercased().contains(queryString.lowercased()) || $0.fullName.lowercased().contains(queryString.lowercased()) }
-            let filteredCur = model.currencyArray.filter { $0.code.lowercased().contains(queryString.lowercased()) || $0.fullName.lowercased().contains(queryString.lowercased()) }
-            
-            return (filteredFav, filteredCur)
-        }
-    }
-    
-    private func refreshData() async {
-        await model.checkRefreshData()
-        
-        if !savedCurrencies.contains(where: { $0.base == settings.baseCurrency!.code && $0.nextRefresh == nextUpdate }) {
-            print("Couldn't populate data from storage. Refreshing...")
-            await model.refreshData()
-            SwiftDataManager.saveCurrencies(data: model.currencyArray + model.favoritesArray, to: modelContext)
-        }
-        
-        SwiftDataManager.cleanData(from: modelContext, useInterval: true)
-        populateCurrenciesFromMemory()
-    }
-    
-    private func populateCurrenciesFromMemory() {
-        let currencies = SwiftDataManager.getCurrencies(from: modelContext)
-        
-        withAnimation {
-            model.present(data: currencies)
-        }
-        print("Populated data from memory")
+    private func loadData() async {
+        await model.loadData(for: settings.baseCurrency!.code, sortIndex: settings.sortIndex, storageOption: settings.storageOption)
     }
     
     private func printSwiftData() {

@@ -16,8 +16,6 @@ import StoreKit
     var titleToPresent = ""
     var arrayToSave = [Int]()
     
-    let defaults = UserDefaults.standard
-    
     var taskHandle: Task<Void, Error>?
     
     init(userUnlockedTitles: [Int]) {
@@ -120,7 +118,7 @@ import StoreKit
         
         if arrayToSave.firstIndex(of: titleID) == nil {
             arrayToSave.append(titleID)
-            defaults.set(arrayToSave, forKey: "titleIDArray")
+            Defaults.saveUnlockedTitles(arrayToSave)
         }
         
         DispatchQueue.main.async {

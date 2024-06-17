@@ -25,11 +25,20 @@ import WidgetKit
     
     var storageOption: StorageSavingOptions
     
-    let defaults = UserDefaults.standard
-    let sharedDefaults = UserDefaults(suiteName: "group.dev.bartminski.Walut")!
+    static let preview: AppSettings = {
+        let settings = AppSettings()
+        settings.appstate = .baseSelected
+        settings.user = User(name: "Test", selectedTitleIndex: 0, unlockedTitlesArray: [0, 1])
+        settings.baseCurrency = Currency(baseCode: "USD")
+        settings.decimal = 3
+        settings.showPercent = true
+        settings.sortByFavorite = true
+        settings.favorites = ["PLN", "EUR"]
+        return settings
+    }()
     
     init() {
-        let baseCode = defaults.string(forKey: "base")
+        let baseCode = Defaults.baseCode()
         let baseSelected = (baseCode != nil)
         
         appstate = baseSelected ? .baseSelected : .onboarding
@@ -37,17 +46,16 @@ import WidgetKit
         user = User.loadUser()
         
         baseCurrency = if let baseCode { Currency(baseCode: baseCode) } else { nil }
-        decimal = sharedDefaults.integer(forKey: "decimal")
-        quickConvert = defaults.bool(forKey: "quickConvert")
-        showPercent = defaults.bool(forKey: "showPercent")
+        decimal = Defaults.decimal()
+        quickConvert = Defaults.quickConvert()
+        showPercent = Defaults.showPercent()
         
-        sortIndex = defaults.integer(forKey: "sort")
-        sortByFavorite = defaults.bool(forKey: "byFavorite")
+        sortIndex = Defaults.sortIndex()
+        sortByFavorite = Defaults.byFavorite()
         
-        favorites = defaults.stringArray(forKey: "favorites") ?? []
+        favorites = Defaults.favorites()
         
-        let option = defaults.integer(forKey: "storageOptions")
-        storageOption = StorageSavingOptions(rawValue: option) ?? .oneMonth
+        storageOption = Defaults.storageOption()
     }
     
     // MARK: - User methods
@@ -66,44 +74,55 @@ import WidgetKit
     
     // MARK: - Settings methods
     func saveBase() {
-        defaults.set(baseCurrency!.code, forKey: "base")
+        Defaults.saveBaseCode(baseCurrency!.code)
         AppIcon.changeIcon(to: baseCurrency!.code)
     }
     func saveDecimal() {
-        sharedDefaults.set(decimal, forKey: "decimal")
+        Defaults.saveDecimal(decimal)
         WidgetCenter.shared.reloadTimelines(ofKind: "WalutWidget")
     }
     func saveConvertMode() {
-        defaults.set(quickConvert, forKey: "quickConvert")
+        Defaults.saveQuickConvert(quickConvert)
     }
     func saveShowPercent() {
-        defaults.set(showPercent, forKey: "showPercent")
+        Defaults.saveShowPercent(showPercent)
     }
     
     // MARK: - Sorting methods
     @MainActor
     func updateSort(to index: Int) {
         sortIndex = index
-        defaults.set(index, forKey: "sort")
-        print("sort updated to \(index)")
+        Defaults.saveSortIndex(index)
+        print("Sort updated to \(index)")
     }
     @MainActor
     func updateByFavorite(_ byFavorite: Bool) {
         sortByFavorite = byFavorite
-        defaults.set(byFavorite, forKey: "byFavorite")
+        Defaults.saveByFavorite(byFavorite)
     }
     
     // MARK: - Favorites
     @MainActor
     func updateFavorites(to array: [String]) {
         favorites = array
-        defaults.set(array, forKey: "favorites")
+        Defaults.saveFavorites(array)
+    }
+    @MainActor
+    func handleFavoriteFlip(of currency: Currency) {
+        if currency.isFavorite, let i = favorites.firstIndex(of: currency.code) {
+            favorites.remove(at: i)
+            print("Unfavorited \(currency.code)")
+        } else {
+            favorites.append(currency.code)
+            print("Favorited \(currency.code)")
+        }
+        Defaults.saveFavorites(favorites)
     }
     
     // MARK: - Storage options
     @MainActor
     func updateStorageOption(to option: StorageSavingOptions) {
         storageOption = option
-        defaults.set(option.rawValue, forKey: "storageOptions")
+        Defaults.saveStorageOption(option)
     }
 }

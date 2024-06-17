@@ -12,7 +12,7 @@ struct SettingsView: View {
     @Environment(AppSettings.self) var settings
     @Environment(\.requestReview) var requestReview
     
-    @State var selectedBaseCode = UserDefaults.standard.string(forKey: "base") ?? "AUD"
+    @State var selectedBaseCode = Defaults.baseCode()!
     
     var isSupporter: Bool {
         settings.user!.unlockedTitlesArray.contains([3]) || settings.user!.unlockedTitlesArray.contains([4])

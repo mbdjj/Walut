@@ -61,6 +61,6 @@ struct SortView: View {
 
 struct SortView_Previews: PreviewProvider {
     static var previews: some View {
-        SortView(settings: AppSettings())
+        SortView(settings: AppSettings.preview)
     }
 }

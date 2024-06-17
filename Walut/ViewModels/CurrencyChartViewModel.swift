@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-class CurrencyChartViewModel: ObservableObject {
+@Observable class CurrencyChartViewModel {
     
-    @Published var currency: Currency
+    var currency: Currency
     let base: Currency
     
-    @Published var shouldDisableChartButton = true
+    var shouldDisableChartButton = true
     
     init(currency: Currency, base: Currency) {
         self.currency = currency

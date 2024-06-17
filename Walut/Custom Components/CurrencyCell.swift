@@ -11,14 +11,11 @@ import SwiftData
 struct CurrencyCell: View {
     
     @Environment(\.modelContext) var modelContext
+    @Environment(AppSettings.self) var settings
     @Query var savedCurrencies: [SavedCurrency]
     
     let currency: Currency
-    let base: Currency
     
-    let decimal: Int
-    
-    let shouldShowPercent: Bool
     var percentColor: Color {
         if currency.percent == 0 {
             return .secondary
@@ -38,24 +35,20 @@ struct CurrencyCell: View {
         }
     }
     
-    let shared = SharedDataManager.shared
-    
     let mode: CurrencyCell.CellMode
     let value: Double
     
     init(for currency: Currency, mode: CurrencyCell.CellMode, value: Double) {
         self.currency = currency
-        self.base = shared.base
-        self.decimal = shared.decimal
-        self.mode = mode
+        currency.price == 1 && mode != .picker ? (self.mode = .loading) : (self.mode = mode)
         self.value = value
-        self.shouldShowPercent = shared.showPercent
     }
     
     enum CellMode {
         case normal
         case quickConvert
         case picker
+        case loading
     }
     
     var body: some View {
@@ -80,19 +73,31 @@ struct CurrencyCell: View {
                 
                 VStack(alignment: .trailing) {
                     if mode == .normal {
-                        Text(currency.rate != 0 ? shared.currencyLocaleString(value: currency.price, currencyCode: base.code) : String(localized: "no_data"))
+                        Text(currency.rate != 0 ? Formatter.currency(value: currency.price, currencyCode: settings.baseCurrency?.code ?? "PLN", decimal: settings.decimal) : String(localized: "no_data"))
                             .foregroundColor(.primary)
                     } else if mode == .quickConvert {
-                        Text(shared.currencyLocaleString(value: currency.rate * value, currencyCode: currency.code))
+                        Text(Formatter.currency(value: currency.rate * value, currencyCode: currency.code, decimal: settings.decimal))
                             .foregroundColor(.primary)
+                    } else if mode == .loading {
+                        Text("1.001 zł")
+                            .foregroundColor(.primary)
+                            .redacted(reason: .placeholder)
+                        if settings.showPercent {
+                            Text("\(Image(systemName: "arrow.right")) 12%")
+                                .font(.caption2)
+                                .fontWeight(.semibold)
+                                .foregroundColor(percentColor)
+                                .redacted(reason: .placeholder)
+                        }
                     }
                     
-                    if shouldShowPercent && currency.rate != 0 && mode != .picker {
-                        Text("\(Image(systemName: "arrow.\(arrowDirection)")) \(shared.percentLocaleStirng(value: abs(currency.percent)))")
+                    if settings.showPercent && currency.rate != 0 && [CellMode.normal, CellMode.quickConvert].contains(mode) {
+                        Text("\(Image(systemName: "arrow.\(arrowDirection)")) \(Formatter.percent(value: abs(currency.percent)))")
                             .font(.caption2)
                             .fontWeight(.semibold)
                             .foregroundColor(percentColor)
                             .contentTransition(.numericText())
+                            
                     }
                 }
                 
@@ -116,7 +121,11 @@ struct CurrencyCell: View {
 struct CurrencyCell_Previews: PreviewProvider {
     static var previews: some View {
         List {
-            CurrencyCell(for: Currency(baseCode: "PLN"), mode: .picker, value: 1)
+            CurrencyCell(for: Currency(baseCode: "EUR"), mode: .picker, value: 1)
+            CurrencyCell(for: Currency.placeholder, mode: .normal, value: 1)
+            CurrencyCell(for: Currency.placeholder, mode: .quickConvert, value: 1)
+            CurrencyCell(for: Currency(baseCode: "EUR"), mode: .loading, value: 1)
         }
+        .environment(AppSettings.preview)
     }
 }

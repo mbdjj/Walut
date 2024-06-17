@@ -66,14 +66,14 @@ struct API {
         let data = getDataFromDefaults()
         let now = Date.now
 
-        let result = data.date < now || data.base != SharedDataManager.shared.base.code
+        let result = data.date < now || data.base != UserDefaults.standard.string(forKey: "base")
         print("Should\(result ? "" : "n't") refresh")
         return result
     }
 
     static private func getDataFromDefaults() -> (date: Date, base: String) {
-        let interval = StaticData.sharedDefaults.integer(forKey: "nextUpdate")
-        let baseCode = StaticData.sharedDefaults.string(forKey: "nextUpdateBase") ?? ""
+        let interval = Defaults.nextUpdateInterval()
+        let baseCode = Defaults.nextUpdateBaseCode()
         let date = Date(timeIntervalSince1970: Double(interval))
 
         return (date: date, base: baseCode)
@@ -82,8 +82,8 @@ struct API {
     static private func saveNextUpdate(date: Date, base: String) {
         print("Saved next update date \(date.formatted(date: .numeric, time: .standard))")
         let interval = Int(date.timeIntervalSince1970)
-        StaticData.sharedDefaults.set(interval, forKey: "nextUpdate")
-        StaticData.sharedDefaults.set(base, forKey: "nextUpdateBase")
+        Defaults.saveNextUpdateInterval(interval)
+        Defaults.saveNextUpdateBaseCode(base)
     }
     
     // MARK: - Error

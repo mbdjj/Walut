@@ -57,10 +57,10 @@ struct CurrencyChartView: View {
         }
     }
     
-    @StateObject var model: CurrencyChartViewModel
+    @State var model: CurrencyChartViewModel
     
     init(currency: Currency, base: Currency) {
-        _model = StateObject(wrappedValue: CurrencyChartViewModel(currency: currency, base: base))
+        model = CurrencyChartViewModel(currency: currency, base: base)
     }
     
     var body: some View {

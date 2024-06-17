@@ -19,11 +19,8 @@ import SwiftUI
     var decimalDigits = 0
     
     var isTopOpen = true
-    
-    private let shared = SharedDataManager.shared
-    private let defaults = UserDefaults.standard
     var textToShare: String {
-        "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(shared.currencyLocaleString(value: currency.price, currencyCode: base.code))"
+        "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(Formatter.currency(value: currency.price, currencyCode: base.code, decimal: UserDefaults.standard.integer(forKey: "decimal")))"
     }
     
     init(currency: Currency, base: Currency, shouldSwap: Bool) {
@@ -68,11 +65,11 @@ import SwiftUI
         var second = ""
         
         if isTopOpen == (type == .active) {
-            first = shared.priceLocaleString(value: topAmount, currencyCode: currency.code)
-            second = shared.priceLocaleString(value: bottomAmount, currencyCode: base.code)
+            first = Formatter.price(value: topAmount, currencyCode: currency.code)
+            second = Formatter.price(value: bottomAmount, currencyCode: base.code)
         } else {
-            first = shared.priceLocaleString(value: bottomAmount, currencyCode: base.code)
-            second = shared.priceLocaleString(value: topAmount, currencyCode: currency.code)
+            first = Formatter.price(value: bottomAmount, currencyCode: base.code)
+            second = Formatter.price(value: topAmount, currencyCode: currency.code)
         }
         
         return "\(first) = \(second)"
@@ -186,26 +183,6 @@ import SwiftUI
         bottomAmount = 0
         isDouble = false
         decimalDigits = 0
-    }
-    
-    func handleFavorites() {
-        if !currency.isFavorite {
-            favorite(currency: currency)
-        } else {
-            unfavorite(currency: currency)
-        }
-        
-        UserDefaults.standard.set(SharedDataManager.shared.favorites, forKey: "favorites")
-    }
-    
-    private func favorite(currency: Currency) {
-        SharedDataManager.shared.favorites.append(currency.code)
-    }
-    
-    private func unfavorite(currency: Currency) {
-        if let i = SharedDataManager.shared.favorites.firstIndex(where: { currency.code == $0 }) {
-            SharedDataManager.shared.favorites.remove(at: i)
-        }
     }
     
     func changeCurrency(_ type: AmountType, to code: String) {

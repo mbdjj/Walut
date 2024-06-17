@@ -59,6 +59,6 @@ struct SupportDevView: View {
 
 struct SupportDevView_Previews: PreviewProvider {
     static var previews: some View {
-        SupportDevView(user: User(name: "User", selectedTitleIndex: 0, unlockedTitlesArray: [0, 1], selectedTitleLocalized: "Essa"))
+        SupportDevView(user: User(name: "User", selectedTitleIndex: 0, unlockedTitlesArray: [0, 1]))
     }
 }

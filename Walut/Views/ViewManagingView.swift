@@ -6,19 +6,21 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ViewManagingView: View {
     
     @Environment(AppSettings.self) var settings
+    @Environment(\.modelContext) var modelContext
     @State var selection = 0
     
     var body: some View {
         switch settings.appstate {
         case .baseSelected:
             TabView(selection: $selection) {
-                CurrencyListView()
+                CurrencyListView(modelContext: modelContext)
                     .tabItem {
-                        Label(settings.baseCurrency?.code ?? "All", systemImage: "dollarsign.circle")
+                        Label("All", systemImage: "dollarsign.circle")
                     }
                     .tag(0)
                 SettingsView()

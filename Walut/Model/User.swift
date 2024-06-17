@@ -17,30 +17,25 @@ import Foundation
     var pfpLetter: String { "\(name.first!)" }
     
     var id: String { name }
-    let defaults = UserDefaults.standard
     
-    init(name: String, selectedTitleIndex: Int, unlockedTitlesArray: [Int], selectedTitleLocalized: String) {
+    init(name: String, selectedTitleIndex: Int, unlockedTitlesArray: [Int]) {
         self.name = name
         self.selectedTitleIndex = selectedTitleIndex
         self.unlockedTitlesArray = unlockedTitlesArray
-        self.selectedTitleLocalized = selectedTitleLocalized
+        self.selectedTitleLocalized = StaticData.localizedTitles[selectedTitleIndex]
     }
     
     static func loadUser() -> User? {
-        let defaults = UserDefaults.standard
-        
-        let savedName = defaults.string(forKey: "name")
-        let selectedIndex = defaults.integer(forKey: "chosenTitle")
-        let unlockedTitles = defaults.array(forKey: "titleIDArray") as? [Int] ?? [0]
-        let selectedTitle = StaticData.localizedTitles[selectedIndex]
+        let savedName = Defaults.userName()
+        let selectedIndex = Defaults.userSelectedTitleIndex()
+        let unlockedTitles = Defaults.unlockedTitles()
         
         if let savedName {
             print("Loaded user (\(savedName))")
             return User(
                 name: savedName,
                 selectedTitleIndex: selectedIndex,
-                unlockedTitlesArray: unlockedTitles,
-                selectedTitleLocalized: selectedTitle
+                unlockedTitlesArray: unlockedTitles
             )
         } else {
             return nil
@@ -50,21 +45,21 @@ import Foundation
     @MainActor
     func updateName(to name: String) {
         self.name = name
-        defaults.set(name, forKey: "name")
+        Defaults.saveUserName(name)
     }
     
     @MainActor
     func changeTitle(to index: Int) {
         selectedTitleIndex = index
         selectedTitleLocalized = StaticData.localizedTitles[index]
-        defaults.set(name, forKey: "chosenTitle")
+        Defaults.saveUserSelectedTitleIndex(index)
     }
     
     @MainActor
     func unlockTitle(at index: Int) {
         if unlockedTitlesArray.firstIndex(of: index) == nil {
             unlockedTitlesArray.append(index)
-            defaults.set(unlockedTitlesArray, forKey: "titleIDArray")
+            Defaults.saveUnlockedTitles(unlockedTitlesArray)
         }
     }
 }

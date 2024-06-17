@@ -22,7 +22,7 @@ struct CalculationCurrencyView: View {
     
     @State var showCurrencyPicker: Bool = false
     let pickerData: [Currency] = {
-        SharedDataManager.shared.allCodesArray.map { Currency(baseCode: $0) }
+        StaticData.currencyCodes.map { Currency(baseCode: $0) }
     }()
     
     var isOpen: Bool { isTop ? isTopOpen : !isTopOpen }
@@ -46,8 +46,6 @@ struct CalculationCurrencyView: View {
         }
     }
     
-    let shared = SharedDataManager.shared
-    
     var body: some View {
         VStack(spacing: 8) {
             // MARK: - Top bar
@@ -66,14 +64,15 @@ struct CalculationCurrencyView: View {
                 Spacer()
                 VStack(alignment: .trailing) {
                     if isOpen {
-                        Text(shared.currencyLocaleString(
+                        Text(Formatter.currency(
                             value: isTop ? currency.price : currency.rate,
-                            currencyCode: isTop ? base.code : currency.code
+                            currencyCode: isTop ? base.code : currency.code,
+                            decimal: Defaults.decimal()
                         ))
                         .foregroundColor(.primary)
                         
                         if isTop && isOpen && currency.percent != 0 {
-                            Text("\(Image(systemName: "arrow.\(arrowDirection)")) \(shared.percentLocaleStirng(value: abs(currency.percent)))")
+                            Text("\(Image(systemName: "arrow.\(arrowDirection)")) \(Formatter.percent(value: abs(currency.percent)))")
                                 .foregroundStyle(percentColor)
                                 .font(.caption2)
                                 .fontWeight(.semibold)

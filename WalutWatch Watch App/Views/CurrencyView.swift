@@ -9,13 +9,13 @@ import SwiftUI
 
 struct CurrencyView: View {
     
-    @State var model: CurrencyCalcViewModel
-    let shared = SharedDataManager.shared
-    
-    init(currency: Currency, base: Currency = SharedDataManager.shared.base, shouldSwap: Bool = true) {
-        let model = CurrencyCalcViewModel(currency: currency, base: base, shouldSwap: shouldSwap)
-        _model = State(initialValue: model)
-    }
+//    @State var model: CurrencyCalcViewModel
+//    let shared = SharedDataManager.shared
+//    
+//    init(currency: Currency, base: Currency = SharedDataManager.shared.base, shouldSwap: Bool = true) {
+//        let model = CurrencyCalcViewModel(currency: currency, base: base, shouldSwap: shouldSwap)
+//        _model = State(initialValue: model)
+//    }
     
     var body: some View {
         VStack {
@@ -68,6 +68,6 @@ struct CurrencyView: View {
 
 #Preview {
     NavigationStack {
-        CurrencyView(currency: Currency(baseCode: "USD"))
+        //CurrencyView(currency: Currency(baseCode: "USD"))
     }
 }

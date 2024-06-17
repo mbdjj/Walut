@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		341750C72C1D92AE00B85B02 /* GlobalCurrencyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341750C62C1D92AE00B85B02 /* GlobalCurrencyData.swift */; };
 		341750C92C1D980C00B85B02 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341750C82C1D980C00B85B02 /* User.swift */; };
 		341750CB2C1D9C1200B85B02 /* StaticData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341750CA2C1D9C1200B85B02 /* StaticData.swift */; };
 		341750CD2C1D9E5600B85B02 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341750CC2C1D9E5600B85B02 /* Formatter.swift */; };
@@ -31,7 +30,6 @@
 		3441ABD828F1709F009528FD /* CurrencyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3441ABD728F1709F009528FD /* CurrencyListView.swift */; };
 		3447F7E728F0BB3F00B59B25 /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3447F7E628F0BB3F00B59B25 /* AppIcon.swift */; };
 		344A71EB292C13200065F689 /* CurrencyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344A71EA292C13200065F689 /* CurrencyListViewModel.swift */; };
-		344E9987295ED7A200921DBC /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344E9986295ED7A200921DBC /* LoadingCell.swift */; };
 		345D49B729B1D51D00C6E1EB /* CurrencyCalcViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345D49B629B1D51D00C6E1EB /* CurrencyCalcViewModel.swift */; };
 		34671B0A296A03AC0023D88C /* SharedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C2028F17592006C4F38 /* SharedDataManager.swift */; };
 		346C7A2329BD19020023DE23 /* WalutWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346C7A2229BD19020023DE23 /* WalutWatchApp.swift */; };
@@ -81,13 +79,14 @@
 		34A4959F2B32BAA8007F7683 /* SwiftDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A4959E2B32BAA8007F7683 /* SwiftDataManager.swift */; };
 		34A495A02B32BAA8007F7683 /* SwiftDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A4959E2B32BAA8007F7683 /* SwiftDataManager.swift */; };
 		34A5019F2C1F02D60087A48E /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A5019E2C1F02D60087A48E /* AppSettings.swift */; };
+		34A501A12C2095F80087A48E /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A501A02C2095F80087A48E /* Defaults.swift */; };
+		34A501A22C209BDB0087A48E /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A501A02C2095F80087A48E /* Defaults.swift */; };
+		34A501A32C209BDC0087A48E /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A501A02C2095F80087A48E /* Defaults.swift */; };
 		34C85A672A1E23FB00FB7B03 /* Sorting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 348CE6EE2951E32400E89078 /* Sorting.swift */; };
 		34C85A682A1E240D00FB7B03 /* SortViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D5AFEA2951B6550043B72A /* SortViewModel.swift */; };
 		34C85A6A2A1E247100FB7B03 /* SharedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C2028F17592006C4F38 /* SharedDataManager.swift */; };
-		34C85A6B2A1E263A00FB7B03 /* CurrencyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344A71EA292C13200065F689 /* CurrencyListViewModel.swift */; };
 		34CAB492290F11CA00D877E5 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CAB491290F11CA00D877E5 /* FavoritesView.swift */; };
 		34CAB494290F128100D877E5 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CAB493290F128100D877E5 /* FavoritesViewModel.swift */; };
-		34D0EA032BADED5F00093D80 /* CurrencyCalcViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345D49B629B1D51D00C6E1EB /* CurrencyCalcViewModel.swift */; };
 		34D20AE12BAD8057009770D0 /* CurrencyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D20AE02BAD8057009770D0 /* CurrencyView.swift */; };
 		34D4AD872997EB2900EFD2A7 /* ZAR@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D4AD392997EB2900EFD2A7 /* ZAR@3x.png */; };
 		34D4AD882997EB2900EFD2A7 /* EUR@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 34D4AD3A2997EB2900EFD2A7 /* EUR@3x.png */; };
@@ -175,7 +174,6 @@
 		34DDC4CC29B292BB002F76EF /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DDC4CB29B292BB002F76EF /* OnboardingCell.swift */; };
 		34E0A201292CFCDB00EF3CBC /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C1A28F172A6006C4F38 /* NetworkManager.swift */; };
 		34E0A203292CFD3C00EF3CBC /* CurrencyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C1E28F1751C006C4F38 /* CurrencyData.swift */; };
-		34ED0C1B28F172A6006C4F38 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C1A28F172A6006C4F38 /* NetworkManager.swift */; };
 		34ED0C1F28F1751C006C4F38 /* CurrencyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C1E28F1751C006C4F38 /* CurrencyData.swift */; };
 		34ED0C2128F17592006C4F38 /* SharedDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C2028F17592006C4F38 /* SharedDataManager.swift */; };
 		34ED0C2328F1C24F006C4F38 /* ViewManagingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34ED0C2228F1C24F006C4F38 /* ViewManagingView.swift */; };
@@ -234,7 +232,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		341750C62C1D92AE00B85B02 /* GlobalCurrencyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalCurrencyData.swift; sourceTree = "<group>"; };
 		341750C82C1D980C00B85B02 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		341750CA2C1D9C1200B85B02 /* StaticData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticData.swift; sourceTree = "<group>"; };
 		341750CC2C1D9E5600B85B02 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
@@ -252,7 +249,6 @@
 		3447F7E628F0BB3F00B59B25 /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
 		3447F7EB28F0BE4800B59B25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		344A71EA292C13200065F689 /* CurrencyListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyListViewModel.swift; sourceTree = "<group>"; };
-		344E9986295ED7A200921DBC /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		345D49B629B1D51D00C6E1EB /* CurrencyCalcViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrencyCalcViewModel.swift; sourceTree = "<group>"; };
 		346C7A2029BD19020023DE23 /* WalutWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WalutWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		346C7A2229BD19020023DE23 /* WalutWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalutWatchApp.swift; sourceTree = "<group>"; };
@@ -295,6 +291,7 @@
 		34A2347328F061D700C81292 /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		34A4959E2B32BAA8007F7683 /* SwiftDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataManager.swift; sourceTree = "<group>"; };
 		34A5019E2C1F02D60087A48E /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		34A501A02C2095F80087A48E /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		34A5A6B0292002A000613135 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		34CAB491290F11CA00D877E5 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		34CAB493290F128100D877E5 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
@@ -626,7 +623,6 @@
 			children = (
 				34DDC4CB29B292BB002F76EF /* OnboardingCell.swift */,
 				342D433928F7E37F001C69AD /* CurrencyCell.swift */,
-				344E9986295ED7A200921DBC /* LoadingCell.swift */,
 				3483639D290D28D5000DA0DB /* ChartToShare.swift */,
 				348D08E22A1C9C400047BEFF /* ChartButtons.swift */,
 				3482D9422C1C717600CECB1F /* CalculationCurrencyView.swift */,
@@ -723,12 +719,12 @@
 			isa = PBXGroup;
 			children = (
 				34F748302B0A246A006ACDCD /* SavedCurrency.swift */,
-				341750C62C1D92AE00B85B02 /* GlobalCurrencyData.swift */,
 				34A5019E2C1F02D60087A48E /* AppSettings.swift */,
 				341750C82C1D980C00B85B02 /* User.swift */,
 				341750CA2C1D9C1200B85B02 /* StaticData.swift */,
 				341750CC2C1D9E5600B85B02 /* Formatter.swift */,
 				341750CE2C1DA2A500B85B02 /* API.swift */,
+				34A501A02C2095F80087A48E /* Defaults.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -959,13 +955,11 @@
 				34D20AE12BAD8057009770D0 /* CurrencyView.swift in Sources */,
 				341750D62C1DB26C00B85B02 /* StaticData.swift in Sources */,
 				34EF3EBF29BDC3FE00CFAEDA /* BasePickerView.swift in Sources */,
-				34D0EA032BADED5F00093D80 /* CurrencyCalcViewModel.swift in Sources */,
 				346C7A3A29BD198E0023DE23 /* RatesData.swift in Sources */,
 				34EF3EC129BDC57D00CFAEDA /* BasePickerViewModel.swift in Sources */,
 				34C85A682A1E240D00FB7B03 /* SortViewModel.swift in Sources */,
 				3490185F29BE315A00DD1D53 /* SettingsView.swift in Sources */,
 				346C7A3729BD19860023DE23 /* NetworkManager.swift in Sources */,
-				34C85A6B2A1E263A00FB7B03 /* CurrencyListViewModel.swift in Sources */,
 				348D08E92A1CA7D00047BEFF /* ChartRange.swift in Sources */,
 				341750D12C1DB02000B85B02 /* API.swift in Sources */,
 				346C7A2529BD19020023DE23 /* ContentView.swift in Sources */,
@@ -975,6 +969,7 @@
 				3420F4A12AC557770059E40E /* NetworkMonitor.swift in Sources */,
 				34C85A672A1E23FB00FB7B03 /* Sorting.swift in Sources */,
 				346C7A4329BD1AEB0023DE23 /* CurrencyListView.swift in Sources */,
+				34A501A32C209BDC0087A48E /* Defaults.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -999,6 +994,7 @@
 				348346FD2926135B003710CA /* RatesData.swift in Sources */,
 				34671B0A296A03AC0023D88C /* SharedDataManager.swift in Sources */,
 				341750D02C1DB01F00B85B02 /* API.swift in Sources */,
+				34A501A22C209BDB0087A48E /* Defaults.swift in Sources */,
 				341750D22C1DB22900B85B02 /* StaticData.swift in Sources */,
 				341DFC0E295DB44300BDCBDB /* WidgetChartView.swift in Sources */,
 			);
@@ -1013,11 +1009,9 @@
 				34DC74BD2998DE140042F968 /* CurrencyChartView.swift in Sources */,
 				34F748312B0A246A006ACDCD /* SavedCurrency.swift in Sources */,
 				34F748332B0A4934006ACDCD /* OnDeviceStorageView.swift in Sources */,
-				341750C72C1D92AE00B85B02 /* GlobalCurrencyData.swift in Sources */,
 				3482D9412C1C5C6700CECB1F /* CalculationView.swift in Sources */,
 				34D5AFEB2951B6550043B72A /* SortViewModel.swift in Sources */,
 				34ED0C2128F17592006C4F38 /* SharedDataManager.swift in Sources */,
-				344E9987295ED7A200921DBC /* LoadingCell.swift in Sources */,
 				34890F5C2914E6460059B5C3 /* ThanksView.swift in Sources */,
 				342D433A28F7E37F001C69AD /* CurrencyCell.swift in Sources */,
 				34A4959F2B32BAA8007F7683 /* SwiftDataManager.swift in Sources */,
@@ -1041,7 +1035,7 @@
 				341750CB2C1D9C1200B85B02 /* StaticData.swift in Sources */,
 				3498532828F57029003E0FC9 /* SettingsView.swift in Sources */,
 				345D49B729B1D51D00C6E1EB /* CurrencyCalcViewModel.swift in Sources */,
-				34ED0C1B28F172A6006C4F38 /* NetworkManager.swift in Sources */,
+				34A501A12C2095F80087A48E /* Defaults.swift in Sources */,
 				34A2346028F05B5C00C81292 /* WalutApp.swift in Sources */,
 				3420F49F2AC557770059E40E /* NetworkMonitor.swift in Sources */,
 				34A2346E28F05BAE00C81292 /* BasePickerView.swift in Sources */,

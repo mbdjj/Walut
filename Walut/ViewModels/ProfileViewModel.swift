@@ -24,8 +24,6 @@ import SwiftUI
     
     let titleArray: [String]
     
-    private let defaults = UserDefaults.standard
-    
     init(settings: AppSettings) {
         name = settings.user!.name
         
