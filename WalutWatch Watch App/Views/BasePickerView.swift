@@ -9,36 +9,35 @@ import SwiftUI
 
 struct BasePickerView: View {
     
-    @ObservedObject var model = BasePickerViewModel()
+    @Environment(AppSettings.self) var settings
+    @State var model = BasePickerViewModel()
     
     var body: some View {
         VStack {
-            
             Picker(String(localized: "base_currency"), selection: $model.selectedCurrency) {
-                ForEach(SharedDataManager.shared.allCodesArray, id: \.self) { code in
+                ForEach(StaticData.currencyCodes, id: \.self) { code in
                     let currency = Currency(baseCode: code)
-                    
                     Text("\(currency.flag) \(currency.code)")
-                    
                 }
             }
             
             Button {
-                model.selectBase()
+                model.saveBase()
+                settings.baseCurrency = Currency(baseCode: model.selectedCurrency)
+                settings.sortByFavorite = true
+                settings.decimal = 3
+                settings.appstate = .baseSelected
             } label: {
                 HStack {
-                    
                     Spacer()
                     Text("save")
                     Spacer()
-                    
                 }
             }
-                .buttonStyle(.borderedProminent)
-                .padding()
+            .buttonStyle(.borderedProminent)
+            .padding()
             
             Spacer()
-            
         }
         .navigationTitle(String(localized: "base_choose"))
     }

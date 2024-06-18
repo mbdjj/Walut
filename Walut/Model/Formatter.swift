@@ -8,14 +8,14 @@
 import Foundation
 
 struct Formatter {
-    static let dateFormatter: DateFormatter = {
+    static private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.calendar = Calendar.current
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter
     }()
     
-    static let percentFormatter: NumberFormatter = {
+    static private let percentFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.locale = Locale.current
         formatter.numberStyle = .percent
@@ -23,7 +23,7 @@ struct Formatter {
         return formatter
     }()
     
-    static let priceFormatter: NumberFormatter = {
+    static private let priceFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.locale = Locale.current
         formatter.numberStyle = .currency
@@ -31,7 +31,7 @@ struct Formatter {
         return formatter
     }()
     
-    static let currencyFormatter: NumberFormatter = {
+    static private let currencyFormatter: NumberFormatter = {
         let formatter = NumberFormatter()
         formatter.locale = Locale.current
         formatter.numberStyle = .currency

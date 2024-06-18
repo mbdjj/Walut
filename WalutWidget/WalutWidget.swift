@@ -12,7 +12,6 @@ import SwiftData
 struct Provider: IntentTimelineProvider {
     
     private let modelContainer: ModelContainer
-    private let defaults = UserDefaults(suiteName: "group.dev.bartminski.Walut")!
     
     init() {
         do {

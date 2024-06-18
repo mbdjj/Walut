@@ -11,10 +11,6 @@ struct RectangularView: View {
     let baseCode: String
     let currency: Currency
     
-    var baseCurrency: Currency { Currency(baseCode: baseCode) }
-    
-    private let defaults = UserDefaults(suiteName: "group.dev.bartminski.Walut")!
-    
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
@@ -22,7 +18,7 @@ struct RectangularView: View {
                     .font(.system(.body, design: .rounded))
                     .fontWeight(.bold)
                 
-                Text(SharedDataManager.shared.currencyLocaleString(value: currency.price, currencyCode: baseCode, decimal: defaults.integer(forKey: "decimal")))
+                Text(Formatter.currency(value: currency.price, currencyCode: baseCode, decimal: Defaults.decimal()))
                     .font(.system(.title3, design: .rounded))
                     .fontWeight(.heavy)
                     .minimumScaleFactor(0.6)

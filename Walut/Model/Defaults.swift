@@ -65,3 +65,18 @@ extension Color {
     static let walut = Color(red: 0, green: 0.725, blue: 0.682)
     static let pinkWalut = Color(red: 1, green: 0.78, blue: 0.87)
 }
+
+enum AppState {
+    case baseSelected
+    case onboarding
+    case onboarded
+}
+
+enum StorageSavingOptions: Int, CaseIterable {
+    case twoDays = 1
+    case oneWeek = 2
+    case oneMonth = 3
+    case threeMonths = 4
+    case sixMonths = 5
+    case oneYear = 6
+}

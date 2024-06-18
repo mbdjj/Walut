@@ -8,18 +8,21 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    @Environment(AppSettings.self) var settings
+    
     var body: some View {
         List {
             Button {
                 DispatchQueue.main.async {
-                    SharedDataManager.shared.appState = .onboarding
+                    settings.appstate = .onboarding
                 }
             } label: {
                 Text("settings_change_base")
             }
             
             NavigationLink {
-                //SortView()
+                SortView(settings: settings)
                 EmptyView()
             } label: {
                 Text("sort_nav_title")

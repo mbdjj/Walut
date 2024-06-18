@@ -7,28 +7,19 @@
 
 import SwiftUI
 
-class BasePickerViewModel: ObservableObject {
+@Observable class BasePickerViewModel {
     
-    @Published var selectedCurrency: String
-    
-    let defaults = UserDefaults.standard
-    let shared = SharedDataManager.shared
+    var selectedCurrency: String
     
     init() {
-        selectedCurrency = Locale.current.currency?.identifier ?? shared.base.code
+        selectedCurrency = Locale.current.currency?.identifier ?? "AUD"
     }
     
     
-    func selectBase() {
-        defaults.set(selectedCurrency, forKey: "base")
-        defaults.set(true, forKey: "isBaseSelected")
-        defaults.set(true, forKey: "byFavorite")
-        shared.base = Currency(baseCode: selectedCurrency)
-        shared.sortByFavorite = true
-        
-        DispatchQueue.main.async {
-            self.shared.appState = .baseSelected
-        }
+    func saveBase() {
+        Defaults.saveBaseCode(selectedCurrency)
+        Defaults.saveByFavorite(true)
+        Defaults.saveDecimal(3)
     }
     
 }

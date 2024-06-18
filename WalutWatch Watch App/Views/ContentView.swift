@@ -6,14 +6,16 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
     
-    @ObservedObject var shared = SharedDataManager.shared
+    @Environment(AppSettings.self) var settings
+    @Environment(\.modelContext) var modelContext
     
     var body: some View {
-        if shared.appState == .baseSelected {
-            CurrencyListView()
+        if settings.appstate == .baseSelected {
+            CurrencyListView(modelContext: modelContext)
         } else {
             BasePickerView()
         }

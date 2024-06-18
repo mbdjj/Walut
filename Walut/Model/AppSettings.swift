@@ -73,10 +73,15 @@ import WidgetKit
     }
     
     // MARK: - Settings methods
+    @MainActor
     func saveBase() {
         Defaults.saveBaseCode(baseCurrency!.code)
+        
+        #if os(iOS)
         AppIcon.changeIcon(to: baseCurrency!.code)
+        #endif
     }
+    @MainActor
     func saveDecimal() {
         Defaults.saveDecimal(decimal)
         WidgetCenter.shared.reloadTimelines(ofKind: "WalutWidget")

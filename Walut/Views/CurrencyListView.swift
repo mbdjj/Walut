@@ -42,26 +42,10 @@ struct CurrencyListView: View {
                     }
                 }
                 
-//                if !model.loading {
-                    if !model.favoritesArray.isEmpty {
-                        Section {
-                            ForEach(model.favoritesArray) { currency in
-                                Button {
-                                    model.selectedCurrency = currency
-                                } label: {
-                                    CurrencyCell(for: currency, mode: settings.quickConvert ? .quickConvert : .normal, value: quickConvertValue)
-                                        .onDrag {
-                                            let textToShare = "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(settings.decimal)f", currency.price)) \(settings.baseCurrency!.symbol)"
-                                            return NSItemProvider(object: textToShare as NSString)
-                                        }
-                                }
 
-                            }
-                        }
-                    }
-                    
+                if !model.favoritesArray.isEmpty {
                     Section {
-                        ForEach(model.currencyArray) { currency in
+                        ForEach(model.favoritesArray) { currency in
                             Button {
                                 model.selectedCurrency = currency
                             } label: {
@@ -71,23 +55,25 @@ struct CurrencyListView: View {
                                         return NSItemProvider(object: textToShare as NSString)
                                     }
                             }
+
                         }
                     }
-//                } else {  // placeholder cells while loading
-//                    if settings.sortByFavorite {
-//                        Section {
-//                            ForEach(0 ..< model.numbersForPlaceholders().0, id: \.self) { _ in
-//                                LoadingCell()
-//                            }
-//                        }
-//                    }
-//                    
-//                    Section {
-//                        ForEach(settings.sortByFavorite ? 0 ..< model.numbersForPlaceholders().1 : 0 ..< StaticData.currencyCodes.count - 1, id: \.self) { _ in
-//                            LoadingCell()
-//                        }
-//                    }
-//                }
+                }
+                
+                Section {
+                    ForEach(model.currencyArray) { currency in
+                        Button {
+                            model.selectedCurrency = currency
+                        } label: {
+                            CurrencyCell(for: currency, mode: settings.quickConvert ? .quickConvert : .normal, value: quickConvertValue)
+                                .onDrag {
+                                    let textToShare = "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(settings.decimal)f", currency.price)) \(settings.baseCurrency!.symbol)"
+                                    return NSItemProvider(object: textToShare as NSString)
+                                }
+                        }
+                    }
+                }
+
             }
             .navigationTitle("\(settings.baseCurrency!.flag) \(settings.baseCurrency!.code)")
             .toolbar {
@@ -108,12 +94,6 @@ struct CurrencyListView: View {
                     .buttonStyle(.bordered)
                     .buttonBorderShape(.circle)
                 }
-            }
-            .refreshable {
-//                Task {
-//                    await model.refreshData(for: settings.baseCurrency!.code, sortIndex: settings.sortIndex)
-//                    SwiftDataManager.saveCurrencies(data: model.currencyArray + model.favoritesArray, to: modelContext)
-//                }
             }
             .alert("error", isPresented: $model.shouldDisplayErrorAlert) {
                 Button {

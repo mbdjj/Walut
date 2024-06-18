@@ -9,10 +9,22 @@ import SwiftUI
 
 struct CurrencyCell: View {
     
-    let currency: Currency
-    var base: Currency { shared.base }
+    @Environment(AppSettings.self) var settings
     
-    let shared = SharedDataManager.shared
+    let currency: Currency
+    var base: Currency { settings.baseCurrency! }
+    
+    let mode: CurrencyCell.CellMode
+    
+    init(currency: Currency) {
+        self.currency = currency
+        currency.price == 1 ? (self.mode = .loading) : (self.mode = .normal)
+    }
+    
+    enum CellMode {
+        case normal
+        case loading
+    }
     
     var body: some View {
         
@@ -35,7 +47,7 @@ struct CurrencyCell: View {
                 
                 Spacer()
                 
-                Text(currency.rate != 0 ? shared.currencyLocaleString(value: currency.price, currencyCode: base.code, decimal: 3) : String(localized: "no_data"))
+                Text(currency.rate != 0 ? Formatter.currency(value: currency.price, currencyCode: base.code, decimal: Defaults.decimal()) : String(localized: "no_data"))
             }
         }
         
