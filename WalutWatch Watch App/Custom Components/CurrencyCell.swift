@@ -47,7 +47,13 @@ struct CurrencyCell: View {
                 
                 Spacer()
                 
-                Text(currency.rate != 0 ? Formatter.currency(value: currency.price, currencyCode: base.code, decimal: Defaults.decimal()) : String(localized: "no_data"))
+                switch mode {
+                case .normal:
+                    Text(currency.rate != 0 ? Formatter.currency(value: currency.price, currencyCode: base.code, decimal: Defaults.decimal()) : String(localized: "no_data"))
+                case .loading:
+                    Text("1,234 zł")
+                        .redacted(reason: .placeholder)
+                }
             }
         }
         
