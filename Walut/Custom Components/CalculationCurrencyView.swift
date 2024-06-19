@@ -87,7 +87,9 @@ struct CalculationCurrencyView: View {
                 }
             }
             .background(Color(uiColor: .secondarySystemBackground))
-            .padding()
+            .padding(.top, 8)
+            .padding(.horizontal, isOpen ? 8 : 16)
+            .padding(.bottom, isOpen ? 0 : 8)
             .onTapGesture {
                 if isOpen {
                     showCurrencyPicker = true
@@ -104,7 +106,7 @@ struct CalculationCurrencyView: View {
                 Rectangle()
                     .frame(height: 1)
                     .foregroundStyle(.secondary)
-                    .padding(.horizontal)
+                    .padding(.horizontal, 8)
                 
                 VStack {
                     Spacer()
@@ -120,7 +122,7 @@ struct CalculationCurrencyView: View {
                     
                     Spacer()
                 }
-                .padding()
+                .padding(.horizontal, 8)
                 .frame(maxHeight: 200)
             }
         }
