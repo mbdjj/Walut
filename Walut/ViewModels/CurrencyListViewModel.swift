@@ -33,6 +33,7 @@ import SwiftData
             currencyArray = sort(array: currencyArray, to: sortIndex)
             
             DispatchQueue.main.async {
+                self.favoritesArray = []
                 self.currencyArray = currencyArray
             }
         }

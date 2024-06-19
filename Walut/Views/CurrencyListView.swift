@@ -13,7 +13,6 @@ struct CurrencyListView: View {
     
     @State var model = CurrencyListViewModel()
     @State var quickConvertValue = 1.0
-    @State var queryString: String = ""
     
     @Environment(AppSettings.self) var settings
     @Environment(MainCurrencyData.self) var mainCurrencyData
@@ -84,12 +83,18 @@ struct CurrencyListView: View {
                 
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     NavigationLink {
-                        SortView(settings: settings)
+                        SettingsView()
                     } label: {
-                        Image(systemName: "arrow.up.arrow.down")
+                        Text(settings.user!.pfpLetter)
+                            .font(.system(.body, design: .rounded))
+                            .bold()
+                            .frame(width: 35, height: 35)
+                            .foregroundColor(.white)
+                            .background(
+                                Color.walut
+                                    .clipShape(Circle())
+                            )
                     }
-                    .buttonStyle(.bordered)
-                    .buttonBorderShape(.circle)
                 }
             }
             .onChange(of: networkMonitor.isConnected) { _, connected in
@@ -130,6 +135,7 @@ struct CurrencyListView: View {
     }
     
     private func presentData() {
+        print("Present data")
         model.present(
             data: mainCurrencyData.allCurrencyData,
             baseCode: settings.baseCurrency!.code,

@@ -76,10 +76,6 @@ import WidgetKit
     @MainActor
     func saveBase() {
         Defaults.saveBaseCode(baseCurrency!.code)
-        
-        #if os(iOS)
-        AppIcon.changeIcon(to: baseCurrency!.code)
-        #endif
     }
     @MainActor
     func saveDecimal() {

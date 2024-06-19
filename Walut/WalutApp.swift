@@ -11,6 +11,7 @@ import SwiftData
 @main
 struct WalutApp: App {
     @State var appSettings = AppSettings()
+    @State var mainCurrencyData: MainCurrencyData
     @StateObject var networkMonitor = NetworkMonitor()
     
     let container: ModelContainer
@@ -21,6 +22,8 @@ struct WalutApp: App {
                 for: SavedCurrency.self,
                 migrationPlan: SavedCurrencyMigrationPlan.self
             )
+            mainCurrencyData = MainCurrencyData(modelContext: container.mainContext)
+            mainCurrencyData.updateBase(appSettings.baseCurrency)
         } catch {
             fatalError("Failed to initialize model container.")
         }
@@ -28,8 +31,9 @@ struct WalutApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ViewManagingView(modelContext: container.mainContext, settings: appSettings)
+            ViewManagingView()
                 .environment(appSettings)
+                .environment(mainCurrencyData)
                 .environmentObject(networkMonitor)
                 .modelContainer(container)
         }

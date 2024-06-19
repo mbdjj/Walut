@@ -12,7 +12,7 @@ struct SettingsView: View {
     @Environment(AppSettings.self) var settings
     @Environment(\.requestReview) var requestReview
     
-    @State var selectedBaseCode = Defaults.baseCode()!
+    @AppStorage("base") var selectedBaseCode: String = "AUD"
     
     var isSupporter: Bool {
         settings.user!.unlockedTitlesArray.contains([3]) || settings.user!.unlockedTitlesArray.contains([4])
@@ -73,6 +73,7 @@ struct SettingsView: View {
                     .foregroundStyle(.primary)
                     .onChange(of: selectedBaseCode) { _, code in
                         settings.baseCurrency = Currency(baseCode: code)
+                        AppIcon.changeIcon(to: code)
                     }
                     
                     Stepper(value: $settings.decimal, in: 0...7) {

@@ -10,6 +10,7 @@ import SwiftUI
 struct BasePickerView: View {
     
     @Environment(AppSettings.self) var settings
+    @Environment(MainCurrencyData.self) var mainCurrencyData
     @StateObject var model = BasePickerViewModel()
     
     @FocusState var shouldNameFieldBeFocused: Bool
@@ -49,6 +50,7 @@ struct BasePickerView: View {
                             settings.sortByFavorite = true
                             
                             settings.appstate = .baseSelected
+                            mainCurrencyData.updateBase(settings.baseCurrency)
                         }
                     } label: {
                         Text(String(localized: "save"))

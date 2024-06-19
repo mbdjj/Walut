@@ -20,7 +20,6 @@ class BasePickerViewModel: ObservableObject {
     @Published var saveButtonDisabled = true
     
     private let defaults = UserDefaults.standard
-    //private let shared = SharedDataManager.shared
     
     init() {
         currencyArray = StaticData.currencyCodes

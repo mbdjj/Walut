@@ -26,6 +26,7 @@ import SwiftData
     }
     
     func updateBase(_ base: Currency?) {
+        print("Base updated to \(base?.code ?? "nil")")
         baseCurrency = base
         Task {
             await checkRefresh()
@@ -99,5 +100,6 @@ import SwiftData
         allCurrencyData = array
         loading = false
         dataUpdateControlNumber += 1
+        print("Data update control number = \(dataUpdateControlNumber)")
     }
 }

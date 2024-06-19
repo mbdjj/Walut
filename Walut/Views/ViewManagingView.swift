@@ -11,21 +11,16 @@ import SwiftData
 struct ViewManagingView: View {
     
     @Environment(AppSettings.self) var settings
+    @Environment(MainCurrencyData.self) var mainCurrencyData
     @Environment(\.modelContext) var modelContext
-    @State var mainCurrencyData: MainCurrencyData
     @AppStorage("selectedTab") var selection: Int = 1
     
-    init(modelContext: ModelContext, settings: AppSettings) {
-        mainCurrencyData = MainCurrencyData(modelContext: modelContext)
-        mainCurrencyData.updateBase(settings.baseCurrency)
-    }
-    
     var body: some View {
+        @Bindable var mainCurrencyData = mainCurrencyData
         switch settings.appstate {
         case .baseSelected:
             TabView(selection: $selection) {
                 CurrencyListView()
-                    .environment(mainCurrencyData)
                     .tabItem {
                         Label("All", systemImage: "dollarsign.circle")
                     }
