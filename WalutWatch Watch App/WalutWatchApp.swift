@@ -28,7 +28,7 @@ struct WalutWatch_Watch_AppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(modelContext: container.mainContext, settings: settings)
                 .environment(settings)
                 .modelContainer(container)
         }

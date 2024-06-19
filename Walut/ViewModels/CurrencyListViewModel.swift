@@ -15,60 +15,25 @@ import SwiftData
     
     var selectedCurrency: Currency?
     
-    var loading: Bool = false
-    
     var errorMessage = ""
     var shouldDisplayErrorAlert = false
     
-    let modelContext: ModelContext
-    
-    init(modelContext: ModelContext) {
-        self.modelContext = modelContext
-        currencyArray = StaticData.currencyCodes.map { Currency(baseCode: $0) }
-    }
-    
-    func loadData(for baseCode: String, sortIndex: Int, storageOption: StorageSavingOptions) async {
-        loading = true
-        let hasToRefresh = API.shouldRefresh()
-        
-        if hasToRefresh {
-            let data = await fetchCurrencyData(for: baseCode)
-            guard !data.isEmpty else {
-                let savedData = await SwiftDataManager.getCurrencies(from: modelContext, baseCode: baseCode)
-                present(data: savedData, baseCode: baseCode, sortIndex: sortIndex)
-                await SwiftDataManager.cleanData(from: modelContext, useInterval: true, storageOption: storageOption)
-                return
-            }
-            await SwiftDataManager.saveCurrencies(data: data, base: baseCode, to: modelContext)
-        }
-        
-        await SwiftDataManager.cleanData(from: modelContext, useInterval: true, storageOption: storageOption)
-        let currencies = await SwiftDataManager.getCurrencies(from: modelContext, baseCode: baseCode)
-        guard !currencies.isEmpty else {
-            let data = await fetchCurrencyData(for: baseCode)
-            await SwiftDataManager.saveCurrencies(data: data, base: baseCode, to: modelContext)
-            present(data: data, baseCode: baseCode, sortIndex: sortIndex)
-            return
-        }
-        present(data: currencies, baseCode: baseCode, sortIndex: sortIndex)
-    }
-    
-    func fetchCurrencyData(for baseCode: String) async -> [Currency] {
-        do {
-            let data = try await API.fetchCurrencyRates(for: Currency(baseCode: baseCode))
-            return data
-        } catch {
-            DispatchQueue.main.async {
-                if let error = error as? API.APIError {
-                    self.errorMessage = error.localizedDesc
-                } else {
-                    self.errorMessage = error.localizedDescription
-                }
-                self.shouldDisplayErrorAlert = true
-            }
-            return []
-        }
-    }
+//    func fetchCurrencyData(for baseCode: String) async -> [Currency] {
+//        do {
+//            let data = try await API.fetchCurrencyRates(for: Currency(baseCode: baseCode))
+//            return data
+//        } catch {
+//            DispatchQueue.main.async {
+//                if let error = error as? API.APIError {
+//                    self.errorMessage = error.localizedDesc
+//                } else {
+//                    self.errorMessage = error.localizedDescription
+//                }
+//                self.shouldDisplayErrorAlert = true
+//            }
+//            return []
+//        }
+//    }
     
     func present(data: [Currency], baseCode: String, sortIndex: Int) {
 //        if byFavorite {
@@ -88,12 +53,6 @@ import SwiftData
                 self.currencyArray = currencyArray
             }
 //        }
-        
-        DispatchQueue.main.async {
-            withAnimation {
-                self.loading = false
-            }
-        }
     }
     
     private func splitFavorites(from array: [Currency], baseCode: String, favoritesOrder: [String]) -> ([Currency], [Currency]) {

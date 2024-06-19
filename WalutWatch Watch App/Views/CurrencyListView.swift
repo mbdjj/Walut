@@ -11,11 +11,8 @@ import SwiftData
 struct CurrencyListView: View {
     
     @Environment(AppSettings.self) var settings
-    @State var model: CurrencyListViewModel
-    
-    init(modelContext: ModelContext) {
-        model = CurrencyListViewModel(modelContext: modelContext)
-    }
+    @Environment(MainCurrencyData.self) var mainCurrencyData
+    @State var model = CurrencyListViewModel()
     
     var body: some View {
         NavigationStack {
@@ -73,14 +70,10 @@ struct CurrencyListView: View {
                 }
             }
             .onAppear {
-                Task {
-                    await loadData()
-                }
+                presentData()
             }
-            .refreshable {
-                Task {
-                    await loadData()
-                }
+            .onChange(of: mainCurrencyData.dataUpdateControlNumber) { _, _ in
+                presentData()
             }
             .navigationDestination(item: $model.selectedCurrency) { currency in
                 CurrencyView(currency: currency, base: settings.baseCurrency!)
@@ -88,8 +81,12 @@ struct CurrencyListView: View {
         }
     }
     
-    private func loadData() async {
-        await model.loadData(for: settings.baseCurrency!.code, sortIndex: settings.sortIndex, storageOption: settings.storageOption)
+    private func presentData() {
+        model.present(
+            data: mainCurrencyData.allCurrencyData,
+            baseCode: settings.baseCurrency!.code,
+            sortIndex: settings.sortIndex
+        )
     }
 }
 

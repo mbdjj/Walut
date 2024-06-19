@@ -66,7 +66,7 @@ struct API {
         let data = getDataFromDefaults()
         let now = Date.now
 
-        let result = data.date < now || data.base != UserDefaults.standard.string(forKey: "base")
+        let result = data.date < now || data.base != Defaults.baseCode()
         print("Should\(result ? "" : "n't") refresh")
         return result
     }

@@ -11,23 +11,20 @@ import SwiftData
 
 struct CurrencyListView: View {
     
-    @State var model: CurrencyListViewModel
+    @State var model = CurrencyListViewModel()
     @State var quickConvertValue = 1.0
     @State var queryString: String = ""
     
     @Environment(AppSettings.self) var settings
+    @Environment(MainCurrencyData.self) var mainCurrencyData
     @Environment(\.requestReview) var requestReview
     @EnvironmentObject var networkMonitor: NetworkMonitor
     
     @AppStorage("openCount") var openCount = 0
-    @AppStorage("nextUpdate", store: UserDefaults(suiteName: "group.dev.bartminski.Walut")) var nextUpdate = 0
+    @AppStorage("nextUpdate", store: Defaults.sharedDefaults) var nextUpdate = 0
     
     @Environment(\.modelContext) var modelContext
     @Query var savedCurrencies: [SavedCurrency]
-    
-    init(modelContext: ModelContext) {
-        model = CurrencyListViewModel(modelContext: modelContext)
-    }
     
     var body: some View {
         NavigationStack {
@@ -43,22 +40,22 @@ struct CurrencyListView: View {
                 }
                 
 
-                if !model.favoritesArray.isEmpty {
-                    Section {
-                        ForEach(model.favoritesArray) { currency in
-                            Button {
-                                model.selectedCurrency = currency
-                            } label: {
-                                CurrencyCell(for: currency, mode: settings.quickConvert ? .quickConvert : .normal, value: quickConvertValue)
-                                    .onDrag {
-                                        let textToShare = "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(settings.decimal)f", currency.price)) \(settings.baseCurrency!.symbol)"
-                                        return NSItemProvider(object: textToShare as NSString)
-                                    }
-                            }
-
-                        }
-                    }
-                }
+//                if !model.favoritesArray.isEmpty {
+//                    Section {
+//                        ForEach(model.favoritesArray) { currency in
+//                            Button {
+//                                model.selectedCurrency = currency
+//                            } label: {
+//                                CurrencyCell(for: currency, mode: settings.quickConvert ? .quickConvert : .normal, value: quickConvertValue)
+//                                    .onDrag {
+//                                        let textToShare = "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(settings.decimal)f", currency.price)) \(settings.baseCurrency!.symbol)"
+//                                        return NSItemProvider(object: textToShare as NSString)
+//                                    }
+//                            }
+//
+//                        }
+//                    }
+//                }
                 
                 Section {
                     ForEach(model.currencyArray) { currency in
@@ -77,7 +74,7 @@ struct CurrencyListView: View {
             }
             .navigationTitle("\(settings.baseCurrency!.flag) \(settings.baseCurrency!.code)")
             .toolbar {
-                if nextUpdate < Int(Date().timeIntervalSince1970) && !model.loading {
+                if nextUpdate < Int(Date().timeIntervalSince1970) && !mainCurrencyData.loading {
                     ToolbarItem(placement: .navigationBarLeading) {
                         Image(systemName: "wifi.slash")
                             .foregroundColor(.gray)
@@ -106,23 +103,22 @@ struct CurrencyListView: View {
                 Text("\(model.errorMessage)")
             }
             .scrollDismissesKeyboard(.immediately)
-            .onAppear {
-                Task {
-                    await loadData()
-                }
-            }
             .onChange(of: networkMonitor.isConnected) { _, connected in
                 if connected {
                     Task {
                         model.shouldDisplayErrorAlert = false
-                        await loadData()
+                        presentData()
                     }
                 }
             }
-            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
-                Task {
-                    await loadData()
+            .onChange(of: mainCurrencyData.dataUpdateControlNumber) { _, _ in
+                presentData()
+                if mainCurrencyData.allCurrencyData.isEmpty {
+                    printSwiftData()
                 }
+            }
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+                presentData()
                 
                 if openCount < 6 {
                     openCount += 1
@@ -139,8 +135,12 @@ struct CurrencyListView: View {
         }
     }
     
-    private func loadData() async {
-        await model.loadData(for: settings.baseCurrency!.code, sortIndex: settings.sortIndex, storageOption: settings.storageOption)
+    private func presentData() {
+        model.present(
+            data: mainCurrencyData.allCurrencyData,
+            baseCode: settings.baseCurrency!.code,
+            sortIndex: settings.sortIndex
+        )
     }
     
     private func printSwiftData() {

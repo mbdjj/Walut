@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Defaults {
     private static let defaults = UserDefaults.standard
-    private static let sharedDefaults = UserDefaults(suiteName: "group.dev.bartminski.Walut")!
+    static let sharedDefaults = UserDefaults(suiteName: "group.dev.bartminski.Walut")!
     
     
     // MARK: - Strings

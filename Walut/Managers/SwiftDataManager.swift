@@ -63,11 +63,11 @@ struct SwiftDataManager {
                 guard let storageOption else { print("No storage option provided!"); return }
                 let minInterval = decodeStorageOptionInterval(from: storageOption)
                 try modelContext.delete(model: SavedCurrency.self, where: #Predicate {
-                    $0.nextRefresh < minInterval || $0.nextRefresh > nextUpdate - (12 * 3600) && $0.nextRefresh < nextUpdate
+                    $0.nextRefresh < minInterval || $0.nextRefresh > nextUpdate - (6 * 3600) && $0.nextRefresh < nextUpdate
                 })
             } else {
                 try modelContext.delete(model: SavedCurrency.self, where: #Predicate {
-                    $0.nextRefresh > nextUpdate - (12 * 3600) && $0.nextRefresh < nextUpdate
+                    $0.nextRefresh > nextUpdate - (6 * 3600) && $0.nextRefresh < nextUpdate
                 })
             }
             
@@ -119,6 +119,11 @@ struct SwiftDataManager {
             .rate
         
         return lastRate
+    }
+    
+    @MainActor
+    static func getAllSavedData(from modelContext: ModelContext) -> [SavedCurrency]? {
+        return try? modelContext.fetch(FetchDescriptor<SavedCurrency>())
     }
     
     static func getChartData(for code: String, base: String, from savedCurrencies: [SavedCurrency]?) -> [RatesData] {

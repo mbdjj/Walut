@@ -28,7 +28,7 @@ struct WalutApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ViewManagingView()
+            ViewManagingView(modelContext: container.mainContext, settings: appSettings)
                 .environment(appSettings)
                 .environmentObject(networkMonitor)
                 .modelContainer(container)
