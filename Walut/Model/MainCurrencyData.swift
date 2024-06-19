@@ -15,6 +15,9 @@ import SwiftData
     var loading = false
     var dataUpdateControlNumber: Int = 0
     
+    var errorMessage = ""
+    var shouldDisplayErrorAlert = false
+    
     let modelContext: ModelContext
     
     init(modelContext: ModelContext) {
@@ -38,14 +41,14 @@ import SwiftData
             SwiftDataManager.saveCurrencies(data: fetchedData, to: modelContext)
             SwiftDataManager.cleanData(from: modelContext)
             guard !fetchedData.isEmpty else {
-                let loaded = await loadCurrencyData()
+                let loaded = loadCurrencyData()
                 updateCurrencies(with: loaded)
                 return
             }
             updateCurrencies(with: fetchedData)
         } else if dataUpdateControlNumber == 0 {
             SwiftDataManager.cleanData(from: modelContext)
-            let loadedData = await loadCurrencyData()
+            let loadedData = loadCurrencyData()
             guard !loadedData.isEmpty else {
                 let fetched = await fetchCurrencyData()
                 SwiftDataManager.saveCurrencies(data: fetched, to: modelContext)
@@ -72,14 +75,22 @@ import SwiftData
             }
             return newData
         } catch {
-            print(error.localizedDescription)
+            DispatchQueue.main.async {
+                if let error = error as? API.APIError {
+                    self.errorMessage = error.localizedDesc
+                } else {
+                    self.errorMessage = error.localizedDescription
+                }
+                self.shouldDisplayErrorAlert = true
+            }
             return []
         }
     }
     
-    func loadCurrencyData() async -> [Currency] {
+    @MainActor
+    func loadCurrencyData() -> [Currency] {
         guard let baseCurrency else { return [] }
-        let data = await SwiftDataManager.getCurrencies(from: modelContext, baseCode: baseCurrency.code)
+        let data = SwiftDataManager.getCurrencies(from: modelContext, baseCode: baseCurrency.code)
         return Sorting.byCode(data, direction: .ascending)
     }
     

@@ -85,7 +85,9 @@ struct CurrencyListView: View {
         model.present(
             data: mainCurrencyData.allCurrencyData,
             baseCode: settings.baseCurrency!.code,
-            sortIndex: settings.sortIndex
+            sortIndex: settings.sortIndex,
+            byFavorite: settings.sortByFavorite,
+            favoritesOrder: settings.favorites
         )
     }
 }

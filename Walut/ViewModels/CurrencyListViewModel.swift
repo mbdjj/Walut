@@ -18,41 +18,24 @@ import SwiftData
     var errorMessage = ""
     var shouldDisplayErrorAlert = false
     
-//    func fetchCurrencyData(for baseCode: String) async -> [Currency] {
-//        do {
-//            let data = try await API.fetchCurrencyRates(for: Currency(baseCode: baseCode))
-//            return data
-//        } catch {
-//            DispatchQueue.main.async {
-//                if let error = error as? API.APIError {
-//                    self.errorMessage = error.localizedDesc
-//                } else {
-//                    self.errorMessage = error.localizedDescription
-//                }
-//                self.shouldDisplayErrorAlert = true
-//            }
-//            return []
-//        }
-//    }
-    
-    func present(data: [Currency], baseCode: String, sortIndex: Int) {
-//        if byFavorite {
-//            var (currencyArray, favoritesArray) = splitFavorites(from: data)
-//            
-//            currencyArray = sort(array: currencyArray)
-//            
-//            DispatchQueue.main.async {
-//                self.favoritesArray = favoritesArray
-//                self.currencyArray = currencyArray
-//            }
-//        } else {
+    func present(data: [Currency], baseCode: String, sortIndex: Int, byFavorite: Bool, favoritesOrder: [String]) {
+        if byFavorite {
+            var (currencyArray, favoritesArray) = splitFavorites(from: data, baseCode: baseCode, favoritesOrder: favoritesOrder)
+            
+            currencyArray = sort(array: currencyArray, to: sortIndex)
+            
+            DispatchQueue.main.async {
+                self.favoritesArray = favoritesArray
+                self.currencyArray = currencyArray
+            }
+        } else {
             var currencyArray = removeBase(from: data, baseCode: baseCode)
             currencyArray = sort(array: currencyArray, to: sortIndex)
             
             DispatchQueue.main.async {
                 self.currencyArray = currencyArray
             }
-//        }
+        }
     }
     
     private func splitFavorites(from array: [Currency], baseCode: String, favoritesOrder: [String]) -> ([Currency], [Currency]) {

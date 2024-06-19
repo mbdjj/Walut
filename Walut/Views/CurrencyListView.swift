@@ -40,22 +40,22 @@ struct CurrencyListView: View {
                 }
                 
 
-//                if !model.favoritesArray.isEmpty {
-//                    Section {
-//                        ForEach(model.favoritesArray) { currency in
-//                            Button {
-//                                model.selectedCurrency = currency
-//                            } label: {
-//                                CurrencyCell(for: currency, mode: settings.quickConvert ? .quickConvert : .normal, value: quickConvertValue)
-//                                    .onDrag {
-//                                        let textToShare = "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(settings.decimal)f", currency.price)) \(settings.baseCurrency!.symbol)"
-//                                        return NSItemProvider(object: textToShare as NSString)
-//                                    }
-//                            }
-//
-//                        }
-//                    }
-//                }
+                if !model.favoritesArray.isEmpty {
+                    Section {
+                        ForEach(model.favoritesArray) { currency in
+                            Button {
+                                model.selectedCurrency = currency
+                            } label: {
+                                CurrencyCell(for: currency, mode: settings.quickConvert ? .quickConvert : .normal, value: quickConvertValue)
+                                    .onDrag {
+                                        let textToShare = "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(settings.decimal)f", currency.price)) \(settings.baseCurrency!.symbol)"
+                                        return NSItemProvider(object: textToShare as NSString)
+                                    }
+                            }
+
+                        }
+                    }
+                }
                 
                 Section {
                     ForEach(model.currencyArray) { currency in
@@ -92,17 +92,6 @@ struct CurrencyListView: View {
                     .buttonBorderShape(.circle)
                 }
             }
-            .alert("error", isPresented: $model.shouldDisplayErrorAlert) {
-                Button {
-                    model.shouldDisplayErrorAlert = false
-                    model.errorMessage = ""
-                } label: {
-                    Text("OK")
-                }
-            } message: {
-                Text("\(model.errorMessage)")
-            }
-            .scrollDismissesKeyboard(.immediately)
             .onChange(of: networkMonitor.isConnected) { _, connected in
                 if connected {
                     Task {
@@ -115,6 +104,11 @@ struct CurrencyListView: View {
                 presentData()
                 if mainCurrencyData.allCurrencyData.isEmpty {
                     printSwiftData()
+                }
+            }
+            .onChange(of: "\(settings.sortIndex)\(settings.sortByFavorite)\(settings.favorites)") { _, _ in
+                withAnimation {
+                    presentData()
                 }
             }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
@@ -139,7 +133,9 @@ struct CurrencyListView: View {
         model.present(
             data: mainCurrencyData.allCurrencyData,
             baseCode: settings.baseCurrency!.code,
-            sortIndex: settings.sortIndex
+            sortIndex: settings.sortIndex,
+            byFavorite: settings.sortByFavorite,
+            favoritesOrder: settings.favorites
         )
     }
     

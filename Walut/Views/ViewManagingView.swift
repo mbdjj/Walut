@@ -13,7 +13,7 @@ struct ViewManagingView: View {
     @Environment(AppSettings.self) var settings
     @Environment(\.modelContext) var modelContext
     @State var mainCurrencyData: MainCurrencyData
-    @State var selection = 0
+    @AppStorage("selectedTab") var selection: Int = 1
     
     init(modelContext: ModelContext, settings: AppSettings) {
         mainCurrencyData = MainCurrencyData(modelContext: modelContext)
@@ -29,15 +29,20 @@ struct ViewManagingView: View {
                     .tabItem {
                         Label("All", systemImage: "dollarsign.circle")
                     }
-                    .tag(0)
-                SettingsView()
-                    .tabItem {
-                        Label("settings", systemImage: "gear")
-                    }
-                    .tag(2)
+                    .tag(1)
             }
             .onChange(of: settings.baseCurrency) { _, base in
                 mainCurrencyData.updateBase(base)
+            }
+            .alert("error", isPresented: $mainCurrencyData.shouldDisplayErrorAlert) {
+                Button {
+                    mainCurrencyData.shouldDisplayErrorAlert = false
+                    mainCurrencyData.errorMessage = ""
+                } label: {
+                    Text("OK")
+                }
+            } message: {
+                Text("\(mainCurrencyData.errorMessage)")
             }
         case .onboarding:
             HelloView()
