@@ -18,12 +18,12 @@ enum SavedCurrencyV1: VersionedSchema {
     }
     
     @Model class SavedCurrency {
-        let code: String
-        let base: String
-        let rate: Double
+        var code: String
+        var base: String
+        var rate: Double
         
-        let nextRefresh: Int
-        let dateSaved: Date
+        var nextRefresh: Int
+        var dateSaved: Date
         
         init(code: String, base: String, rate: Double, nextRefresh: Int, dateSaved: Date = .now) {
             self.code = code
@@ -45,14 +45,14 @@ enum SavedCurrencyV2: VersionedSchema {
     }
     
     @Model class SavedCurrency {
-        @Attribute(.unique) let dataIdentity: String
+        @Attribute(.unique) var dataIdentity: String
         
-        let code: String
-        let base: String
-        let rate: Double
+        var code: String
+        var base: String
+        var rate: Double
         
-        let nextRefresh: Int
-        let dateSaved: Date
+        var nextRefresh: Int
+        var dateSaved: Date
         
         init(code: String, base: String, rate: Double, nextRefresh: Int, dateSaved: Date = .now) {
             self.dataIdentity = "\(base)+\(code)+\(nextRefresh)"
