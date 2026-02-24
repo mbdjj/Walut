@@ -85,15 +85,7 @@ struct CurrencyListView: View {
                     NavigationLink {
                         SettingsView()
                     } label: {
-                        Text(settings.user!.pfpLetter)
-                            .font(.system(.body, design: .rounded))
-                            .bold()
-                            .frame(width: 35, height: 35)
-                            .foregroundColor(.white)
-                            .background(
-                                Color.walut
-                                    .clipShape(Circle())
-                            )
+                        Image(systemName: "gear")
                     }
                 }
             }

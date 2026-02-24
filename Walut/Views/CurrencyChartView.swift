@@ -72,19 +72,13 @@ struct CurrencyChartView: View {
                 Text(model.currency.flag)
                     .frame(width: 60, height: 60)
                     .font(.system(size: 44))
-                    .background {
-                        Color.walut
-                            .clipShape(Circle())
-                    }
+                    .glassEffect()
                 
                 if model.base.code != settings.baseCurrency!.code {
                     Text(model.base.flag)
                         .frame(width: 60, height: 60)
                         .font(.system(size: 44))
-                        .background {
-                            Color.walut
-                                .clipShape(Circle())
-                        }
+                        .glassEffect()
                 }
                 
                 Spacer()
@@ -217,9 +211,6 @@ struct CurrencyChartView: View {
 
 struct CurrencyOverviewView_Previews: PreviewProvider {
     static var previews: some View {
-        Text("dupa")
-            .sheet(isPresented: .constant(true)) {
-                CurrencyChartView(currency: Currency.placeholder, base: Currency(baseCode: "PLN"))
-            }
+        CurrencyChartView(currency: Currency.placeholder, base: Currency(baseCode: "PLN"))
     }
 }

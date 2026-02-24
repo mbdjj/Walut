@@ -52,6 +52,7 @@ struct CalculationView: View {
                             }
                             .foregroundStyle(.primary)
                             .font(.system(.title2, design: .rounded, weight: .medium))
+                            .id("\(row)\(col)")
                         }
                     }
                     .padding(.bottom, 4)
@@ -105,13 +106,11 @@ struct CalculationView: View {
                 HStack {
                     Spacer()
                     Text("share_chart")
-                        .foregroundColor(.walut)
                         .font(.system(.title3, design: .rounded, weight: .medium))
                     Spacer()
                 }
             }
-            .buttonStyle(.bordered)
-            .buttonBorderShape(.capsule)
+            .buttonStyle(.glassProminent)
             .padding(.horizontal, 32)
             .padding(.bottom)
         }
@@ -126,11 +125,14 @@ struct CalculationView: View {
                 }
                 
                 Button {
-                    settings.handleFavoriteFlip(of: model.currency)
+                    withAnimation {
+                        settings.handleFavoriteFlip(of: model.currency)
+                    }
                 } label: {
-                    Label("favorite", systemImage: model.currency.isFavorite ? "star.fill" : "star")
+                    Label("favorite", systemImage: model.currency.isFavorite ? "star.slash" : "star")
+                        .contentTransition(.symbolEffect(.replace))
                 }
-                .tint(model.currency.isFavorite ? .yellow : .walut)
+                .tint(model.currency.isFavorite ? .yellow : .primary)
             }
         }
         .onChange(of: model.topAmount) { _, _ in

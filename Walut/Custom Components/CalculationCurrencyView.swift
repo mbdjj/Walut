@@ -86,7 +86,6 @@ struct CalculationCurrencyView: View {
                     }
                 }
             }
-            .background(Color(uiColor: .secondarySystemBackground))
             .padding(.top, 8)
             .padding(.horizontal, isOpen ? 8 : 16)
             .padding(.bottom, isOpen ? 0 : 8)
@@ -105,7 +104,7 @@ struct CalculationCurrencyView: View {
             if isOpen {
                 Rectangle()
                     .frame(height: 1)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color(UIColor.secondarySystemBackground))
                     .padding(.horizontal, 8)
                 
                 VStack {
@@ -126,8 +125,7 @@ struct CalculationCurrencyView: View {
                 .frame(maxHeight: 200)
             }
         }
-        .background(Color(uiColor: .secondarySystemBackground))
-        .clipShape(RoundedRectangle(cornerRadius: 25))
+        .glassEffect(in: .rect(cornerRadius: 25))
         .popover(isPresented: $showCurrencyPicker) {
             NavigationStack {
                 List {
