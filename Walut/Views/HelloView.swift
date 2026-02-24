@@ -58,7 +58,7 @@ struct HelloView: View {
                     animateStart = true
                 }
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
                     withAnimation(.spring(response: 0.8, dampingFraction: 0.8, blendDuration: 0.6)) {
                         changeToOnboarding = true
                     }
@@ -98,13 +98,10 @@ struct HelloView: View {
                     }
                 } label: {
                     Text("next")
-                        .foregroundColor(.white)
+                        .bold()
                         .frame(maxWidth: .infinity, maxHeight: 40)
-                        .background {
-                            Color.walut
-                                .clipShape(RoundedRectangle(cornerRadius: 8))
-                        }
                 }
+                .buttonStyle(.glassProminent)
                 .padding(.horizontal, 40)
                 .padding(.bottom, 30)
                 .offset(y: animateNext ? 0 : 40)
