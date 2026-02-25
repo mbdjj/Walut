@@ -37,7 +37,7 @@ struct BasePickerView: View {
                     Spacer()
                 }
             }
-            .buttonStyle(.borderedProminent)
+            .buttonStyle(.glassProminent)
             .padding()
             
             Spacer()
