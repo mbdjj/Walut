@@ -19,13 +19,7 @@ struct ViewManagingView: View {
         @Bindable var mainCurrencyData = mainCurrencyData
         switch settings.appstate {
         case .baseSelected:
-            TabView(selection: $selection) {
-                CurrencyListView()
-                    .tabItem {
-                        Label("All", systemImage: "dollarsign.circle")
-                    }
-                    .tag(1)
-            }
+            CurrencyListView()
             .onChange(of: settings.baseCurrency) { _, base in
                 mainCurrencyData.updateBase(base)
             }
