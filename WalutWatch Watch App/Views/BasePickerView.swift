@@ -10,6 +10,7 @@ import SwiftUI
 struct BasePickerView: View {
     
     @Environment(AppSettings.self) var settings
+    @Environment(MainCurrencyData.self) var mainCurrencyData
     @State var model = BasePickerViewModel()
     
     var body: some View {
@@ -27,6 +28,8 @@ struct BasePickerView: View {
                 settings.sortByFavorite = true
                 settings.decimal = 3
                 settings.appstate = .baseSelected
+                
+                mainCurrencyData.updateBase(settings.baseCurrency)
             } label: {
                 HStack {
                     Spacer()

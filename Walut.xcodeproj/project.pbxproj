@@ -451,7 +451,6 @@
 			children = (
 				346C7A4429BD1DE30023DE23 /* WalutWatch-Watch-App-Info.plist */,
 				346C7A2229BD19020023DE23 /* WalutWatchApp.swift */,
-				346C7A3529BD195A0023DE23 /* Models */,
 				346C7A3429BD19530023DE23 /* ViewModels */,
 				346C7A3329BD194D0023DE23 /* Views */,
 				346C7A3629BD195F0023DE23 /* Custom Components */,
@@ -487,13 +486,6 @@
 				34EF3EC029BDC57D00CFAEDA /* BasePickerViewModel.swift */,
 			);
 			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		346C7A3529BD195A0023DE23 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		346C7A3629BD195F0023DE23 /* Custom Components */ = {

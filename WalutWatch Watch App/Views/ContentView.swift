@@ -11,18 +11,10 @@ import SwiftData
 struct ContentView: View {
     
     @Environment(AppSettings.self) var settings
-    @Environment(\.modelContext) var modelContext
-    @State var mainCurrencyData: MainCurrencyData
-    
-    init(modelContext: ModelContext, settings: AppSettings) {
-        mainCurrencyData = MainCurrencyData(modelContext: modelContext)
-        mainCurrencyData.updateBase(settings.baseCurrency)
-    }
     
     var body: some View {
         if settings.appstate == .baseSelected {
             CurrencyListView()
-                .environment(mainCurrencyData)
         } else {
             BasePickerView()
         }

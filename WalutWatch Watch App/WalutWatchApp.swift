@@ -11,7 +11,8 @@ import SwiftData
 @main
 struct WalutWatch_Watch_AppApp: App {
     
-    @State var settings = AppSettings()
+    @State var appSettings = AppSettings()
+    @State var mainCurrencyData: MainCurrencyData
     
     let container: ModelContainer
     
@@ -21,6 +22,8 @@ struct WalutWatch_Watch_AppApp: App {
                 for: SavedCurrency.self,
                 migrationPlan: SavedCurrencyMigrationPlan.self
             )
+            mainCurrencyData = MainCurrencyData(modelContext: container.mainContext)
+            mainCurrencyData.updateBase(appSettings.baseCurrency)
         } catch {
             fatalError("Failed to initialize model container.")
         }
@@ -28,8 +31,9 @@ struct WalutWatch_Watch_AppApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView(modelContext: container.mainContext, settings: settings)
-                .environment(settings)
+            ContentView()
+                .environment(appSettings)
+                .environment(mainCurrencyData)
                 .modelContainer(container)
         }
     }
