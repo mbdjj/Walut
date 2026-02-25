@@ -161,6 +161,7 @@
 
 "calc_from" = "From: ";
 "calc_to" = "To: ";
+"change_currency" = "Change currency";
 
 "error_invalid_url" = "There was a problem with URL";
 "error_invalid_response" = "Response received from the server was invalid";

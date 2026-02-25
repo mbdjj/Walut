@@ -161,6 +161,7 @@
 
 "calc_from" = "Z: ";
 "calc_to" = "Na: ";
+"change_currency" = "Zmień walutę";
 
 "error_invalid_url" = "Problem z adresem URL";
 "error_invalid_response" = "Odpowiedź serwera nie jest prawidłowa";

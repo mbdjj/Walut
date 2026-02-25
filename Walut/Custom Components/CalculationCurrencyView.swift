@@ -138,7 +138,14 @@ struct CalculationCurrencyView: View {
                         }
                     }
                 }
-                .navigationTitle("Change")
+                .navigationTitle("change_currency")
+                .toolbar {
+                    Button {
+                        showCurrencyPicker = false
+                    } label: {
+                        Image(systemName: "xmark")
+                    }
+                }
             }
         }
     }
