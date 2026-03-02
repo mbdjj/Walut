@@ -19,9 +19,6 @@ import SwiftUI
     var decimalDigits = 0
     
     var isTopOpen = true
-    var textToShare: String {
-        "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(Formatter.currency(value: currency.price, currencyCode: base.code, decimal: UserDefaults.standard.integer(forKey: "decimal")))"
-    }
     
     init(currency: Currency, base: Currency, shouldSwap: Bool) {
         self.currency = currency
@@ -61,18 +58,15 @@ import SwiftUI
     }
     
     func valueToShare(_ type: AmountType = .active) -> String {
-        var first = ""
-        var second = ""
+        var text = ""
         
         if isTopOpen == (type == .active) {
-            first = Formatter.price(value: topAmount, currencyCode: currency.code)
-            second = Formatter.price(value: bottomAmount, currencyCode: base.code)
+            text = Sharing.valueText(firstCurrency: currency, secondCurrency: base, firstValue: topAmount, secondValue: bottomAmount)
         } else {
-            first = Formatter.price(value: bottomAmount, currencyCode: base.code)
-            second = Formatter.price(value: topAmount, currencyCode: currency.code)
+            text = Sharing.valueText(firstCurrency: base, secondCurrency: currency, firstValue: bottomAmount, secondValue: topAmount)
         }
         
-        return "\(first) = \(second)"
+        return text
     }
     
     private func calcDecimal() {

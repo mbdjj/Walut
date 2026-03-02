@@ -13,7 +13,6 @@ struct ViewManagingView: View {
     @Environment(AppSettings.self) var settings
     @Environment(MainCurrencyData.self) var mainCurrencyData
     @Environment(\.modelContext) var modelContext
-    @AppStorage("selectedTab") var selection: Int = 1
     
     var body: some View {
         @Bindable var mainCurrencyData = mainCurrencyData

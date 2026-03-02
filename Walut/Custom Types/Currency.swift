@@ -24,10 +24,9 @@ struct Currency: Identifiable, Equatable, Hashable {
         self.rate = saved.rate
     }
     
-    static var placeholder: Currency {
-        let currency = Currency(code: "EUR", rate: 1.234)
-        return currency
-    }
+    static var placeholder: Currency { Currency(code: "EUR", rate: 1.234) }
+    
+    static var empty: Currency { Currency(code: "---", rate: 0) }
     
     let code: String
     var flag: String { CurrencyDataManager.shared.getEmoji(of: code) }
@@ -98,7 +97,8 @@ struct CurrencyDataManager {
         "THB": "🇹🇭",
         "TRY": "🇹🇷",
         "USD": "🇺🇸",
-        "UAH": "🇺🇦"
+        "UAH": "🇺🇦",
+        "---": " "
     ]
     
     private let symbolDictionary = [
@@ -134,7 +134,8 @@ struct CurrencyDataManager {
         "THB": "฿",
         "TRY": "₺",
         "USD": "$",
-        "UAH": "₴"
+        "UAH": "₴",
+        "---": " "
     ]
     
     private let nameDictionary = [
@@ -170,7 +171,8 @@ struct CurrencyDataManager {
         "THB": String(localized: "THB"),
         "TRY": String(localized: "TRY"),
         "USD": String(localized: "USD"),
-        "UAH": String(localized: "UAH")
+        "UAH": String(localized: "UAH"),
+        "---": " "
     ]
     
     func getEmoji(of currency: String) -> String {

@@ -16,7 +16,7 @@ struct BasePickerView: View {
     @FocusState var shouldNameFieldBeFocused: Bool
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 TextField("your_name", text: $model.name)
                     .focused($shouldNameFieldBeFocused)
@@ -73,8 +73,8 @@ struct BasePickerView: View {
     }
 }
 
-struct BasePickerView_Previews: PreviewProvider {
-    static var previews: some View {
-        BasePickerView()
-    }
-}
+//struct BasePickerView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        BasePickerView()
+//    }
+//}

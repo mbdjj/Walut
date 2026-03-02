@@ -46,10 +46,7 @@ struct CurrencyListView: View {
                                 model.selectedCurrency = currency
                             } label: {
                                 CurrencyCell(for: currency, mode: settings.quickConvert ? .quickConvert : .normal, value: quickConvertValue)
-                                    .onDrag {
-                                        let textToShare = "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(settings.decimal)f", currency.price)) \(settings.baseCurrency!.symbol)"
-                                        return NSItemProvider(object: textToShare as NSString)
-                                    }
+                                    .onDrag { NSItemProvider(object: Sharing.dragText(currency: currency, settings: settings) as NSString) }
                             }
 
                         }
@@ -62,10 +59,7 @@ struct CurrencyListView: View {
                             model.selectedCurrency = currency
                         } label: {
                             CurrencyCell(for: currency, mode: settings.quickConvert ? .quickConvert : .normal, value: quickConvertValue)
-                                .onDrag {
-                                    let textToShare = "\(currency.fullName)\(String(localized: "text_to_share0"))(\(currency.code))\(String(localized: "text_to_share1"))\(String(format: "%.\(settings.decimal)f", currency.price)) \(settings.baseCurrency!.symbol)"
-                                    return NSItemProvider(object: textToShare as NSString)
-                                }
+                                .onDrag { NSItemProvider(object: Sharing.dragText(currency: currency, settings: settings) as NSString) }
                         }
                     }
                 }

@@ -118,8 +118,15 @@ struct CalculationView: View {
         .toolbar(.hidden, for: .tabBar)
         .toolbar {
             ToolbarItemGroup(placement: .topBarTrailing) {
-                Button {
+                Menu {
+                    ShareLink(item: model.valueToShare()) {
+                        Label("share_value", systemImage: "equal.circle")
+                    }
+                    .disabled(model.topAmount == 0)
                     
+                    ShareLink(item: Sharing.descText(currency: model.currency, base: model.base)) {
+                        Label("share_text", systemImage: "text.bubble")
+                    }
                 } label: {
                     Label("share", systemImage: "square.and.arrow.up")
                 }
