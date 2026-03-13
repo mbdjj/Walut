@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -194,6 +194,7 @@
 		34FA8C312C22CCB10010FF02 /* MainCurrencyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34FA8C302C22CCB10010FF02 /* MainCurrencyData.swift */; };
 		C47D9B8A2F55FC5A0061D255 /* Sharing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47D9B892F55FC5A0061D255 /* Sharing.swift */; };
 		C47D9B8C2F55FC5A0061D255 /* Sharing.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47D9B892F55FC5A0061D255 /* Sharing.swift */; };
+		C4C6138A2F63FBAC00BBA262 /* KeyboardMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C613882F63FBAC00BBA262 /* KeyboardMonitor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -398,7 +399,12 @@
 		34F748322B0A4934006ACDCD /* OnDeviceStorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnDeviceStorageView.swift; sourceTree = "<group>"; };
 		34FA8C302C22CCB10010FF02 /* MainCurrencyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCurrencyData.swift; sourceTree = "<group>"; };
 		C47D9B892F55FC5A0061D255 /* Sharing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sharing.swift; sourceTree = "<group>"; };
+		C4C613882F63FBAC00BBA262 /* KeyboardMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardMonitor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		C4C6138C2F63FD0500BBA262 /* iPad */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = iPad; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		346C7A1D29BD19020023DE23 /* Frameworks */ = {
@@ -446,6 +452,7 @@
 				348CE6EE2951E32400E89078 /* Sorting.swift */,
 				34A4959E2B32BAA8007F7683 /* SwiftDataManager.swift */,
 				C47D9B892F55FC5A0061D255 /* Sharing.swift */,
+				C4C613882F63FBAC00BBA262 /* KeyboardMonitor.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -584,6 +591,7 @@
 				349E3F7728FEAFDE004831E2 /* ProfileView.swift */,
 				34CAB491290F11CA00D877E5 /* FavoritesView.swift */,
 				34F748322B0A4934006ACDCD /* OnDeviceStorageView.swift */,
+				C4C6138C2F63FD0500BBA262 /* iPad */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -780,6 +788,9 @@
 			dependencies = (
 				3483470129262447003710CA /* PBXTargetDependency */,
 				34F4A54829BF34DD009E2583 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				C4C6138C2F63FD0500BBA262 /* iPad */,
 			);
 			name = Walut;
 			packageProductDependencies = (
@@ -1034,6 +1045,7 @@
 				3481E08C295DE09100322363 /* WalutWidgetIntents.intentdefinition in Sources */,
 				341750C92C1D980C00B85B02 /* User.swift in Sources */,
 				34A2347428F061D700C81292 /* Currency.swift in Sources */,
+				C4C6138A2F63FBAC00BBA262 /* KeyboardMonitor.swift in Sources */,
 				3447F7E728F0BB3F00B59B25 /* AppIcon.swift in Sources */,
 				348CE6EF2951E32400E89078 /* Sorting.swift in Sources */,
 				349E3F7828FEAFDE004831E2 /* ProfileView.swift in Sources */,
@@ -1093,7 +1105,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"WalutWatch Watch App/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1124,7 +1136,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"WalutWatch Watch App/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1156,7 +1168,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = WalutWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WalutWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WalutWidget;
@@ -1184,7 +1196,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = WalutWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WalutWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = WalutWidget;
@@ -1338,7 +1350,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Walut/Walut.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Walut/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1364,7 +1376,7 @@
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -1375,7 +1387,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Walut/Walut.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Walut/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1401,7 +1413,7 @@
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

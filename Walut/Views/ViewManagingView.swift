@@ -18,19 +18,36 @@ struct ViewManagingView: View {
         @Bindable var mainCurrencyData = mainCurrencyData
         switch settings.appstate {
         case .baseSelected:
-            CurrencyListView()
-            .onChange(of: settings.baseCurrency) { _, base in
-                mainCurrencyData.updateBase(base)
-            }
-            .alert("error", isPresented: $mainCurrencyData.shouldDisplayErrorAlert) {
-                Button {
-                    mainCurrencyData.shouldDisplayErrorAlert = false
-                    mainCurrencyData.errorMessage = ""
-                } label: {
-                    Text("OK")
-                }
-            } message: {
-                Text("\(mainCurrencyData.errorMessage)")
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                CurrencyListView()
+                    .onChange(of: settings.baseCurrency) { _, base in
+                        mainCurrencyData.updateBase(base)
+                    }
+                    .alert("error", isPresented: $mainCurrencyData.shouldDisplayErrorAlert) {
+                        Button {
+                            mainCurrencyData.shouldDisplayErrorAlert = false
+                            mainCurrencyData.errorMessage = ""
+                        } label: {
+                            Text("OK")
+                        }
+                    } message: {
+                        Text("\(mainCurrencyData.errorMessage)")
+                    }
+            } else {
+                CurrencySplitView()
+                    .onChange(of: settings.baseCurrency) { _, base in
+                        mainCurrencyData.updateBase(base)
+                    }
+                    .alert("error", isPresented: $mainCurrencyData.shouldDisplayErrorAlert) {
+                        Button {
+                            mainCurrencyData.shouldDisplayErrorAlert = false
+                            mainCurrencyData.errorMessage = ""
+                        } label: {
+                            Text("OK")
+                        }
+                    } message: {
+                        Text("\(mainCurrencyData.errorMessage)")
+                    }
             }
         case .onboarding:
             HelloView()
