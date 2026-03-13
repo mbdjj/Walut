@@ -113,9 +113,12 @@ struct CurrencySplitView: View {
             }
             .navigationDestination(item: $model.selectedCurrency) { currency in
                 CalculationView(currency: currency, base: settings.baseCurrency!)
+                    .id("\(currency.code)\(settings.baseCurrency!.code)")
             }
         } detail: {
-            EmptyView()
+            NavigationStack {
+                EmptyView()
+            }
         }
 
     }

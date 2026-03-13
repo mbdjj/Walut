@@ -9,8 +9,10 @@ import SwiftUI
 
 struct CalculationView: View {
     @Environment(AppSettings.self) var settings
+    
     @State var model: CurrencyCalcViewModel
     @State var chartCurrency: Currency?
+    @State var keyboardMonitor = KeyboardMonitor()
     
     init(currency: Currency, base: Currency, shouldSwap: Bool = true) {
         let model = CurrencyCalcViewModel(currency: currency, base: base, shouldSwap: shouldSwap)
@@ -37,68 +39,70 @@ struct CalculationView: View {
             .padding()
             
             // MARK: - Keypad
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 0) {
-                ForEach(0 ... 2, id: \.self) { row in
+            if !keyboardMonitor.isConnected {
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 0) {
+                    ForEach(0 ... 2, id: \.self) { row in
+                        GridRow {
+                            ForEach(1 ... 3, id: \.self) { col in
+                                let num = row * 3 + col
+                                Button {
+                                    withAnimation {
+                                        model.buttonPressed(num)
+                                    }
+                                } label: {
+                                    Text("\(num)")
+                                        .frame(width: 60, height: 60)
+                                }
+                                .foregroundStyle(.primary)
+                                .font(.system(.title2, design: .rounded, weight: .medium))
+                                .id("\(row)\(col)")
+                            }
+                        }
+                        .padding(.bottom, 4)
+                    }
                     GridRow {
-                        ForEach(1 ... 3, id: \.self) { col in
-                            let num = row * 3 + col
-                            Button {
-                                withAnimation {
-                                    model.buttonPressed(num)
-                                }
-                            } label: {
-                                Text("\(num)")
-                                    .frame(width: 60, height: 60)
+                        Button {
+                            withAnimation {
+                                model.buttonPressed(",")
                             }
-                            .foregroundStyle(.primary)
-                            .font(.system(.title2, design: .rounded, weight: .medium))
-                            .id("\(row)\(col)")
+                        } label: {
+                            Text(Locale.current.decimalSeparator ?? ".")
+                                .frame(width: 60, height: 60)
                         }
+                        .foregroundStyle(.primary)
+                        .font(.system(.title2, design: .rounded, weight: .medium))
+                        
+                        Button {
+                            withAnimation {
+                                model.buttonPressed("0")
+                            }
+                        } label: {
+                            Text("0")
+                                .frame(width: 60, height: 60)
+                        }
+                        .foregroundStyle(.primary)
+                        .font(.system(.title2, design: .rounded, weight: .medium))
+                        
+                        Button {} label: {
+                            Image(systemName: "delete.left")
+                                .frame(width: 60, height: 60)
+                                .onTapGesture {
+                                    withAnimation {
+                                        model.buttonPressed("<")
+                                    }
+                                }
+                                .onLongPressGesture {
+                                    withAnimation {
+                                        model.clear()
+                                    }
+                                }
+                        }
+                        .foregroundStyle(.primary)
+                        .font(.system(.title2, design: .rounded, weight: .medium))
                     }
-                    .padding(.bottom, 4)
                 }
-                GridRow {
-                    Button {
-                        withAnimation {
-                            model.buttonPressed(",")
-                        }
-                    } label: {
-                        Text(Locale.current.decimalSeparator ?? ".")
-                            .frame(width: 60, height: 60)
-                    }
-                    .foregroundStyle(.primary)
-                    .font(.system(.title2, design: .rounded, weight: .medium))
-                    
-                    Button {
-                        withAnimation {
-                            model.buttonPressed("0")
-                        }
-                    } label: {
-                        Text("0")
-                            .frame(width: 60, height: 60)
-                    }
-                    .foregroundStyle(.primary)
-                    .font(.system(.title2, design: .rounded, weight: .medium))
-                    
-                    Button {} label: {
-                        Image(systemName: "delete.left")
-                            .frame(width: 60, height: 60)
-                            .onTapGesture {
-                                withAnimation {
-                                    model.buttonPressed("<")
-                                }
-                            }
-                            .onLongPressGesture {
-                                withAnimation {
-                                    model.clear()
-                                }
-                            }
-                    }
-                    .foregroundStyle(.primary)
-                    .font(.system(.title2, design: .rounded, weight: .medium))
-                }
+                .padding(.bottom)
             }
-            .padding(.bottom)
             
             Button {
                 chartCurrency = model.currency
@@ -167,6 +171,7 @@ struct CalculationView: View {
         .navigationDestination(item: $chartCurrency) { currency in
             CurrencyChartView(currency: currency, base: model.base)
         }
+        .animation(.easeInOut, value: keyboardMonitor.isConnected)
     }
 }
 
