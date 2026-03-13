@@ -102,6 +102,29 @@ struct CalculationView: View {
                     }
                 }
                 .padding(.bottom)
+            } else {
+                Spacer()
+                    .background {
+                        // Keyboard support 
+                        
+                        ZStack {
+                            Color(uiColor: .systemBackground)
+                            
+                            Button("1") { withAnimation { model.buttonPressed(1) } }.keyboardShortcut("1", modifiers: [])
+                            Button("2") { withAnimation { model.buttonPressed(2) } }.keyboardShortcut("2", modifiers: [])
+                            Button("3") { withAnimation { model.buttonPressed(3) } }.keyboardShortcut("3", modifiers: [])
+                            Button("4") { withAnimation { model.buttonPressed(4) } }.keyboardShortcut("4", modifiers: [])
+                            Button("5") { withAnimation { model.buttonPressed(5) } }.keyboardShortcut("5", modifiers: [])
+                            Button("6") { withAnimation { model.buttonPressed(6) } }.keyboardShortcut("6", modifiers: [])
+                            Button("7") { withAnimation { model.buttonPressed(7) } }.keyboardShortcut("7", modifiers: [])
+                            Button("8") { withAnimation { model.buttonPressed(8) } }.keyboardShortcut("8", modifiers: [])
+                            Button("9") { withAnimation { model.buttonPressed(9) } }.keyboardShortcut("9", modifiers: [])
+                            Button("0") { withAnimation { model.buttonPressed("0") } }.keyboardShortcut("0", modifiers: [])
+                            Button(".") { withAnimation { model.buttonPressed(",") } }.keyboardShortcut(".", modifiers: [])
+                            Button(",") { withAnimation { model.buttonPressed(",") } }.keyboardShortcut(",", modifiers: [])
+                            Button("delete") { withAnimation { model.buttonPressed("<") } }.keyboardShortcut(.delete, modifiers: [])
+                        }
+                    }
             }
             
             Button {
