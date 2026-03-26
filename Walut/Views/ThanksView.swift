@@ -10,6 +10,7 @@ import SwiftUI
 struct ThanksView: View {
     
     @Environment(AppSettings.self) var settings
+    @Environment(\.dismiss) var dismiss
     
     let title: String
     let arrayToSave: [Int]
@@ -41,15 +42,16 @@ struct ThanksView: View {
                 
                 Button {
                     settings.user!.unlockedTitlesArray = arrayToSave
+                    dismiss()
                 } label: {
-                    ZStack {
-                        Color.white
-                        
+                    HStack {
+                        Spacer()
                         Text("OK")
+                            .padding()
+                        Spacer()
                     }
-                    .frame(maxHeight: 45)
-                    .cornerRadius(10)
                 }
+                .buttonStyle(.glass)
                 .padding(.bottom, 40)
                 .padding(.horizontal)
             }
